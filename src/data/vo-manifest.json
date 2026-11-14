@@ -1,1 +1,874 @@
-{}
+{
+  "m01_intro_pa": {
+    "dur": 8.758,
+    "who": "pa"
+  },
+  "m01_intro_s1": {
+    "dur": 7.934,
+    "who": "steward"
+  },
+  "m01_intro_s2": {
+    "dur": 4.944,
+    "who": "steward"
+  },
+  "m01_intro_rivet": {
+    "dur": 5.563,
+    "who": "rivet"
+  },
+  "m01_intro_s3": {
+    "dur": 9.045,
+    "who": "steward"
+  },
+  "m01_intro_dutch": {
+    "dur": 5.398,
+    "who": "dutch"
+  },
+  "m01_intro_s4": {
+    "dur": 2.638,
+    "who": "steward"
+  },
+  "m01_start": {
+    "dur": 3.327,
+    "who": "dutch"
+  },
+  "m01_first_contact": {
+    "dur": 4.387,
+    "who": "steward"
+  },
+  "m01_first_loot": {
+    "dur": 6.173,
+    "who": "steward"
+  },
+  "m01_locker_hint": {
+    "dur": 5.086,
+    "who": "steward"
+  },
+  "m01_yard": {
+    "dur": 4.868,
+    "who": "steward"
+  },
+  "m01_drones": {
+    "dur": 1.957,
+    "who": "rivet"
+  },
+  "m01_drones_s": {
+    "dur": 5.782,
+    "who": "steward"
+  },
+  "m01_gate_1": {
+    "dur": 4.05,
+    "who": "steward"
+  },
+  "m01_gate_2": {
+    "dur": 6.607,
+    "who": "steward"
+  },
+  "m01_gate_hint": {
+    "dur": 4.848,
+    "who": "steward"
+  },
+  "m01_gate_one": {
+    "dur": 2.243,
+    "who": "steward"
+  },
+  "m01_gate_blown": {
+    "dur": 2.624,
+    "who": "dutch"
+  },
+  "m01_gate_blown_s": {
+    "dur": 2.429,
+    "who": "steward"
+  },
+  "m01_motorpool": {
+    "dur": 5.813,
+    "who": "steward"
+  },
+  "m01_scooter": {
+    "dur": 4.238,
+    "who": "steward"
+  },
+  "m01_gunner": {
+    "dur": 2.113,
+    "who": "rivet"
+  },
+  "m01_drive_go": {
+    "dur": 0.981,
+    "who": "dutch"
+  },
+  "m01_price_1": {
+    "dur": 8.486,
+    "who": "price"
+  },
+  "m01_price_2": {
+    "dur": 9.389,
+    "who": "price"
+  },
+  "m01_roadblock": {
+    "dur": 4.798,
+    "who": "steward"
+  },
+  "m01_arena_1": {
+    "dur": 4.035,
+    "who": "steward"
+  },
+  "m01_manager_intro": {
+    "dur": 7.407,
+    "who": "manager"
+  },
+  "m01_manager_hint": {
+    "dur": 5.83,
+    "who": "steward"
+  },
+  "m01_manager_half": {
+    "dur": 3.228,
+    "who": "manager"
+  },
+  "m01_manager_dead": {
+    "dur": 3.29,
+    "who": "rivet"
+  },
+  "m01_end_s": {
+    "dur": 7.825,
+    "who": "steward"
+  },
+  "m01_end_price": {
+    "dur": 6.831,
+    "who": "price"
+  },
+  "st_death_1": {
+    "dur": 4.823,
+    "who": "steward"
+  },
+  "st_death_2": {
+    "dur": 3.828,
+    "who": "steward"
+  },
+  "st_death_3": {
+    "dur": 1.875,
+    "who": "steward"
+  },
+  "st_low_1": {
+    "dur": 3.406,
+    "who": "steward"
+  },
+  "st_legendary_1": {
+    "dur": 3.565,
+    "who": "steward"
+  },
+  "st_mines_out": {
+    "dur": 3.061,
+    "who": "steward"
+  },
+  "st_allies_down": {
+    "dur": 3.783,
+    "who": "steward"
+  },
+  "st_idle_1": {
+    "dur": 2.459,
+    "who": "steward"
+  },
+  "st_idle_2": {
+    "dur": 3.409,
+    "who": "steward"
+  },
+  "st_objective": {
+    "dur": 1.892,
+    "who": "steward"
+  },
+  "pa_1": {
+    "dur": 4.4,
+    "who": "pa"
+  },
+  "pa_2": {
+    "dur": 4.71,
+    "who": "pa"
+  },
+  "pa_3": {
+    "dur": 5.004,
+    "who": "pa"
+  },
+  "pa_4": {
+    "dur": 3.519,
+    "who": "pa"
+  },
+  "pa_5": {
+    "dur": 4.301,
+    "who": "pa"
+  },
+  "pa_6": {
+    "dur": 3.122,
+    "who": "pa"
+  },
+  "pa_7": {
+    "dur": 2.962,
+    "who": "pa"
+  },
+  "kiosk_1": {
+    "dur": 1.839,
+    "who": "kiosk"
+  },
+  "kiosk_2": {
+    "dur": 1.563,
+    "who": "kiosk"
+  },
+  "kiosk_3": {
+    "dur": 2.9,
+    "who": "kiosk"
+  },
+  "rivet_see_1": {
+    "dur": 1.198,
+    "who": "rivet"
+  },
+  "rivet_see_2": {
+    "dur": 2.013,
+    "who": "rivet"
+  },
+  "rivet_see_3": {
+    "dur": 0.838,
+    "who": "rivet"
+  },
+  "rivet_see_4": {
+    "dur": 1.272,
+    "who": "rivet"
+  },
+  "rivet_kill_1": {
+    "dur": 0.873,
+    "who": "rivet"
+  },
+  "rivet_kill_2": {
+    "dur": 1.269,
+    "who": "rivet"
+  },
+  "rivet_kill_3": {
+    "dur": 0.726,
+    "who": "rivet"
+  },
+  "rivet_kill_4": {
+    "dur": 1.15,
+    "who": "rivet"
+  },
+  "rivet_praise_1": {
+    "dur": 1.561,
+    "who": "rivet"
+  },
+  "rivet_praise_2": {
+    "dur": 0.968,
+    "who": "rivet"
+  },
+  "rivet_praise_3": {
+    "dur": 1.031,
+    "who": "rivet"
+  },
+  "rivet_hurt_1": {
+    "dur": 0.655,
+    "who": "rivet"
+  },
+  "rivet_hurt_2": {
+    "dur": 0.989,
+    "who": "rivet"
+  },
+  "rivet_hurt_3": {
+    "dur": 1.49,
+    "who": "rivet"
+  },
+  "rivet_death_1": {
+    "dur": 2.402,
+    "who": "rivet"
+  },
+  "rivet_death_2": {
+    "dur": 1.381,
+    "who": "rivet"
+  },
+  "rivet_follow_1": {
+    "dur": 1.196,
+    "who": "rivet"
+  },
+  "rivet_follow_2": {
+    "dur": 0.93,
+    "who": "rivet"
+  },
+  "rivet_follow_3": {
+    "dur": 0.764,
+    "who": "rivet"
+  },
+  "rivet_reload_1": {
+    "dur": 0.797,
+    "who": "rivet"
+  },
+  "rivet_reload_2": {
+    "dur": 1.142,
+    "who": "rivet"
+  },
+  "rivet_cover_1": {
+    "dur": 0.63,
+    "who": "rivet"
+  },
+  "rivet_cover_2": {
+    "dur": 0.895,
+    "who": "rivet"
+  },
+  "rivet_boom_1": {
+    "dur": 1.674,
+    "who": "rivet"
+  },
+  "rivet_boom_2": {
+    "dur": 0.835,
+    "who": "rivet"
+  },
+  "rivet_ride_1": {
+    "dur": 0.85,
+    "who": "rivet"
+  },
+  "rivet_ride_2": {
+    "dur": 1.058,
+    "who": "rivet"
+  },
+  "rivet_crash_1": {
+    "dur": 2.379,
+    "who": "rivet"
+  },
+  "rivet_crash_2": {
+    "dur": 1.492,
+    "who": "rivet"
+  },
+  "rivet_idle_1": {
+    "dur": 3.448,
+    "who": "rivet"
+  },
+  "rivet_idle_2": {
+    "dur": 2.535,
+    "who": "rivet"
+  },
+  "rivet_idle_3": {
+    "dur": 2.542,
+    "who": "rivet"
+  },
+  "dutch_see_1": {
+    "dur": 1.523,
+    "who": "dutch"
+  },
+  "dutch_see_2": {
+    "dur": 2.102,
+    "who": "dutch"
+  },
+  "dutch_see_3": {
+    "dur": 1.021,
+    "who": "dutch"
+  },
+  "dutch_see_4": {
+    "dur": 1.476,
+    "who": "dutch"
+  },
+  "dutch_kill_1": {
+    "dur": 1.026,
+    "who": "dutch"
+  },
+  "dutch_kill_2": {
+    "dur": 1.322,
+    "who": "dutch"
+  },
+  "dutch_kill_3": {
+    "dur": 0.807,
+    "who": "dutch"
+  },
+  "dutch_kill_4": {
+    "dur": 1.248,
+    "who": "dutch"
+  },
+  "dutch_praise_1": {
+    "dur": 1.69,
+    "who": "dutch"
+  },
+  "dutch_praise_2": {
+    "dur": 1.14,
+    "who": "dutch"
+  },
+  "dutch_praise_3": {
+    "dur": 1.117,
+    "who": "dutch"
+  },
+  "dutch_hurt_1": {
+    "dur": 0.804,
+    "who": "dutch"
+  },
+  "dutch_hurt_2": {
+    "dur": 1.112,
+    "who": "dutch"
+  },
+  "dutch_hurt_3": {
+    "dur": 1.552,
+    "who": "dutch"
+  },
+  "dutch_death_1": {
+    "dur": 2.511,
+    "who": "dutch"
+  },
+  "dutch_death_2": {
+    "dur": 1.374,
+    "who": "dutch"
+  },
+  "dutch_follow_1": {
+    "dur": 1.255,
+    "who": "dutch"
+  },
+  "dutch_follow_2": {
+    "dur": 1.079,
+    "who": "dutch"
+  },
+  "dutch_follow_3": {
+    "dur": 0.856,
+    "who": "dutch"
+  },
+  "dutch_reload_1": {
+    "dur": 0.853,
+    "who": "dutch"
+  },
+  "dutch_reload_2": {
+    "dur": 1.264,
+    "who": "dutch"
+  },
+  "dutch_cover_1": {
+    "dur": 0.784,
+    "who": "dutch"
+  },
+  "dutch_cover_2": {
+    "dur": 0.982,
+    "who": "dutch"
+  },
+  "dutch_boom_1": {
+    "dur": 1.796,
+    "who": "dutch"
+  },
+  "dutch_boom_2": {
+    "dur": 1.034,
+    "who": "dutch"
+  },
+  "dutch_ride_1": {
+    "dur": 1.047,
+    "who": "dutch"
+  },
+  "dutch_ride_2": {
+    "dur": 1.15,
+    "who": "dutch"
+  },
+  "dutch_crash_1": {
+    "dur": 2.472,
+    "who": "dutch"
+  },
+  "dutch_crash_2": {
+    "dur": 1.532,
+    "who": "dutch"
+  },
+  "dutch_idle_1": {
+    "dur": 3.263,
+    "who": "dutch"
+  },
+  "dutch_idle_2": {
+    "dur": 2.566,
+    "who": "dutch"
+  },
+  "dutch_idle_3": {
+    "dur": 2.536,
+    "who": "dutch"
+  },
+  "hank_see_1": {
+    "dur": 1.335,
+    "who": "hank"
+  },
+  "hank_see_2": {
+    "dur": 1.743,
+    "who": "hank"
+  },
+  "hank_see_3": {
+    "dur": 0.86,
+    "who": "hank"
+  },
+  "hank_see_4": {
+    "dur": 1.225,
+    "who": "hank"
+  },
+  "hank_kill_1": {
+    "dur": 0.937,
+    "who": "hank"
+  },
+  "hank_kill_2": {
+    "dur": 1.175,
+    "who": "hank"
+  },
+  "hank_kill_3": {
+    "dur": 0.701,
+    "who": "hank"
+  },
+  "hank_kill_4": {
+    "dur": 1.05,
+    "who": "hank"
+  },
+  "hank_praise_1": {
+    "dur": 1.468,
+    "who": "hank"
+  },
+  "hank_praise_2": {
+    "dur": 0.833,
+    "who": "hank"
+  },
+  "hank_praise_3": {
+    "dur": 1.039,
+    "who": "hank"
+  },
+  "hank_hurt_1": {
+    "dur": 0.613,
+    "who": "hank"
+  },
+  "hank_hurt_2": {
+    "dur": 0.893,
+    "who": "hank"
+  },
+  "hank_hurt_3": {
+    "dur": 1.326,
+    "who": "hank"
+  },
+  "hank_death_1": {
+    "dur": 2.254,
+    "who": "hank"
+  },
+  "hank_death_2": {
+    "dur": 1.181,
+    "who": "hank"
+  },
+  "hank_follow_1": {
+    "dur": 1.117,
+    "who": "hank"
+  },
+  "hank_follow_2": {
+    "dur": 0.979,
+    "who": "hank"
+  },
+  "hank_follow_3": {
+    "dur": 0.709,
+    "who": "hank"
+  },
+  "hank_reload_1": {
+    "dur": 0.648,
+    "who": "hank"
+  },
+  "hank_reload_2": {
+    "dur": 1.042,
+    "who": "hank"
+  },
+  "hank_cover_1": {
+    "dur": 0.744,
+    "who": "hank"
+  },
+  "hank_cover_2": {
+    "dur": 0.88,
+    "who": "hank"
+  },
+  "hank_boom_1": {
+    "dur": 1.627,
+    "who": "hank"
+  },
+  "hank_boom_2": {
+    "dur": 0.867,
+    "who": "hank"
+  },
+  "hank_ride_1": {
+    "dur": 0.903,
+    "who": "hank"
+  },
+  "hank_ride_2": {
+    "dur": 1.079,
+    "who": "hank"
+  },
+  "hank_crash_1": {
+    "dur": 2.152,
+    "who": "hank"
+  },
+  "hank_crash_2": {
+    "dur": 1.324,
+    "who": "hank"
+  },
+  "hank_idle_1": {
+    "dur": 2.915,
+    "who": "hank"
+  },
+  "hank_idle_2": {
+    "dur": 2.157,
+    "who": "hank"
+  },
+  "hank_idle_3": {
+    "dur": 2.084,
+    "who": "hank"
+  },
+  "assoc_alert_1": {
+    "dur": 1.315,
+    "who": "assoc"
+  },
+  "assoc_alert_2": {
+    "dur": 1.733,
+    "who": "assoc"
+  },
+  "assoc_alert_3": {
+    "dur": 2.535,
+    "who": "assoc"
+  },
+  "assoc_alert_4": {
+    "dur": 1.682,
+    "who": "assoc"
+  },
+  "assoc_alert_5": {
+    "dur": 2.329,
+    "who": "assoc"
+  },
+  "assoc_attack_1": {
+    "dur": 2.188,
+    "who": "assoc"
+  },
+  "assoc_attack_2": {
+    "dur": 1.711,
+    "who": "assoc"
+  },
+  "assoc_attack_3": {
+    "dur": 1.794,
+    "who": "assoc"
+  },
+  "assoc_attack_4": {
+    "dur": 2.003,
+    "who": "assoc"
+  },
+  "assoc_attack_5": {
+    "dur": 1.21,
+    "who": "assoc"
+  },
+  "assoc_attack_6": {
+    "dur": 1.248,
+    "who": "assoc"
+  },
+  "assoc_hurt_1": {
+    "dur": 1.796,
+    "who": "assoc"
+  },
+  "assoc_hurt_2": {
+    "dur": 1.783,
+    "who": "assoc"
+  },
+  "assoc_hurt_3": {
+    "dur": 1.713,
+    "who": "assoc"
+  },
+  "assoc_hurt_4": {
+    "dur": 2.146,
+    "who": "assoc"
+  },
+  "assoc_death_1": {
+    "dur": 1.857,
+    "who": "assoc"
+  },
+  "assoc_death_2": {
+    "dur": 3.566,
+    "who": "assoc"
+  },
+  "assoc_death_3": {
+    "dur": 1.033,
+    "who": "assoc"
+  },
+  "assoc_death_4": {
+    "dur": 1.943,
+    "who": "assoc"
+  },
+  "assoc_allydown_1": {
+    "dur": 1.301,
+    "who": "assoc"
+  },
+  "assoc_allydown_2": {
+    "dur": 2.308,
+    "who": "assoc"
+  },
+  "assoc_allydown_3": {
+    "dur": 0.861,
+    "who": "assoc"
+  },
+  "assoc_mine_1": {
+    "dur": 1.185,
+    "who": "assoc"
+  },
+  "assoc_mine_2": {
+    "dur": 1.877,
+    "who": "assoc"
+  },
+  "assoc_mine_3": {
+    "dur": 1.425,
+    "who": "assoc"
+  },
+  "assoc_flee_1": {
+    "dur": 1.845,
+    "who": "assoc"
+  },
+  "assoc_flee_2": {
+    "dur": 1.408,
+    "who": "assoc"
+  },
+  "assoc_flee_3": {
+    "dur": 1.074,
+    "who": "assoc"
+  },
+  "assoc_flee_4": {
+    "dur": 2.183,
+    "who": "assoc"
+  },
+  "assoc_search_1": {
+    "dur": 1.785,
+    "who": "assoc"
+  },
+  "assoc_search_2": {
+    "dur": 1.383,
+    "who": "assoc"
+  },
+  "assoc_search_3": {
+    "dur": 1.281,
+    "who": "assoc"
+  },
+  "assoc_lost_1": {
+    "dur": 1.46,
+    "who": "assoc"
+  },
+  "assoc_lost_2": {
+    "dur": 1.346,
+    "who": "assoc"
+  },
+  "assoc_reload_1": {
+    "dur": 0.739,
+    "who": "assoc"
+  },
+  "assoc_reload_2": {
+    "dur": 1.199,
+    "who": "assoc"
+  },
+  "assoc_cover_1": {
+    "dur": 2.184,
+    "who": "assoc"
+  },
+  "assoc_cover_2": {
+    "dur": 0.893,
+    "who": "assoc"
+  },
+  "assoc_win_1": {
+    "dur": 1.557,
+    "who": "assoc"
+  },
+  "assoc_win_2": {
+    "dur": 1.6,
+    "who": "assoc"
+  },
+  "assoc_win_3": {
+    "dur": 0.949,
+    "who": "assoc"
+  },
+  "assoc_vehicle_1": {
+    "dur": 1.506,
+    "who": "assoc"
+  },
+  "assoc_vehicle_2": {
+    "dur": 1.38,
+    "who": "assoc"
+  },
+  "super_alert_1": {
+    "dur": 2.633,
+    "who": "super"
+  },
+  "super_alert_2": {
+    "dur": 1.63,
+    "who": "super"
+  },
+  "super_alert_3": {
+    "dur": 1.914,
+    "who": "super"
+  },
+  "super_attack_1": {
+    "dur": 1.221,
+    "who": "super"
+  },
+  "super_attack_2": {
+    "dur": 2.139,
+    "who": "super"
+  },
+  "super_attack_3": {
+    "dur": 1.07,
+    "who": "super"
+  },
+  "super_attack_4": {
+    "dur": 2.036,
+    "who": "super"
+  },
+  "super_shield_1": {
+    "dur": 2.662,
+    "who": "super"
+  },
+  "super_shield_2": {
+    "dur": 1.955,
+    "who": "super"
+  },
+  "super_hurt_1": {
+    "dur": 1.139,
+    "who": "super"
+  },
+  "super_hurt_2": {
+    "dur": 1.66,
+    "who": "super"
+  },
+  "super_death_1": {
+    "dur": 4.084,
+    "who": "super"
+  },
+  "super_death_2": {
+    "dur": 2.053,
+    "who": "super"
+  },
+  "super_rally_1": {
+    "dur": 1.65,
+    "who": "super"
+  },
+  "super_rally_2": {
+    "dur": 2.326,
+    "who": "super"
+  },
+  "super_win_1": {
+    "dur": 1.941,
+    "who": "super"
+  },
+  "manager_attack_1": {
+    "dur": 2.199,
+    "who": "manager"
+  },
+  "manager_attack_2": {
+    "dur": 1.312,
+    "who": "manager"
+  },
+  "manager_attack_3": {
+    "dur": 0.769,
+    "who": "manager"
+  },
+  "manager_attack_4": {
+    "dur": 3.268,
+    "who": "manager"
+  },
+  "manager_attack_5": {
+    "dur": 0.963,
+    "who": "manager"
+  },
+  "manager_hurt_1": {
+    "dur": 2.048,
+    "who": "manager"
+  },
+  "manager_hurt_2": {
+    "dur": 1.882,
+    "who": "manager"
+  },
+  "manager_back_1": {
+    "dur": 1.614,
+    "who": "manager"
+  },
+  "manager_death_1": {
+    "dur": 5.649,
+    "who": "manager"
+  }
+}

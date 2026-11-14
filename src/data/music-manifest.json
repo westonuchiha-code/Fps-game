@@ -1,1 +1,7 @@
-{}
+{
+  "tracks": {
+    "menu": { "bpm": 92, "bars": 24, "beatsPerBar": 4, "loopSeconds": 62.6087, "stems": { "main": "menu.ogg" } },
+    "m01": { "bpm": 124, "bars": 48, "beatsPerBar": 4, "loopSeconds": 92.9032, "stems": { "base": "m01_base.ogg", "combat": "m01_combat.ogg" } }
+  },
+  "stingers": {}
+}
