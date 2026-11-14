@@ -110,6 +110,8 @@ export class Game {
   private hitstop = 0;
   /** per-frame hooks registered by optional systems (AI, vehicles, cutscenes, menus) */
   readonly systems: { update(dt: number): void; lateUpdate?(dt: number): void }[] = [];
+  /** when set (menus), this scene/camera is drawn instead of the game world */
+  renderOverride: { scene: THREE.Scene; camera: THREE.PerspectiveCamera } | null = null;
   /** set by a cutscene/vehicle to take over the camera this frame */
   cameraOwner: { updateCamera(cam: THREE.PerspectiveCamera, dt: number): void } | null = null;
 
@@ -363,6 +365,14 @@ export class Game {
   }
 
   render() {
+    if (this.renderOverride) {
+      const o = this.renderOverride;
+      o.camera.aspect = this.pipe.aspect;
+      o.camera.updateProjectionMatrix();
+      this.pipe.post.uniforms.uTime.value = this.realTime;
+      this.pipe.render(o.scene, o.camera, { viewFov: 50, drawView: false });
+      return;
+    }
     this.sky.update(this.camera.position, this.realTime);
     this.pipe.post.uniforms.uTime.value = this.realTime;
     const drawView = this.state !== 'menu' && this.view.root.visible && !this.cameraOwner && this.player.alive;
