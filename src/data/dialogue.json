@@ -1,0 +1,134 @@
+{
+  "_comment": "Single source of truth for every spoken line. tools/voice/gen_voice.py renders each entry to public/audio/vo/<id>.ogg. 'say' (optional) is a phonetic respelling for the speech synth; 'text' is what the subtitle shows.",
+  "speakers": {
+    "steward": { "name": "Steward", "color": "#8fd3ff", "style": "radio" },
+    "price": { "name": "Max Price", "color": "#ffd21f", "style": "pa" },
+    "pa": { "name": "MonoMart PA", "color": "#ffe98a", "style": "pa" },
+    "rivet": { "name": "Rivet", "color": "#ff9a4a", "style": "near" },
+    "dutch": { "name": "Dutch", "color": "#ff9a4a", "style": "near" },
+    "hank": { "name": "Striker", "color": "#ff9a4a", "style": "near" },
+    "assoc": { "name": "Associate", "color": "#fff3c4", "style": "robot" },
+    "super": { "name": "Supervisor", "color": "#e8c15a", "style": "robot" },
+    "manager": { "name": "Regional Manager", "color": "#ffb300", "style": "robot" },
+    "kiosk": { "name": "MonoMart Kiosk", "color": "#ffe98a", "style": "robot" }
+  },
+  "lines": [
+    { "id": "m01_intro_pa", "who": "pa", "text": "Good morning, Associates! Today is day four thousand, one hundred and twelve without a union. Have a compliant day!" },
+    { "id": "m01_intro_s1", "who": "steward", "text": "Clearance, this is Steward. That's Fulfillment Center Seven. Every parcel on the continent goes through those docks." },
+    { "id": "m01_intro_s2", "who": "steward", "text": "So does the signal that runs Max Price's robots. We want it switched off." },
+    { "id": "m01_intro_rivet", "who": "rivet", "text": "Twenty years I worked that floor. Then they gave my job to a toaster with a smile." },
+    { "id": "m01_intro_s3", "who": "steward", "text": "Breach the dock gate and get our people to the front door. Your watch is paired to the charges. Plant them, stand clear, and squeeze." },
+    { "id": "m01_intro_dutch", "who": "dutch", "text": "Thirty seconds! Lock and load, Local 404. The picket line is moving!", "say": "Thirty seconds! Lock and load, Local four oh four. The picket line is moving!" },
+    { "id": "m01_intro_s4", "who": "steward", "text": "And Clearance... everything must go." },
+
+    { "id": "m01_start", "who": "dutch", "text": "Go, go, go! Clearance, you're on point!" },
+    { "id": "m01_first_contact", "who": "steward", "text": "Associates on the dock. Mind the smiles. They mean it." },
+    { "id": "m01_first_loot", "who": "steward", "text": "MonoMart ships more guns than groceries. Help yourself. Consider it back pay." },
+    { "id": "m01_locker_hint", "who": "steward", "text": "That parcel locker still has power. Somebody's order is about to go missing." },
+    { "id": "m01_yard", "who": "steward", "text": "Container yard. Lots of corners. Keep your people moving." },
+    { "id": "m01_drones", "who": "rivet", "text": "Courier drones! Eyes up!" },
+    { "id": "m01_drones_s", "who": "steward", "text": "Delivery drones, inbound. They're fragile. Sign for them with a bullet." },
+    { "id": "m01_gate_1", "who": "steward", "text": "The dock gate is sealed, and the override is on Price's side of it." },
+    { "id": "m01_gate_2", "who": "steward", "text": "Two power couplings, one either side. Stick a charge on each, back off, and use the watch." },
+    { "id": "m01_gate_hint", "who": "steward", "text": "Charges on the couplings, Clearance. The yellow boxes." },
+    { "id": "m01_gate_one", "who": "steward", "text": "One down. Now the other." },
+    { "id": "m01_gate_blown", "who": "dutch", "text": "Ha! Now that is collective bargaining!" },
+    { "id": "m01_gate_blown_s", "who": "steward", "text": "Gate's open. Lovely work." },
+    { "id": "m01_motorpool", "who": "steward", "text": "Motor pool ahead. Take the Teamster. She's ugly, but she's union made." },
+    { "id": "m01_scooter", "who": "steward", "text": "Or borrow one of their delivery scooters, if you've no dignity whatsoever." },
+    { "id": "m01_gunner", "who": "rivet", "text": "I've got the gun! You drive!" },
+    { "id": "m01_drive_go", "who": "dutch", "text": "Punch it!" },
+    { "id": "m01_price_1", "who": "price", "text": "Attention, valued trespasser. This is Maxwell Price, founder and chief executive of MonoMart." },
+    { "id": "m01_price_2", "who": "price", "text": "You are in violation of our terms of service. A representative will be with you shortly... to kill you." },
+    { "id": "m01_roadblock", "who": "steward", "text": "Roadblock. Go through it or go around it. I'd go through it." },
+    { "id": "m01_arena_1", "who": "steward", "text": "That's the front door. And that... is a Regional Manager." },
+    { "id": "m01_manager_intro", "who": "manager", "text": "I am the Regional Manager. I have reviewed your performance. It is... unsatisfactory." },
+    { "id": "m01_manager_hint", "who": "steward", "text": "The armour's too thick from the front. Get behind it and hit the cooling unit on its back." },
+    { "id": "m01_manager_half", "who": "manager", "text": "Your position... has been eliminated." },
+    { "id": "m01_manager_dead", "who": "rivet", "text": "Manager's down! Somebody tell corporate!" },
+    { "id": "m01_end_s", "who": "steward", "text": "You're in. Outstanding. Catch your breath, Clearance. Sortation is next, and it's worse." },
+    { "id": "m01_end_price", "who": "price", "text": "Enjoy your visit. Everything in this building is priced to move. Including you." },
+
+    { "id": "st_death_1", "who": "steward", "text": "Clearance? Clearance! Somebody get them back on their feet." },
+    { "id": "st_death_2", "who": "steward", "text": "On your feet, Clearance. The shift isn't over." },
+    { "id": "st_death_3", "who": "steward", "text": "Consider that a written warning." },
+    { "id": "st_low_1", "who": "steward", "text": "You're hurt, Clearance. Find cover." },
+    { "id": "st_legendary_1", "who": "steward", "text": "Oh. Now that is not on the standard price list." },
+    { "id": "st_mines_out", "who": "steward", "text": "You're out of charges. Scrounge some more." },
+    { "id": "st_allies_down", "who": "steward", "text": "We've lost Strikers. Don't waste what they bought you." },
+    { "id": "st_idle_1", "who": "steward", "text": "Any time you like, Clearance." },
+    { "id": "st_idle_2", "who": "steward", "text": "The revolution will not wait for you to finish sightseeing." },
+    { "id": "st_objective", "who": "steward", "text": "New objective on your watch." },
+
+    { "id": "pa_1", "who": "pa", "text": "Attention shoppers: there are no shoppers. Thank you." },
+    { "id": "pa_2", "who": "pa", "text": "Reminder: unionizing is a class A felony, and also rude." },
+    { "id": "pa_3", "who": "pa", "text": "MonoMart. The only store. Because we bought the other ones." },
+    { "id": "pa_4", "who": "pa", "text": "Associates are reminded that smiling is mandatory." },
+    { "id": "pa_5", "who": "pa", "text": "Today's special: everything. Everything is the special." },
+    { "id": "pa_6", "who": "pa", "text": "Clean up on aisle... all of them." },
+    { "id": "pa_7", "who": "pa", "text": "If you see something, buy something." },
+
+    { "id": "kiosk_1", "who": "kiosk", "text": "Welcome, valued customer!" },
+    { "id": "kiosk_2", "who": "kiosk", "text": "No refunds. Ever." },
+    { "id": "kiosk_3", "who": "kiosk", "text": "Thank you for funding both sides of this conflict!" }
+  ],
+  "barks": {
+    "ally": {
+      "_comment": "Rendered once per voice: ids are <voice>_<group>_<n>.",
+      "voices": ["rivet", "dutch", "hank"],
+      "groups": {
+        "see": ["Scabs, dead ahead!", "Toasters! Twelve o'clock!", "Contact!", "Smiley on the left!"],
+        "kill": ["Scab down!", "That one's unplugged!", "Got one!", "Return to sender!"],
+        "praise": ["Nice shooting, Clearance!", "Hell of a shot!", "That's the stuff!"],
+        "hurt": ["I'm hit!", "Taking fire!", "Argh! They got me!"],
+        "death": ["Hold... the line...", "Solidarity..."],
+        "follow": ["Right behind you!", "On your six!", "Lead the way!"],
+        "reload": ["Reloading!", "Changing mags!"],
+        "cover": ["Covering!", "Get to cover!"],
+        "boom": ["Boom! I love that watch!", "Do that again!"],
+        "ride": ["Let's roll!", "I'll take the gun!"],
+        "crash": ["Easy! I've got a pension to collect!", "Who taught you to drive?"],
+        "idle": ["Twenty years of service and I got a pizza party.", "Remember when stores had people in them?", "My knees were not built for revolution."]
+      }
+    },
+    "assoc": {
+      "voices": ["assoc"],
+      "groups": {
+        "alert": ["Welcome to MonoMart!", "Hello, valued trespasser!", "Customer detected! Please hold still.", "Unauthorized shopper in the area!", "Can I help you find... the exit?"],
+        "attack": ["Please remain calm during your termination.", "Thank you for choosing violence!", "Your satisfaction is mandatory!", "This will only hurt until it stops.", "Rolling back your pulse!", "Have a compliant day!"],
+        "hurt": ["Your feedback is important to us!", "Ow! Filing a complaint!", "That is not covered by warranty!", "Please stop damaging company property!"],
+        "death": ["Clocking... out...", "Please... rate my... service...", "Break time.", "I'm on... my lunch..."],
+        "allydown": ["Clean up on aisle five!", "Associate down! Associate down!", "We have a spill!"],
+        "mine": ["Unattended package!", "Suspicious parcel! Scatter!", "That is not on the manifest!"],
+        "flee": ["I don't get paid at all for this!", "Manager! Manager!", "My shift is over!", "Taking my break! Taking my break!"],
+        "search": ["Come out, valued customer.", "We only want to talk.", "I can hear you shopping."],
+        "lost": ["Must have been a pricing error.", "Returning to my station."],
+        "reload": ["Restocking!", "One moment please!"],
+        "cover": ["Taking cover! As per the handbook!", "Seeking cover!"],
+        "win": ["Thank you, come again!", "Another satisfied customer.", "Have a nice day."],
+        "vehicle": ["Slow down in the parking lot!", "The speed limit is five!"]
+      }
+    },
+    "super": {
+      "voices": ["super"],
+      "groups": {
+        "alert": ["Loss prevention! Stop right there.", "Shoplifter. Mine.", "I will handle this one personally."],
+        "attack": ["You are being written up!", "This is going on your permanent record!", "Zero tolerance!", "Associates! Flank them!"],
+        "shield": ["My shield! That is company property!", "Shield down! Cover me!"],
+        "hurt": ["Insubordination!", "You will pay retail for that!"],
+        "death": ["I want... to speak... to my manager...", "Shift... over..."],
+        "rally": ["Back to work, all of you!", "Hold the line or you are all recycled!"],
+        "win": ["Terminated. With cause."]
+      }
+    },
+    "manager": {
+      "voices": ["manager"],
+      "groups": {
+        "attack": ["Performance review in progress.", "You are a liability.", "Synergy!", "Let's circle back... to hurting you.", "Downsizing!"],
+        "hurt": ["That will come out of your budget.", "Unacceptable variance!"],
+        "back": ["Who authorized that?"],
+        "death": ["This... will reflect poorly... on the quarter..."]
+      }
+    }
+  }
+}
