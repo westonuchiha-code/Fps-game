@@ -87,11 +87,11 @@ export class GeoBuilder {
   }
 
   /** Run `fn` with a local transform applied to everything it emits. */
-  at(pos: V3, rotY: number, fn: () => void, rotX = 0, rotZ = 0) {
+  at(pos: V3, rotY: number, fn: () => void, rotX = 0, rotZ = 0, scale = 1) {
     const m = new THREE.Matrix4().compose(
       _v.set(pos[0], pos[1], pos[2]).clone(),
       new THREE.Quaternion().setFromEuler(new THREE.Euler(rotX, rotY, rotZ, 'YXZ')),
-      _one,
+      scale === 1 ? _one : new THREE.Vector3(scale, scale, scale),
     );
     this.stack.push(this.m.clone().multiply(m));
     try {

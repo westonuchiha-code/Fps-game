@@ -3,7 +3,8 @@ import { G } from '../core/globals';
 import { clamp, damp, lerp, Spring, yawToDir, DEG, rand, smoothstep } from '../core/math';
 import { newMoveResult, type MoveResult } from '../world/collision';
 import { Surf } from '../world/builder';
-import { newId, type DamageInfo, type Faction, type Target } from '../core/types';
+import { newId, type DamageInfo, type Faction, type HitZone, type Target } from '../core/types';
+import { rayCapsule, type Shootable, type WorldHit } from '../world/world';
 
 export const P = {
   radius: 0.36,
@@ -44,7 +45,10 @@ const _save = new THREE.Vector3();
 const _e = new THREE.Euler(0, 0, 0, 'YXZ');
 const DOWN = new THREE.Vector3(0, -1, 0);
 
-export class Player implements Target {
+const _ca = new THREE.Vector3();
+const _cb = new THREE.Vector3();
+
+export class Player implements Target, Shootable {
   readonly id = newId();
   faction: Faction = 'player';
   alive = true;
@@ -141,6 +145,21 @@ export class Player implements Target {
     this.recoilTargetP = this.recoilTargetY = 0;
   }
 
+  // Shootable: lets enemy bolts and blasts find the player
+  readonly boundPos = new THREE.Vector3();
+  readonly boundRadius = 1.3;
+  readonly owner: Target = this;
+  rayHit(origin: THREE.Vector3, dir: THREE.Vector3, maxDist: number, out: { zone?: HitZone; onHit?: WorldHit['onHit']; normal: THREE.Vector3 }) {
+    if (!this.alive) return -1;
+    _ca.set(this.pos.x, this.pos.y + this.radius, this.pos.z);
+    _cb.set(this.pos.x, this.pos.y + Math.max(this.radius + 0.05, this.height - this.radius), this.pos.z);
+    const d = rayCapsule(origin, dir, _ca, _cb, this.radius * 0.92);
+    if (d < 0 || d > maxDist) return -1;
+    out.zone = 'body';
+    out.normal.copy(dir).negate();
+    return d;
+  }
+
   aimPoint(out: THREE.Vector3) {
     return out.set(this.pos.x, this.pos.y + this.height * 0.68, this.pos.z);
   }
@@ -230,6 +249,7 @@ export class Player implements Target {
 
   update(dt: number) {
     const inp = G.input;
+    this.boundPos.set(this.pos.x, this.pos.y + this.height * 0.5, this.pos.z);
     this.updateShield(dt);
     if (!this.alive) {
       this.deathT += dt;

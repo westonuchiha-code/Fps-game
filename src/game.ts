@@ -21,6 +21,9 @@ import { Mines } from './weapons/mines';
 import { Inventory } from './loot/inventory';
 import { Loot } from './loot/loot';
 import { Hud } from './ui/hud';
+import { Nav } from './ai/nav';
+import { Projectiles } from './ai/projectile';
+import { AiDirector } from './ai/director';
 
 export type GameState = 'boot' | 'menu' | 'playing' | 'paused' | 'inventory' | 'report';
 
@@ -85,6 +88,9 @@ export class Game {
   readonly mines = new Mines();
   readonly inv = new Inventory();
   readonly loot = new Loot();
+  readonly nav = new Nav();
+  readonly projectiles: Projectiles;
+  readonly ai: AiDirector;
   /** shared materials */
   readonly mat: { prop: THREE.Material; char: THREE.Material };
 
@@ -133,6 +139,8 @@ export class Game {
     this.fx = new Fx(this.scene);
     this.hud = new Hud(this.ui);
     this.view = new ViewModel(this.scene);
+    this.projectiles = new Projectiles(this.scene);
+    this.ai = new AiDirector();
     this.weapons.init();
     this.audio.onSubtitle = (s) => {
       if (this.settings.subtitles || !s) this.hud.subtitle(s);
@@ -205,6 +213,7 @@ export class Game {
     this.col.setStatic(built.collision);
     this.events.emit('levelBuilt', { level, builder: b });
     this.world.targets.push(this.player);
+    this.world.shootables.push(this.player);
     this.player.spawn(level.spawn.pos, level.spawn.yaw);
     this.respawn.pos.copy(level.spawn.pos);
     this.respawn.yaw = level.spawn.yaw;
@@ -337,6 +346,8 @@ export class Game {
       this.level.update(dt);
       for (const s of this.systems) s.update(dt);
       pl.update(dt);
+      this.ai.update(dt);
+      this.projectiles.update(dt);
       this.world.update(dt);
       this.mines.update(dt);
       this.weapons.update(dt);

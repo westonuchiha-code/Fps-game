@@ -311,7 +311,7 @@ export class Nav {
    * Shortest path between two world positions as smoothed waypoints (excluding the start).
    * Returns null when unreachable within the search budget.
    */
-  findPath(from: THREE.Vector3, to: THREE.Vector3, maxExpand = 5000): THREE.Vector3[] | null {
+  findPath(from: THREE.Vector3, to: THREE.Vector3, maxExpand = 14000): THREE.Vector3[] | null {
     const s = this.nearest(from, 3);
     const e = this.nearest(to, 4);
     if (s < 0 || e < 0) return null;
@@ -349,7 +349,8 @@ export class Nav {
         const hx = x[j] - ex;
         const hy = y[j] - ey;
         const hz = z[j] - ez;
-        f[j] = ng + Math.sqrt(hx * hx + hy * hy + hz * hz);
+        // weighted heuristic: far fewer expansions in open yards; smoothing hides the slight detours
+        f[j] = ng + Math.sqrt(hx * hx + hy * hy + hz * hz) * 1.4;
         this.from[j] = cur;
         mark[j] = stamp;
         this.heapPush(j);

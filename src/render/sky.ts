@@ -37,6 +37,62 @@ export const SKY_DAWN: SkyPreset = {
   hemiIntensity: 1.2,
 };
 
+export const SKY_NOON: SkyPreset = {
+  zenith: 0x2b7fd0,
+  mid: 0x6fb6e6,
+  horizon: 0xcfe6ee,
+  sun: 0xffffff,
+  sunDir: new THREE.Vector3(0.35, 0.86, 0.36).normalize(),
+  cloud: 0xffffff,
+  cloudShade: 0xb8cbe0,
+  cloudCover: 0.42,
+  fog: 0xc9dde6,
+  fogDensity: 0.0042,
+  sunIntensity: 2.9,
+  sunColor: 0xfffaf0,
+  hemiSky: 0xa9c6f2,
+  hemiGround: 0xb9a37c,
+  hemiIntensity: 1.3,
+};
+
+export const SKY_DUSK: SkyPreset = {
+  zenith: 0x2a2f6e,
+  mid: 0x8a4f8f,
+  horizon: 0xff8a4a,
+  sun: 0xffd9a0,
+  sunDir: new THREE.Vector3(-0.72, 0.2, -0.66).normalize(),
+  cloud: 0xffb07a,
+  cloudShade: 0x8a4a78,
+  cloudCover: 0.55,
+  fog: 0xd98a6a,
+  fogDensity: 0.006,
+  sunIntensity: 2.5,
+  sunColor: 0xffc890,
+  hemiSky: 0x7a6fd0,
+  hemiGround: 0xa5603c,
+  hemiIntensity: 1.15,
+};
+
+export const SKY_NIGHT: SkyPreset = {
+  zenith: 0x0b1030,
+  mid: 0x1b2a58,
+  horizon: 0x34508a,
+  sun: 0xe8f0ff,
+  sunDir: new THREE.Vector3(0.4, 0.62, -0.67).normalize(),
+  cloud: 0x3a4f86,
+  cloudShade: 0x1c274f,
+  cloudCover: 0.4,
+  fog: 0x1e2c52,
+  fogDensity: 0.0075,
+  sunIntensity: 1.5,
+  sunColor: 0xa9c0ff,
+  hemiSky: 0x4a5fb0,
+  hemiGround: 0x2a2f4a,
+  hemiIntensity: 1.15,
+};
+
+export const SKIES: Record<string, SkyPreset> = { dawn: SKY_DAWN, noon: SKY_NOON, dusk: SKY_DUSK, night: SKY_NIGHT };
+
 const VERT = /* glsl */ `
 varying vec3 vDir;
 void main() {

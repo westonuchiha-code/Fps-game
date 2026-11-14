@@ -60,6 +60,53 @@ export function installDebug(game: Game) {
       game.hud.setVisible(true);
       game.camera.near = 0.08;
     },
+    /** Point the player's view at a world position. */
+    lookAt(x: number, y: number, z: number) {
+      const pl = game.player;
+      const dx = x - pl.pos.x;
+      const dy = y - (pl.pos.y + pl.eyeHeight);
+      const dz = z - pl.pos.z;
+      pl.yaw = Math.atan2(-dx, -dz);
+      pl.pitch = Math.atan2(dy, Math.hypot(dx, dz));
+    },
+    /**
+     * Crude auto-player: for `frames` frames aim at the nearest living enemy's head and hold fire.
+     * Returns a summary so tests can assert on it.
+     */
+    botFight(frames: number, o: { head?: boolean; move?: [number, number] } = {}) {
+      const pl = game.player;
+      const inp = game.input;
+      const v = new THREE.Vector3();
+      let shotsBefore = game.stats.shots;
+      for (let i = 0; i < frames; i++) {
+        let best: any = null;
+        let bd = 1e9;
+        for (const t of game.world.targets) {
+          if (!t.alive || t.faction !== 'monomart') continue;
+          const d = t.pos.distanceToSquared(pl.pos);
+          if (d < bd) {
+            bd = d;
+            best = t;
+          }
+        }
+        inp.simDown.clear();
+        inp.simMove.x = o.move?.[0] ?? 0;
+        inp.simMove.y = o.move?.[1] ?? 0;
+        if (best && pl.alive) {
+          if (o.head !== false) best.headPoint(v);
+          else best.aimPoint(v);
+          d.lookAt(v.x, v.y, v.z);
+          // semi-autos need the trigger released between shots
+          const w = game.inv.current;
+          if (w && (w.auto || i % 6 < 3)) inp.simDown.add('fire');
+        }
+        game.tick(1 / 60);
+      }
+      inp.simDown.clear();
+      inp.simMove.x = inp.simMove.y = 0;
+      game.render();
+      return { shots: game.stats.shots - shotsBefore, kills: game.stats.kills, hp: Math.round(pl.health), shield: Math.round(pl.shield), alive: pl.alive, enemies: game.ai.aliveEnemies() };
+    },
     tp(x: number, y: number, z: number, yaw?: number, pitch?: number) {
       game.player.pos.set(x, y, z);
       game.player.vel.set(0, 0, 0);
