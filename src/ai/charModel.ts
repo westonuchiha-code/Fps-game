@@ -217,11 +217,6 @@ export class CharModel {
 
   // ------------------------------------------------------------------ builders
 
-  private limb(k: Kit, bone: number, x: number, y0: number, y1: number, r: number, color: number) {
-    k.curBone = bone;
-    k.cyl(r, r, Math.abs(y1 - y0), color, [x, (y0 + y1) / 2, 0], 'y', 6, false);
-  }
-
   private buildRobot(k: Kit, s: Spec, boss: boolean) {
     // Moulded shop-floor robots: every part is a shaped shell (a tube TV for a head, a wedge of a
     // chest, flared forearms and shins) over dark joints, with the uniform painted on.
@@ -462,50 +457,68 @@ export class CharModel {
   }
 
   private buildMech(k: Kit, s: Spec) {
+    // The Regional Manager: the shop-floor robots' shapes at forklift scale. Barrel chest with a
+    // hazard belt, the monitor sunk between the shoulders under a brow, a cannon and a stamp.
     const P = this.pal;
     const sh = P.shell;
     const dk = P.dark;
+    const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, n: 4, ...extra });
     k.curBone = B.pelvis;
-    k.box(1.0, 0.4, 0.7, dk, [0, s.hip + 0.05, 0]);
-    k.cyl(0.3, 0.3, 0.3, dk, [0, s.hip + 0.25, 0], 'y', 8, false);
+    k.cyl(0.3, 0.3, 0.32, dk, [0, s.hip + 0.25, 0], 'y', 12, true);
+    k.loft([R(1.2, 0, 0, 0), R(1.22, 0.3, 0.25, 0.25), R(1.32, 0.52, 0.36, 0.36), R(1.5, 0.56, 0.38, 0.38), R(1.6, 0.5, 0.34, 0.34), R(1.64, 0.3, 0.22, 0.22), R(1.65, 0, 0, 0)], (seg, d) => (seg >= 1 && seg <= 2 && d < 2 ? sh : dk), { sides: 16 });
     k.curBone = B.chest;
-    // barrel torso with hazard chevrons
-    k.taper(1.5, 1.0, 1.05, 1.12, 1.0, sh, [0, 2.2, 0]);
-    k.box(1.3, 0.16, 0.04, PAL.screen, [0, 1.86, -0.54]);
-    k.box(1.56, 0.12, 1.1, PAL.screen, [0, 2.72, 0]);
-    for (let i = -2; i <= 2; i++) k.box(0.14, 0.3, 0.03, PAL.screen, [i * 0.26, 1.95, -0.55], [0, 0, 0.5]);
-    // armour slab protecting the front
-    k.box(1.2, 0.5, 0.12, shade(sh, 0.85), [0, 2.4, -0.6]);
+    k.loft(
+      [R(1.72, 0, 0, 0), R(1.74, 0.42, 0.36, 0.34), R(1.86, 0.56, 0.46, 0.42), R(2.0, 0.66, 0.53, 0.47), R(2.4, 0.75, 0.62, 0.54), R(2.62, 0.75, 0.58, 0.54), R(2.72, 0.66, 0.48, 0.48), R(2.78, 0.4, 0.3, 0.32), R(2.79, 0, 0, 0)],
+      (seg, d, side) => {
+        if (seg >= 6) return PAL.screen; // top deck
+        if (seg === 2) return side % 2 ? PAL.screen : sh; // hazard belt
+        if ((seg === 3 || seg === 4) && d < 3) return shade(sh, 0.85); // armour slab
+        return sh;
+      },
+      { sides: 20 },
+    );
     // cooling unit on the back: the weak point
-    k.box(0.9, 0.7, 0.28, dk, [0, 2.25, 0.62]);
-    for (let i = 0; i < 4; i++) k.box(0.76, 0.06, 0.06, 0x55585f, [0, 2.0 + i * 0.16, 0.77]);
-    k.cyl(0.07, 0.07, 0.5, dk, [-0.5, 2.9, 0.4], 'y', 6);
-    k.cyl(0.07, 0.07, 0.36, dk, [0.5, 2.85, 0.4], 'y', 6);
+    k.loft([R(1.86, 0, 0, 0), R(1.88, 0.4, 0.05, 0.2), R(1.95, 0.46, 0.05, 0.3), R(2.55, 0.46, 0.05, 0.28), R(2.62, 0.38, 0.05, 0.18), R(2.64, 0, 0, 0)].map((r) => ({ ...r, z: 0.5, n: 3.4 })), dk);
+    for (let i = 0; i < 4; i++) k.cyl(0.025, 0.025, 0.66, 0x55585f, [0, 2.01 + i * 0.16, 0.83], 'x', 6, true);
+    for (const [x, h] of [[-0.5, 0.5], [0.5, 0.36]]) {
+      k.cyl(0.07, 0.07, h, dk, [x, 2.65 + h / 2, 0.4], 'y', 8, true); // exhaust stacks
+      k.cyl(0.09, 0.09, 0.06, P.accent, [x, 2.65 + h, 0.4], 'y', 8, true);
+    }
+    // cockpit monitor (back-to-front, like the small robots' heads) under a heavy brow
     k.curBone = B.head;
-    // cockpit monitor
-    k.box(0.9, 0.62, 0.5, sh, [0, 3.02, -0.1]);
-    k.box(0.8, 0.52, 0.04, PAL.screen, [0, 3.02, -0.36]);
-    k.box(0.96, 0.08, 0.56, P.trim, [0, 3.36, -0.1]);
+    const H = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 4.5 });
+    k.loft(
+      [H(-0.34, 0, 0, 0), H(-0.32, 0.2, 0.16, 0.14), H(-0.2, 0.32, 0.24, 0.24), H(0, 0.42, 0.3, 0.31), H(0.2, 0.455, 0.32, 0.34), H(0.26, 0.46, 0.325, 0.345), H(0.285, 0.44, 0.305, 0.325), H(0.287, 0.4, 0.265, 0.28), H(0.297, 0.28, 0.18, 0.19), H(0.3, 0, 0, 0)],
+      (seg) => (seg >= 7 ? PAL.screen : seg >= 5 || seg <= 1 ? shade(sh, 0.84) : sh),
+      { sides: 20, pos: [0, 3.02, -0.1], rot: [-Math.PI / 2, 0, 0] },
+    );
+    k.loft([R(3.32, 0, 0, 0), R(3.33, 0.48, 0.4, 0.3), R(3.4, 0.5, 0.42, 0.3), R(3.41, 0, 0, 0)].map((r) => ({ ...r, z: -0.1 })), P.trim, { sides: 16 });
     for (const side of [-1, 1]) {
       const x = side * s.shoulderX;
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
+      const sy = s.shoulderY;
+      const ey = sy - s.upperArm;
+      const A = (y: number, w: number, f: number, b: number, n = 3.5): Ring => ({ y, w, f, b, x, n });
       k.curBone = up;
-      k.box(0.5, 0.46, 0.56, sh, [x, s.shoulderY, 0]);
-      k.box(0.54, 0.1, 0.6, PAL.screen, [x, s.shoulderY + 0.24, 0]);
-      this.limb(k, up, x, s.shoulderY - 0.2, s.shoulderY - s.upperArm, 0.13, dk);
+      k.loft([A(sy + 0.36, 0, 0, 0), A(sy + 0.34, 0.15, 0.2, 0.2), A(sy + 0.22, 0.26, 0.34, 0.32), A(sy, 0.28, 0.36, 0.34), A(sy - 0.2, 0.24, 0.3, 0.28), A(sy - 0.24, 0, 0, 0)], (seg) => (seg === 3 ? P.accent : seg === 0 ? PAL.screen : sh), { sides: 14 });
+      k.cyl(0.12, 0.12, s.upperArm - 0.2, dk, [x, (sy - 0.2 + ey) / 2, 0], 'y', 10, true);
       k.curBone = fo;
-      const ey = s.shoulderY - s.upperArm;
+      k.sphere(0.17, dk, [x, ey, 0], 2, [1, 1, 1], true);
       if (side > 0) {
         // cannon arm
-        k.box(0.42, 0.5, 0.42, sh, [x, ey - 0.28, 0]);
-        k.cyl(0.17, 0.15, 0.5, dk, [x, ey - 0.76, 0], 'y', 8);
-        k.cyl(0.2, 0.2, 0.08, P.accent, [x, ey - 1.0, 0], 'y', 8);
+        k.loft(
+          [A(ey - 0.02, 0, 0, 0), A(ey - 0.05, 0.16, 0.16, 0.16), A(ey - 0.14, 0.23, 0.25, 0.23), A(ey - 0.5, 0.24, 0.26, 0.24), A(ey - 0.58, 0.19, 0.2, 0.19), A(ey - 0.6, 0.16, 0.16, 0.16, 2), A(ey - 0.96, 0.14, 0.14, 0.14, 2), A(ey - 0.97, 0.2, 0.2, 0.2, 2), A(ey - 1.04, 0.2, 0.2, 0.2, 2), A(ey - 1.05, 0, 0, 0, 2)],
+          (seg) => (seg === 1 || seg === 6 || seg === 7 ? P.accent : seg >= 4 ? dk : sh),
+          { sides: 14 },
+        );
       } else {
         // rubber-stamp fist
-        k.box(0.36, 0.5, 0.36, sh, [x, ey - 0.28, 0]);
-        k.box(0.5, 0.3, 0.5, dk, [x, ey - 0.68, 0]);
-        k.box(0.54, 0.06, 0.54, 0xc0281e, [x, ey - 0.86, 0]);
+        k.loft(
+          [A(ey - 0.02, 0, 0, 0), A(ey - 0.05, 0.14, 0.14, 0.14), A(ey - 0.14, 0.19, 0.2, 0.19), A(ey - 0.48, 0.2, 0.21, 0.2), A(ey - 0.52, 0.14, 0.14, 0.14), A(ey - 0.53, 0.14, 0.14, 0.14, 4), A(ey - 0.56, 0.26, 0.26, 0.26, 4), A(ey - 0.82, 0.27, 0.27, 0.27, 4), A(ey - 0.83, 0.285, 0.285, 0.285, 4), A(ey - 0.89, 0.285, 0.285, 0.285, 4), A(ey - 0.9, 0, 0, 0, 4)],
+          (seg) => (seg >= 7 ? 0xc0281e : seg >= 4 ? dk : seg === 1 ? P.accent : sh),
+          { sides: 14 },
+        );
       }
     }
     for (const side of [-1, 1]) {
@@ -513,19 +526,22 @@ export class CharModel {
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const ky = s.hip - s.thigh;
-      this.limb(k, th, x, s.hip, ky, 0.14, dk);
+      const L = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, x, n: 3.5 });
       k.curBone = th;
-      k.box(0.36, 0.5, 0.4, sh, [x, s.hip - 0.34, -0.02]);
+      k.cyl(0.13, 0.13, s.thigh, dk, [x, (s.hip + ky) / 2, 0], 'y', 10, true);
+      k.loft([L(1.4, 0, 0, 0), L(1.38, 0.14, 0.16, 0.16), L(1.28, 0.2, 0.23, 0.21), L(0.98, 0.19, 0.21, 0.19), L(0.84, 0.15, 0.16, 0.15), L(0.82, 0, 0, 0)], sh, { sides: 14 });
       k.curBone = sn;
-      k.box(0.34, 0.5, 0.36, sh, [x, ky - 0.3, 0]);
-      k.box(0.46, 0.18, 0.7, dk, [x, 0.09, -0.08]);
-      k.box(0.48, 0.05, 0.3, PAL.smile, [x, 0.2, -0.3]);
+      k.sphere(0.17, dk, [x, ky, 0], 2, [1, 1, 1], true);
+      k.sphere(0.13, P.accent, [x, ky, -0.13], 2, [1, 1.1, 0.5], true);
+      k.loft([L(0.68, 0, 0, 0), L(0.66, 0.13, 0.14, 0.13), L(0.56, 0.17, 0.2, 0.18), L(0.3, 0.2, 0.22, 0.23), L(0.16, 0.24, 0.25, 0.27), L(0.14, 0, 0, 0)], (seg) => (seg === 3 ? P.accent : sh), { sides: 14 });
+      const F = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 3.2 });
+      k.loft([F(-0.3, 0, 0, 0), F(-0.28, 0.14, 0.1, 0.06), F(-0.2, 0.22, 0.11, 0.12), F(0.1, 0.25, 0.11, 0.12), F(0.3, 0.25, 0.11, 0.08), F(0.42, 0.2, 0.1, 0.05), F(0.45, 0, 0, 0)], (seg) => (seg >= 3 ? PAL.smile : dk), { sides: 12, pos: [x, 0.11, 0], rot: [-Math.PI / 2, 0, 0] });
     }
-    this.finishRobot(s, 0.8, 3.02, -0.385, 0.74, 0.46);
+    this.finishRobot(s, 0.8, 3.0275, -0.408, 0.7, 0.46);
     this.muzzle.position.set(0, -1.08, 0);
     this.bones[B.foreR].add(this.muzzle);
-    const vent = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.5, 0.04), flat(0xff7b1c));
-    vent.position.set(0, 2.25 - s.spine, 0.74);
+    const vent = new THREE.Mesh(new THREE.BoxGeometry(0.6, 0.5, 0.04), flat(0xff7b1c));
+    vent.position.set(0, 2.25 - s.spine, 0.795);
     this.bones[B.chest].add(vent);
     this.glow.push(vent);
   }
