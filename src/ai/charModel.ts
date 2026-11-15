@@ -458,7 +458,7 @@ export class CharModel {
 
   private buildMech(k: Kit, s: Spec) {
     // The Regional Manager: the shop-floor robots' shapes at forklift scale. Barrel chest with a
-    // hazard belt, the monitor sunk between the shoulders under a brow, a cannon and a stamp.
+    // hazard belt, the monitor sunk between the shoulders, a cannon and a stamp.
     const P = this.pal;
     const sh = P.shell;
     const dk = P.dark;
@@ -484,7 +484,7 @@ export class CharModel {
       k.cyl(0.07, 0.07, h, dk, [x, 2.65 + h / 2, 0.4], 'y', 8, true); // exhaust stacks
       k.cyl(0.09, 0.09, 0.06, P.accent, [x, 2.65 + h, 0.4], 'y', 8, true);
     }
-    // cockpit monitor (back-to-front, like the small robots' heads) under a heavy brow
+    // cockpit monitor (back-to-front, like the small robots' heads)
     k.curBone = B.head;
     const H = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 4.5 });
     k.loft(
@@ -492,7 +492,6 @@ export class CharModel {
       (seg) => (seg >= 7 ? PAL.screen : seg >= 5 || seg <= 1 ? shade(sh, 0.84) : sh),
       { sides: 20, pos: [0, 3.02, -0.1], rot: [-Math.PI / 2, 0, 0] },
     );
-    k.loft([R(3.32, 0, 0, 0), R(3.33, 0.48, 0.4, 0.3), R(3.4, 0.5, 0.42, 0.3), R(3.41, 0, 0, 0)].map((r) => ({ ...r, z: -0.1 })), P.trim, { sides: 16 });
     for (const side of [-1, 1]) {
       const x = side * s.shoulderX;
       const up = side < 0 ? B.armL : B.armR;
