@@ -410,7 +410,7 @@ export class CharModel {
 
     // hips, with the belt painted on
     k.curBone = B.pelvis;
-    k.loft([R(0.815, 0, 0, 0), R(0.825, 0.07, 0.06, 0.07), R(0.86, 0.15, 0.092, 0.105), R(0.92, 0.172, 0.1, 0.115), R(0.98, 0.166, 0.1, 0.112), R(1.03, 0.15, 0.098, 0.1), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 5 ? leather : pants), { sides: 16 });
+    k.loft([R(0.838, 0, 0, 0), R(0.845, 0.04, 0.05, 0.05), R(0.875, 0.11, 0.082, 0.078), R(0.92, 0.17, 0.092, 0.088), R(0.98, 0.166, 0.096, 0.094), R(1.03, 0.15, 0.097, 0.096), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 5 ? leather : pants), { sides: 16 });
 
     // torso: waist, ribcage, chest, shoulders sloping up into the neck
     k.curBone = B.chest;
@@ -420,8 +420,10 @@ export class CharModel {
     ];
     k.loft(torso, (seg, d) => (agent && d < 1 && seg >= 2 && seg <= 8 ? PAL.shirt : shirt), { sides: 16 });
     // hi-vis vest worn open: the same body, a little bigger, with the front left out
-    const open = agent ? 2 : 1;
-    k.loft(torso.slice(2, 10), (seg, d) => (seg === 1 || (seg > 1 && d > 3 && d < 4) ? band : PAL.hivis), { sides: 16, grow: 0.012, from: open, to: 16 - open });
+    // (the workers' vest is a closed shell with the shirt painted down the middle: an edge that
+    // close to the centre line would show past the chest in profile)
+    const vest = (seg: number, d: number) => (!agent && d < 1 ? shirt : seg === 1 || (seg > 1 && d > 3 && d < 4) ? band : PAL.hivis);
+    k.loft(torso.slice(2, 10), vest, { sides: 16, grow: 0.012, from: agent ? 2 : 0, to: agent ? 14 : 16 });
     if (agent) {
       k.sphere(0.03, ink, [-0.03, 1.495, -0.094], 2, [1.2, 0.8, 0.5], true); // bow tie
       k.sphere(0.03, ink, [0.03, 1.495, -0.094], 2, [1.2, 0.8, 0.5], true);
@@ -450,11 +452,17 @@ export class CharModel {
       if (bearded && seg <= 3 && seg >= 1 && d < 6) return hair;
       return skin;
     }, { sides: 16 });
-    k.sphere(0.026, skin, [-0.083, y0 + 0.105, 0.012], 2, [0.4, 1, 0.75], true); // ears
-    k.sphere(0.026, skin, [0.083, y0 + 0.105, 0.012], 2, [0.4, 1, 0.75], true);
+    for (const side of [-1, 1]) {
+      // ears: a flat flap set into the head at the front and standing off it at the back, with a
+      // darker hollow so it reads as an ear rather than a button
+      const g = new THREE.SphereGeometry(0.03, 8, 6);
+      k.add(g, skin, [side * 0.074, y0 + 0.102, 0.03], [0, -side * 0.6, 0], true, [0.2, 1.05, 0.62]);
+      k.add(g, shade(skin, 0.78), [side * 0.0795, y0 + 0.1, 0.03], [0, -side * 0.6, 0], true, [0.12, 0.62, 0.34]);
+      g.dispose();
+    }
     if (!agent && v === 2) {
       // beanie with a turned-up cuff
-      k.loft([R(0.14, 0.086, 0.102, 0.108), R(0.182, 0.089, 0.104, 0.11), R(0.186, 0.084, 0.098, 0.105), R(0.235, 0.07, 0.078, 0.088), R(0.268, 0.04, 0.045, 0.05), R(0.278, 0, 0, 0)].map((r) => ({ ...r, y: r.y + y0, n: 2.4 })), (seg) => (seg === 0 ? shade(hat, 0.8) : hat), { sides: 16 });
+      k.loft([R(0.138, 0.084, 0.1, 0.106), R(0.143, 0.098, 0.115, 0.121), R(0.183, 0.1, 0.117, 0.123), R(0.19, 0.094, 0.109, 0.116), R(0.24, 0.086, 0.098, 0.106), R(0.275, 0.064, 0.07, 0.08), R(0.297, 0.03, 0.033, 0.036), R(0.303, 0, 0, 0)].map((r) => ({ ...r, y: r.y + y0, n: 2.4 })), (seg) => (seg <= 2 ? shade(hat, 0.8) : hat), { sides: 16 });
     } else if (!agent) {
       // hard hat: brim, then the dome
       k.loft([R(0.15, 0.086, 0.1, 0.106), R(0.152, 0.116, 0.152, 0.122), R(0.162, 0.116, 0.15, 0.122), R(0.166, 0.093, 0.108, 0.113), R(0.215, 0.088, 0.1, 0.106), R(0.255, 0.068, 0.076, 0.084), R(0.278, 0.032, 0.036, 0.04), R(0.285, 0, 0, 0)].map((r) => ({ ...r, y: r.y + y0, n: 2.3 })), hat, { sides: 16 });
@@ -486,7 +494,7 @@ export class CharModel {
       const sn = side < 0 ? B.shinL : B.shinR;
       const L = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, x, n: 2.3, ...extra });
       k.curBone = th;
-      k.loft([L(0.95, 0, 0, 0), L(0.94, 0.05, 0.06, 0.07), L(0.9, 0.078, 0.085, 0.092), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
+      k.loft([L(0.995, 0, 0, 0), L(0.985, 0.05, 0.05, 0.07), L(0.95, 0.082, 0.08, 0.106, { x: side * 0.084 }), L(0.905, 0.088, 0.088, 0.114, { x: side * 0.082 }), L(0.86, 0.084, 0.086, 0.1, { x: side * 0.085 }), L(0.825, 0.077, 0.084, 0.086), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
       k.curBone = sn;
       k.loft([L(0.5, 0, 0, 0), L(0.49, 0.05, 0.05, 0.05), L(0.46, 0.054, 0.058, 0.054, { nose: 0.008, nw: 0.04 }), L(0.36, 0.052, 0.05, 0.064), L(0.2, 0.04, 0.04, 0.044), L(0.1, 0.036, 0.036, 0.04), L(0.09, 0, 0, 0)], (seg, d) => (!agent && seg >= 1 && seg <= 2 && d < 2 ? ink : pants), { sides: 10 });
       const boot = agent ? ink : leather;
