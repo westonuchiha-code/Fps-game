@@ -247,6 +247,7 @@ export class Game {
       const any = u as any;
       any.dead = true;
       any.obj?.removeFromParent?.();
+      any.mesh?.removeFromParent?.();
       any.beam?.removeFromParent?.();
       any.dispose?.();
     }

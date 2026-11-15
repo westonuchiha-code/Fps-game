@@ -114,6 +114,24 @@ export class Inventory {
     G.weapons.onInventoryChanged(slot);
   }
 
+  /** Move an equipped weapon (or the shield) back into the pack. Returns false if the pack is full. */
+  unequip(item: Item) {
+    if (!this.hasRoom()) return false;
+    if (item.kind === 'shield') {
+      if (this.shield !== item) return false;
+      this.shield = null;
+      G.player.setShield(0, 3, 0);
+      this.backpack.push(item);
+      return true;
+    }
+    const s = this.slots.indexOf(item);
+    if (s < 0) return false;
+    this.slots[s] = null;
+    this.backpack.push(item);
+    G.weapons.onInventoryChanged(s);
+    return true;
+  }
+
   /** Throw an item out of the pack / a slot onto the ground. */
   drop(item: Item) {
     const i = this.backpack.indexOf(item);

@@ -259,8 +259,23 @@ export class JsonLevel extends Level {
 
   override onStart() {
     for (const o of this.data.objects) this.spawnObject(o, false);
+    if (!this.script) this.starterKit();
     const handled = this.script?.onStart?.(this);
     if (!handled) this.begin();
+  }
+
+  /** Levels without a script (anything made in the editor) start the player with a sensible loadout. */
+  private starterKit() {
+    const inv = G.inv;
+    const lvl = this.enemyLevel;
+    inv.reset();
+    inv.give(rollWeapon(lvl, { cls: 'pistol', brand: 'valu', rarity: 0, seed: 1 }));
+    inv.give(rollWeapon(lvl, { cls: 'rifle', brand: 'picket', rarity: 1, seed: 2 }));
+    inv.give(rollShield(lvl, { rarity: 0, brand: 'valu', seed: 3 }));
+    inv.ammo.pistol = 72;
+    inv.ammo.rifle = 150;
+    inv.mines = 3;
+    G.player.setShield(G.player.shieldMax, G.player.shieldDelay, G.player.shieldRate, true);
   }
 
   /** Run the level's own opening actions (scripts call this when their intro is over). */

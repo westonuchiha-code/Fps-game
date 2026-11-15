@@ -405,7 +405,7 @@ function buildRifle(item: WeaponItem, s: Style): GunRig {
   rb.socket('fore', [-0.016, -0.011, -0.33], 'gun', [1, 0.12, -0.2], [-0.1, -1, 0]);
   rb.socket('away', [-0.24, -0.45, 0.0], 'gun', [0.3, 0.6, -1], [-1, 0, 0]);
   rb.finish();
-  return { root: rb.root, nodes: rb.nodes, sockets: rb.sockets, cls: 'rifle', hip: new THREE.Vector3(0.125, -0.152, -0.33), adsDist: 0.13, scoped: false, glow: rb.glow };
+  return { root: rb.root, nodes: rb.nodes, sockets: rb.sockets, cls: 'rifle', hip: new THREE.Vector3(0.125, -0.152, -0.33), adsDist: 0.13, scoped: item.parts.sight === 2, glow: rb.glow };
 }
 
 // ---------------------------------------------------------------------------------------------- shotgun

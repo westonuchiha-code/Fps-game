@@ -441,8 +441,9 @@ function sniperClips(): ClipDef[] {
   const L = 'fore';
   const boltUp: [number, number, number] = [0, 0, 58];
   const boltPull: [number, number, number] = [0, 0, 0.1];
-  const cantP: [number, number, number] = [-0.03, 0.01, 0.03];
-  const cantR: [number, number, number] = [5, 9, 24];
+  // pushed forward and rolled so the bolt hand works out in front instead of filling the corner of the screen
+  const cantP: [number, number, number] = [-0.06, 0.005, -0.08];
+  const cantR: [number, number, number] = [4, 10, 28];
 
   /** Bolt cycle starting at t0. Returns the pieces to merge into a clip. */
   const cycle = (t0: number) => ({
@@ -454,7 +455,7 @@ function sniperClips(): ClipDef[] {
       k(t0 + 0.55, [0, 0, 0], boltUp, 'in'),
       k(t0 + 0.63, [0, 0, 0], [0, 0, 0], 'snap'),
     ],
-    gun: [k(t0), k(t0 + 0.15, cantP, cantR, 'inOut'), k(t0 + 0.38, [-0.03, 0.006, 0.045], [6, 9, 25], 'inOut'), k(t0 + 0.55, [-0.03, 0.012, 0.02], [4, 9, 23], 'in'), k(t0 + 0.66, cantP, cantR), k(t0 + 0.88, [0, 0, 0], [0, 0, 0], 'inOut')],
+    gun: [k(t0), k(t0 + 0.15, cantP, cantR, 'inOut'), k(t0 + 0.38, [-0.06, 0.0, -0.065], [6, 10, 29], 'inOut'), k(t0 + 0.55, [-0.06, 0.008, -0.09], [4, 10, 27], 'in'), k(t0 + 0.66, cantP, cantR), k(t0 + 0.88, [0, 0, 0], [0, 0, 0], 'inOut')],
     right: [hand(t0, 'grip'), hand(t0 + 0.03, 'handle', { blend: 0.14, pose: 'pinch', arc: 0.02 }), hand(t0 + 0.66, 'grip', { blend: 0.17, pose: 'grip', arc: 0.02 })],
     events: [sfx(t0 + 0.17, 'bolt_up'), sfx(t0 + 0.27, 'bolt_pull'), ev(t0 + 0.36, 'eject'), sfx(t0 + 0.46, 'bolt_push'), sfx(t0 + 0.6, 'bolt_down')],
     dur: 0.88,
