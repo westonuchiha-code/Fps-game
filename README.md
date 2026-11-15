@@ -105,7 +105,18 @@ recording, drop a file with the same name into `public/audio/vo/`.
 
 ### Testing without playing
 
-`tools/shot.mjs` drives the real game in headless Chromium:
+With `npm run dev` running in another terminal:
+
+```bash
+npm test             # real-input smoke test: boots like a player, clicks through the menu,
+                     # skips the intro, moves, shoots, reloads, pauses, opens the backpack
+npm run check        # scripted gameplay checks (tools/checks/*.js): combat, loot, charges,
+                     # respawn, and Mission 01's gate / boss / ending logic
+npm run typecheck
+```
+
+Both fail on any console error. To poke at something by hand, `tools/shot.mjs` drives the real
+game in headless Chromium and saves a screenshot:
 
 ```bash
 node tools/shot.mjs --url "?auto=1&dev=1&level=m01&nointro=1" --out shots/x.png \

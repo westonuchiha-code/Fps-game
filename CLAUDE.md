@@ -40,4 +40,8 @@ node tools/shot.mjs --url "?auto=1&dev=1&level=m01&nointro=1" --out shots/x.png 
 In the eval, `game` is the Game; set `game.manual = true` and advance with
 `game.step(frames, 1/60)`. `game.debug` (`src/dev/debug.ts`) has `tp`, `lookAt`, `run`
 (hold inputs), `botFight`, `gun`, `pose`, `rigView`, `overview`, `cam`. Look at the screenshot.
-`npm run typecheck` must pass; `npm run build` must succeed.
+`npm run typecheck` must pass; `npm run build` must succeed. `npm test` (real-input smoke test)
+and `npm run check` (scripted gameplay checks in `tools/checks/`) must pass; add a check when you
+add a mechanic. Checks are flaky while files are being saved (Vite reloads the page): run them
+against a build instead with `npm run build && npx vite preview --port 4173` and
+`GAME_URL=http://localhost:4173/ npm test`.

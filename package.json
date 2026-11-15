@@ -2,7 +2,7 @@
   "name": "everything-must-go",
   "private": true,
   "version": "0.1.0",
-  "description": "EVERYTHING MUST GO — a cel-shaded single-player looter FPS (working title)",
+  "description": "EVERYTHING MUST GO \u2014 a cel-shaded single-player looter FPS (working title)",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "shot": "node tools/shot.mjs",
-    "test": "node tools/smoke.mjs"
+    "test": "node tools/smoke.mjs",
+    "check": "node tools/check.mjs"
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",
