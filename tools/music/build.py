@@ -45,6 +45,7 @@ MANIFEST = os.path.join(ROOT, "src", "data", "music-manifest.json")
 TP_LIMIT = -1.0          # decoded true peak must stay at or below this (dBTP)
 TP_AIM = -1.1            # what the encode loop aims for
 SUM_PEAK_AIM = -0.7      # m01 base+combat, decoded, sample peak (limit is -0.5 dBFS)
+SUM_CEILING = -1.2       # keyed limiter on the combat layer: base+combat, 4x true peak
 
 # ---------------------------------------------------------------- registry
 
@@ -70,10 +71,10 @@ LOOPS = {
 
 # stinger name -> (file, exact length in seconds, fade-out seconds)
 STINGERS = {
-    "start": ("sting_start.ogg", 5.0, 0.5),
-    "complete": ("sting_complete.ogg", 9.4, 0.8),
-    "death": ("sting_death.ogg", 4.4, 0.5),
-    "objective": ("sting_objective.ogg", 2.2, 0.35),
+    "start": ("sting_start.ogg", 5.2, 0.5),
+    "complete": ("sting_complete.ogg", 9.1, 0.8),
+    "death": ("sting_death.ogg", 4.0, 0.5),
+    "objective": ("sting_objective.ogg", 2.0, 0.35),
 }
 STING_MASTER = Master(target=-14.0, comp_ratio=1.5, comp_thresh_rel=-1.0, clip_knee=1.5,
                       side_hp=120.0)
@@ -117,11 +118,13 @@ def build_loop(name: str, cfg: dict, args) -> dict:
     log(f"\n=== {name}: {song.key}, {song.bpm:g} BPM, {song.bars} bars, "
         f"{n_out} samples ({n_out / SR:.4f} s) ===")
     _lint(song, args.lint)
-    audio, start, length = mix.render_parts(song, tmp, jobs=args.jobs, cache=not args.no_cache)
+    passes = getattr(song, "passes", None) or mix.LOOP_PASSES
+    audio, start, length = mix.render_parts(song, tmp, jobs=args.jobs, cache=not args.no_cache,
+                                            reps=passes)
     ident = mix.pass_identity(audio, start, length)
     stems, rows, mism = mix.assemble(song, audio, start, length)
     _fmt_rows(rows)
-    log(f"  render: {len(rows)} parts, {mix.LOOP_PASSES} passes of {length} samples on the 64-sample grid; "
+    log(f"  render: {len(rows)} parts, {passes} passes of {length} samples on the 64-sample grid; "
         f"last two passes differ by {'nothing (bit-identical)' if ident <= -299 else f'{ident:.1f} dB re peak'}"
         f"; seam safety crossfade {'idle' if mism <= -299 else f'used ({mism:.1f} dB)'}")
     stems = {k: mix.fit_loop(v, n_out) for k, v in stems.items()}
@@ -156,22 +159,37 @@ def _build_stem_pair(name, cfg, stems, m: Master, tmp) -> dict:
         f"so that base+combat = {cfg['sum_target']:.1f} LUFS")
     combat = combat * dsp.lin(g)
     paths = {k: os.path.join(OUT_DIR, f) for k, f in cfg["stems"].items()}
+
+    def keyed(z, ceiling):
+        y, gr = dsp.limit_keyed(z[:, :2], z[:, 2:], ceiling_db=ceiling)
+        return np.hstack([z[:, :2], y]), gr
+
     scale = 0.0
+    sum_ceiling = SUM_CEILING
     for attempt in range(5):
         k = dsp.lin(scale)
         # individual safety limiters (normally idle: the stems have headroom)
         yb, grb = dsp.periodic(dsp.limit, base * k, ceiling_db=m.ceiling)
         yc, grc = dsp.periodic(dsp.limit, combat * k, ceiling_db=m.ceiling)
+        # the combat layer alone gives way where base + combat would overshoot;
+        # base is untouched, so it sounds exactly the same when played alone
+        z, grk = dsp.periodic(keyed, np.hstack([yb, yc]), sum_ceiling)
+        yc = z[:, 2:]
+        grc = np.maximum(grc, grk)
         db_, tpb = mix.encode_checked(yb, tmp, paths["base"], name + "_base")
         dc_, tpc = mix.encode_checked(yc, tmp, paths["combat"], name + "_combat")
         sum_pk = dsp.sample_peak_db(db_ + dc_)
         over = max(tpb - TP_AIM, tpc - TP_AIM, sum_pk - SUM_PEAK_AIM)
         if over <= 0.05:
             break
-        scale -= over + 0.05
+        if max(tpb - TP_AIM, tpc - TP_AIM) <= 0.05:
+            sum_ceiling -= (sum_pk - SUM_PEAK_AIM) + 0.05    # only the sum is hot: key harder
+        else:
+            scale -= over + 0.05
     if scale < 0:
         log(f"  ! both stems lowered by {-scale:.2f} dB to keep the summed peak legal")
-    log(f"  limiters: base max GR {grb.max():.2f} dB, combat max GR {grc.max():.2f} dB")
+    log(f"  limiters: base max GR {grb.max():.2f} dB, combat max GR {grc.max():.2f} dB "
+        f"(keyed on the sum, active {(grc > 0.1).mean() * 100:.2f}% of the time)")
     log(f"  encoded base: {dsp.lufs(db_, periodic=True):.2f} LUFS, TP {tpb:.2f} | combat: "
         f"{dsp.lufs(dc_, periodic=True):.2f} LUFS, TP {tpc:.2f} | sum: {dsp.lufs(db_ + dc_, periodic=True):.2f} LUFS, "
         f"sample peak {sum_pk:.2f} dBFS, TP {dsp.true_peak_db(db_ + dc_):.2f}")

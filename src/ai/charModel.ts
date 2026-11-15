@@ -217,9 +217,11 @@ export class CharModel {
   }
 
   private buildStriker(k: Kit, s: Spec, variant: number) {
-    const skin = variant % 2 === 0 ? PAL.skin1 : PAL.skin2;
-    const shirt = [PAL.denim, 0x7a3b3b, 0x4f6b4a][variant % 3];
-    const pants = [0x2c3140, 0x3a3328, 0x2e3a4a][variant % 3];
+    // variant 99 is the player character: Agent "Clearance", tuxedo under a hi-vis vest
+    const agent = variant === 99;
+    const skin = agent ? PAL.skin1 : variant % 2 === 0 ? PAL.skin1 : PAL.skin2;
+    const shirt = agent ? PAL.tux : [PAL.denim, 0x7a3b3b, 0x4f6b4a][variant % 3];
+    const pants = agent ? PAL.tux : [0x2c3140, 0x3a3328, 0x2e3a4a][variant % 3];
     const hat = [0xf0c020, 0xe8e2d0, PAL.hivis][variant % 3];
     k.curBone = B.pelvis;
     k.box(0.32, 0.18, 0.22, pants, [0, s.hip + 0.03, 0]);
@@ -229,14 +231,18 @@ export class CharModel {
     // hi-vis vest with reflective bands
     k.box(0.4, 0.34, 0.245, PAL.hivis, [0, 1.3, 0]);
     k.box(0.41, 0.04, 0.25, 0xe8e8d8, [0, 1.24, 0]);
-    k.box(0.1, 0.36, 0.25, shirt, [0, 1.3, -0.004]); // open front
-    k.box(0.22, 0.2, 0.1, 0x4a4f3a, [0, 1.28, 0.16]); // pack
+    k.box(0.1, 0.36, 0.25, agent ? PAL.shirt : shirt, [0, 1.3, -0.004]); // open front
+    if (agent) k.box(0.07, 0.035, 0.03, 0x15161c, [0, 1.46, -0.125]); // bow tie
+    else k.box(0.22, 0.2, 0.1, 0x4a4f3a, [0, 1.28, 0.16]); // pack
     k.cyl(0.05, 0.05, 0.1, skin, [0, 1.5, 0], 'y', 6);
     k.curBone = B.head;
     k.box(0.2, 0.23, 0.21, skin, [0, 1.65, 0]);
-    k.box(0.21, 0.07, 0.04, 0x15161c, [0, 1.68, -0.1]); // safety goggles
-    k.box(0.21, 0.09, 0.215, 0xb5382e, [0, 1.58, -0.004]); // bandana
-    if (variant % 3 === 2) k.box(0.22, 0.09, 0.23, hat, [0, 1.775, 0]); // beanie
+    k.box(0.21, 0.07, 0.04, 0x15161c, [0, 1.68, -0.1]); // safety goggles / shades
+    if (!agent) k.box(0.21, 0.09, 0.215, 0xb5382e, [0, 1.58, -0.004]); // bandana
+    if (agent) {
+      k.box(0.22, 0.08, 0.23, 0x2a1d14, [0, 1.79, 0.01]); // slicked hair
+      k.box(0.22, 0.14, 0.06, 0x2a1d14, [0, 1.7, 0.09]);
+    } else if (variant % 3 === 2) k.box(0.22, 0.09, 0.23, hat, [0, 1.775, 0]); // beanie
     else {
       k.taper(0.24, 0.1, 0.25, 0.8, 0.8, hat, [0, 1.8, 0]);
       k.box(0.26, 0.02, 0.32, hat, [0, 1.755, -0.03]);

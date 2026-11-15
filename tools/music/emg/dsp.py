@@ -218,17 +218,58 @@ def limit(x: np.ndarray, ceiling_db: float = -1.5, lookahead_ms: float = 4.0,
     """
     x = np.asarray(x, dtype=np.float64)
     c = lin(ceiling_db)
-    os = 4
-    up = signal.resample_poly(x, os, 1, axis=0)
-    pk = np.abs(up).max(axis=1)
-    pk = pk[: len(x) * os].reshape(len(x), os).max(axis=1)
-    pk = np.maximum(pk, np.abs(x).max(axis=1))
+    pk = _peak_env(x)
     if pk.max() <= c:
         return x.copy(), np.zeros(len(x))
     nb = int(np.ceil(len(x) / hop))
     pad = nb * hop - len(x)
     pkb = np.pad(pk, (0, pad)).reshape(nb, hop).max(axis=1)
     req = np.minimum(1.0, c / np.maximum(pkb, 1e-12))
+    gg = _smooth_gain(req, len(x), hop, lookahead_ms, release_ms)
+    y = x * gg[:, None]
+    # absolute safety net (should be a no-op)
+    np.clip(y, -c, c, out=y)
+    return y, -20.0 * np.log10(np.maximum(gg, 1e-9))
+
+
+def _peak_env(x: np.ndarray, os: int = 4) -> np.ndarray:
+    """Per-sample stereo-linked peak, 4x oversampled (inter-sample peaks)."""
+    up = signal.resample_poly(x, os, 1, axis=0)
+    pk = np.abs(up).max(axis=1)
+    pk = pk[: len(x) * os].reshape(len(x), os).max(axis=1)
+    return np.maximum(pk, np.abs(x).max(axis=1))
+
+
+def limit_keyed(bed: np.ndarray, x: np.ndarray, ceiling_db: float = -1.5,
+                lookahead_ms: float = 4.0, release_ms: float = 90.0,
+                hop: int = 8) -> tuple[np.ndarray, np.ndarray]:
+    """Limit `x` alone so that bed + x stays under the ceiling.
+
+    For layered stems (m01 base + combat): the bed is never touched, so it
+    sounds the same on its own; only the layer on top gives way on the few
+    peaks where the *sum* would overshoot.  Worst case (same polarity) the
+    sum peak is |bed| + g*|x|, so g = (c - |bed|) / |x| is sufficient.
+    Returns (limited x, gain reduction dB per sample)."""
+    bed = np.asarray(bed, dtype=np.float64)
+    x = np.asarray(x, dtype=np.float64)
+    c = lin(ceiling_db)
+    ps = _peak_env(bed + x)
+    if ps.max() <= c:
+        return x.copy(), np.zeros(len(x))
+    pb = _peak_env(bed)
+    px = _peak_env(x)
+    req_s = np.where(ps > c, np.clip((c - pb) / np.maximum(px, 1e-12), 0.0, 1.0), 1.0)
+    nb = int(np.ceil(len(x) / hop))
+    pad = nb * hop - len(x)
+    req = np.pad(req_s, (0, pad), constant_values=1.0).reshape(nb, hop).min(axis=1)
+    gg = _smooth_gain(req, len(x), hop, lookahead_ms, release_ms)
+    return x * gg[:, None], -20.0 * np.log10(np.maximum(gg, 1e-9))
+
+
+def _smooth_gain(req: np.ndarray, n: int, hop: int, lookahead_ms: float,
+                 release_ms: float) -> np.ndarray:
+    """Per-block required gain -> smooth per-sample gain that never exceeds it."""
+    nb = len(req)
     # release smoothing (decimated rate): gain recovers exponentially
     rate = SR / hop
     cr = np.exp(-1.0 / (release_ms * 0.001 * rate))
@@ -253,11 +294,7 @@ def limit(x: np.ndarray, ceiling_db: float = -1.5, lookahead_ms: float = 4.0,
     # sample-rate gain: hold the lower of neighbouring blocks, linear in between
     gs3 = minimum_filter1d(gs, size=3, mode="nearest")
     t_blk = (np.arange(nb) + 0.5) * hop
-    gg = np.interp(np.arange(len(x)), t_blk, gs3)
-    y = x * gg[:, None]
-    # absolute safety net (should be a no-op)
-    np.clip(y, -c, c, out=y)
-    return y, -20.0 * np.log10(np.maximum(gg, 1e-9))
+    return np.interp(np.arange(n), t_blk, gs3)
 
 
 def soft_clip(x: np.ndarray, ceiling_db: float, knee_db: float = 4.0) -> np.ndarray:

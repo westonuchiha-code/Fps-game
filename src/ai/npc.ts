@@ -610,8 +610,10 @@ export class Npc implements Target, Shootable, Listener {
 
   // ------------------------------------------------------------------ vehicles (Passenger)
 
-  setSeat(seat: THREE.Object3D | null) {
+  private seatStanding = false;
+  setSeat(seat: THREE.Object3D | null, vehicle?: { seats?: { gunner?: THREE.Object3D } } | null) {
     this.seat = seat;
+    this.seatStanding = !!seat && !!vehicle?.seats && vehicle.seats.gunner === seat;
     if (!seat) this.anim.sit = 0;
   }
 
@@ -679,9 +681,13 @@ export class Npc implements Target, Shootable, Listener {
       // riding: glued to the seat, brain only picks targets
       this.seat.getWorldPosition(this.pos);
       this.vel.set(0, 0, 0);
-      this.anim.sit = 1;
+      this.anim.sit = this.seatStanding ? 0 : 1;
+      this.anim.aim = this.seatStanding ? 1 : 0;
+      this.crouching = false;
       this.brain.updateSeated(dt);
       m.root.position.copy(this.pos);
+      // seat anchors for sitting riders are at hip height
+      if (!this.seatStanding) m.root.position.y -= 0.5;
       this.seat.getWorldQuaternion(m.root.quaternion);
       this.anim.speed = 0;
       this.anim.update(dt);

@@ -127,6 +127,7 @@ class Song:
         self.seed = zlib.crc32(name.encode()) if seed is None else seed
         self.sections: list[tuple[int, str]] = []   # (bar, label) for reports
         self.chords: dict[int, str] = {}            # bar -> chord symbol (for lint/report)
+        self.passes: int | None = None              # loop render passes (None = mix.LOOP_PASSES)
         self._tm = None
         if tempo_map:
             self._build_tempo_map(tempo_map)

@@ -447,6 +447,10 @@ export class AudioSys {
     this.music = { id, gain, stems };
   }
 
+  hasMusic(id: string) {
+    return !!musicManifest.tracks?.[id];
+  }
+
   get musicId() {
     return this.music?.id ?? null;
   }

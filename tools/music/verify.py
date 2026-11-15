@@ -141,8 +141,18 @@ def check_synth_timing() -> tuple[bool, str]:
     import mido
     from emg.seq import BLOCK, PPQ, TEMPO_US, tick_for_block
     from emg.synth import render_midi
-    blocks = [400 + 97 * i + (i * i) % 53 for i in range(180)] + [442 + 441 * k for k in range(1, 8)]
-    blocks = sorted(set(blocks))
+    # varied offsets within a block (residues), notes ~0.4 s apart so each one's
+    # release has died away before the next; then blocks whose millisecond clock
+    # lands exactly on an integer (block - 1 a multiple of 441)
+    blocks = [400 + 331 * i + (i * i) % 53 for i in range(180)]
+    blocks += [1 + 441 * m for m in range(blocks[-1] // 441 + 2, blocks[-1] // 441 + 9)]
+    # keep the test notes apart (each lasts 20 blocks and needs a silent gap
+    # after it for onset detection), so the MIDI events stay in time order
+    kept = []
+    for b in sorted(set(blocks)):
+        if not kept or b - kept[-1] >= 250:
+            kept.append(b)
+    blocks = kept
     with tempfile.TemporaryDirectory() as td:
         mf = mido.MidiFile(type=1, ticks_per_beat=PPQ)
         tr = mido.MidiTrack()
@@ -160,8 +170,17 @@ def check_synth_timing() -> tuple[bool, str]:
         mf.save(mid)
         x = render_midi(mid, os.path.join(td, "t.wav"))
     a = np.abs(x).max(axis=1)
-    idx = np.flatnonzero(a > 0)
-    onsets = [idx[0]] + [idx[i] for i in range(1, len(idx)) if idx[i] - idx[i - 1] > 2000]
+    # release tails decay towards (not to) zero in float output: an onset is the
+    # first non-zero sample after a stretch of near-silence
+    quiet = a < 1e-5
+    idx = np.flatnonzero(~quiet)
+    starts = [idx[0]] + [idx[i] for i in range(1, len(idx)) if idx[i] - idx[i - 1] > 2000]
+    onsets = []
+    for st in starts:
+        k = st
+        while k > 0 and a[k - 1] > 0:
+            k -= 1
+        onsets.append(k)
     if len(onsets) != len(blocks):
         return False, f"expected {len(blocks)} onsets, found {len(onsets)}"
     offs = sorted({int(o - b * BLOCK) for o, b in zip(onsets, blocks)})

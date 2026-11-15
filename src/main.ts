@@ -1,5 +1,7 @@
 import { Game } from './game';
 import { TestBed } from './levels/testbed';
+import './levels/m01';
+import { installVehicles } from './vehicles';
 import { JsonLevel } from './world/jsonLevel';
 import type { LevelData } from './world/leveldata';
 import type { Level } from './world/level';
@@ -7,6 +9,7 @@ import type { Level } from './world/level';
 const params = new URLSearchParams(location.search);
 const game = new Game();
 (window as any).__game = game;
+installVehicles(game);
 
 async function boot() {
   const ui = game.ui;
@@ -49,6 +52,7 @@ async function boot() {
     game.audio.resume();
     await game.loadLevel(await makeLevel());
     game.state = 'playing';
+    game.ready = true;
     if (!params.has('auto')) game.input.requestLock();
   };
   if (params.has('auto')) {
@@ -61,6 +65,7 @@ async function boot() {
     go.textContent = 'CLICK TO START';
     overlay.appendChild(go);
     overlay.addEventListener('click', () => void begin(), { once: true });
+    game.ready = true;
   }
   game.canvas.addEventListener('click', () => {
     if (game.state === 'playing') game.input.requestLock();

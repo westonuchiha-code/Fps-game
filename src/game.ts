@@ -319,7 +319,6 @@ export class Game {
       this.render();
     };
     requestAnimationFrame(loop);
-    this.ready = true;
   }
 
   /** Advance the simulation by `n` frames of `dt` seconds without waiting for the browser (tests). */

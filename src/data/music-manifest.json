@@ -1,7 +1,59 @@
 {
   "tracks": {
-    "menu": { "bpm": 92, "bars": 24, "beatsPerBar": 4, "loopSeconds": 62.6087, "stems": { "main": "menu.ogg" } },
-    "m01": { "bpm": 124, "bars": 48, "beatsPerBar": 4, "loopSeconds": 92.9032, "stems": { "base": "m01_base.ogg", "combat": "m01_combat.ogg" } }
+    "menu": {
+      "bpm": 92,
+      "bars": 24,
+      "beatsPerBar": 4,
+      "loopSeconds": 62.608685,
+      "stems": {
+        "main": "menu.ogg"
+      }
+    },
+    "m01": {
+      "bpm": 124,
+      "bars": 48,
+      "beatsPerBar": 4,
+      "loopSeconds": 92.90322,
+      "stems": {
+        "base": "m01_base.ogg",
+        "combat": "m01_combat.ogg"
+      }
+    },
+    "drive": {
+      "bpm": 148,
+      "bars": 36,
+      "beatsPerBar": 4,
+      "loopSeconds": 58.378367,
+      "stems": {
+        "main": "drive.ogg"
+      }
+    },
+    "boss": {
+      "bpm": 132,
+      "bars": 36,
+      "beatsPerBar": 4,
+      "loopSeconds": 65.454535,
+      "stems": {
+        "main": "boss.ogg"
+      }
+    }
   },
-  "stingers": {}
+  "stingers": {
+    "start": {
+      "file": "sting_start.ogg",
+      "seconds": 5.2
+    },
+    "complete": {
+      "file": "sting_complete.ogg",
+      "seconds": 9.1
+    },
+    "death": {
+      "file": "sting_death.ogg",
+      "seconds": 4.0
+    },
+    "objective": {
+      "file": "sting_objective.ogg",
+      "seconds": 2.0
+    }
+  }
 }

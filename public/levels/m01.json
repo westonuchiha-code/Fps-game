@@ -1,0 +1,9216 @@
+{
+ "format": 1,
+ "id": "m01",
+ "title": "Receiving",
+ "number": "MISSION 01",
+ "sky": "dawn",
+ "enemyLevel": 1,
+ "music": "m01",
+ "killY": -30,
+ "spawn": {
+  "pos": [
+   0,
+   0.1,
+   112
+  ],
+  "yaw": 0
+ },
+ "winOnAllDead": false,
+ "onStart": [
+  {
+   "do": "objective",
+   "id": "docks",
+   "text": "Fight through the docks to the gate"
+  }
+ ],
+ "watchers": [
+  {
+   "allDead": "boss",
+   "actions": [
+    {
+     "do": "script",
+     "name": "ending"
+    }
+   ]
+  }
+ ],
+ "objects": [
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.5,
+    20
+   ],
+   "size": [
+    82,
+    1,
+    222
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "uv": 6,
+   "id": "b1"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -40.5,
+    2.5,
+    20
+   ],
+   "size": [
+    1,
+    5,
+    222
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b2"
+  },
+  {
+   "type": "box",
+   "pos": [
+    40.5,
+    2.5,
+    20
+   ],
+   "size": [
+    1,
+    5,
+    222
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b3"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    2.5,
+    130.5
+   ],
+   "size": [
+    82,
+    5,
+    1
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b4"
+  },
+  {
+   "type": "nav",
+   "pos": [
+    0,
+    4,
+    20
+   ],
+   "size": [
+    80,
+    10,
+    220
+   ],
+   "id": "n5"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -120,
+    13,
+    60
+   ],
+   "size": [
+    70,
+    26,
+    90
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "b6"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -120,
+    27.5,
+    60
+   ],
+   "size": [
+    35,
+    3,
+    45
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "b7"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -120,
+    14.3,
+    105.2
+   ],
+   "size": [
+    63,
+    4.16,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8"
+  },
+  {
+   "type": "box",
+   "pos": [
+    130,
+    17,
+    0
+   ],
+   "size": [
+    80,
+    34,
+    120
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "b9"
+  },
+  {
+   "type": "box",
+   "pos": [
+    130,
+    35.5,
+    0
+   ],
+   "size": [
+    40,
+    3,
+    60
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "ba"
+  },
+  {
+   "type": "box",
+   "pos": [
+    130,
+    18.7,
+    60.2
+   ],
+   "size": [
+    72,
+    5.44,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bb"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -140,
+    11,
+    -120
+   ],
+   "size": [
+    90,
+    22,
+    100
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "bc"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -140,
+    23.5,
+    -120
+   ],
+   "size": [
+    45,
+    3,
+    50
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "bd"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -140,
+    12.1,
+    -69.8
+   ],
+   "size": [
+    81,
+    3.52,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "be"
+  },
+  {
+   "type": "box",
+   "pos": [
+    125,
+    20,
+    -200
+   ],
+   "size": [
+    70,
+    40,
+    90
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "bf"
+  },
+  {
+   "type": "box",
+   "pos": [
+    125,
+    41.5,
+    -200
+   ],
+   "size": [
+    35,
+    3,
+    45
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "bg"
+  },
+  {
+   "type": "box",
+   "pos": [
+    125,
+    22,
+    -154.8
+   ],
+   "size": [
+    63,
+    6.4,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bh"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    15,
+    210
+   ],
+   "size": [
+    160,
+    30,
+    60
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "bi"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    31.5,
+    210
+   ],
+   "size": [
+    80,
+    3,
+    30
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "bj"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    16.5,
+    240.2
+   ],
+   "size": [
+    144,
+    4.8,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bk"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -150,
+    14,
+    -330
+   ],
+   "size": [
+    80,
+    28,
+    120
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "bl"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -150,
+    29.5,
+    -330
+   ],
+   "size": [
+    40,
+    3,
+    60
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "bm"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -150,
+    15.4,
+    -269.8
+   ],
+   "size": [
+    72,
+    4.48,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bn"
+  },
+  {
+   "type": "box",
+   "pos": [
+    150,
+    18,
+    -380
+   ],
+   "size": [
+    90,
+    36,
+    110
+   ],
+   "mat": "panel",
+   "color": "#c9c2b4",
+   "uv": 14,
+   "collide": false,
+   "id": "bo"
+  },
+  {
+   "type": "box",
+   "pos": [
+    150,
+    37.5,
+    -380
+   ],
+   "size": [
+    45,
+    3,
+    55
+   ],
+   "mat": "panel",
+   "color": "#a8a297",
+   "collide": false,
+   "uv": 14,
+   "id": "bp"
+  },
+  {
+   "type": "box",
+   "pos": [
+    150,
+    19.8,
+    -324.8
+   ],
+   "size": [
+    81,
+    5.76,
+    0.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bq"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -14.91,
+    0,
+    101.13
+   ],
+   "rot": [
+    0,
+    3.15,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "pr"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -8.97,
+    0,
+    101.19
+   ],
+   "rot": [
+    0,
+    3.18,
+    0
+   ],
+   "color": "#3a3d46",
+   "id": "ps"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    20.87,
+    0,
+    101.4
+   ],
+   "rot": [
+    0,
+    3.16,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "pt"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    26.79,
+    0,
+    101.09
+   ],
+   "rot": [
+    0,
+    3.2,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "pu"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -27,
+    0,
+    80.23
+   ],
+   "rot": [
+    0,
+    3.09,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "pv"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -14.91,
+    0,
+    80.19
+   ],
+   "rot": [
+    0,
+    -0.04,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "pw"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -9.1,
+    0,
+    79.96
+   ],
+   "rot": [
+    0,
+    -0.05,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "px"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    3.11,
+    0,
+    80.19
+   ],
+   "rot": [
+    0,
+    0.04,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "py"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    9.2,
+    0,
+    80.2
+   ],
+   "rot": [
+    0,
+    3.19,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "pz"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    20.87,
+    0,
+    80.26
+   ],
+   "rot": [
+    0,
+    -0.05,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p10"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -30,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b11"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -24,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b12"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -18,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b13"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -12,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b14"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -6,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b15"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b16"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b17"
+  },
+  {
+   "type": "box",
+   "pos": [
+    12,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b18"
+  },
+  {
+   "type": "box",
+   "pos": [
+    18,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b19"
+  },
+  {
+   "type": "box",
+   "pos": [
+    24,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1a"
+  },
+  {
+   "type": "box",
+   "pos": [
+    30,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1b"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -30,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -24,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1d"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -18,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1e"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -12,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1f"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -6,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1g"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1h"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1i"
+  },
+  {
+   "type": "box",
+   "pos": [
+    12,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1j"
+  },
+  {
+   "type": "box",
+   "pos": [
+    18,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1k"
+  },
+  {
+   "type": "box",
+   "pos": [
+    24,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1l"
+  },
+  {
+   "type": "box",
+   "pos": [
+    30,
+    0.01,
+    80
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1m"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -15,
+    0,
+    91
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "p1n"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    15,
+    0,
+    91
+   ],
+   "rot": [
+    0,
+    -1.57,
+    0
+   ],
+   "id": "p1o"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -15,
+    0,
+    69
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "p1p"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    15,
+    0,
+    69
+   ],
+   "rot": [
+    0,
+    -1.57,
+    0
+   ],
+   "id": "p1q"
+  },
+  {
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    -27,
+    0,
+    66
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 0,
+   "id": "p1r"
+  },
+  {
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    29,
+    0,
+    125
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "variant": 3,
+   "id": "p1s"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    7.5,
+    0,
+    119
+   ],
+   "rot": [
+    0,
+    0.35,
+    0
+   ],
+   "color": "#b5442f",
+   "variant": 4,
+   "id": "p1t"
+  },
+  {
+   "type": "prop",
+   "prop": "union_sign",
+   "pos": [
+    5.2,
+    0,
+    122.6
+   ],
+   "rot": [
+    0,
+    1.92,
+    0
+   ],
+   "id": "p1u"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    -6,
+    0,
+    117
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "p1v"
+  },
+  {
+   "type": "prop",
+   "prop": "boxes",
+   "pos": [
+    -7.4,
+    0,
+    115.6
+   ],
+   "rot": [
+    0,
+    0.9,
+    0
+   ],
+   "variant": 1,
+   "id": "p1w"
+  },
+  {
+   "type": "prop",
+   "prop": "cart",
+   "pos": [
+    11,
+    0,
+    90
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "id": "p1x"
+  },
+  {
+   "type": "prop",
+   "prop": "cart",
+   "pos": [
+    12.2,
+    0,
+    91.4
+   ],
+   "rot": [
+    0,
+    1.2,
+    0
+   ],
+   "id": "p1y"
+  },
+  {
+   "type": "prop",
+   "prop": "cart",
+   "pos": [
+    -20,
+    0,
+    72
+   ],
+   "rot": [
+    0,
+    2.1,
+    0
+   ],
+   "id": "p1z"
+  },
+  {
+   "type": "prop",
+   "prop": "cart",
+   "pos": [
+    22,
+    0,
+    97
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "p20"
+  },
+  {
+   "type": "prop",
+   "prop": "cart",
+   "pos": [
+    -4,
+    0,
+    88
+   ],
+   "rot": [
+    0,
+    1,
+    0
+   ],
+   "id": "p21"
+  },
+  {
+   "type": "prop",
+   "prop": "cone",
+   "pos": [
+    -9,
+    0,
+    96
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p22"
+  },
+  {
+   "type": "prop",
+   "prop": "cone",
+   "pos": [
+    9.5,
+    0,
+    86
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p23"
+  },
+  {
+   "type": "prop",
+   "prop": "cone",
+   "pos": [
+    -2,
+    0,
+    74
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p24"
+  },
+  {
+   "type": "prop",
+   "prop": "dumpster",
+   "pos": [
+    34,
+    0,
+    108
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "p25"
+  },
+  {
+   "type": "prop",
+   "prop": "dumpster",
+   "pos": [
+    34,
+    0,
+    104.5
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p26"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -10,
+    0,
+    63.5
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "p27"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    9,
+    0,
+    64.5
+   ],
+   "rot": [
+    0,
+    -0.15,
+    0
+   ],
+   "id": "p28"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    20,
+    0,
+    66
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "variant": 0,
+   "id": "p29"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    21.6,
+    0,
+    67.2
+   ],
+   "rot": [
+    0,
+    1.1,
+    0
+   ],
+   "variant": 2,
+   "id": "p2a"
+  },
+  {
+   "type": "locker",
+   "pos": [
+    -34,
+    0,
+    110
+   ],
+   "rot": [
+    0,
+    1.5707963267948966,
+    0
+   ],
+   "luck": 1,
+   "name": "locker_lot",
+   "id": "l2b"
+  },
+  {
+   "type": "weapon",
+   "pos": [
+    -3.4,
+    1,
+    116.4
+   ],
+   "shield": true,
+   "brand": "picket",
+   "rarity": 1,
+   "seed": 404,
+   "id": "w2c"
+  },
+  {
+   "type": "weapon",
+   "pos": [
+    17,
+    1,
+    84
+   ],
+   "cls": "rifle",
+   "brand": "valu",
+   "rarity": 1,
+   "seed": 7,
+   "id": "w2d"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -5,
+    0.05,
+    118.4
+   ],
+   "cls": "pistol",
+   "amount": 36,
+   "id": "p2e"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    18.4,
+    0.05,
+    84.6
+   ],
+   "cls": "rifle",
+   "amount": 60,
+   "id": "p2f"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    -33,
+    0.05,
+    107.4
+   ],
+   "amount": 30,
+   "id": "p2g"
+  },
+  {
+   "type": "ally",
+   "voice": "rivet",
+   "name": "rivet",
+   "essential": true,
+   "pos": [
+    -3.2,
+    0,
+    113.6
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "a2h"
+  },
+  {
+   "type": "ally",
+   "voice": "dutch",
+   "name": "dutch",
+   "essential": true,
+   "pos": [
+    3.4,
+    0,
+    114.4
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "a2i"
+  },
+  {
+   "type": "ally",
+   "voice": "hank",
+   "name": "hank",
+   "pos": [
+    0.4,
+    0,
+    117.2
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "a2j"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -12,
+    0,
+    92
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "lot",
+   "patrol": [
+    [
+     -12,
+     0,
+     74
+    ],
+    [
+     -22,
+     0,
+     86
+    ]
+   ],
+   "id": "e2k"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    6,
+    0,
+    88
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "lot",
+   "patrol": [
+    [
+     18,
+     0,
+     92
+    ],
+    [
+     8,
+     0,
+     74
+    ]
+   ],
+   "id": "e2l"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    21,
+    0,
+    75
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "lot",
+   "id": "e2m"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -6,
+    0,
+    66
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "lot2",
+   "id": "e2n"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    5,
+    0,
+    67
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "lot2",
+   "id": "e2o"
+  },
+  {
+   "type": "trigger",
+   "name": "first_contact",
+   "pos": [
+    0,
+    3,
+    104
+   ],
+   "size": [
+    70,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_first_contact"
+    }
+   ],
+   "id": "t2p"
+  },
+  {
+   "type": "trigger",
+   "name": "locker_hint",
+   "pos": [
+    -30,
+    3,
+    109
+   ],
+   "size": [
+    12,
+    10,
+    8
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_locker_hint"
+    }
+   ],
+   "id": "t2q"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -36,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2r"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -32,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2s"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -28,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2t"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -24,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2u"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -20,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2v"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -16,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2w"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -12,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2x"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    -8,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2y"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    8,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p2z"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    12,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p30"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    16,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p31"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    20,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p32"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    24,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p33"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    28,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p34"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    32,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p35"
+  },
+  {
+   "type": "prop",
+   "prop": "fence",
+   "pos": [
+    36,
+    0,
+    60
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p36"
+  },
+  {
+   "type": "checkpoint",
+   "pos": [
+    0,
+    0.1,
+    58
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "size": [
+    14,
+    6,
+    5
+   ],
+   "id": "c37"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -34.5,
+    6,
+    33
+   ],
+   "size": [
+    11,
+    12,
+    54
+   ],
+   "mat": "panel",
+   "color": "#cfc8ba",
+   "uv": 6,
+   "id": "b38"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -34.5,
+    12.2,
+    33
+   ],
+   "size": [
+    11.6,
+    0.6,
+    54.6
+   ],
+   "mat": "plain",
+   "color": "#4d5663",
+   "collide": false,
+   "id": "b39"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -28.92,
+    9.6,
+    33
+   ],
+   "size": [
+    0.2,
+    1.6,
+    54
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b3a"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -25.5,
+    0.6,
+    33
+   ],
+   "size": [
+    7,
+    1.2,
+    54
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "uv": 4,
+   "id": "b3b"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -22.1,
+    1.14,
+    33
+   ],
+   "size": [
+    0.24,
+    0.12,
+    54
+   ],
+   "mat": "hazard",
+   "color": "#ffffff",
+   "collide": false,
+   "uv": 1,
+   "id": "b3c"
+  },
+  {
+   "type": "ramp",
+   "pos": [
+    -25.5,
+    0,
+    63
+   ],
+   "size": [
+    7,
+    1.2,
+    6
+   ],
+   "rot": [
+    0,
+    3.141592653589793,
+    0
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "r3d"
+  },
+  {
+   "type": "stairs",
+   "pos": [
+    -25.5,
+    0,
+    4
+   ],
+   "size": [
+    5,
+    1.2,
+    4
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "mat": "concrete",
+   "color": "#8d8880",
+   "steps": 6,
+   "id": "s3e"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    12
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 0,
+   "id": "p3f"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    20.4
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 1,
+   "id": "p3g"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    28.8
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 2,
+   "id": "p3h"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    37.2
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 3,
+   "id": "p3i"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    45.6
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 4,
+   "id": "p3j"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -28.9,
+    1.2,
+    54
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 5,
+   "id": "p3k"
+  },
+  {
+   "type": "prop",
+   "prop": "sign",
+   "pos": [
+    -28.9,
+    7.4,
+    29
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "scale": 3.2,
+   "variant": 1,
+   "id": "p3l"
+  },
+  {
+   "type": "prop",
+   "prop": "trailer",
+   "pos": [
+    -15.6,
+    0,
+    20.4
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 1,
+   "id": "p3m"
+  },
+  {
+   "type": "prop",
+   "prop": "trailer",
+   "pos": [
+    -15.6,
+    0,
+    45.6
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "variant": 5,
+   "color": "#ffd21f",
+   "id": "p3n"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    9,
+    0,
+    31
+   ],
+   "rot": [
+    0,
+    0.35,
+    0
+   ],
+   "variant": 2,
+   "id": "p3o"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    21,
+    0,
+    49
+   ],
+   "rot": [
+    0,
+    -0.5,
+    0
+   ],
+   "variant": 6,
+   "id": "p3p"
+  },
+  {
+   "type": "prop",
+   "prop": "trailer",
+   "pos": [
+    30,
+    0,
+    22
+   ],
+   "rot": [
+    0,
+    0.08,
+    0
+   ],
+   "variant": 7,
+   "id": "p3q"
+  },
+  {
+   "type": "prop",
+   "prop": "forklift",
+   "pos": [
+    -2,
+    0,
+    21
+   ],
+   "rot": [
+    0,
+    2.2,
+    0
+   ],
+   "id": "p3r"
+  },
+  {
+   "type": "prop",
+   "prop": "forklift",
+   "pos": [
+    -24.6,
+    1.2,
+    37
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "p3s"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    2,
+    0,
+    40
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 1,
+   "id": "p3t"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    3.5,
+    0,
+    41.4
+   ],
+   "rot": [
+    0,
+    1.4,
+    0
+   ],
+   "variant": 0,
+   "id": "p3u"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -4.5,
+    0,
+    34
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "variant": 0,
+   "id": "p3v"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    -6.4,
+    0,
+    33
+   ],
+   "rot": [
+    0,
+    0.9,
+    0
+   ],
+   "variant": 2,
+   "id": "p3w"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    14,
+    0,
+    18
+   ],
+   "rot": [
+    0,
+    0.6,
+    0
+   ],
+   "variant": 2,
+   "id": "p3x"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    15.4,
+    0,
+    16.6
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 1,
+   "id": "p3y"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -9,
+    0,
+    10
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 0,
+   "id": "p3z"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    6,
+    0,
+    9
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "variant": 1,
+   "id": "p40"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -24,
+    1.2,
+    28
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "variant": 0,
+   "id": "p41"
+  },
+  {
+   "type": "prop",
+   "prop": "boxes",
+   "pos": [
+    -26.4,
+    1.2,
+    50
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "variant": 2,
+   "id": "p42"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    -24.4,
+    1.2,
+    16
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "variant": 1,
+   "id": "p43"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    3.2,
+    0,
+    26
+   ],
+   "id": "b44"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    4.3,
+    0,
+    27.1
+   ],
+   "id": "b45"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    15.6,
+    0,
+    39
+   ],
+   "id": "b46"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -8,
+    0,
+    48
+   ],
+   "id": "b47"
+  },
+  {
+   "type": "locker",
+   "pos": [
+    -28.3,
+    1.2,
+    8.4
+   ],
+   "rot": [
+    0,
+    1.5707963267948966,
+    0
+   ],
+   "luck": 1,
+   "name": "locker_dock",
+   "id": "l48"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -24,
+    1.25,
+    44
+   ],
+   "cls": "rifle",
+   "amount": 45,
+   "id": "p49"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    12,
+    0.05,
+    17
+   ],
+   "cls": "pistol",
+   "amount": 24,
+   "id": "p4a"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    28,
+    0.05,
+    27
+   ],
+   "amount": 30,
+   "id": "p4b"
+  },
+  {
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    -3,
+    0.05,
+    20
+   ],
+   "amount": 1,
+   "id": "p4c"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -25,
+    1.2,
+    30
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "squad": "dock",
+   "id": "e4d"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -25.4,
+    1.2,
+    46
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "squad": "dock",
+   "id": "e4e"
+  },
+  {
+   "type": "enemy",
+   "kind": "super",
+   "pos": [
+    4,
+    0,
+    22
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock",
+   "id": "e4f"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    13,
+    0,
+    36
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock",
+   "id": "e4g"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -8,
+    0,
+    16
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock",
+   "id": "e4h"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -4,
+    0,
+    6
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock_r",
+   "tag": "dock_reinf",
+   "id": "e4i"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    2,
+    0,
+    5
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock_r",
+   "tag": "dock_reinf",
+   "id": "e4j"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    9,
+    0,
+    7
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "dock_r",
+   "tag": "dock_reinf",
+   "id": "e4k"
+  },
+  {
+   "type": "trigger",
+   "name": "dock_reinf",
+   "pos": [
+    0,
+    3,
+    36
+   ],
+   "size": [
+    80,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "spawn",
+     "tag": "dock_reinf"
+    }
+   ],
+   "id": "t4l"
+  },
+  {
+   "type": "trigger",
+   "name": "first_loot",
+   "pos": [
+    -27,
+    3,
+    9
+   ],
+   "size": [
+    10,
+    10,
+    10
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_first_loot"
+    }
+   ],
+   "id": "t4m"
+  },
+  {
+   "type": "checkpoint",
+   "pos": [
+    0,
+    0.1,
+    3
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "size": [
+    30,
+    6,
+    5
+   ],
+   "id": "c4n"
+  },
+  {
+   "type": "trigger",
+   "name": "yard",
+   "pos": [
+    0,
+    3,
+    1
+   ],
+   "size": [
+    80,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_yard"
+    }
+   ],
+   "id": "t4o"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33,
+    0,
+    -4
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p4p"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -32.91,
+    2.6,
+    -4
+   ],
+   "rot": [
+    0,
+    -0.05,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p4q"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -30.4,
+    0,
+    -11
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p4r"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33,
+    0,
+    -18
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p4s"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33.03,
+    2.6,
+    -17.89
+   ],
+   "rot": [
+    0,
+    0.05,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p4t"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -32.96,
+    5.2,
+    -18.05
+   ],
+   "rot": [
+    0,
+    -0.02,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p4u"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33,
+    0,
+    -29
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p4v"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33.04,
+    2.6,
+    -28.83
+   ],
+   "rot": [
+    0,
+    0.02,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p4w"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -30.4,
+    0,
+    -38
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p4x"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33,
+    0,
+    -46
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p4y"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -33.12,
+    2.6,
+    -45.76
+   ],
+   "rot": [
+    0,
+    -0.01,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p4z"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    33,
+    0,
+    -5
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p50"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    32.88,
+    2.6,
+    -5.13
+   ],
+   "rot": [
+    0,
+    0.02,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p51"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    32.92,
+    5.2,
+    -4.98
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p52"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    30.4,
+    0,
+    -14
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p53"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    33,
+    0,
+    -23
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p54"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    33.11,
+    2.6,
+    -22.81
+   ],
+   "rot": [
+    0,
+    -0.04,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p55"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    33,
+    0,
+    -34
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p56"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    30.4,
+    0,
+    -44
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p57"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    30.49,
+    2.6,
+    -43.78
+   ],
+   "rot": [
+    0,
+    0.05,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p58"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    30.39,
+    5.2,
+    -43.77
+   ],
+   "rot": [
+    0,
+    -0.03,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p59"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -18,
+    0,
+    -6
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p5a"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -14,
+    0,
+    -16
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p5b"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -14.02,
+    2.6,
+    -16.2
+   ],
+   "rot": [
+    0,
+    -0.05,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p5c"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -20,
+    0,
+    -27
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p5d"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -12,
+    0,
+    -36
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p5e"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -12.05,
+    2.6,
+    -36.21
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p5f"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -21,
+    0,
+    -44
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p5g"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    16,
+    0,
+    -8
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p5h"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    16.16,
+    2.6,
+    -7.79
+   ],
+   "rot": [
+    0,
+    1.6,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p5i"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    20,
+    0,
+    -18
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p5j"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    13,
+    0,
+    -27
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "p5k"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    21,
+    0,
+    -37
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p5l"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    20.96,
+    2.6,
+    -37.13
+   ],
+   "rot": [
+    0,
+    1.61,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p5m"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    12,
+    0,
+    -45
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "p5n"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -2,
+    0,
+    -12
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p5o"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    3,
+    0,
+    -40
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p5p"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    3.14,
+    2.6,
+    -40.2
+   ],
+   "rot": [
+    0,
+    1.58,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p5q"
+  },
+  {
+   "type": "prop",
+   "prop": "container_open",
+   "pos": [
+    2,
+    0,
+    -26
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p5r"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    -11.6,
+    0,
+    -11
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 1,
+   "id": "p5s"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -10.4,
+    0,
+    -12.2
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "variant": 1,
+   "id": "p5t"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    17.6,
+    0,
+    -22.4
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "variant": 2,
+   "id": "p5u"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    16.2,
+    0,
+    -21.2
+   ],
+   "rot": [
+    0,
+    0.7,
+    0
+   ],
+   "variant": 0,
+   "id": "p5v"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -6,
+    0,
+    -30
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "variant": 1,
+   "id": "p5w"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    8,
+    0,
+    -15
+   ],
+   "rot": [
+    0,
+    1.2,
+    0
+   ],
+   "variant": 2,
+   "id": "p5x"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    9.6,
+    0,
+    -16.2
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "variant": 2,
+   "id": "p5y"
+  },
+  {
+   "type": "prop",
+   "prop": "boxes",
+   "pos": [
+    -25,
+    0,
+    -21
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 2,
+   "id": "p5z"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    26,
+    0,
+    -29
+   ],
+   "rot": [
+    0,
+    0.9,
+    0
+   ],
+   "variant": 0,
+   "id": "p60"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    0.6,
+    0,
+    -5
+   ],
+   "rot": [
+    0,
+    0.05,
+    0
+   ],
+   "variant": 0,
+   "id": "p61"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -7,
+    0,
+    -44
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "variant": 2,
+   "id": "p62"
+  },
+  {
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    7.5,
+    0,
+    -33.6
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "variant": 2,
+   "id": "p63"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -5,
+    0,
+    -21
+   ],
+   "id": "b64"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    10,
+    0,
+    -34.6
+   ],
+   "id": "b65"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -24,
+    0,
+    -33
+   ],
+   "id": "b66"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    24,
+    0,
+    -11
+   ],
+   "id": "b67"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -26.5,
+    7.5,
+    -22
+   ],
+   "size": [
+    0.9,
+    15,
+    0.9
+   ],
+   "mat": "panel",
+   "color": "#ffd21f",
+   "uv": 3,
+   "id": "b68"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -26.5,
+    7.5,
+    -28
+   ],
+   "size": [
+    0.9,
+    15,
+    0.9
+   ],
+   "mat": "panel",
+   "color": "#ffd21f",
+   "uv": 3,
+   "id": "b69"
+  },
+  {
+   "type": "box",
+   "pos": [
+    26.5,
+    7.5,
+    -22
+   ],
+   "size": [
+    0.9,
+    15,
+    0.9
+   ],
+   "mat": "panel",
+   "color": "#ffd21f",
+   "uv": 3,
+   "id": "b6a"
+  },
+  {
+   "type": "box",
+   "pos": [
+    26.5,
+    7.5,
+    -28
+   ],
+   "size": [
+    0.9,
+    15,
+    0.9
+   ],
+   "mat": "panel",
+   "color": "#ffd21f",
+   "uv": 3,
+   "id": "b6b"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    15.4,
+    -25
+   ],
+   "size": [
+    56,
+    1.4,
+    7
+   ],
+   "mat": "panel",
+   "color": "#ffd21f",
+   "uv": 3,
+   "collide": false,
+   "id": "b6c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    13.2,
+    -25
+   ],
+   "size": [
+    3,
+    3,
+    3
+   ],
+   "mat": "panel",
+   "color": "#4d5663",
+   "collide": false,
+   "id": "b6d"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    9.4,
+    -25
+   ],
+   "size": [
+    0.2,
+    5,
+    0.2
+   ],
+   "mat": "plain",
+   "color": "#2a2c34",
+   "collide": false,
+   "id": "b6e"
+  },
+  {
+   "type": "weapon",
+   "pos": [
+    2,
+    1,
+    -27
+   ],
+   "cls": "shotgun",
+   "rarity": 1,
+   "seed": 21,
+   "id": "w6f"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    3,
+    0.05,
+    -25.4
+   ],
+   "cls": "shotgun",
+   "amount": 16,
+   "id": "p6g"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -24,
+    0.05,
+    -20
+   ],
+   "cls": "rifle",
+   "amount": 45,
+   "id": "p6h"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    25.4,
+    0.05,
+    -30.4
+   ],
+   "amount": 30,
+   "id": "p6i"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -8,
+    0,
+    -8
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard",
+   "id": "e6j"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    9,
+    0,
+    -12
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard",
+   "patrol": [
+    [
+     9,
+     0,
+     -22
+    ],
+    [
+     -4,
+     0,
+     -18
+    ]
+   ],
+   "id": "e6k"
+  },
+  {
+   "type": "enemy",
+   "kind": "super",
+   "pos": [
+    0,
+    0,
+    -20
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard",
+   "id": "e6l"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -22,
+    0,
+    -34
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard2",
+   "id": "e6m"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    24,
+    0,
+    -30
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard2",
+   "id": "e6n"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -3,
+    0,
+    -36
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "yard2",
+   "patrol": [
+    [
+     8,
+     0,
+     -38
+    ],
+    [
+     -6,
+     0,
+     -46
+    ]
+   ],
+   "id": "e6o"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    -14,
+    0,
+    -30
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "yard_drones",
+   "id": "e6p"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    0,
+    0,
+    -34
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "yard_drones",
+   "id": "e6q"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    15,
+    0,
+    -26
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "yard_drones",
+   "id": "e6r"
+  },
+  {
+   "type": "trigger",
+   "name": "drones",
+   "pos": [
+    0,
+    3,
+    -14
+   ],
+   "size": [
+    80,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "spawn",
+     "tag": "yard_drones"
+    },
+    {
+     "do": "say",
+     "line": "m01_drones"
+    },
+    {
+     "do": "wait",
+     "seconds": 2.4
+    },
+    {
+     "do": "say",
+     "line": "m01_drones_s"
+    }
+   ],
+   "id": "t6s"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -22.25,
+    3.2,
+    -55
+   ],
+   "size": [
+    35.5,
+    6.4,
+    1.6
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b6t"
+  },
+  {
+   "type": "box",
+   "pos": [
+    22.25,
+    3.2,
+    -55
+   ],
+   "size": [
+    35.5,
+    6.4,
+    1.6
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b6u"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    6.9,
+    -55
+   ],
+   "size": [
+    81,
+    1,
+    2
+   ],
+   "mat": "hazard",
+   "color": "#ffffff",
+   "uv": 1.2,
+   "collide": false,
+   "id": "b6v"
+  },
+  {
+   "type": "prop",
+   "prop": "gate",
+   "pos": [
+    0,
+    0,
+    -55
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "dynamic": true,
+   "name": "dockgate",
+   "id": "p6w"
+  },
+  {
+   "type": "destructible",
+   "prop": "coupling",
+   "name": "coupling_w",
+   "pos": [
+    -7.6,
+    0,
+    -53.6
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "hp": 40,
+   "by": "explosion",
+   "actions": [
+    {
+     "do": "unmark",
+     "target": "coupling_w"
+    },
+    {
+     "do": "count",
+     "id": "couplings",
+     "need": 1,
+     "then": [
+      {
+       "do": "say",
+       "line": "m01_gate_one"
+      }
+     ]
+    },
+    {
+     "do": "count",
+     "id": "couplings_all",
+     "need": 2,
+     "then": [
+      {
+       "do": "script",
+       "name": "gate_blown"
+      }
+     ]
+    }
+   ],
+   "id": "d6x"
+  },
+  {
+   "type": "destructible",
+   "prop": "coupling",
+   "name": "coupling_e",
+   "pos": [
+    7.6,
+    0,
+    -53.6
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "hp": 40,
+   "by": "explosion",
+   "actions": [
+    {
+     "do": "unmark",
+     "target": "coupling_e"
+    },
+    {
+     "do": "count",
+     "id": "couplings",
+     "need": 1,
+     "then": [
+      {
+       "do": "say",
+       "line": "m01_gate_one"
+      }
+     ]
+    },
+    {
+     "do": "count",
+     "id": "couplings_all",
+     "need": 2,
+     "then": [
+      {
+       "do": "script",
+       "name": "gate_blown"
+      }
+     ]
+    }
+   ],
+   "id": "d6y"
+  },
+  {
+   "type": "prop",
+   "prop": "tower",
+   "pos": [
+    -16,
+    0,
+    -49.4
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "p6z"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -4,
+    0,
+    -47.5
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "p70"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    4.6,
+    0,
+    -48
+   ],
+   "rot": [
+    0,
+    -0.1,
+    0
+   ],
+   "id": "p71"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    12,
+    0,
+    -47
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "p72"
+  },
+  {
+   "type": "prop",
+   "prop": "kiosk",
+   "pos": [
+    18,
+    0,
+    -53.2
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "id": "p73"
+  },
+  {
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    -1.4,
+    0.05,
+    -41
+   ],
+   "amount": 2,
+   "id": "p74"
+  },
+  {
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    0,
+    0.05,
+    -41.6
+   ],
+   "amount": 2,
+   "id": "p75"
+  },
+  {
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    1.4,
+    0.05,
+    -41
+   ],
+   "amount": 2,
+   "id": "p76"
+  },
+  {
+   "type": "marker",
+   "name": "mine_cache",
+   "pos": [
+    0,
+    0,
+    -41
+   ],
+   "id": "m77"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -3,
+    0,
+    -50
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "gate",
+   "hold": true,
+   "id": "e78"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    5,
+    0,
+    -50.4
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "gate",
+   "hold": true,
+   "id": "e79"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    12,
+    0,
+    -49
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "gate",
+   "id": "e7a"
+  },
+  {
+   "type": "trigger",
+   "name": "gate_brief",
+   "pos": [
+    0,
+    3,
+    -37
+   ],
+   "size": [
+    80,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_gate_1"
+    },
+    {
+     "do": "wait",
+     "seconds": 4.6
+    },
+    {
+     "do": "say",
+     "line": "m01_gate_2"
+    },
+    {
+     "do": "objective",
+     "id": "gate",
+     "text": "Blow both power couplings: plant charges, then squeeze the watch"
+    },
+    {
+     "do": "marker",
+     "target": "coupling_w",
+     "label": "COUPLING"
+    },
+    {
+     "do": "marker",
+     "target": "coupling_e",
+     "label": "COUPLING"
+    }
+   ],
+   "id": "t7b"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -24,
+    3.2,
+    -90
+   ],
+   "size": [
+    32,
+    6.4,
+    1.6
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b7c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    24,
+    3.2,
+    -90
+   ],
+   "size": [
+    32,
+    6.4,
+    1.6
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "b7d"
+  },
+  {
+   "type": "vehicle",
+   "kind": "teamster",
+   "name": "teamster",
+   "pos": [
+    -7,
+    0.9,
+    -72
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "v7e"
+  },
+  {
+   "type": "vehicle",
+   "kind": "vesper",
+   "pos": [
+    8,
+    0.7,
+    -68
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "v7f"
+  },
+  {
+   "type": "vehicle",
+   "kind": "vesper",
+   "pos": [
+    11.4,
+    0.7,
+    -70
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "v7g"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -30,
+    0,
+    -66
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p7h"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -30,
+    0,
+    -76
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "p7i"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    29,
+    0,
+    -70
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "variant": 8,
+   "id": "p7j"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    20,
+    0,
+    -63
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "variant": 1,
+   "id": "p7k"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -18,
+    0,
+    -84
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "p7l"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    14,
+    0,
+    -84
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "p7m"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -20,
+    0,
+    -62
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "p7n"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    20,
+    0,
+    -62
+   ],
+   "rot": [
+    0,
+    -1.57,
+    0
+   ],
+   "id": "p7o"
+  },
+  {
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    -30,
+    0,
+    -86.5
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 5,
+   "id": "p7p"
+  },
+  {
+   "type": "locker",
+   "pos": [
+    34,
+    0,
+    -80
+   ],
+   "rot": [
+    0,
+    -1.5707963267948966,
+    0
+   ],
+   "luck": 2,
+   "name": "locker_pool",
+   "id": "l7q"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    22,
+    0.05,
+    -64.5
+   ],
+   "amount": 30,
+   "id": "p7r"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -17,
+    0.05,
+    -82.4
+   ],
+   "cls": "rifle",
+   "amount": 60,
+   "id": "p7s"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -16,
+    0.05,
+    -83.4
+   ],
+   "cls": "sniper",
+   "amount": 10,
+   "id": "p7t"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -14,
+    0,
+    -66
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "pool",
+   "tag": "pool",
+   "id": "e7u"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    16,
+    0,
+    -72
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "pool",
+   "tag": "pool",
+   "id": "e7v"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    0,
+    0,
+    -82
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "squad": "pool",
+   "tag": "pool",
+   "id": "e7w"
+  },
+  {
+   "type": "trigger",
+   "name": "motorpool",
+   "pos": [
+    0,
+    3,
+    -60
+   ],
+   "size": [
+    30,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "checkpoint"
+    },
+    {
+     "do": "say",
+     "line": "m01_motorpool"
+    },
+    {
+     "do": "wait",
+     "seconds": 5
+    },
+    {
+     "do": "say",
+     "line": "m01_scooter"
+    },
+    {
+     "do": "objective",
+     "id": "drive",
+     "text": "Drive the Last Mile to the front door"
+    }
+   ],
+   "id": "t7x"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.5,
+    -262
+   ],
+   "size": [
+    96,
+    1,
+    344
+   ],
+   "mat": "sand",
+   "color": "#d9a066",
+   "uv": 9,
+   "id": "b7y"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.22,
+    -260
+   ],
+   "size": [
+    12,
+    0.5,
+    340
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "uv": 6,
+   "id": "b7z"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -98
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b80"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -107
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b81"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -116
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b82"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -125
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b83"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -134
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b84"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -143
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b85"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -152
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b86"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -161
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b87"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -170
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b88"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -179
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b89"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -188
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8a"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -197
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8b"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -206
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -215
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8d"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -224
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8e"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -233
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8f"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -242
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8g"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -251
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8h"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -260
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8i"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -269
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8j"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -278
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8k"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -287
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8l"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -296
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8m"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -305
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8n"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -314
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8o"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -323
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8p"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -332
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8q"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -341
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8r"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -350
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8s"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -359
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8t"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -368
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8u"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -377
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8v"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -386
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8w"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -395
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8x"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -404
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8y"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -413
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b8z"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.04,
+    -422
+   ],
+   "size": [
+    0.22,
+    0.02,
+    3.4
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "b90"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -41.09,
+    6.99,
+    -96.88
+   ],
+   "size": [
+    18.12,
+    15.97,
+    17.21
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.01623205890879035,
+    -0.16469582298304886,
+    -0.06294939935207366
+   ],
+   "uv": 7,
+   "id": "b91"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -29.31,
+    0,
+    -101.55
+   ],
+   "rot": [
+    0,
+    3.8,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.37,
+   "color": "#9a6a55",
+   "id": "p92"
+  },
+  {
+   "type": "box",
+   "pos": [
+    37.79,
+    6.79,
+    -96.35
+   ],
+   "size": [
+    17.64,
+    15.57,
+    15.38
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.05407869265414774,
+    0.21849171444773674,
+    0.012488033734261994
+   ],
+   "uv": 7,
+   "id": "b93"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    26.41,
+    0,
+    -101.77
+   ],
+   "rot": [
+    0,
+    1.26,
+    0
+   ],
+   "variant": 4,
+   "scale": 0.82,
+   "color": "#9a6a55",
+   "id": "p94"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -38.32,
+    3.66,
+    -108.98
+   ],
+   "size": [
+    18.11,
+    9.32,
+    16.77
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.001633860915899274,
+    -0.05838700209278613,
+    -0.002119842693209653
+   ],
+   "uv": 7,
+   "id": "b95"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -27.46,
+    0,
+    -110.72
+   ],
+   "rot": [
+    0,
+    2.42,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.29,
+   "color": "#9a6a55",
+   "id": "p96"
+  },
+  {
+   "type": "box",
+   "pos": [
+    40.1,
+    4.74,
+    -111.37
+   ],
+   "size": [
+    19.63,
+    11.47,
+    16.66
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.02126104381866753,
+    0.03037676797248423,
+    0.0024778834357857688
+   ],
+   "uv": 7,
+   "id": "b97"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -33.39,
+    6.94,
+    -121.84
+   ],
+   "size": [
+    17.79,
+    15.89,
+    16.36
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.04206107597798109,
+    0.1493162823608145,
+    -0.06306220121681691
+   ],
+   "uv": 7,
+   "id": "b98"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -21.33,
+    0,
+    -127.96
+   ],
+   "rot": [
+    0,
+    2.13,
+    0
+   ],
+   "variant": 2,
+   "id": "p99"
+  },
+  {
+   "type": "box",
+   "pos": [
+    41.75,
+    4.27,
+    -124.52
+   ],
+   "size": [
+    19.88,
+    10.54,
+    18.07
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.02230531987734139,
+    0.10733052110299468,
+    -0.014824656434357167
+   ],
+   "uv": 7,
+   "id": "b9a"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -33.69,
+    4.22,
+    -136.24
+   ],
+   "size": [
+    20.78,
+    10.44,
+    15.05
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.05355131043121218,
+    -0.11111398634966463,
+    0.035169699490070344
+   ],
+   "uv": 7,
+   "id": "b9b"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -18.81,
+    0,
+    -139.44
+   ],
+   "rot": [
+    0,
+    5.23,
+    0
+   ],
+   "variant": 4,
+   "scale": 1.44,
+   "color": "#9a6a55",
+   "id": "p9c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    40.08,
+    5.85,
+    -136.05
+   ],
+   "size": [
+    17.45,
+    13.69,
+    17.48
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.01882635452784598,
+    0.04399039130657911,
+    0.0717195424064994
+   ],
+   "uv": 7,
+   "id": "b9d"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    26.79,
+    0,
+    -140.63
+   ],
+   "rot": [
+    0,
+    4.73,
+    0
+   ],
+   "variant": 4,
+   "scale": 0.79,
+   "color": "#9a6a55",
+   "id": "p9e"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -32.55,
+    3.51,
+    -147.14
+   ],
+   "size": [
+    21.49,
+    9.01,
+    17.34
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.0581710260361433,
+    -0.018995965947397053,
+    -0.045499073490500454
+   ],
+   "uv": 7,
+   "id": "b9f"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -17.62,
+    0,
+    -146.1
+   ],
+   "rot": [
+    0,
+    4.56,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.49,
+   "color": "#b87a4b",
+   "id": "p9g"
+  },
+  {
+   "type": "box",
+   "pos": [
+    40.67,
+    4.71,
+    -147.28
+   ],
+   "size": [
+    20.27,
+    11.41,
+    17.75
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.05424639140255749,
+    0.09573957812972367,
+    0.012582516707479952
+   ],
+   "uv": 7,
+   "id": "b9h"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    27.37,
+    0,
+    -145.44
+   ],
+   "rot": [
+    0,
+    1.58,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.42,
+   "color": "#9a6a55",
+   "id": "p9i"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    25.12,
+    0,
+    -148.46
+   ],
+   "rot": [
+    0,
+    2.11,
+    0
+   ],
+   "variant": 0,
+   "id": "p9j"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -31.04,
+    6.49,
+    -163.5
+   ],
+   "size": [
+    18.38,
+    14.98,
+    15.33
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.03574896672740578,
+    -0.1784579505911097,
+    -0.03269557774066925
+   ],
+   "uv": 7,
+   "id": "b9k"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -18.12,
+    0,
+    -160.76
+   ],
+   "rot": [
+    0,
+    4.76,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.14,
+   "color": "#b87a4b",
+   "id": "p9l"
+  },
+  {
+   "type": "box",
+   "pos": [
+    36.61,
+    6.57,
+    -162.43
+   ],
+   "size": [
+    19.98,
+    15.14,
+    15.9
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.009112426796928051,
+    0.19214166700839996,
+    0.0724195658788085
+   ],
+   "uv": 7,
+   "id": "b9m"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -34.74,
+    3.74,
+    -173.99
+   ],
+   "size": [
+    18.79,
+    9.48,
+    17.42
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.02776628209277987,
+    0.24595267151016742,
+    -0.0036545766890049014
+   ],
+   "uv": 7,
+   "id": "b9n"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -22.3,
+    0,
+    -179.33
+   ],
+   "rot": [
+    0,
+    1.14,
+    0
+   ],
+   "variant": 0,
+   "scale": 0.85,
+   "color": "#b87a4b",
+   "id": "p9o"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -17.74,
+    0,
+    -173.13
+   ],
+   "rot": [
+    0,
+    1.82,
+    0
+   ],
+   "variant": 1,
+   "id": "p9p"
+  },
+  {
+   "type": "box",
+   "pos": [
+    31.05,
+    4.13,
+    -175.37
+   ],
+   "size": [
+    16.84,
+    10.25,
+    18.67
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.01765539036132395,
+    -0.2096376083791256,
+    0.02494295116513967
+   ],
+   "uv": 7,
+   "id": "b9q"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    21.34,
+    0,
+    -178.55
+   ],
+   "rot": [
+    0,
+    1.32,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.46,
+   "color": "#b87a4b",
+   "id": "p9r"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    18.16,
+    0,
+    -177.33
+   ],
+   "rot": [
+    0,
+    1.78,
+    0
+   ],
+   "variant": 0,
+   "id": "p9s"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -35.29,
+    4.93,
+    -189.17
+   ],
+   "size": [
+    18.68,
+    11.87,
+    18.8
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.01297153729945421,
+    -0.24914673867169768,
+    0.04571087323129176
+   ],
+   "uv": 7,
+   "id": "b9t"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -19.32,
+    0,
+    -188.05
+   ],
+   "rot": [
+    0,
+    4.6,
+    0
+   ],
+   "variant": 1,
+   "id": "p9u"
+  },
+  {
+   "type": "box",
+   "pos": [
+    28.97,
+    6.86,
+    -188.67
+   ],
+   "size": [
+    17.32,
+    15.72,
+    16.83
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.04491102461703121,
+    -0.22884377976879478,
+    -0.02383541334420443
+   ],
+   "uv": 7,
+   "id": "b9v"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    17.82,
+    0,
+    -191.7
+   ],
+   "rot": [
+    0,
+    3.79,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.09,
+   "color": "#9a6a55",
+   "id": "p9w"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -41.21,
+    5.68,
+    -200.3
+   ],
+   "size": [
+    19.07,
+    13.37,
+    15.17
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.055329449661076065,
+    0.06721272540744394,
+    -0.038466300144791604
+   ],
+   "uv": 7,
+   "id": "b9x"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -23.1,
+    0,
+    -200.45
+   ],
+   "rot": [
+    0,
+    4.87,
+    0
+   ],
+   "variant": 2,
+   "id": "p9y"
+  },
+  {
+   "type": "box",
+   "pos": [
+    28.53,
+    4.53,
+    -199.08
+   ],
+   "size": [
+    17.14,
+    11.07,
+    17.69
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.016160883055999872,
+    -0.023085964377969503,
+    -0.014983121044933795
+   ],
+   "uv": 7,
+   "id": "b9z"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    14.98,
+    0,
+    -200.93
+   ],
+   "rot": [
+    0,
+    2.14,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.46,
+   "color": "#9a6a55",
+   "id": "pa0"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -40.65,
+    4.67,
+    -212.5
+   ],
+   "size": [
+    19.8,
+    11.35,
+    16.72
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.03618161838501692,
+    -0.01387301238719374,
+    0.04546886168420315
+   ],
+   "uv": 7,
+   "id": "ba1"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -26.81,
+    0,
+    -209.82
+   ],
+   "rot": [
+    0,
+    3.59,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.45,
+   "color": "#b87a4b",
+   "id": "pa2"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -24.46,
+    0,
+    -217.18
+   ],
+   "rot": [
+    0,
+    2.27,
+    0
+   ],
+   "variant": 1,
+   "id": "pa3"
+  },
+  {
+   "type": "box",
+   "pos": [
+    33.34,
+    6.83,
+    -212.64
+   ],
+   "size": [
+    18.11,
+    15.66,
+    18.98
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.03837142397649586,
+    -0.07157236034981906,
+    0.043175265230238444
+   ],
+   "uv": 7,
+   "id": "ba4"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    20.69,
+    0,
+    -216.03
+   ],
+   "rot": [
+    0,
+    1.93,
+    0
+   ],
+   "variant": 4,
+   "scale": 0.71,
+   "color": "#9a6a55",
+   "id": "pa5"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -41.63,
+    4.33,
+    -225.2
+   ],
+   "size": [
+    18.03,
+    10.67,
+    15.97
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.017040703911334276,
+    -0.03895773726981133,
+    -0.003070414811372754
+   ],
+   "uv": 7,
+   "id": "ba6"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -31.31,
+    0,
+    -231.47
+   ],
+   "rot": [
+    0,
+    5.62,
+    0
+   ],
+   "variant": 2,
+   "scale": 1,
+   "color": "#9a6a55",
+   "id": "pa7"
+  },
+  {
+   "type": "box",
+   "pos": [
+    34.42,
+    4.57,
+    -226.36
+   ],
+   "size": [
+    16.81,
+    11.14,
+    18.48
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.016870852829888462,
+    -0.03324380563572049,
+    -0.008813379593193532
+   ],
+   "uv": 7,
+   "id": "ba8"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    20.66,
+    0,
+    -231.27
+   ],
+   "rot": [
+    0,
+    4.56,
+    0
+   ],
+   "variant": 2,
+   "id": "pa9"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -40.54,
+    5.96,
+    -241.71
+   ],
+   "size": [
+    16.41,
+    13.92,
+    18.92
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.0578839692659676,
+    0.14327384170610458,
+    0.0030079488456249276
+   ],
+   "uv": 7,
+   "id": "baa"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -28.61,
+    0,
+    -242.22
+   ],
+   "rot": [
+    0,
+    0.37,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.01,
+   "color": "#9a6a55",
+   "id": "pab"
+  },
+  {
+   "type": "box",
+   "pos": [
+    41.38,
+    5.22,
+    -240.84
+   ],
+   "size": [
+    21.61,
+    12.44,
+    17.48
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.018166815815493467,
+    -0.05240232916548848,
+    0.04194553654640913
+   ],
+   "uv": 7,
+   "id": "bac"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    22.31,
+    0,
+    -237.08
+   ],
+   "rot": [
+    0,
+    2.56,
+    0
+   ],
+   "variant": 1,
+   "id": "pad"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -38.75,
+    5.12,
+    -252.62
+   ],
+   "size": [
+    19.11,
+    12.24,
+    16.8
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.03405472638085484,
+    -0.14625389862339944,
+    -0.048823080807924274
+   ],
+   "uv": 7,
+   "id": "bae"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -26.76,
+    0,
+    -249.63
+   ],
+   "rot": [
+    0,
+    1.24,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.11,
+   "color": "#9a6a55",
+   "id": "paf"
+  },
+  {
+   "type": "box",
+   "pos": [
+    40.64,
+    6.18,
+    -253.39
+   ],
+   "size": [
+    18.23,
+    14.36,
+    16.79
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.009188790796324606,
+    0.16803503734990954,
+    0.044345230273902414
+   ],
+   "uv": 7,
+   "id": "bag"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    27.65,
+    0,
+    -251.21
+   ],
+   "rot": [
+    0,
+    4.97,
+    0
+   ],
+   "variant": 2,
+   "id": "pah"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -33.86,
+    3.53,
+    -266.8
+   ],
+   "size": [
+    19.34,
+    9.05,
+    16.95
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.05458129556849599,
+    -0.09449164185207337,
+    -0.026278347522020337
+   ],
+   "uv": 7,
+   "id": "bai"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -18.29,
+    0,
+    -262.51
+   ],
+   "rot": [
+    0,
+    2.76,
+    0
+   ],
+   "variant": 2,
+   "id": "paj"
+  },
+  {
+   "type": "box",
+   "pos": [
+    43.91,
+    6.52,
+    -264.84
+   ],
+   "size": [
+    21.77,
+    15.03,
+    18.91
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.05989807317964732,
+    -0.21637998218648136,
+    0.0730192107334733
+   ],
+   "uv": 7,
+   "id": "bak"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    31.29,
+    0,
+    -261.62
+   ],
+   "rot": [
+    0,
+    5.27,
+    0
+   ],
+   "variant": 4,
+   "scale": 0.71,
+   "color": "#b87a4b",
+   "id": "pal"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -30.98,
+    3.59,
+    -278.56
+   ],
+   "size": [
+    16.41,
+    9.18,
+    16
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.05411699714139104,
+    0.05692242842633277,
+    -0.024572695046663283
+   ],
+   "uv": 7,
+   "id": "bam"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -21.67,
+    0,
+    -282.89
+   ],
+   "rot": [
+    0,
+    1.77,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.59,
+   "color": "#b87a4b",
+   "id": "pan"
+  },
+  {
+   "type": "box",
+   "pos": [
+    43.74,
+    5.66,
+    -279.41
+   ],
+   "size": [
+    20.36,
+    13.32,
+    15.75
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.0003380035143345575,
+    -0.15155060635879636,
+    -0.04960492450743914
+   ],
+   "uv": 7,
+   "id": "bao"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -31.11,
+    6.21,
+    -290.86
+   ],
+   "size": [
+    20.91,
+    14.41,
+    18.42
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.01038178352639079,
+    0.04209954629186541,
+    -0.04309585481882095
+   ],
+   "uv": 7,
+   "id": "bap"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -18.75,
+    0,
+    -291.77
+   ],
+   "rot": [
+    0,
+    1.26,
+    0
+   ],
+   "variant": 1,
+   "scale": 1,
+   "color": "#b87a4b",
+   "id": "paq"
+  },
+  {
+   "type": "box",
+   "pos": [
+    39.41,
+    6.33,
+    -293.28
+   ],
+   "size": [
+    17.86,
+    14.67,
+    15.32
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.03840238041244447,
+    0.1274340869858861,
+    -0.050664266087114815
+   ],
+   "uv": 7,
+   "id": "bar"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    26.21,
+    0,
+    -291.17
+   ],
+   "rot": [
+    0,
+    3.13,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.31,
+   "color": "#9a6a55",
+   "id": "pas"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -31.9,
+    3.82,
+    -306.48
+   ],
+   "size": [
+    18.5,
+    9.64,
+    16.07
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.030816702470183373,
+    0.23603739484678954,
+    -0.07593877159059048
+   ],
+   "uv": 7,
+   "id": "bat"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -19.7,
+    0,
+    -302.29
+   ],
+   "rot": [
+    0,
+    2,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.56,
+   "color": "#9a6a55",
+   "id": "pau"
+  },
+  {
+   "type": "box",
+   "pos": [
+    36.44,
+    4.1,
+    -305.59
+   ],
+   "size": [
+    17.43,
+    10.2,
+    16.42
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.008300837678834792,
+    -0.014621690614148974,
+    -0.016491369567811484
+   ],
+   "uv": 7,
+   "id": "bav"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    25.05,
+    0,
+    -309.22
+   ],
+   "rot": [
+    0,
+    2.69,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.48,
+   "color": "#b87a4b",
+   "id": "paw"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -35.11,
+    6.61,
+    -316.09
+   ],
+   "size": [
+    19.16,
+    15.21,
+    16.74
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.017687099296599625,
+    -0.12761881563346833,
+    -0.02913865998387337
+   ],
+   "uv": 7,
+   "id": "bax"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -20.77,
+    0,
+    -313.76
+   ],
+   "rot": [
+    0,
+    5.54,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.09,
+   "color": "#9a6a55",
+   "id": "pay"
+  },
+  {
+   "type": "box",
+   "pos": [
+    32.69,
+    5.74,
+    -316.61
+   ],
+   "size": [
+    16.85,
+    13.48,
+    17.55
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.014615018544718625,
+    -0.1163695645518601,
+    0.021951456479728224
+   ],
+   "uv": 7,
+   "id": "baz"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -36.61,
+    4.5,
+    -330.87
+   ],
+   "size": [
+    16.07,
+    11.01,
+    15.44
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.033298075217753645,
+    0.11241661722306162,
+    -0.03589849501848221
+   ],
+   "uv": 7,
+   "id": "bb0"
+  },
+  {
+   "type": "box",
+   "pos": [
+    29.73,
+    5.23,
+    -329.91
+   ],
+   "size": [
+    18.51,
+    12.46,
+    15.9
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.020871187420561904,
+    0.17320569814182818,
+    -0.053525275848805905
+   ],
+   "uv": 7,
+   "id": "bb1"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    16.42,
+    0,
+    -329.46
+   ],
+   "rot": [
+    0,
+    4.34,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.4,
+   "color": "#b87a4b",
+   "id": "pb2"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -40.53,
+    6.71,
+    -342.34
+   ],
+   "size": [
+    18.69,
+    15.42,
+    15.06
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.04922038340941071,
+    0.12347336404491216,
+    0.0381826700270176
+   ],
+   "uv": 7,
+   "id": "bb3"
+  },
+  {
+   "type": "box",
+   "pos": [
+    32.22,
+    3.96,
+    -344.12
+   ],
+   "size": [
+    19.42,
+    9.92,
+    17.19
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.041950880745425814,
+    -0.17457943060435355,
+    -0.06678167205303907
+   ],
+   "uv": 7,
+   "id": "bb4"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    21.42,
+    0,
+    -344.04
+   ],
+   "rot": [
+    0,
+    5.54,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.32,
+   "color": "#9a6a55",
+   "id": "pb5"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -42.36,
+    5.9,
+    -355
+   ],
+   "size": [
+    16.49,
+    13.8,
+    18.66
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.0018663753010332573,
+    -0.09718287864234298,
+    -0.06817221105098725
+   ],
+   "uv": 7,
+   "id": "bb6"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -29.71,
+    0,
+    -353.32
+   ],
+   "rot": [
+    0,
+    0.87,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.06,
+   "color": "#9a6a55",
+   "id": "pb7"
+  },
+  {
+   "type": "box",
+   "pos": [
+    32.62,
+    6.2,
+    -358.22
+   ],
+   "size": [
+    18.01,
+    14.4,
+    16.69
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.031551809767261144,
+    -0.11593622341752052,
+    -0.03976001981645823
+   ],
+   "uv": 7,
+   "id": "bb8"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    19.27,
+    0,
+    -359.01
+   ],
+   "rot": [
+    0,
+    2.09,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.34,
+   "color": "#9a6a55",
+   "id": "pb9"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    17.97,
+    0,
+    -358.26
+   ],
+   "rot": [
+    0,
+    5.53,
+    0
+   ],
+   "variant": 1,
+   "id": "pba"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -42.41,
+    4.31,
+    -370.22
+   ],
+   "size": [
+    16.98,
+    10.62,
+    18.95
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.05369256298989057,
+    0.007245434797368944,
+    -0.05587517537176609
+   ],
+   "uv": 7,
+   "id": "bbb"
+  },
+  {
+   "type": "box",
+   "pos": [
+    38.28,
+    6.13,
+    -371.23
+   ],
+   "size": [
+    21.24,
+    14.25,
+    15.09
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.007868674239143725,
+    -0.027849718928337097,
+    0.02068313475698233
+   ],
+   "uv": 7,
+   "id": "bbc"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    23.91,
+    0,
+    -372.72
+   ],
+   "rot": [
+    0,
+    2.94,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.54,
+   "color": "#b87a4b",
+   "id": "pbd"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -39.56,
+    5.3,
+    -381.43
+   ],
+   "size": [
+    21.02,
+    12.59,
+    17.77
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.030311299413442613,
+    -0.23339867789763957,
+    0.05878605373203753
+   ],
+   "uv": 7,
+   "id": "bbe"
+  },
+  {
+   "type": "box",
+   "pos": [
+    38.85,
+    6.1,
+    -384.58
+   ],
+   "size": [
+    17.31,
+    14.19,
+    18.52
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.045061621041968467,
+    -0.1934863575734198,
+    0.07638210874050856
+   ],
+   "uv": 7,
+   "id": "bbf"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    28.84,
+    0,
+    -381.22
+   ],
+   "rot": [
+    0,
+    1.12,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.29,
+   "color": "#9a6a55",
+   "id": "pbg"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -35.45,
+    6.47,
+    -396.45
+   ],
+   "size": [
+    19.41,
+    14.94,
+    16.82
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.029030381552875042,
+    -0.19802559411618859,
+    0.021116076037287712
+   ],
+   "uv": 7,
+   "id": "bbh"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -21.82,
+    0,
+    -391.22
+   ],
+   "rot": [
+    0,
+    4.87,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.25,
+   "color": "#b87a4b",
+   "id": "pbi"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -21.96,
+    0,
+    -393.13
+   ],
+   "rot": [
+    0,
+    2.11,
+    0
+   ],
+   "variant": 0,
+   "id": "pbj"
+  },
+  {
+   "type": "box",
+   "pos": [
+    41.78,
+    3.95,
+    -397.55
+   ],
+   "size": [
+    19.38,
+    9.9,
+    18.84
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.02635625925846398,
+    0.0032097978983074427,
+    -0.02979818668216467
+   ],
+   "uv": 7,
+   "id": "bbk"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -35.32,
+    6.14,
+    -410.72
+   ],
+   "size": [
+    21.31,
+    14.28,
+    16.84
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.02360202949494123,
+    -0.24923712632153183,
+    0.0609099643677473
+   ],
+   "uv": 7,
+   "id": "bbl"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -23.29,
+    0,
+    -411.91
+   ],
+   "rot": [
+    0,
+    0.59,
+    0
+   ],
+   "variant": 0,
+   "scale": 0.79,
+   "color": "#9a6a55",
+   "id": "pbm"
+  },
+  {
+   "type": "box",
+   "pos": [
+    43.79,
+    6.49,
+    -409.02
+   ],
+   "size": [
+    21.1,
+    14.98,
+    15.32
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.03991573945619166,
+    0.060610309010371566,
+    -0.0023553679510951026
+   ],
+   "uv": 7,
+   "id": "bbn"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    29.07,
+    0,
+    -406.78
+   ],
+   "rot": [
+    0,
+    3.67,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.21,
+   "color": "#9a6a55",
+   "id": "pbo"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -30.89,
+    6,
+    -421.69
+   ],
+   "size": [
+    16.59,
+    14,
+    16.5
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    -0.014763591494411227,
+    -0.07835032546427101,
+    0.013612982630729673
+   ],
+   "uv": 7,
+   "id": "bbp"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -17.79,
+    0,
+    -425.12
+   ],
+   "rot": [
+    0,
+    1.5,
+    0
+   ],
+   "variant": 3,
+   "scale": 1.17,
+   "color": "#b87a4b",
+   "id": "pbq"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -17.58,
+    0,
+    -417.42
+   ],
+   "rot": [
+    0,
+    2.39,
+    0
+   ],
+   "variant": 1,
+   "id": "pbr"
+  },
+  {
+   "type": "box",
+   "pos": [
+    42.48,
+    3.86,
+    -422.2
+   ],
+   "size": [
+    18.16,
+    9.72,
+    17.92
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.0479279416333884,
+    -0.144268864300102,
+    -0.004260845072567465
+   ],
+   "uv": 7,
+   "id": "bbs"
+  },
+  {
+   "type": "checkpoint",
+   "pos": [
+    0,
+    0.1,
+    -93
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "size": [
+    14,
+    6,
+    5
+   ],
+   "id": "cbt"
+  },
+  {
+   "type": "nav",
+   "pos": [
+    0,
+    4,
+    -152
+   ],
+   "size": [
+    64,
+    10,
+    44
+   ],
+   "id": "nbu"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -12,
+    0,
+    -146
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "pbv"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    -14.4,
+    0,
+    -152
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "id": "pbw"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    13,
+    0,
+    -150
+   ],
+   "rot": [
+    0,
+    -0.3,
+    0
+   ],
+   "id": "pbx"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    15,
+    0,
+    -157
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "pby"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -18,
+    0,
+    -160
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "id": "pbz"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    19,
+    0,
+    -144
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "pc0"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -13,
+    0,
+    -149
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "squad": "mile1",
+   "id": "ec1"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -16,
+    0,
+    -156
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "squad": "mile1",
+   "id": "ec2"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    14,
+    0,
+    -153
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "squad": "mile1",
+   "id": "ec3"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    17,
+    0,
+    -147
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "squad": "mile1",
+   "id": "ec4"
+  },
+  {
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    -23,
+    0,
+    -128
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "variant": 2,
+   "id": "pc5"
+  },
+  {
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    22,
+    0,
+    -182
+   ],
+   "rot": [
+    0,
+    -0.5,
+    0
+   ],
+   "variant": 9,
+   "id": "pc6"
+  },
+  {
+   "type": "trigger",
+   "name": "price",
+   "pos": [
+    0,
+    3,
+    -118
+   ],
+   "size": [
+    90,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_price_1"
+    },
+    {
+     "do": "wait",
+     "seconds": 6.4
+    },
+    {
+     "do": "say",
+     "line": "m01_price_2"
+    }
+   ],
+   "id": "tc7"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.2,
+    -196
+   ],
+   "size": [
+    40,
+    1.6,
+    26
+   ],
+   "mat": "sand",
+   "color": "#b87a4b",
+   "rot": [
+    0.07,
+    0,
+    0
+   ],
+   "uv": 9,
+   "id": "bc8"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.2,
+    -208
+   ],
+   "size": [
+    40,
+    1.6,
+    12
+   ],
+   "mat": "sand",
+   "color": "#b87a4b",
+   "rot": [
+    -0.1,
+    0,
+    0
+   ],
+   "uv": 9,
+   "id": "bc9"
+  },
+  {
+   "type": "nav",
+   "pos": [
+    0,
+    4,
+    -250
+   ],
+   "size": [
+    70,
+    10,
+    56
+   ],
+   "id": "nca"
+  },
+  {
+   "type": "trigger",
+   "name": "roadblock",
+   "pos": [
+    0,
+    3,
+    -214
+   ],
+   "size": [
+    90,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "say",
+     "line": "m01_roadblock"
+    }
+   ],
+   "id": "tcb"
+  },
+  {
+   "type": "ramp",
+   "pos": [
+    0,
+    0,
+    -236
+   ],
+   "size": [
+    9,
+    1.9,
+    9
+   ],
+   "rot": [
+    0,
+    3.141592653589793,
+    0
+   ],
+   "mat": "panel",
+   "color": "#7d8a99",
+   "id": "rcc"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    -10,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    0.01,
+    0
+   ],
+   "id": "pcd"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    -6,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    -0.03,
+    0
+   ],
+   "id": "pce"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    -2,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    -0.04,
+    0
+   ],
+   "id": "pcf"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    2,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    0.03,
+    0
+   ],
+   "id": "pcg"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    6,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    0.04,
+    0
+   ],
+   "id": "pch"
+  },
+  {
+   "type": "prop",
+   "prop": "hazard_barrier",
+   "pos": [
+    10,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    0.05,
+    0
+   ],
+   "id": "pci"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    -17,
+    0,
+    -249
+   ],
+   "rot": [
+    0,
+    1.77,
+    0
+   ],
+   "variant": 3,
+   "id": "pcj"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    18,
+    0,
+    -252
+   ],
+   "rot": [
+    0,
+    -1.72,
+    0
+   ],
+   "variant": 1,
+   "id": "pck"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -8,
+    0,
+    -254
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "pcl"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    6,
+    0,
+    -256
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "id": "pcm"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -22,
+    0,
+    -262
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "pcn"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    23,
+    0,
+    -262
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "id": "pco"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    0,
+    0,
+    -262
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "pcp"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -4,
+    0,
+    -250
+   ],
+   "id": "bcq"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    10,
+    0,
+    -251.4
+   ],
+   "id": "bcr"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -13,
+    0,
+    -256
+   ],
+   "id": "bcs"
+  },
+  {
+   "type": "enemy",
+   "kind": "super",
+   "pos": [
+    0,
+    0,
+    -258
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "block",
+   "id": "ect"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -9,
+    0,
+    -256
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "block",
+   "id": "ecu"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    7,
+    0,
+    -258
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "block",
+   "id": "ecv"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -20,
+    0,
+    -258
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "block",
+   "id": "ecw"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    21,
+    0,
+    -259
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "block",
+   "id": "ecx"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    -6,
+    0,
+    -244
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "block_drones",
+   "id": "ecy"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    8,
+    0,
+    -246
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "block_drones",
+   "id": "ecz"
+  },
+  {
+   "type": "trigger",
+   "name": "block_drones",
+   "pos": [
+    0,
+    3,
+    -205
+   ],
+   "size": [
+    90,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "spawn",
+     "tag": "block_drones"
+    }
+   ],
+   "id": "td0"
+  },
+  {
+   "type": "checkpoint",
+   "pos": [
+    0,
+    0.1,
+    -278
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "size": [
+    60,
+    6,
+    6
+   ],
+   "id": "cd1"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    0,
+    0.05,
+    -270
+   ],
+   "amount": 30,
+   "id": "pd2"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    2,
+    0.05,
+    -271
+   ],
+   "cls": "rifle",
+   "amount": 60,
+   "id": "pd3"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.2,
+    -312
+   ],
+   "size": [
+    44,
+    2.4,
+    30
+   ],
+   "mat": "sand",
+   "color": "#d9a066",
+   "rot": [
+    0.085,
+    0,
+    0
+   ],
+   "uv": 9,
+   "id": "bd4"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.2,
+    -330
+   ],
+   "size": [
+    44,
+    2.4,
+    16
+   ],
+   "mat": "sand",
+   "color": "#d9a066",
+   "rot": [
+    -0.14,
+    0,
+    0
+   ],
+   "uv": 9,
+   "id": "bd5"
+  },
+  {
+   "type": "nav",
+   "pos": [
+    0,
+    4,
+    -372
+   ],
+   "size": [
+    70,
+    10,
+    56
+   ],
+   "id": "nd6"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -10,
+    0,
+    -366
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "pd7"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    11,
+    0,
+    -370
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "id": "pd8"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -16,
+    0,
+    -378
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "pd9"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    17,
+    0,
+    -382
+   ],
+   "rot": [
+    0,
+    1.77,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "pda"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    0,
+    0,
+    -384
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "pdb"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -6,
+    0,
+    -376
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "id": "pdc"
+  },
+  {
+   "type": "prop",
+   "prop": "tower",
+   "pos": [
+    24,
+    0,
+    -366
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "pdd"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -11,
+    0,
+    -369
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "mile3",
+   "id": "ede"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    12,
+    0,
+    -373
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "mile3",
+   "id": "edf"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    0,
+    0,
+    -386
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "squad": "mile3",
+   "id": "edg"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    -12,
+    0,
+    -350
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "mile_drones",
+   "id": "edh"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    0,
+    0,
+    -356
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "mile_drones",
+   "id": "edi"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    12,
+    0,
+    -352
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "mile_drones",
+   "id": "edj"
+  },
+  {
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    4,
+    0,
+    -344
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "mile_drones",
+   "id": "edk"
+  },
+  {
+   "type": "trigger",
+   "name": "mile_drones",
+   "pos": [
+    0,
+    3,
+    -318
+   ],
+   "size": [
+    90,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "spawn",
+     "tag": "mile_drones"
+    }
+   ],
+   "id": "tdl"
+  },
+  {
+   "type": "checkpoint",
+   "pos": [
+    0,
+    0.1,
+    -418
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "size": [
+    60,
+    6,
+    6
+   ],
+   "id": "cdm"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.5,
+    -477
+   ],
+   "size": [
+    96,
+    1,
+    94
+   ],
+   "mat": "tile",
+   "color": "#d8d2c4",
+   "uv": 5,
+   "id": "bdn"
+  },
+  {
+   "type": "nav",
+   "pos": [
+    0,
+    4,
+    -477
+   ],
+   "size": [
+    94,
+    10,
+    92
+   ],
+   "id": "ndo"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -47.5,
+    5,
+    -477
+   ],
+   "size": [
+    1.5,
+    10,
+    94
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "bdp"
+  },
+  {
+   "type": "box",
+   "pos": [
+    47.5,
+    5,
+    -477
+   ],
+   "size": [
+    1.5,
+    10,
+    94
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "id": "bdq"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    15,
+    -540
+   ],
+   "size": [
+    130,
+    30,
+    32
+   ],
+   "mat": "panel",
+   "color": "#d2cabb",
+   "uv": 8,
+   "id": "bdr"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    30.6,
+    -540
+   ],
+   "size": [
+    132,
+    1.2,
+    33
+   ],
+   "mat": "plain",
+   "color": "#4d5663",
+   "collide": false,
+   "id": "bds"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    22,
+    -523.8
+   ],
+   "size": [
+    130,
+    3,
+    0.5
+   ],
+   "mat": "plain",
+   "color": "#ffd21f",
+   "collide": false,
+   "id": "bdt"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    4.5,
+    -523.6
+   ],
+   "size": [
+    22,
+    9,
+    1.2
+   ],
+   "mat": "concrete",
+   "color": "#8d8880",
+   "id": "bdu"
+  },
+  {
+   "type": "box",
+   "name": "fcdoor",
+   "dynamic": true,
+   "pos": [
+    0,
+    3.25,
+    -522.6
+   ],
+   "size": [
+    11,
+    6.5,
+    0.8
+   ],
+   "mat": "hazard",
+   "color": "#ffffff",
+   "uv": 1.6,
+   "id": "bdv"
+  },
+  {
+   "type": "prop",
+   "prop": "sign",
+   "pos": [
+    0,
+    11.5,
+    -523.4
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "scale": 7,
+   "variant": 0,
+   "id": "pdw"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -30,
+    0,
+    -523.8
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 1,
+   "id": "pdx"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    -18,
+    0,
+    -523.8
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 4,
+   "id": "pdy"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    18,
+    0,
+    -523.8
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 4,
+   "id": "pdz"
+  },
+  {
+   "type": "prop",
+   "prop": "dock_door",
+   "pos": [
+    30,
+    0,
+    -523.8
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "variant": 7,
+   "id": "pe0"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -14,
+    0,
+    -452
+   ],
+   "rot": [
+    0,
+    0.1,
+    0
+   ],
+   "id": "pe1"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    14,
+    0,
+    -452
+   ],
+   "rot": [
+    0,
+    -0.1,
+    0
+   ],
+   "id": "pe2"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    -26,
+    0,
+    -462
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "variant": 5,
+   "id": "pe3"
+  },
+  {
+   "type": "prop",
+   "prop": "truck",
+   "pos": [
+    27,
+    0,
+    -466
+   ],
+   "rot": [
+    0,
+    -0.4,
+    0
+   ],
+   "variant": 7,
+   "id": "pe4"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    -8,
+    0,
+    -470
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "pe5"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    9,
+    0,
+    -474
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "id": "pe6"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -20,
+    0,
+    -484
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "color": "#2e9b8f",
+   "id": "pe7"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    21,
+    0,
+    -488
+   ],
+   "rot": [
+    0,
+    -0.3,
+    0
+   ],
+   "color": "#b5442f",
+   "id": "pe8"
+  },
+  {
+   "type": "prop",
+   "prop": "kiosk",
+   "pos": [
+    0,
+    0,
+    -462
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "pe9"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -34,
+    0,
+    -498
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "pea"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    34,
+    0,
+    -500
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "id": "peb"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -10,
+    0,
+    -500
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "pec"
+  },
+  {
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    11,
+    0,
+    -503
+   ],
+   "rot": [
+    0,
+    -0.2,
+    0
+   ],
+   "id": "ped"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    -36,
+    0,
+    -446
+   ],
+   "rot": [
+    0,
+    0.6,
+    0
+   ],
+   "id": "pee"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    36,
+    0,
+    -444
+   ],
+   "rot": [
+    0,
+    -0.6,
+    0
+   ],
+   "id": "pef"
+  },
+  {
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    0,
+    0,
+    -488
+   ],
+   "rot": [
+    0,
+    0,
+    0
+   ],
+   "id": "peg"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -38,
+    0,
+    -474
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "peh"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    38,
+    0,
+    -478
+   ],
+   "rot": [
+    0,
+    -1.57,
+    0
+   ],
+   "id": "pei"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -12,
+    0,
+    -512
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "id": "pej"
+  },
+  {
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    12,
+    0,
+    -512
+   ],
+   "rot": [
+    0,
+    -1.57,
+    0
+   ],
+   "id": "pek"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -30,
+    0,
+    -470
+   ],
+   "id": "bel"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    31,
+    0,
+    -482
+   ],
+   "id": "bem"
+  },
+  {
+   "type": "barrel",
+   "pos": [
+    -4,
+    0,
+    -476
+   ],
+   "id": "ben"
+  },
+  {
+   "type": "locker",
+   "pos": [
+    -45.6,
+    0,
+    -470
+   ],
+   "rot": [
+    0,
+    1.5707963267948966,
+    0
+   ],
+   "luck": 2,
+   "name": "locker_arena",
+   "id": "leo"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -40,
+    0.05,
+    -450
+   ],
+   "cls": "rifle",
+   "id": "pep"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    40,
+    0.05,
+    -452
+   ],
+   "cls": "shotgun",
+   "id": "peq"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    -42,
+    0.05,
+    -500
+   ],
+   "amount": 40,
+   "id": "per"
+  },
+  {
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    42,
+    0.05,
+    -498
+   ],
+   "amount": 40,
+   "id": "pes"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    0,
+    0.05,
+    -446
+   ],
+   "cls": "pistol",
+   "id": "pet"
+  },
+  {
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    -41,
+    0.05,
+    -452
+   ],
+   "amount": 3,
+   "id": "peu"
+  },
+  {
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    41,
+    0.05,
+    -454
+   ],
+   "cls": "sniper",
+   "id": "pev"
+  },
+  {
+   "type": "enemy",
+   "kind": "manager",
+   "pos": [
+    0,
+    0,
+    -506
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss",
+   "name": "manager",
+   "id": "eew"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -30,
+    0,
+    -508
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss_adds",
+   "squad": "adds",
+   "id": "eex"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    30,
+    0,
+    -508
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss_adds",
+   "squad": "adds",
+   "id": "eey"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -38,
+    0,
+    -488
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss_adds",
+   "squad": "adds",
+   "id": "eez"
+  },
+  {
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    38,
+    0,
+    -490
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss_adds",
+   "squad": "adds",
+   "id": "ef0"
+  },
+  {
+   "type": "enemy",
+   "kind": "super",
+   "pos": [
+    0,
+    0,
+    -516
+   ],
+   "rot": [
+    0,
+    3.14,
+    0
+   ],
+   "tag": "boss_adds",
+   "squad": "adds",
+   "id": "ef1"
+  },
+  {
+   "type": "trigger",
+   "name": "arena",
+   "pos": [
+    0,
+    3,
+    -436
+   ],
+   "size": [
+    96,
+    10,
+    4
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "checkpoint"
+    },
+    {
+     "do": "complete",
+     "id": "drive"
+    },
+    {
+     "do": "script",
+     "name": "boss_intro"
+    }
+   ],
+   "id": "tf2"
+  }
+ ]
+}

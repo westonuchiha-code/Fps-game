@@ -107,6 +107,38 @@ export function installDebug(game: Game) {
       game.render();
       return { shots: game.stats.shots - shotsBefore, kills: game.stats.kills, hp: Math.round(pl.health), shield: Math.round(pl.shield), alive: pl.alive, enemies: game.ai.aliveEnemies() };
     },
+    /** Bird's-eye camera (north = up) for checking layouts. */
+    overview(x: number, z: number, h = 90, fov = 60, tiltZ = 0) {
+      game.sky.fog.density = 0.0011;
+      game.cameraOwner = {
+        updateCamera(c) {
+          c.position.set(x, h, z + tiltZ);
+          c.up.set(0, 0, -1);
+          c.lookAt(x, 0, z);
+          c.fov = fov;
+          c.far = 3000;
+          c.updateProjectionMatrix();
+        },
+      };
+      game.hud.setVisible(false);
+    },
+    /** Free camera at a position looking at a point. */
+    cam(px: number, py: number, pz: number, lx: number, ly: number, lz: number, fov = 60) {
+      game.cameraOwner = {
+        updateCamera(c) {
+          c.position.set(px, py, pz);
+          c.up.set(0, 1, 0);
+          c.lookAt(lx, ly, lz);
+          c.fov = fov;
+          c.updateProjectionMatrix();
+        },
+      };
+      game.hud.setVisible(false);
+    },
+    camOff() {
+      game.cameraOwner = null;
+      game.hud.setVisible(true);
+    },
     tp(x: number, y: number, z: number, yaw?: number, pitch?: number) {
       game.player.pos.set(x, y, z);
       game.player.vel.set(0, 0, 0);

@@ -364,7 +364,8 @@ export class ViewModel {
     if (this.flashLight.intensity > 0.05) this.socketWorld('muzzle', this.flashLight.position);
 
     // scoped rifles hide the model while looking through the glass
-    this.scopeView = this.rig.scoped && this.ads > 0.9;
+    // (a clip finishing inside anim.update may have put the gun away)
+    this.scopeView = !!this.rig?.scoped && this.ads > 0.9;
     this.root.visible = !this.scopeView;
   }
 }

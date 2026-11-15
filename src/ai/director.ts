@@ -302,7 +302,7 @@ export class AiDirector {
           n.stop();
           n.bark('ride', 12);
         }
-      } else if (d < 22 && n.brain.alert !== 'combat') {
+      } else if (d < 22 && (n.brain.alert !== 'combat' || d < 12)) {
         const node = G.nav.nearest(veh.pos ?? G.player.pos, 4, 4);
         if (node >= 0) n.goTo(G.nav.pos(node, _v), n.def.run);
       }
