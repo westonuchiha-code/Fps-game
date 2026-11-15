@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import type { Game } from '../game';
 import { rollShield, rollWeapon, type Brand, type Rarity, type WeaponClass } from '../weapons/items';
 import type { ClipName } from '../weapons/clips';
-import { CharAnim, CharModel, PALETTES, type CharKind } from '../ai/charModel';
+import { B, CharAnim, CharModel, PALETTES, type CharKind } from '../ai/charModel';
 import { setLayer } from '../render/kit';
 import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
 
@@ -14,7 +14,7 @@ export function installDebug(game: Game) {
      * Stand one of every character in a row in mid-air and point the camera at them: the way to
      * judge character art. `aim` 0..1 raises their weapons; `turn` spins them (radians).
      */
-    lineup(aim = 0.6, turn = 0.5, close = false) {
+    lineup(aim = 0.6, turn = 0.5, close = false, hold = true) {
       const cast: [CharKind, string, number][] = [['assoc', 'assoc', 0], ['super', 'super', 0], ['striker', 'striker', 0], ['striker', 'striker', 1], ['striker', 'striker', 2], ['striker', 'striker', 99], ['manager', 'manager', 0]];
       const y = 200;
       const floor = new THREE.Mesh(new THREE.BoxGeometry(40, 0.2, 12), new THREE.MeshBasicMaterial({ color: 0x9aa0a8 }));
@@ -37,6 +37,13 @@ export function installDebug(game: Game) {
         m.root.rotation.y = turn;
         game.scene.add(m.root);
         for (let i = 0; i < 40; i++) a.update(1 / 30);
+        if (!hold) {
+          // arms down, for judging the model rather than the pose
+          for (const [arm, fore, sgn] of [[B.armL, B.foreL, -1], [B.armR, B.foreR, 1]]) {
+            m.bones[arm].rotation.set(0.04, 0, sgn * 0.1);
+            m.bones[fore].rotation.set(0.12, 0, 0);
+          }
+        }
       }
       game.hud.setVisible(false);
       game.view.root.visible = false;

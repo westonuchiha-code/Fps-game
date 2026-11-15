@@ -169,7 +169,7 @@ export class CharModel {
     readonly pal: Palette,
     variant = 0,
   ) {
-    const s = (this.spec = kind === 'manager' ? MECH : { ...HUMAN, scale: kind === 'super' ? 1.12 : 1 });
+    const s = (this.spec = kind === 'manager' ? MECH : kind === 'striker' ? { ...HUMAN, shoulderX: 0.205, hipX: 0.09 } : { ...HUMAN, scale: kind === 'super' ? 1.12 : 1 });
     const k = new Kit();
     const bind: [number, number, number, number][] = [
       // parent, x, y, z (absolute bind position)
@@ -216,6 +216,52 @@ export class CharModel {
   }
 
   // ------------------------------------------------------------------ builders
+
+  /**
+   * A shoe: flat sole, toe box, instep rising to the ankle. Built upright at the ankle (x, 0, 0)
+   * with the toe toward -Z; `sx`/`sy`/`sz` size it, `cap` paints a toe cap.
+   */
+  private foot(k: Kit, x: number, sx: number, sy: number, sz: number, sole: number, upper: number, cap?: number) {
+    const F = (y: number, w: number, f: number, b: number): Ring => ({ y: y * sy, w: w * sx, f: f * sz, b: b * sz, x, n: 2.8 });
+    k.loft(
+      [F(0, 0, 0, 0), F(0.001, 0.052, 0.185, 0.068), F(0.022, 0.053, 0.187, 0.069), F(0.024, 0.048, 0.178, 0.062), F(0.06, 0.047, 0.172, 0.06), F(0.078, 0.045, 0.12, 0.058), F(0.1, 0.044, 0.07, 0.056), F(0.13, 0.046, 0.052, 0.054), F(0.135, 0, 0, 0)],
+      (seg, d) => (seg <= 2 ? sole : cap !== undefined && seg <= 4 && d < 2 ? cap : upper),
+      { sides: 12 },
+    );
+  }
+
+  /** A hand hanging from the wrist at (x, wy): palm facing the body, four curled fingers, a thumb. */
+  private hand(k: Kit, x: number, wy: number, side: number, color: number) {
+    k.loft([[0.005, 0, 0, 0], [0, 0.016, 0.026, 0.026], [-0.035, 0.018, 0.043, 0.04], [-0.078, 0.016, 0.042, 0.038], [-0.088, 0, 0, 0]].map(([y, w, f, b]) => ({ y: wy + y, w, f, b, x, n: 2.6 })), color, { sides: 10 });
+    const seg = (r: number, len: number, px: number, py: number, pz: number, rot: [number, number, number]) => {
+      const g = new THREE.CapsuleGeometry(r, len, 2, 6);
+      k.add(g, color, [px, py, pz], rot, true);
+      g.dispose();
+    };
+    const zs = [-0.03, -0.0095, 0.011, 0.03];
+    const lens = [0.036, 0.04, 0.037, 0.03];
+    for (let i = 0; i < 4; i++) {
+      // two joints, curling in toward the palm
+      let px = x;
+      let py = wy - 0.08;
+      for (const [a, len] of [[0.2, lens[i]], [0.75, lens[i] * 0.8]]) {
+        const dx = -side * Math.sin(a);
+        const dy = -Math.cos(a);
+        seg(0.0088, len, px + (dx * len) / 2, py + (dy * len) / 2, zs[i], [0, 0, -side * a]);
+        px += dx * len;
+        py += dy * len;
+      }
+    }
+    let ty = wy - 0.03;
+    let tz = -0.036;
+    for (const [a, len, r] of [[0.75, 0.034, 0.0105], [0.35, 0.024, 0.0095]]) {
+      const dy = -Math.cos(a);
+      const dz = -Math.sin(a);
+      seg(r, len, x - side * 0.004, ty + (dy * len) / 2, tz + (dz * len) / 2, [a, 0, 0]);
+      ty += dy * len;
+      tz += dz * len;
+    }
+  }
 
   private buildRobot(k: Kit, s: Spec, boss: boolean) {
     // Moulded shop-floor robots: every part is a shaped shell (a tube TV for a head, a wedge of a
@@ -314,8 +360,7 @@ export class CharModel {
       k.sphere(0.04, P.accent, [x, ky, -0.04], 2, [1, 1.1, 0.5], true);
       k.loft([L(0.42, 0, 0, 0), L(0.41, 0.04, 0.045, 0.04), L(0.36, 0.052, 0.06, 0.056), L(0.2, 0.062, 0.066, 0.07), L(0.1, 0.072, 0.074, 0.08), L(0.085, 0.066, 0.068, 0.074), L(0.08, 0, 0, 0)], (seg) => (seg === 4 ? P.accent : sh), { sides: 12 });
       k.cyl(0.035, 0.035, 0.06, dk, [x, 0.07, 0], 'y', 8, true);
-      const F = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 3 });
-      k.loft([F(-0.08, 0, 0, 0), F(-0.072, 0.035, 0.045, 0.025), F(-0.03, 0.055, 0.05, 0.05), F(0.05, 0.06, 0.05, 0.045), F(0.12, 0.064, 0.05, 0.032), F(0.18, 0.058, 0.046, 0.024), F(0.21, 0.03, 0.034, 0.014), F(0.218, 0, 0, 0)], (seg) => (seg >= 4 ? sh : dk), { sides: 10, pos: [x, 0.05, 0], rot: [-Math.PI / 2, 0, 0] });
+      this.foot(k, x, 1.2, 0.72, 1.08, dk, dk, sh);
     }
     this.finishRobot(s, 0.3, hy + 0.003, -0.127, 0.25, 0.185);
     this.muzzle.position.set(0, -0.375, 0);
@@ -365,18 +410,18 @@ export class CharModel {
 
     // hips, with the belt painted on
     k.curBone = B.pelvis;
-    k.loft([R(0.82, 0, 0, 0), R(0.83, 0.06, 0.06, 0.07), R(0.88, 0.14, 0.098, 0.108), R(0.96, 0.152, 0.1, 0.11), R(1.03, 0.146, 0.098, 0.1), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 4 ? leather : pants), { sides: 16 });
+    k.loft([R(0.815, 0, 0, 0), R(0.825, 0.07, 0.06, 0.07), R(0.86, 0.15, 0.092, 0.105), R(0.92, 0.172, 0.1, 0.115), R(0.98, 0.166, 0.1, 0.112), R(1.03, 0.15, 0.098, 0.1), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 5 ? leather : pants), { sides: 16 });
 
     // torso: waist, ribcage, chest, shoulders sloping up into the neck
     k.curBone = B.chest;
     const torso: Ring[] = [
-      R(1.06, 0, 0, 0), R(1.07, 0.13, 0.092, 0.088), R(1.15, 0.138, 0.098, 0.092), R(1.24, 0.156, 0.111, 0.099), R(1.275, 0.163, 0.116, 0.102),
-      R(1.35, 0.18, 0.128, 0.108), R(1.42, 0.196, 0.118, 0.112), R(1.47, 0.19, 0.096, 0.1), R(1.505, 0.12, 0.07, 0.08), R(1.53, 0.056, 0.05, 0.056), R(1.54, 0, 0, 0),
+      R(1.06, 0, 0, 0), R(1.07, 0.13, 0.092, 0.088), R(1.15, 0.136, 0.098, 0.092), R(1.24, 0.15, 0.11, 0.099), R(1.275, 0.156, 0.115, 0.102),
+      R(1.35, 0.168, 0.126, 0.108), R(1.41, 0.186, 0.118, 0.112), R(1.45, 0.2, 0.1, 0.104), R(1.48, 0.17, 0.078, 0.09), R(1.51, 0.1, 0.064, 0.074), R(1.53, 0.056, 0.05, 0.056), R(1.54, 0, 0, 0),
     ];
-    k.loft(torso, (seg, d) => (agent && d < 2 && seg >= 2 && seg <= 7 ? PAL.shirt : shirt), { sides: 16 });
+    k.loft(torso, (seg, d) => (agent && d < 1 && seg >= 2 && seg <= 8 ? PAL.shirt : shirt), { sides: 16 });
     // hi-vis vest worn open: the same body, a little bigger, with the front left out
     const open = agent ? 2 : 1;
-    k.loft(torso.slice(2, 9), (seg, d) => (seg === 1 || (seg > 1 && d > 3 && d < 4) ? band : PAL.hivis), { sides: 16, grow: 0.012, from: open, to: 16 - open });
+    k.loft(torso.slice(2, 10), (seg, d) => (seg === 1 || (seg > 1 && d > 3 && d < 4) ? band : PAL.hivis), { sides: 16, grow: 0.012, from: open, to: 16 - open });
     if (agent) {
       k.sphere(0.03, ink, [-0.03, 1.495, -0.094], 2, [1.2, 0.8, 0.5], true); // bow tie
       k.sphere(0.03, ink, [0.03, 1.495, -0.094], 2, [1.2, 0.8, 0.5], true);
@@ -421,18 +466,17 @@ export class CharModel {
 
     // arms: deltoid, bicep, forearm tapering to the wrist, a mitt of a hand
     for (const side of [-1, 1]) {
-      const x = side * (s.shoulderX - 0.012);
+      const x = side * (s.shoulderX + 0.008);
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
       const sy = s.shoulderY;
       const ey = sy - s.upperArm;
-      const A = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, x, n: 2.2 });
+      const A = (y: number, w: number, f: number, b: number): Ring => ({ y, w: w * 1.12, f: f * 1.12, b: b * 1.12, x, n: 2.2 });
       k.curBone = up;
-      k.loft([A(sy + 0.072, 0, 0, 0), A(sy + 0.062, 0.034, 0.034, 0.034), A(sy + 0.03, 0.062, 0.064, 0.06), A(sy - 0.04, 0.06, 0.062, 0.058), A(sy - 0.14, 0.052, 0.057, 0.05), A(ey + 0.03, 0.046, 0.047, 0.047), A(ey - 0.015, 0.047, 0.047, 0.048), A(ey - 0.025, 0, 0, 0)], (seg) => (seg === 5 ? cuff : shirt), { sides: 10 });
+      k.loft([A(sy + 0.058, 0, 0, 0), A(sy + 0.05, 0.03, 0.04, 0.04), A(sy + 0.02, 0.052, 0.062, 0.06), A(sy - 0.04, 0.054, 0.06, 0.056), A(sy - 0.14, 0.048, 0.055, 0.048), A(ey + 0.03, 0.044, 0.046, 0.046), A(ey - 0.015, 0.045, 0.046, 0.047), A(ey - 0.025, 0, 0, 0)], (seg) => (seg === 5 ? cuff : shirt), { sides: 10 });
       k.curBone = fo;
-      k.loft([A(ey + 0.03, 0, 0, 0), A(ey + 0.022, 0.04, 0.04, 0.04), A(ey - 0.03, 0.046, 0.048, 0.046), A(ey - 0.12, 0.042, 0.042, 0.04), A(ey - 0.205, 0.031, 0.03, 0.03), A(ey - 0.215, 0, 0, 0)], (seg) => (agent ? (seg === 3 ? PAL.shirt : shirt) : skin), { sides: 10 });
-      k.loft([A(ey - 0.2, 0, 0, 0), A(ey - 0.205, 0.022, 0.03, 0.028), A(ey - 0.24, 0.026, 0.044, 0.04), A(ey - 0.285, 0.024, 0.042, 0.038), A(ey - 0.322, 0.017, 0.03, 0.026), A(ey - 0.335, 0, 0, 0)], glove, { sides: 10 });
-      k.sphere(0.015, glove, [x, ey - 0.255, -0.046], 2, [0.9, 1.7, 0.9], true); // thumb
+      k.loft([A(ey + 0.03, 0, 0, 0), A(ey + 0.022, 0.04, 0.04, 0.04), A(ey - 0.03, 0.045, 0.047, 0.045), A(ey - 0.13, 0.041, 0.042, 0.04), A(ey - 0.23, 0.027, 0.029, 0.029), A(ey - 0.24, 0, 0, 0)], (seg) => (agent ? (seg === 3 ? PAL.shirt : shirt) : skin), { sides: 10 });
+      this.hand(k, x, ey - 0.23, side, glove);
     }
 
     // legs: thigh, knee, calf, boot
@@ -442,15 +486,13 @@ export class CharModel {
       const sn = side < 0 ? B.shinL : B.shinR;
       const L = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, x, n: 2.3, ...extra });
       k.curBone = th;
-      k.loft([L(0.945, 0, 0, 0), L(0.93, 0.05, 0.06, 0.07), L(0.88, 0.08, 0.085, 0.09), L(0.76, 0.078, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
+      k.loft([L(0.95, 0, 0, 0), L(0.94, 0.05, 0.06, 0.07), L(0.9, 0.078, 0.085, 0.092), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
       k.curBone = sn;
       k.loft([L(0.5, 0, 0, 0), L(0.49, 0.05, 0.05, 0.05), L(0.46, 0.054, 0.058, 0.054, { nose: 0.008, nw: 0.04 }), L(0.36, 0.052, 0.05, 0.064), L(0.2, 0.04, 0.04, 0.044), L(0.1, 0.036, 0.036, 0.04), L(0.09, 0, 0, 0)], (seg, d) => (!agent && seg >= 1 && seg <= 2 && d < 2 ? ink : pants), { sides: 10 });
       const boot = agent ? ink : leather;
-      if (!agent) k.loft([L(0.225, 0, 0, 0), L(0.22, 0.046, 0.046, 0.05), L(0.2, 0.05, 0.05, 0.054), L(0.08, 0.05, 0.052, 0.056), L(0.03, 0.05, 0.05, 0.055), L(0.02, 0, 0, 0)], boot, { sides: 10 });
-      // the foot is the same kind of form laid on its side: `y` runs forward, `f` is down to the sole
-      const F = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 3 });
-      const sc = agent ? 0.86 : 1;
-      k.loft([F(-0.07, 0, 0, 0), F(-0.062, 0.03 * sc, 0.04, 0.02), F(-0.03, 0.046 * sc, 0.045, 0.05 * sc), F(0.04, 0.05 * sc, 0.045, 0.045 * sc), F(0.11, 0.052 * sc, 0.045, 0.03 * sc), F(0.16, 0.046 * sc, 0.042, 0.022 * sc), F(0.185, 0.025 * sc, 0.03, 0.012), F(0.192, 0, 0, 0)], boot, { sides: 10, pos: [x, 0.045, 0], rot: [-Math.PI / 2, 0, 0] });
+      if (!agent) k.loft([L(0.225, 0, 0, 0), L(0.22, 0.046, 0.046, 0.05), L(0.2, 0.05, 0.05, 0.054), L(0.1, 0.05, 0.052, 0.056), L(0.09, 0, 0, 0)], boot, { sides: 10 });
+      if (agent) this.foot(k, x, 0.86, 0.8, 0.95, ink, boot);
+      else this.foot(k, x, 1, 1, 1, ink, boot);
     }
     this.muzzle.position.set(0, -0.3, -0.5);
     this.bones[B.foreR].add(this.muzzle);
@@ -533,8 +575,7 @@ export class CharModel {
       k.sphere(0.17, dk, [x, ky, 0], 2, [1, 1, 1], true);
       k.sphere(0.13, P.accent, [x, ky, -0.13], 2, [1, 1.1, 0.5], true);
       k.loft([L(0.68, 0, 0, 0), L(0.66, 0.13, 0.14, 0.13), L(0.56, 0.17, 0.2, 0.18), L(0.3, 0.2, 0.22, 0.23), L(0.16, 0.24, 0.25, 0.27), L(0.14, 0, 0, 0)], (seg) => (seg === 3 ? P.accent : sh), { sides: 14 });
-      const F = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 3.2 });
-      k.loft([F(-0.3, 0, 0, 0), F(-0.28, 0.14, 0.1, 0.06), F(-0.2, 0.22, 0.11, 0.12), F(0.1, 0.25, 0.11, 0.12), F(0.3, 0.25, 0.11, 0.08), F(0.42, 0.2, 0.1, 0.05), F(0.45, 0, 0, 0)], (seg) => (seg >= 3 ? PAL.smile : dk), { sides: 12, pos: [x, 0.11, 0], rot: [-Math.PI / 2, 0, 0] });
+      this.foot(k, x, 4.6, 1.85, 2.7, dk, dk, PAL.smile);
     }
     this.finishRobot(s, 0.8, 3.0275, -0.408, 0.7, 0.46);
     this.muzzle.position.set(0, -1.08, 0);
