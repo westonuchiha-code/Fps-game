@@ -47,9 +47,11 @@ async function intro(lvl: JsonLevel) {
   const cs = new Cutscene();
   showAgent(pl.pos, pl.yaw);
   void G.audio.playMusic(null);
-  await G.hud.fade(true, 0.01);
+  // start black and take the camera in the same frame the level appears
+  void G.hud.fade(true, 0.01);
   await cs.run(async (c) => {
-    c.shot({ from: [-36, 30, 132], to: [-14, 15, 124], look: [0, 3, 62], lookTo: [0, 2, 30], fov: 58, dur: 9, ease: 'inOut' });
+    c.shot({ from: [-36, 30, 132], to: [-14, 15, 124], look: [0, 3, 62], lookTo: [0, 2, 30], fov: 58, dur: 9.4, ease: 'inOut' });
+    await c.wait(0.4);
     void G.hud.fade(false, 1.6);
     void G.audio.stinger('start');
     G.hud.typed('RUSTBELT FLATS\nMONOMART FULFILLMENT CENTER 7\n05:47', 3.2);

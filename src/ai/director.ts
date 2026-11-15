@@ -16,6 +16,8 @@ type Fighter = Npc | Drone;
 export class AiDirector {
   readonly npcs: Npc[] = [];
   readonly drones: Drone[] = [];
+  /** cutscenes set this: everyone stands still and holds fire */
+  hold = false;
   private tokens = new Map<number, number>();
   private calmT = 99;
   private intensity = 0;

@@ -393,6 +393,7 @@ export class Hud {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
 
+    this.root.classList.toggle('touch', G.input.device === 'touch');
     // crosshair gap follows the real spread cone
     const pxPerDeg = vh / cam.fov;
     const target = clamp(w.spread * pxPerDeg + 4, 5, 90);

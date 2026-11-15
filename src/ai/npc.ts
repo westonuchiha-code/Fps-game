@@ -44,8 +44,8 @@ export interface NpcDef {
 
 export const NPC_DEFS: Record<string, NpcDef> = {
   assoc: {
-    kind: 'assoc', label: 'Associate', faction: 'monomart', hp: 85, shield: 0, walk: 1.5, run: 4.4, dmg: 7, burst: [3, 4], shotGap: 0.15, pause: [0.9, 1.7], boltSpeed: 52, boltColor: 0xffe36a,
-    range: 46, err0: 5.5, err1: 2.2, view: 55, turn: 6, voice: 'assoc', tier: 0, melee: null, blast: 0, armor: 'soft', radius: 0.38, mass: 1,
+    kind: 'assoc', label: 'Associate', faction: 'monomart', hp: 85, shield: 0, walk: 1.5, run: 4.4, dmg: 6, burst: [3, 4], shotGap: 0.15, pause: [1.0, 1.9], boltSpeed: 52, boltColor: 0xffe36a,
+    range: 46, err0: 5.5, err1: 2.6, view: 55, turn: 6, voice: 'assoc', tier: 0, melee: null, blast: 0, armor: 'soft', radius: 0.38, mass: 1,
   },
   super: {
     kind: 'super', label: 'Supervisor', faction: 'monomart', hp: 130, shield: 110, walk: 1.7, run: 5.2, dmg: 10, burst: [4, 6], shotGap: 0.12, pause: [0.7, 1.3], boltSpeed: 60, boltColor: 0xff8a3c,
@@ -695,8 +695,17 @@ export class Npc implements Target, Shootable, Listener {
       return;
     }
 
-    this.brain.update(dt);
-    this.move(dt);
+    if (G.ai.hold) {
+      // cutscene: stand easy
+      this.wantFire = false;
+      this.vel.x = damp(this.vel.x, 0, 10, dt);
+      this.vel.z = damp(this.vel.z, 0, 10, dt);
+      this.anim.aim = 0;
+      this.crouching = false;
+    } else {
+      this.brain.update(dt);
+      this.move(dt);
+    }
 
     // facing
     const sp = Math.hypot(this.vel.x, this.vel.z);

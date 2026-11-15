@@ -54,6 +54,7 @@ export class Cutscene {
     G.hud.setVisible(false);
     G.hud.letterbox(true, this.skippable);
     G.cameraOwner = this;
+    G.ai.hold = true;
     this.sys = { update: (dt) => this.update(dt) };
     G.systems.push(this.sys);
     try {
@@ -71,6 +72,7 @@ export class Cutscene {
     for (const w of this.waits) w.resolve();
     this.waits.length = 0;
     G.cameraOwner = null;
+    G.ai.hold = false;
     G.hud.letterbox(false);
     G.hud.clearTyped();
     G.hud.setVisible(true);

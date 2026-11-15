@@ -555,7 +555,7 @@
    "pos": [
     -27,
     0,
-    80.23
+    90.73
    ],
    "rot": [
     0,
@@ -571,7 +571,7 @@
    "pos": [
     -14.91,
     0,
-    80.19
+    90.69
    ],
    "rot": [
     0,
@@ -585,9 +585,9 @@
    "type": "prop",
    "prop": "car",
    "pos": [
-    -9.1,
+    14.9,
     0,
-    79.96
+    90.46
    ],
    "rot": [
     0,
@@ -601,9 +601,9 @@
    "type": "prop",
    "prop": "car",
    "pos": [
-    3.11,
+    27.11,
     0,
-    80.19
+    90.69
    ],
    "rot": [
     0,
@@ -617,7 +617,7 @@
    "type": "prop",
    "prop": "car",
    "pos": [
-    9.2,
+    -26.8,
     0,
     80.2
    ],
@@ -633,7 +633,7 @@
    "type": "prop",
    "prop": "car",
    "pos": [
-    20.87,
+    -15.13,
     0,
     80.26
    ],
@@ -646,111 +646,105 @@
    "id": "p10"
   },
   {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    -3.16,
+    0,
+    79.72
+   ],
+   "rot": [
+    0,
+    3.2,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "p11"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    2.93,
+    0,
+    79.81
+   ],
+   "rot": [
+    0,
+    3.15,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p12"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    8.71,
+    0,
+    79.95
+   ],
+   "rot": [
+    0,
+    3.2,
+    0
+   ],
+   "color": "#3a3d46",
+   "id": "p13"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    14.85,
+    0,
+    79.94
+   ],
+   "rot": [
+    0,
+    3.17,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p14"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    20.96,
+    0,
+    79.8
+   ],
+   "rot": [
+    0,
+    0.03,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "p15"
+  },
+  {
+   "type": "prop",
+   "prop": "car",
+   "pos": [
+    26.98,
+    0,
+    80.18
+   ],
+   "rot": [
+    0,
+    3.09,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "p16"
+  },
+  {
    "type": "box",
    "pos": [
     -30,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b11"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -24,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b12"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -18,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b13"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -12,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b14"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -6,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b15"
-  },
-  {
-   "type": "box",
-   "pos": [
-    0,
-    0.01,
-    101
-   ],
-   "size": [
-    0.14,
-    0.02,
-    5
-   ],
-   "mat": "plain",
-   "color": "#e6e0d0",
-   "collide": false,
-   "id": "b16"
-  },
-  {
-   "type": "box",
-   "pos": [
-    6,
     0.01,
     101
    ],
@@ -767,7 +761,7 @@
   {
    "type": "box",
    "pos": [
-    12,
+    -24,
     0.01,
     101
    ],
@@ -784,7 +778,7 @@
   {
    "type": "box",
    "pos": [
-    18,
+    -18,
     0.01,
     101
    ],
@@ -801,7 +795,7 @@
   {
    "type": "box",
    "pos": [
-    24,
+    -12,
     0.01,
     101
    ],
@@ -818,7 +812,7 @@
   {
    "type": "box",
    "pos": [
-    30,
+    -6,
     0.01,
     101
    ],
@@ -835,6 +829,295 @@
   {
    "type": "box",
    "pos": [
+    0,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1c"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1d"
+  },
+  {
+   "type": "box",
+   "pos": [
+    12,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1e"
+  },
+  {
+   "type": "box",
+   "pos": [
+    18,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1f"
+  },
+  {
+   "type": "box",
+   "pos": [
+    24,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1g"
+  },
+  {
+   "type": "box",
+   "pos": [
+    30,
+    0.01,
+    101
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1h"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -30,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1i"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -24,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1j"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -18,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1k"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -12,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1l"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -6,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1m"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1n"
+  },
+  {
+   "type": "box",
+   "pos": [
+    6,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1o"
+  },
+  {
+   "type": "box",
+   "pos": [
+    12,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1p"
+  },
+  {
+   "type": "box",
+   "pos": [
+    18,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1q"
+  },
+  {
+   "type": "box",
+   "pos": [
+    24,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1r"
+  },
+  {
+   "type": "box",
+   "pos": [
+    30,
+    0.01,
+    90.5
+   ],
+   "size": [
+    0.14,
+    0.02,
+    5
+   ],
+   "mat": "plain",
+   "color": "#e6e0d0",
+   "collide": false,
+   "id": "b1s"
+  },
+  {
+   "type": "box",
+   "pos": [
     -30,
     0.01,
     80
@@ -847,7 +1130,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1c"
+   "id": "b1t"
   },
   {
    "type": "box",
@@ -864,7 +1147,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1d"
+   "id": "b1u"
   },
   {
    "type": "box",
@@ -881,7 +1164,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1e"
+   "id": "b1v"
   },
   {
    "type": "box",
@@ -898,7 +1181,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1f"
+   "id": "b1w"
   },
   {
    "type": "box",
@@ -915,7 +1198,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1g"
+   "id": "b1x"
   },
   {
    "type": "box",
@@ -932,7 +1215,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1h"
+   "id": "b1y"
   },
   {
    "type": "box",
@@ -949,7 +1232,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1i"
+   "id": "b1z"
   },
   {
    "type": "box",
@@ -966,7 +1249,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1j"
+   "id": "b20"
   },
   {
    "type": "box",
@@ -983,7 +1266,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1k"
+   "id": "b21"
   },
   {
    "type": "box",
@@ -1000,7 +1283,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1l"
+   "id": "b22"
   },
   {
    "type": "box",
@@ -1017,7 +1300,7 @@
    "mat": "plain",
    "color": "#e6e0d0",
    "collide": false,
-   "id": "b1m"
+   "id": "b23"
   },
   {
    "type": "prop",
@@ -1032,7 +1315,7 @@
     1.57,
     0
    ],
-   "id": "p1n"
+   "id": "p24"
   },
   {
    "type": "prop",
@@ -1047,7 +1330,7 @@
     -1.57,
     0
    ],
-   "id": "p1o"
+   "id": "p25"
   },
   {
    "type": "prop",
@@ -1062,7 +1345,7 @@
     1.57,
     0
    ],
-   "id": "p1p"
+   "id": "p26"
   },
   {
    "type": "prop",
@@ -1077,7 +1360,7 @@
     -1.57,
     0
    ],
-   "id": "p1q"
+   "id": "p27"
   },
   {
    "type": "prop",
@@ -1093,7 +1376,7 @@
     0
    ],
    "variant": 0,
-   "id": "p1r"
+   "id": "p28"
   },
   {
    "type": "prop",
@@ -1109,7 +1392,7 @@
     0
    ],
    "variant": 3,
-   "id": "p1s"
+   "id": "p29"
   },
   {
    "type": "prop",
@@ -1126,7 +1409,7 @@
    ],
    "color": "#b5442f",
    "variant": 4,
-   "id": "p1t"
+   "id": "p2a"
   },
   {
    "type": "prop",
@@ -1141,7 +1424,7 @@
     1.92,
     0
    ],
-   "id": "p1u"
+   "id": "p2b"
   },
   {
    "type": "prop",
@@ -1156,7 +1439,7 @@
     0.3,
     0
    ],
-   "id": "p1v"
+   "id": "p2c"
   },
   {
    "type": "prop",
@@ -1172,7 +1455,7 @@
     0
    ],
    "variant": 1,
-   "id": "p1w"
+   "id": "p2d"
   },
   {
    "type": "prop",
@@ -1187,7 +1470,7 @@
     0.4,
     0
    ],
-   "id": "p1x"
+   "id": "p2e"
   },
   {
    "type": "prop",
@@ -1202,7 +1485,7 @@
     1.2,
     0
    ],
-   "id": "p1y"
+   "id": "p2f"
   },
   {
    "type": "prop",
@@ -1217,7 +1500,7 @@
     2.1,
     0
    ],
-   "id": "p1z"
+   "id": "p2g"
   },
   {
    "type": "prop",
@@ -1232,7 +1515,7 @@
     0.2,
     0
    ],
-   "id": "p20"
+   "id": "p2h"
   },
   {
    "type": "prop",
@@ -1247,7 +1530,7 @@
     1,
     0
    ],
-   "id": "p21"
+   "id": "p2i"
   },
   {
    "type": "prop",
@@ -1262,7 +1545,7 @@
     0,
     0
    ],
-   "id": "p22"
+   "id": "p2j"
   },
   {
    "type": "prop",
@@ -1277,7 +1560,7 @@
     0,
     0
    ],
-   "id": "p23"
+   "id": "p2k"
   },
   {
    "type": "prop",
@@ -1292,7 +1575,7 @@
     0,
     0
    ],
-   "id": "p24"
+   "id": "p2l"
   },
   {
    "type": "prop",
@@ -1307,7 +1590,7 @@
     1.57,
     0
    ],
-   "id": "p25"
+   "id": "p2m"
   },
   {
    "type": "prop",
@@ -1323,7 +1606,7 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p26"
+   "id": "p2n"
   },
   {
    "type": "prop",
@@ -1338,7 +1621,7 @@
     0.1,
     0
    ],
-   "id": "p27"
+   "id": "p2o"
   },
   {
    "type": "prop",
@@ -1353,7 +1636,7 @@
     -0.15,
     0
    ],
-   "id": "p28"
+   "id": "p2p"
   },
   {
    "type": "prop",
@@ -1369,7 +1652,7 @@
     0
    ],
    "variant": 0,
-   "id": "p29"
+   "id": "p2q"
   },
   {
    "type": "prop",
@@ -1385,7 +1668,7 @@
     0
    ],
    "variant": 2,
-   "id": "p2a"
+   "id": "p2r"
   },
   {
    "type": "locker",
@@ -1401,7 +1684,7 @@
    ],
    "luck": 1,
    "name": "locker_lot",
-   "id": "l2b"
+   "id": "l2s"
   },
   {
    "type": "weapon",
@@ -1414,7 +1697,7 @@
    "brand": "picket",
    "rarity": 1,
    "seed": 404,
-   "id": "w2c"
+   "id": "w2t"
   },
   {
    "type": "weapon",
@@ -1427,7 +1710,7 @@
    "brand": "valu",
    "rarity": 1,
    "seed": 7,
-   "id": "w2d"
+   "id": "w2u"
   },
   {
    "type": "pickup",
@@ -1439,7 +1722,7 @@
    ],
    "cls": "pistol",
    "amount": 36,
-   "id": "p2e"
+   "id": "p2v"
   },
   {
    "type": "pickup",
@@ -1451,7 +1734,7 @@
    ],
    "cls": "rifle",
    "amount": 60,
-   "id": "p2f"
+   "id": "p2w"
   },
   {
    "type": "pickup",
@@ -1462,7 +1745,7 @@
     107.4
    ],
    "amount": 30,
-   "id": "p2g"
+   "id": "p2x"
   },
   {
    "type": "ally",
@@ -1479,7 +1762,7 @@
     0,
     0
    ],
-   "id": "a2h"
+   "id": "a2y"
   },
   {
    "type": "ally",
@@ -1496,7 +1779,7 @@
     0,
     0
    ],
-   "id": "a2i"
+   "id": "a2z"
   },
   {
    "type": "ally",
@@ -1512,7 +1795,7 @@
     0,
     0
    ],
-   "id": "a2j"
+   "id": "a30"
   },
   {
    "type": "enemy",
@@ -1540,7 +1823,7 @@
      86
     ]
    ],
-   "id": "e2k"
+   "id": "e31"
   },
   {
    "type": "enemy",
@@ -1568,7 +1851,7 @@
      74
     ]
    ],
-   "id": "e2l"
+   "id": "e32"
   },
   {
    "type": "enemy",
@@ -1584,7 +1867,7 @@
     0
    ],
    "squad": "lot",
-   "id": "e2m"
+   "id": "e33"
   },
   {
    "type": "enemy",
@@ -1600,7 +1883,7 @@
     0
    ],
    "squad": "lot2",
-   "id": "e2n"
+   "id": "e34"
   },
   {
    "type": "enemy",
@@ -1616,7 +1899,7 @@
     0
    ],
    "squad": "lot2",
-   "id": "e2o"
+   "id": "e35"
   },
   {
    "type": "trigger",
@@ -1638,7 +1921,7 @@
      "line": "m01_first_contact"
     }
    ],
-   "id": "t2p"
+   "id": "t36"
   },
   {
    "type": "trigger",
@@ -1660,7 +1943,7 @@
      "line": "m01_locker_hint"
     }
    ],
-   "id": "t2q"
+   "id": "t37"
   },
   {
    "type": "prop",
@@ -1675,7 +1958,7 @@
     0,
     0
    ],
-   "id": "p2r"
+   "id": "p38"
   },
   {
    "type": "prop",
@@ -1690,7 +1973,7 @@
     0,
     0
    ],
-   "id": "p2s"
+   "id": "p39"
   },
   {
    "type": "prop",
@@ -1705,7 +1988,7 @@
     0,
     0
    ],
-   "id": "p2t"
+   "id": "p3a"
   },
   {
    "type": "prop",
@@ -1720,7 +2003,7 @@
     0,
     0
    ],
-   "id": "p2u"
+   "id": "p3b"
   },
   {
    "type": "prop",
@@ -1735,7 +2018,7 @@
     0,
     0
    ],
-   "id": "p2v"
+   "id": "p3c"
   },
   {
    "type": "prop",
@@ -1750,7 +2033,7 @@
     0,
     0
    ],
-   "id": "p2w"
+   "id": "p3d"
   },
   {
    "type": "prop",
@@ -1765,7 +2048,7 @@
     0,
     0
    ],
-   "id": "p2x"
+   "id": "p3e"
   },
   {
    "type": "prop",
@@ -1780,7 +2063,7 @@
     0,
     0
    ],
-   "id": "p2y"
+   "id": "p3f"
   },
   {
    "type": "prop",
@@ -1795,7 +2078,7 @@
     0,
     0
    ],
-   "id": "p2z"
+   "id": "p3g"
   },
   {
    "type": "prop",
@@ -1810,7 +2093,7 @@
     0,
     0
    ],
-   "id": "p30"
+   "id": "p3h"
   },
   {
    "type": "prop",
@@ -1825,7 +2108,7 @@
     0,
     0
    ],
-   "id": "p31"
+   "id": "p3i"
   },
   {
    "type": "prop",
@@ -1840,7 +2123,7 @@
     0,
     0
    ],
-   "id": "p32"
+   "id": "p3j"
   },
   {
    "type": "prop",
@@ -1855,7 +2138,7 @@
     0,
     0
    ],
-   "id": "p33"
+   "id": "p3k"
   },
   {
    "type": "prop",
@@ -1870,7 +2153,7 @@
     0,
     0
    ],
-   "id": "p34"
+   "id": "p3l"
   },
   {
    "type": "prop",
@@ -1885,7 +2168,7 @@
     0,
     0
    ],
-   "id": "p35"
+   "id": "p3m"
   },
   {
    "type": "prop",
@@ -1900,7 +2183,7 @@
     0,
     0
    ],
-   "id": "p36"
+   "id": "p3n"
   },
   {
    "type": "checkpoint",
@@ -1919,7 +2202,7 @@
     6,
     5
    ],
-   "id": "c37"
+   "id": "c3o"
   },
   {
    "type": "box",
@@ -1936,7 +2219,7 @@
    "mat": "panel",
    "color": "#cfc8ba",
    "uv": 6,
-   "id": "b38"
+   "id": "b3p"
   },
   {
    "type": "box",
@@ -1953,7 +2236,7 @@
    "mat": "plain",
    "color": "#4d5663",
    "collide": false,
-   "id": "b39"
+   "id": "b3q"
   },
   {
    "type": "box",
@@ -1970,7 +2253,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b3a"
+   "id": "b3r"
   },
   {
    "type": "box",
@@ -1987,7 +2270,7 @@
    "mat": "concrete",
    "color": "#b9b3a8",
    "uv": 4,
-   "id": "b3b"
+   "id": "b3s"
   },
   {
    "type": "box",
@@ -2005,7 +2288,7 @@
    "color": "#ffffff",
    "collide": false,
    "uv": 1,
-   "id": "b3c"
+   "id": "b3t"
   },
   {
    "type": "ramp",
@@ -2026,7 +2309,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "r3d"
+   "id": "r3u"
   },
   {
    "type": "stairs",
@@ -2048,7 +2331,7 @@
    "mat": "concrete",
    "color": "#8d8880",
    "steps": 6,
-   "id": "s3e"
+   "id": "s3v"
   },
   {
    "type": "prop",
@@ -2064,7 +2347,7 @@
     0
    ],
    "variant": 0,
-   "id": "p3f"
+   "id": "p3w"
   },
   {
    "type": "prop",
@@ -2080,7 +2363,7 @@
     0
    ],
    "variant": 1,
-   "id": "p3g"
+   "id": "p3x"
   },
   {
    "type": "prop",
@@ -2096,7 +2379,7 @@
     0
    ],
    "variant": 2,
-   "id": "p3h"
+   "id": "p3y"
   },
   {
    "type": "prop",
@@ -2112,7 +2395,7 @@
     0
    ],
    "variant": 3,
-   "id": "p3i"
+   "id": "p3z"
   },
   {
    "type": "prop",
@@ -2128,7 +2411,7 @@
     0
    ],
    "variant": 4,
-   "id": "p3j"
+   "id": "p40"
   },
   {
    "type": "prop",
@@ -2144,7 +2427,7 @@
     0
    ],
    "variant": 5,
-   "id": "p3k"
+   "id": "p41"
   },
   {
    "type": "prop",
@@ -2161,7 +2444,7 @@
    ],
    "scale": 3.2,
    "variant": 1,
-   "id": "p3l"
+   "id": "p42"
   },
   {
    "type": "prop",
@@ -2177,7 +2460,7 @@
     0
    ],
    "variant": 1,
-   "id": "p3m"
+   "id": "p43"
   },
   {
    "type": "prop",
@@ -2194,7 +2477,7 @@
    ],
    "variant": 5,
    "color": "#ffd21f",
-   "id": "p3n"
+   "id": "p44"
   },
   {
    "type": "prop",
@@ -2210,7 +2493,7 @@
     0
    ],
    "variant": 2,
-   "id": "p3o"
+   "id": "p45"
   },
   {
    "type": "prop",
@@ -2226,7 +2509,7 @@
     0
    ],
    "variant": 6,
-   "id": "p3p"
+   "id": "p46"
   },
   {
    "type": "prop",
@@ -2242,7 +2525,7 @@
     0
    ],
    "variant": 7,
-   "id": "p3q"
+   "id": "p47"
   },
   {
    "type": "prop",
@@ -2257,7 +2540,7 @@
     2.2,
     0
    ],
-   "id": "p3r"
+   "id": "p48"
   },
   {
    "type": "prop",
@@ -2272,7 +2555,7 @@
     1.57,
     0
    ],
-   "id": "p3s"
+   "id": "p49"
   },
   {
    "type": "prop",
@@ -2287,8 +2570,8 @@
     0.2,
     0
    ],
-   "variant": 1,
-   "id": "p3t"
+   "variant": 2,
+   "id": "p4a"
   },
   {
    "type": "prop",
@@ -2303,8 +2586,8 @@
     1.4,
     0
    ],
-   "variant": 0,
-   "id": "p3u"
+   "variant": 2,
+   "id": "p4b"
   },
   {
    "type": "prop",
@@ -2319,8 +2602,8 @@
     0.3,
     0
    ],
-   "variant": 0,
-   "id": "p3v"
+   "variant": 1,
+   "id": "p4c"
   },
   {
    "type": "prop",
@@ -2336,7 +2619,7 @@
     0
    ],
    "variant": 2,
-   "id": "p3w"
+   "id": "p4d"
   },
   {
    "type": "prop",
@@ -2351,8 +2634,8 @@
     0.6,
     0
    ],
-   "variant": 2,
-   "id": "p3x"
+   "variant": 0,
+   "id": "p4e"
   },
   {
    "type": "prop",
@@ -2368,7 +2651,7 @@
     0
    ],
    "variant": 1,
-   "id": "p3y"
+   "id": "p4f"
   },
   {
    "type": "prop",
@@ -2384,7 +2667,7 @@
     0
    ],
    "variant": 0,
-   "id": "p3z"
+   "id": "p4g"
   },
   {
    "type": "prop",
@@ -2399,8 +2682,8 @@
     -0.2,
     0
    ],
-   "variant": 1,
-   "id": "p40"
+   "variant": 0,
+   "id": "p4h"
   },
   {
    "type": "prop",
@@ -2415,8 +2698,8 @@
     0.1,
     0
    ],
-   "variant": 0,
-   "id": "p41"
+   "variant": 1,
+   "id": "p4i"
   },
   {
    "type": "prop",
@@ -2431,8 +2714,8 @@
     0.5,
     0
    ],
-   "variant": 2,
-   "id": "p42"
+   "variant": 0,
+   "id": "p4j"
   },
   {
    "type": "prop",
@@ -2448,7 +2731,7 @@
     0
    ],
    "variant": 1,
-   "id": "p43"
+   "id": "p4k"
   },
   {
    "type": "barrel",
@@ -2457,7 +2740,7 @@
     0,
     26
    ],
-   "id": "b44"
+   "id": "b4l"
   },
   {
    "type": "barrel",
@@ -2466,7 +2749,7 @@
     0,
     27.1
    ],
-   "id": "b45"
+   "id": "b4m"
   },
   {
    "type": "barrel",
@@ -2475,7 +2758,7 @@
     0,
     39
    ],
-   "id": "b46"
+   "id": "b4n"
   },
   {
    "type": "barrel",
@@ -2484,7 +2767,7 @@
     0,
     48
    ],
-   "id": "b47"
+   "id": "b4o"
   },
   {
    "type": "locker",
@@ -2500,7 +2783,7 @@
    ],
    "luck": 1,
    "name": "locker_dock",
-   "id": "l48"
+   "id": "l4p"
   },
   {
    "type": "pickup",
@@ -2512,7 +2795,7 @@
    ],
    "cls": "rifle",
    "amount": 45,
-   "id": "p49"
+   "id": "p4q"
   },
   {
    "type": "pickup",
@@ -2524,7 +2807,7 @@
    ],
    "cls": "pistol",
    "amount": 24,
-   "id": "p4a"
+   "id": "p4r"
   },
   {
    "type": "pickup",
@@ -2535,7 +2818,7 @@
     27
    ],
    "amount": 30,
-   "id": "p4b"
+   "id": "p4s"
   },
   {
    "type": "pickup",
@@ -2546,7 +2829,7 @@
     20
    ],
    "amount": 1,
-   "id": "p4c"
+   "id": "p4t"
   },
   {
    "type": "enemy",
@@ -2562,7 +2845,7 @@
     0
    ],
    "squad": "dock",
-   "id": "e4d"
+   "id": "e4u"
   },
   {
    "type": "enemy",
@@ -2578,7 +2861,7 @@
     0
    ],
    "squad": "dock",
-   "id": "e4e"
+   "id": "e4v"
   },
   {
    "type": "enemy",
@@ -2594,7 +2877,7 @@
     0
    ],
    "squad": "dock",
-   "id": "e4f"
+   "id": "e4w"
   },
   {
    "type": "enemy",
@@ -2610,7 +2893,7 @@
     0
    ],
    "squad": "dock",
-   "id": "e4g"
+   "id": "e4x"
   },
   {
    "type": "enemy",
@@ -2626,7 +2909,7 @@
     0
    ],
    "squad": "dock",
-   "id": "e4h"
+   "id": "e4y"
   },
   {
    "type": "enemy",
@@ -2643,7 +2926,7 @@
    ],
    "squad": "dock_r",
    "tag": "dock_reinf",
-   "id": "e4i"
+   "id": "e4z"
   },
   {
    "type": "enemy",
@@ -2660,7 +2943,7 @@
    ],
    "squad": "dock_r",
    "tag": "dock_reinf",
-   "id": "e4j"
+   "id": "e50"
   },
   {
    "type": "enemy",
@@ -2677,7 +2960,7 @@
    ],
    "squad": "dock_r",
    "tag": "dock_reinf",
-   "id": "e4k"
+   "id": "e51"
   },
   {
    "type": "trigger",
@@ -2699,7 +2982,7 @@
      "tag": "dock_reinf"
     }
    ],
-   "id": "t4l"
+   "id": "t52"
   },
   {
    "type": "trigger",
@@ -2721,7 +3004,7 @@
      "line": "m01_first_loot"
     }
    ],
-   "id": "t4m"
+   "id": "t53"
   },
   {
    "type": "checkpoint",
@@ -2740,7 +3023,7 @@
     6,
     5
    ],
-   "id": "c4n"
+   "id": "c54"
   },
   {
    "type": "trigger",
@@ -2762,7 +3045,7 @@
      "line": "m01_yard"
     }
    ],
-   "id": "t4o"
+   "id": "t55"
   },
   {
    "type": "prop",
@@ -2778,23 +3061,23 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p4p"
+   "id": "p56"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -32.91,
+    -32.84,
     2.6,
-    -4
+    -3.79
    ],
    "rot": [
     0,
-    -0.05,
+    0.03,
     0
    ],
    "color": "#2e9b8f",
-   "id": "p4q"
+   "id": "p57"
   },
   {
    "type": "prop",
@@ -2810,7 +3093,7 @@
     0
    ],
    "color": "#2e9b8f",
-   "id": "p4r"
+   "id": "p58"
   },
   {
    "type": "prop",
@@ -2826,39 +3109,39 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "p4s"
+   "id": "p59"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -33.03,
+    -33.04,
     2.6,
-    -17.89
+    -18.13
    ],
    "rot": [
     0,
-    0.05,
+    0.04,
     0
    ],
    "color": "#e6e0d0",
-   "id": "p4t"
+   "id": "p5a"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -32.96,
+    -32.86,
     5.2,
-    -18.05
+    -18.2
    ],
    "rot": [
     0,
-    -0.02,
+    0.01,
     0
    ],
    "color": "#2f6f9f",
-   "id": "p4u"
+   "id": "p5b"
   },
   {
    "type": "prop",
@@ -2874,7 +3157,7 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p4v"
+   "id": "p5c"
   },
   {
    "type": "prop",
@@ -2882,15 +3165,15 @@
    "pos": [
     -33.04,
     2.6,
-    -28.83
+    -28.94
    ],
    "rot": [
     0,
-    0.02,
+    0.05,
     0
    ],
    "color": "#e0a82e",
-   "id": "p4w"
+   "id": "p5d"
   },
   {
    "type": "prop",
@@ -2906,7 +3189,7 @@
     0
    ],
    "color": "#5a8f4a",
-   "id": "p4x"
+   "id": "p5e"
   },
   {
    "type": "prop",
@@ -2922,23 +3205,23 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p4y"
+   "id": "p5f"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -33.12,
+    -33.24,
     2.6,
-    -45.76
+    -46.06
    ],
    "rot": [
     0,
-    -0.01,
+    0.03,
     0
    ],
    "color": "#2e9b8f",
-   "id": "p4z"
+   "id": "p5g"
   },
   {
    "type": "prop",
@@ -2954,39 +3237,39 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p50"
+   "id": "p5h"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    32.88,
+    33.14,
     2.6,
-    -5.13
+    -4.9
    ],
    "rot": [
     0,
-    0.02,
+    -0.04,
     0
    ],
    "color": "#e0a82e",
-   "id": "p51"
+   "id": "p5i"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    32.92,
+    32.78,
     5.2,
-    -4.98
+    -4.86
    ],
    "rot": [
     0,
-    0,
+    0.05,
     0
    ],
    "color": "#e6e0d0",
-   "id": "p52"
+   "id": "p5j"
   },
   {
    "type": "prop",
@@ -3002,7 +3285,7 @@
     0
    ],
    "color": "#e6e0d0",
-   "id": "p53"
+   "id": "p5k"
   },
   {
    "type": "prop",
@@ -3018,23 +3301,23 @@
     0
    ],
    "color": "#2e9b8f",
-   "id": "p54"
+   "id": "p5l"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    33.11,
+    33.03,
     2.6,
-    -22.81
+    -23.07
    ],
    "rot": [
     0,
-    -0.04,
+    0.05,
     0
    ],
    "color": "#5a8f4a",
-   "id": "p55"
+   "id": "p5m"
   },
   {
    "type": "prop",
@@ -3050,7 +3333,7 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "p56"
+   "id": "p5n"
   },
   {
    "type": "prop",
@@ -3066,39 +3349,39 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p57"
+   "id": "p5o"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    30.49,
+    30.42,
     2.6,
-    -43.78
+    -43.97
    ],
    "rot": [
     0,
-    0.05,
+    0.03,
     0
    ],
    "color": "#2e9b8f",
-   "id": "p58"
+   "id": "p5p"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    30.39,
+    30.33,
     5.2,
-    -43.77
+    -44.16
    ],
    "rot": [
     0,
-    -0.03,
+    -0.04,
     0
    ],
    "color": "#5a8f4a",
-   "id": "p59"
+   "id": "p5q"
   },
   {
    "type": "prop",
@@ -3114,7 +3397,7 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "p5a"
+   "id": "p5r"
   },
   {
    "type": "prop",
@@ -3130,15 +3413,15 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p5b"
+   "id": "p5s"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -14.02,
+    -14.03,
     2.6,
-    -16.2
+    -16.03
    ],
    "rot": [
     0,
@@ -3146,7 +3429,7 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "p5c"
+   "id": "p5t"
   },
   {
    "type": "prop",
@@ -3162,7 +3445,7 @@
     0
    ],
    "color": "#e6e0d0",
-   "id": "p5d"
+   "id": "p5u"
   },
   {
    "type": "prop",
@@ -3178,23 +3461,23 @@
     0
    ],
    "color": "#2e9b8f",
-   "id": "p5e"
+   "id": "p5v"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    -12.05,
+    -11.93,
     2.6,
-    -36.21
+    -35.99
    ],
    "rot": [
     0,
-    0,
+    0.02,
     0
    ],
    "color": "#5a8f4a",
-   "id": "p5f"
+   "id": "p5w"
   },
   {
    "type": "prop",
@@ -3210,7 +3493,7 @@
     0
    ],
    "color": "#5a8f4a",
-   "id": "p5g"
+   "id": "p5x"
   },
   {
    "type": "prop",
@@ -3226,23 +3509,23 @@
     0
    ],
    "color": "#5a8f4a",
-   "id": "p5h"
+   "id": "p5y"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    16.16,
+    15.86,
     2.6,
-    -7.79
+    -7.93
    ],
    "rot": [
     0,
-    1.6,
+    1.59,
     0
    ],
    "color": "#b5442f",
-   "id": "p5i"
+   "id": "p5z"
   },
   {
    "type": "prop",
@@ -3258,7 +3541,7 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p5j"
+   "id": "p60"
   },
   {
    "type": "prop",
@@ -3274,7 +3557,7 @@
     0
    ],
    "color": "#2e9b8f",
-   "id": "p5k"
+   "id": "p61"
   },
   {
    "type": "prop",
@@ -3290,23 +3573,23 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p5l"
+   "id": "p62"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    20.96,
+    20.89,
     2.6,
-    -37.13
+    -36.78
    ],
    "rot": [
     0,
-    1.61,
+    1.59,
     0
    ],
    "color": "#e0a82e",
-   "id": "p5m"
+   "id": "p63"
   },
   {
    "type": "prop",
@@ -3322,7 +3605,7 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "p5n"
+   "id": "p64"
   },
   {
    "type": "prop",
@@ -3338,7 +3621,7 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p5o"
+   "id": "p65"
   },
   {
    "type": "prop",
@@ -3354,23 +3637,23 @@
     0
    ],
    "color": "#e6e0d0",
-   "id": "p5p"
+   "id": "p66"
   },
   {
    "type": "prop",
    "prop": "container",
    "pos": [
-    3.14,
+    2.8,
     2.6,
-    -40.2
+    -40.06
    ],
    "rot": [
     0,
-    1.58,
+    1.53,
     0
    ],
    "color": "#2f6f9f",
-   "id": "p5q"
+   "id": "p67"
   },
   {
    "type": "prop",
@@ -3386,7 +3669,7 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "p5r"
+   "id": "p68"
   },
   {
    "type": "prop",
@@ -3401,8 +3684,8 @@
     0.2,
     0
    ],
-   "variant": 1,
-   "id": "p5s"
+   "variant": 2,
+   "id": "p69"
   },
   {
    "type": "prop",
@@ -3418,7 +3701,7 @@
     0
    ],
    "variant": 1,
-   "id": "p5t"
+   "id": "p6a"
   },
   {
    "type": "prop",
@@ -3433,8 +3716,8 @@
     0.1,
     0
    ],
-   "variant": 2,
-   "id": "p5u"
+   "variant": 0,
+   "id": "p6b"
   },
   {
    "type": "prop",
@@ -3449,8 +3732,8 @@
     0.7,
     0
    ],
-   "variant": 0,
-   "id": "p5v"
+   "variant": 1,
+   "id": "p6c"
   },
   {
    "type": "prop",
@@ -3465,8 +3748,8 @@
     0.3,
     0
    ],
-   "variant": 1,
-   "id": "p5w"
+   "variant": 0,
+   "id": "p6d"
   },
   {
    "type": "prop",
@@ -3481,8 +3764,8 @@
     1.2,
     0
    ],
-   "variant": 2,
-   "id": "p5x"
+   "variant": 0,
+   "id": "p6e"
   },
   {
    "type": "prop",
@@ -3498,7 +3781,7 @@
     0
    ],
    "variant": 2,
-   "id": "p5y"
+   "id": "p6f"
   },
   {
    "type": "prop",
@@ -3513,8 +3796,8 @@
     0.2,
     0
    ],
-   "variant": 2,
-   "id": "p5z"
+   "variant": 0,
+   "id": "p6g"
   },
   {
    "type": "prop",
@@ -3530,7 +3813,7 @@
     0
    ],
    "variant": 0,
-   "id": "p60"
+   "id": "p6h"
   },
   {
    "type": "prop",
@@ -3545,8 +3828,8 @@
     0.05,
     0
    ],
-   "variant": 0,
-   "id": "p61"
+   "variant": 2,
+   "id": "p6i"
   },
   {
    "type": "prop",
@@ -3561,8 +3844,8 @@
     0.2,
     0
    ],
-   "variant": 2,
-   "id": "p62"
+   "variant": 1,
+   "id": "p6j"
   },
   {
    "type": "prop",
@@ -3577,8 +3860,8 @@
     0.3,
     0
    ],
-   "variant": 2,
-   "id": "p63"
+   "variant": 1,
+   "id": "p6k"
   },
   {
    "type": "barrel",
@@ -3587,7 +3870,7 @@
     0,
     -21
    ],
-   "id": "b64"
+   "id": "b6l"
   },
   {
    "type": "barrel",
@@ -3596,7 +3879,7 @@
     0,
     -34.6
    ],
-   "id": "b65"
+   "id": "b6m"
   },
   {
    "type": "barrel",
@@ -3605,7 +3888,7 @@
     0,
     -33
    ],
-   "id": "b66"
+   "id": "b6n"
   },
   {
    "type": "barrel",
@@ -3614,7 +3897,7 @@
     0,
     -11
    ],
-   "id": "b67"
+   "id": "b6o"
   },
   {
    "type": "box",
@@ -3631,7 +3914,7 @@
    "mat": "panel",
    "color": "#ffd21f",
    "uv": 3,
-   "id": "b68"
+   "id": "b6p"
   },
   {
    "type": "box",
@@ -3648,7 +3931,7 @@
    "mat": "panel",
    "color": "#ffd21f",
    "uv": 3,
-   "id": "b69"
+   "id": "b6q"
   },
   {
    "type": "box",
@@ -3665,7 +3948,7 @@
    "mat": "panel",
    "color": "#ffd21f",
    "uv": 3,
-   "id": "b6a"
+   "id": "b6r"
   },
   {
    "type": "box",
@@ -3682,7 +3965,7 @@
    "mat": "panel",
    "color": "#ffd21f",
    "uv": 3,
-   "id": "b6b"
+   "id": "b6s"
   },
   {
    "type": "box",
@@ -3700,7 +3983,7 @@
    "color": "#ffd21f",
    "uv": 3,
    "collide": false,
-   "id": "b6c"
+   "id": "b6t"
   },
   {
    "type": "box",
@@ -3717,7 +4000,7 @@
    "mat": "panel",
    "color": "#4d5663",
    "collide": false,
-   "id": "b6d"
+   "id": "b6u"
   },
   {
    "type": "box",
@@ -3734,7 +4017,7 @@
    "mat": "plain",
    "color": "#2a2c34",
    "collide": false,
-   "id": "b6e"
+   "id": "b6v"
   },
   {
    "type": "weapon",
@@ -3746,7 +4029,7 @@
    "cls": "shotgun",
    "rarity": 1,
    "seed": 21,
-   "id": "w6f"
+   "id": "w6w"
   },
   {
    "type": "pickup",
@@ -3758,7 +4041,7 @@
    ],
    "cls": "shotgun",
    "amount": 16,
-   "id": "p6g"
+   "id": "p6x"
   },
   {
    "type": "pickup",
@@ -3770,7 +4053,7 @@
    ],
    "cls": "rifle",
    "amount": 45,
-   "id": "p6h"
+   "id": "p6y"
   },
   {
    "type": "pickup",
@@ -3781,7 +4064,7 @@
     -30.4
    ],
    "amount": 30,
-   "id": "p6i"
+   "id": "p6z"
   },
   {
    "type": "enemy",
@@ -3797,7 +4080,7 @@
     0
    ],
    "squad": "yard",
-   "id": "e6j"
+   "id": "e70"
   },
   {
    "type": "enemy",
@@ -3825,7 +4108,7 @@
      -18
     ]
    ],
-   "id": "e6k"
+   "id": "e71"
   },
   {
    "type": "enemy",
@@ -3841,7 +4124,7 @@
     0
    ],
    "squad": "yard",
-   "id": "e6l"
+   "id": "e72"
   },
   {
    "type": "enemy",
@@ -3857,7 +4140,7 @@
     0
    ],
    "squad": "yard2",
-   "id": "e6m"
+   "id": "e73"
   },
   {
    "type": "enemy",
@@ -3873,7 +4156,7 @@
     0
    ],
    "squad": "yard2",
-   "id": "e6n"
+   "id": "e74"
   },
   {
    "type": "enemy",
@@ -3901,7 +4184,7 @@
      -46
     ]
    ],
-   "id": "e6o"
+   "id": "e75"
   },
   {
    "type": "enemy",
@@ -3917,7 +4200,7 @@
     0
    ],
    "tag": "yard_drones",
-   "id": "e6p"
+   "id": "e76"
   },
   {
    "type": "enemy",
@@ -3933,7 +4216,7 @@
     0
    ],
    "tag": "yard_drones",
-   "id": "e6q"
+   "id": "e77"
   },
   {
    "type": "enemy",
@@ -3949,7 +4232,7 @@
     0
    ],
    "tag": "yard_drones",
-   "id": "e6r"
+   "id": "e78"
   },
   {
    "type": "trigger",
@@ -3983,7 +4266,7 @@
      "line": "m01_drones_s"
     }
    ],
-   "id": "t6s"
+   "id": "t79"
   },
   {
    "type": "box",
@@ -3999,7 +4282,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "b6t"
+   "id": "b7a"
   },
   {
    "type": "box",
@@ -4015,7 +4298,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "b6u"
+   "id": "b7b"
   },
   {
    "type": "box",
@@ -4033,7 +4316,7 @@
    "color": "#ffffff",
    "uv": 1.2,
    "collide": false,
-   "id": "b6v"
+   "id": "b7c"
   },
   {
    "type": "prop",
@@ -4050,7 +4333,7 @@
    ],
    "dynamic": true,
    "name": "dockgate",
-   "id": "p6w"
+   "id": "p7d"
   },
   {
    "type": "destructible",
@@ -4096,7 +4379,7 @@
      ]
     }
    ],
-   "id": "d6x"
+   "id": "d7e"
   },
   {
    "type": "destructible",
@@ -4142,7 +4425,7 @@
      ]
     }
    ],
-   "id": "d6y"
+   "id": "d7f"
   },
   {
    "type": "prop",
@@ -4157,7 +4440,7 @@
     0,
     0
    ],
-   "id": "p6z"
+   "id": "p7g"
   },
   {
    "type": "prop",
@@ -4172,7 +4455,7 @@
     0.1,
     0
    ],
-   "id": "p70"
+   "id": "p7h"
   },
   {
    "type": "prop",
@@ -4187,7 +4470,7 @@
     -0.1,
     0
    ],
-   "id": "p71"
+   "id": "p7i"
   },
   {
    "type": "prop",
@@ -4202,7 +4485,7 @@
     0.2,
     0
    ],
-   "id": "p72"
+   "id": "p7j"
   },
   {
    "type": "prop",
@@ -4217,7 +4500,7 @@
     3.14,
     0
    ],
-   "id": "p73"
+   "id": "p7k"
   },
   {
    "type": "pickup",
@@ -4228,7 +4511,7 @@
     -41
    ],
    "amount": 2,
-   "id": "p74"
+   "id": "p7l"
   },
   {
    "type": "pickup",
@@ -4239,7 +4522,7 @@
     -41.6
    ],
    "amount": 2,
-   "id": "p75"
+   "id": "p7m"
   },
   {
    "type": "pickup",
@@ -4250,7 +4533,7 @@
     -41
    ],
    "amount": 2,
-   "id": "p76"
+   "id": "p7n"
   },
   {
    "type": "marker",
@@ -4260,7 +4543,7 @@
     0,
     -41
    ],
-   "id": "m77"
+   "id": "m7o"
   },
   {
    "type": "enemy",
@@ -4277,7 +4560,7 @@
    ],
    "squad": "gate",
    "hold": true,
-   "id": "e78"
+   "id": "e7p"
   },
   {
    "type": "enemy",
@@ -4294,7 +4577,7 @@
    ],
    "squad": "gate",
    "hold": true,
-   "id": "e79"
+   "id": "e7q"
   },
   {
    "type": "enemy",
@@ -4310,7 +4593,7 @@
     0
    ],
    "squad": "gate",
-   "id": "e7a"
+   "id": "e7r"
   },
   {
    "type": "trigger",
@@ -4355,7 +4638,7 @@
      "label": "COUPLING"
     }
    ],
-   "id": "t7b"
+   "id": "t7s"
   },
   {
    "type": "box",
@@ -4371,7 +4654,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "b7c"
+   "id": "b7t"
   },
   {
    "type": "box",
@@ -4387,7 +4670,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "b7d"
+   "id": "b7u"
   },
   {
    "type": "vehicle",
@@ -4403,7 +4686,7 @@
     0,
     0
    ],
-   "id": "v7e"
+   "id": "v7v"
   },
   {
    "type": "vehicle",
@@ -4418,7 +4701,7 @@
     0.3,
     0
    ],
-   "id": "v7f"
+   "id": "v7w"
   },
   {
    "type": "vehicle",
@@ -4433,7 +4716,7 @@
     0.1,
     0
    ],
-   "id": "v7g"
+   "id": "v7x"
   },
   {
    "type": "prop",
@@ -4449,7 +4732,7 @@
     0
    ],
    "color": "#5a8f4a",
-   "id": "p7h"
+   "id": "p7y"
   },
   {
    "type": "prop",
@@ -4465,7 +4748,7 @@
     0
    ],
    "color": "#b5442f",
-   "id": "p7i"
+   "id": "p7z"
   },
   {
    "type": "prop",
@@ -4481,7 +4764,7 @@
     0
    ],
    "variant": 8,
-   "id": "p7j"
+   "id": "p80"
   },
   {
    "type": "prop",
@@ -4497,7 +4780,7 @@
     0
    ],
    "variant": 1,
-   "id": "p7k"
+   "id": "p81"
   },
   {
    "type": "prop",
@@ -4512,7 +4795,7 @@
     0.3,
     0
    ],
-   "id": "p7l"
+   "id": "p82"
   },
   {
    "type": "prop",
@@ -4527,7 +4810,7 @@
     0.1,
     0
    ],
-   "id": "p7m"
+   "id": "p83"
   },
   {
    "type": "prop",
@@ -4542,7 +4825,7 @@
     1.57,
     0
    ],
-   "id": "p7n"
+   "id": "p84"
   },
   {
    "type": "prop",
@@ -4557,7 +4840,7 @@
     -1.57,
     0
    ],
-   "id": "p7o"
+   "id": "p85"
   },
   {
    "type": "prop",
@@ -4573,7 +4856,7 @@
     0
    ],
    "variant": 5,
-   "id": "p7p"
+   "id": "p86"
   },
   {
    "type": "locker",
@@ -4589,7 +4872,7 @@
    ],
    "luck": 2,
    "name": "locker_pool",
-   "id": "l7q"
+   "id": "l87"
   },
   {
    "type": "pickup",
@@ -4600,7 +4883,7 @@
     -64.5
    ],
    "amount": 30,
-   "id": "p7r"
+   "id": "p88"
   },
   {
    "type": "pickup",
@@ -4612,7 +4895,7 @@
    ],
    "cls": "rifle",
    "amount": 60,
-   "id": "p7s"
+   "id": "p89"
   },
   {
    "type": "pickup",
@@ -4624,7 +4907,7 @@
    ],
    "cls": "sniper",
    "amount": 10,
-   "id": "p7t"
+   "id": "p8a"
   },
   {
    "type": "enemy",
@@ -4641,7 +4924,7 @@
    ],
    "squad": "pool",
    "tag": "pool",
-   "id": "e7u"
+   "id": "e8b"
   },
   {
    "type": "enemy",
@@ -4658,7 +4941,7 @@
    ],
    "squad": "pool",
    "tag": "pool",
-   "id": "e7v"
+   "id": "e8c"
   },
   {
    "type": "enemy",
@@ -4675,7 +4958,7 @@
    ],
    "squad": "pool",
    "tag": "pool",
-   "id": "e7w"
+   "id": "e8d"
   },
   {
    "type": "trigger",
@@ -4713,7 +4996,7 @@
      "text": "Drive the Last Mile to the front door"
     }
    ],
-   "id": "t7x"
+   "id": "t8e"
   },
   {
    "type": "box",
@@ -4730,7 +5013,7 @@
    "mat": "sand",
    "color": "#d9a066",
    "uv": 9,
-   "id": "b7y"
+   "id": "b8f"
   },
   {
    "type": "box",
@@ -4747,7 +5030,7 @@
    "mat": "asphalt",
    "color": "#4b4852",
    "uv": 6,
-   "id": "b7z"
+   "id": "b8g"
   },
   {
    "type": "box",
@@ -4764,7 +5047,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b80"
+   "id": "b8h"
   },
   {
    "type": "box",
@@ -4781,7 +5064,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b81"
+   "id": "b8i"
   },
   {
    "type": "box",
@@ -4798,7 +5081,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b82"
+   "id": "b8j"
   },
   {
    "type": "box",
@@ -4815,7 +5098,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b83"
+   "id": "b8k"
   },
   {
    "type": "box",
@@ -4832,7 +5115,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b84"
+   "id": "b8l"
   },
   {
    "type": "box",
@@ -4849,7 +5132,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b85"
+   "id": "b8m"
   },
   {
    "type": "box",
@@ -4866,7 +5149,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b86"
+   "id": "b8n"
   },
   {
    "type": "box",
@@ -4883,7 +5166,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b87"
+   "id": "b8o"
   },
   {
    "type": "box",
@@ -4900,7 +5183,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b88"
+   "id": "b8p"
   },
   {
    "type": "box",
@@ -4917,7 +5200,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b89"
+   "id": "b8q"
   },
   {
    "type": "box",
@@ -4934,7 +5217,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8a"
+   "id": "b8r"
   },
   {
    "type": "box",
@@ -4951,7 +5234,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8b"
+   "id": "b8s"
   },
   {
    "type": "box",
@@ -4968,7 +5251,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8c"
+   "id": "b8t"
   },
   {
    "type": "box",
@@ -4985,7 +5268,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8d"
+   "id": "b8u"
   },
   {
    "type": "box",
@@ -5002,7 +5285,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8e"
+   "id": "b8v"
   },
   {
    "type": "box",
@@ -5019,7 +5302,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8f"
+   "id": "b8w"
   },
   {
    "type": "box",
@@ -5036,7 +5319,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8g"
+   "id": "b8x"
   },
   {
    "type": "box",
@@ -5053,7 +5336,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8h"
+   "id": "b8y"
   },
   {
    "type": "box",
@@ -5070,7 +5353,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8i"
+   "id": "b8z"
   },
   {
    "type": "box",
@@ -5087,7 +5370,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8j"
+   "id": "b90"
   },
   {
    "type": "box",
@@ -5104,7 +5387,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8k"
+   "id": "b91"
   },
   {
    "type": "box",
@@ -5121,7 +5404,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8l"
+   "id": "b92"
   },
   {
    "type": "box",
@@ -5138,7 +5421,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8m"
+   "id": "b93"
   },
   {
    "type": "box",
@@ -5155,7 +5438,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8n"
+   "id": "b94"
   },
   {
    "type": "box",
@@ -5172,7 +5455,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8o"
+   "id": "b95"
   },
   {
    "type": "box",
@@ -5189,7 +5472,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8p"
+   "id": "b96"
   },
   {
    "type": "box",
@@ -5206,7 +5489,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8q"
+   "id": "b97"
   },
   {
    "type": "box",
@@ -5223,7 +5506,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8r"
+   "id": "b98"
   },
   {
    "type": "box",
@@ -5240,7 +5523,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8s"
+   "id": "b99"
   },
   {
    "type": "box",
@@ -5257,7 +5540,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8t"
+   "id": "b9a"
   },
   {
    "type": "box",
@@ -5274,7 +5557,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8u"
+   "id": "b9b"
   },
   {
    "type": "box",
@@ -5291,7 +5574,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8v"
+   "id": "b9c"
   },
   {
    "type": "box",
@@ -5308,7 +5591,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8w"
+   "id": "b9d"
   },
   {
    "type": "box",
@@ -5325,7 +5608,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8x"
+   "id": "b9e"
   },
   {
    "type": "box",
@@ -5342,7 +5625,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8y"
+   "id": "b9f"
   },
   {
    "type": "box",
@@ -5359,7 +5642,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b8z"
+   "id": "b9g"
   },
   {
    "type": "box",
@@ -5376,404 +5659,66 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "b90"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -41.09,
-    6.99,
-    -96.88
-   ],
-   "size": [
-    18.12,
-    15.97,
-    17.21
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    -0.01623205890879035,
-    -0.16469582298304886,
-    -0.06294939935207366
-   ],
-   "uv": 7,
-   "id": "b91"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -29.31,
-    0,
-    -101.55
-   ],
-   "rot": [
-    0,
-    3.8,
-    0
-   ],
-   "variant": 2,
-   "scale": 1.37,
-   "color": "#9a6a55",
-   "id": "p92"
-  },
-  {
-   "type": "box",
-   "pos": [
-    37.79,
-    6.79,
-    -96.35
-   ],
-   "size": [
-    17.64,
-    15.57,
-    15.38
-   ],
-   "mat": "rock",
-   "color": "#9a6a55",
-   "rot": [
-    -0.05407869265414774,
-    0.21849171444773674,
-    0.012488033734261994
-   ],
-   "uv": 7,
-   "id": "b93"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    26.41,
-    0,
-    -101.77
-   ],
-   "rot": [
-    0,
-    1.26,
-    0
-   ],
-   "variant": 4,
-   "scale": 0.82,
-   "color": "#9a6a55",
-   "id": "p94"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -38.32,
-    3.66,
-    -108.98
-   ],
-   "size": [
-    18.11,
-    9.32,
-    16.77
-   ],
-   "mat": "rock",
-   "color": "#9a6a55",
-   "rot": [
-    -0.001633860915899274,
-    -0.05838700209278613,
-    -0.002119842693209653
-   ],
-   "uv": 7,
-   "id": "b95"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -27.46,
-    0,
-    -110.72
-   ],
-   "rot": [
-    0,
-    2.42,
-    0
-   ],
-   "variant": 1,
-   "scale": 1.29,
-   "color": "#9a6a55",
-   "id": "p96"
-  },
-  {
-   "type": "box",
-   "pos": [
-    40.1,
-    4.74,
-    -111.37
-   ],
-   "size": [
-    19.63,
-    11.47,
-    16.66
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    0.02126104381866753,
-    0.03037676797248423,
-    0.0024778834357857688
-   ],
-   "uv": 7,
-   "id": "b97"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -33.39,
-    6.94,
-    -121.84
-   ],
-   "size": [
-    17.79,
-    15.89,
-    16.36
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    -0.04206107597798109,
-    0.1493162823608145,
-    -0.06306220121681691
-   ],
-   "uv": 7,
-   "id": "b98"
-  },
-  {
-   "type": "prop",
-   "prop": "cactus",
-   "pos": [
-    -21.33,
-    0,
-    -127.96
-   ],
-   "rot": [
-    0,
-    2.13,
-    0
-   ],
-   "variant": 2,
-   "id": "p99"
-  },
-  {
-   "type": "box",
-   "pos": [
-    41.75,
-    4.27,
-    -124.52
-   ],
-   "size": [
-    19.88,
-    10.54,
-    18.07
-   ],
-   "mat": "rock",
-   "color": "#9a6a55",
-   "rot": [
-    -0.02230531987734139,
-    0.10733052110299468,
-    -0.014824656434357167
-   ],
-   "uv": 7,
-   "id": "b9a"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -33.69,
-    4.22,
-    -136.24
-   ],
-   "size": [
-    20.78,
-    10.44,
-    15.05
-   ],
-   "mat": "rock",
-   "color": "#9a6a55",
-   "rot": [
-    -0.05355131043121218,
-    -0.11111398634966463,
-    0.035169699490070344
-   ],
-   "uv": 7,
-   "id": "b9b"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -18.81,
-    0,
-    -139.44
-   ],
-   "rot": [
-    0,
-    5.23,
-    0
-   ],
-   "variant": 4,
-   "scale": 1.44,
-   "color": "#9a6a55",
-   "id": "p9c"
-  },
-  {
-   "type": "box",
-   "pos": [
-    40.08,
-    5.85,
-    -136.05
-   ],
-   "size": [
-    17.45,
-    13.69,
-    17.48
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    -0.01882635452784598,
-    0.04399039130657911,
-    0.0717195424064994
-   ],
-   "uv": 7,
-   "id": "b9d"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    26.79,
-    0,
-    -140.63
-   ],
-   "rot": [
-    0,
-    4.73,
-    0
-   ],
-   "variant": 4,
-   "scale": 0.79,
-   "color": "#9a6a55",
-   "id": "p9e"
-  },
-  {
-   "type": "box",
-   "pos": [
-    -32.55,
-    3.51,
-    -147.14
-   ],
-   "size": [
-    21.49,
-    9.01,
-    17.34
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    0.0581710260361433,
-    -0.018995965947397053,
-    -0.045499073490500454
-   ],
-   "uv": 7,
-   "id": "b9f"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -17.62,
-    0,
-    -146.1
-   ],
-   "rot": [
-    0,
-    4.56,
-    0
-   ],
-   "variant": 2,
-   "scale": 1.49,
-   "color": "#b87a4b",
-   "id": "p9g"
-  },
-  {
-   "type": "box",
-   "pos": [
-    40.67,
-    4.71,
-    -147.28
-   ],
-   "size": [
-    20.27,
-    11.41,
-    17.75
-   ],
-   "mat": "rock",
-   "color": "#6e4a41",
-   "rot": [
-    0.05424639140255749,
-    0.09573957812972367,
-    0.012582516707479952
-   ],
-   "uv": 7,
    "id": "b9h"
   },
   {
-   "type": "prop",
-   "prop": "rock",
+   "type": "box",
    "pos": [
-    27.37,
-    0,
-    -145.44
+    -40.21,
+    5.05,
+    -97.65
    ],
-   "rot": [
-    0,
-    1.58,
-    0
+   "size": [
+    20.53,
+    12.1,
+    16.95
    ],
-   "variant": 1,
-   "scale": 1.42,
+   "mat": "rock",
    "color": "#9a6a55",
-   "id": "p9i"
+   "rot": [
+    -0.0015898820199072364,
+    -0.04183762229513377,
+    -0.04806938275694847
+   ],
+   "uv": 7,
+   "id": "b9i"
   },
   {
    "type": "prop",
-   "prop": "cactus",
+   "prop": "rock",
    "pos": [
-    25.12,
+    -27.34,
     0,
-    -148.46
+    -98.96
    ],
    "rot": [
     0,
-    2.11,
+    3.94,
     0
    ],
    "variant": 0,
+   "scale": 1.5,
+   "color": "#9a6a55",
    "id": "p9j"
   },
   {
    "type": "box",
    "pos": [
-    -31.04,
-    6.49,
-    -163.5
+    36.21,
+    4.95,
+    -95.34
    ],
    "size": [
-    18.38,
-    14.98,
-    15.33
+    16.94,
+    11.9,
+    17.71
    ],
    "mat": "rock",
-   "color": "#9a6a55",
+   "color": "#6e4a41",
    "rot": [
-    0.03574896672740578,
-    -0.1784579505911097,
-    -0.03269557774066925
+    0.00185841257683933,
+    0.17717758426442742,
+    0.04367415439337492
    ],
    "uv": 7,
    "id": "b9k"
@@ -5782,116 +5727,116 @@
    "type": "prop",
    "prop": "rock",
    "pos": [
-    -18.12,
+    25.55,
     0,
-    -160.76
+    -92.16
    ],
    "rot": [
     0,
-    4.76,
+    4.75,
     0
    ],
-   "variant": 0,
-   "scale": 1.14,
-   "color": "#b87a4b",
+   "variant": 1,
+   "scale": 1.2,
+   "color": "#9a6a55",
    "id": "p9l"
   },
   {
    "type": "box",
    "pos": [
-    36.61,
-    6.57,
-    -162.43
+    -38.15,
+    4.37,
+    -111.89
    ],
    "size": [
-    19.98,
-    15.14,
-    15.9
+    21.52,
+    10.74,
+    15.01
    ],
    "mat": "rock",
-   "color": "#6e4a41",
+   "color": "#9a6a55",
    "rot": [
-    -0.009112426796928051,
-    0.19214166700839996,
-    0.0724195658788085
+    0.02952362906187772,
+    -0.1375317551428452,
+    0.023457549437880518
    ],
    "uv": 7,
    "id": "b9m"
   },
   {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -25.91,
+    0,
+    -107.32
+   ],
+   "rot": [
+    0,
+    0.25,
+    0
+   ],
+   "variant": 1,
+   "scale": 1.34,
+   "color": "#9a6a55",
+   "id": "p9n"
+  },
+  {
    "type": "box",
    "pos": [
-    -34.74,
-    3.74,
-    -173.99
+    40.68,
+    6.29,
+    -111.18
    ],
    "size": [
-    18.79,
-    9.48,
-    17.42
+    20.14,
+    14.58,
+    16.76
    ],
    "mat": "rock",
    "color": "#9a6a55",
    "rot": [
-    0.02776628209277987,
-    0.24595267151016742,
-    -0.0036545766890049014
+    -0.035832902407273645,
+    -0.22313046013005078,
+    -0.03555647563189268
    ],
    "uv": 7,
-   "id": "b9n"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -22.3,
-    0,
-    -179.33
-   ],
-   "rot": [
-    0,
-    1.14,
-    0
-   ],
-   "variant": 0,
-   "scale": 0.85,
-   "color": "#b87a4b",
-   "id": "p9o"
+   "id": "b9o"
   },
   {
    "type": "prop",
    "prop": "cactus",
    "pos": [
-    -17.74,
+    22.36,
     0,
-    -173.13
+    -113.44
    ],
    "rot": [
     0,
-    1.82,
+    5.23,
     0
    ],
-   "variant": 1,
+   "variant": 2,
    "id": "p9p"
   },
   {
    "type": "box",
    "pos": [
-    31.05,
-    4.13,
-    -175.37
+    -36.13,
+    6.74,
+    -124.15
    ],
    "size": [
-    16.84,
-    10.25,
-    18.67
+    18.69,
+    15.49,
+    15.97
    ],
    "mat": "rock",
    "color": "#6e4a41",
    "rot": [
-    -0.01765539036132395,
-    -0.2096376083791256,
-    0.02494295116513967
+    -0.001627427525818348,
+    0.06052393314894289,
+    0.0697147937864065
    ],
    "uv": 7,
    "id": "b9q"
@@ -5900,170 +5845,182 @@
    "type": "prop",
    "prop": "rock",
    "pos": [
-    21.34,
+    -23.44,
     0,
-    -178.55
+    -118.52
    ],
    "rot": [
     0,
-    1.32,
+    1.84,
     0
    ],
-   "variant": 3,
-   "scale": 1.46,
+   "variant": 4,
+   "scale": 0.73,
    "color": "#b87a4b",
    "id": "p9r"
   },
   {
-   "type": "prop",
-   "prop": "cactus",
+   "type": "box",
    "pos": [
-    18.16,
-    0,
-    -177.33
+    40.69,
+    4.98,
+    -122.27
    ],
+   "size": [
+    18.73,
+    11.95,
+    18.66
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
    "rot": [
-    0,
-    1.78,
-    0
+    0.05593147703446448,
+    0.042245619697496295,
+    0.002611507661640644
    ],
-   "variant": 0,
-   "id": "p9s"
+   "uv": 7,
+   "id": "b9s"
   },
   {
    "type": "box",
    "pos": [
-    -35.29,
-    4.93,
-    -189.17
+    -29.64,
+    6.28,
+    -134.84
    ],
    "size": [
-    18.68,
-    11.87,
-    18.8
+    16.47,
+    14.56,
+    18.04
    ],
    "mat": "rock",
    "color": "#6e4a41",
    "rot": [
-    -0.01297153729945421,
-    -0.24914673867169768,
-    0.04571087323129176
+    0.045583874434232716,
+    0.02883665810804814,
+    -0.013961188718676562
    ],
    "uv": 7,
    "id": "b9t"
   },
   {
+   "type": "box",
+   "pos": [
+    42.68,
+    5.91,
+    -134.23
+   ],
+   "size": [
+    21.58,
+    13.81,
+    18.81
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.009436887530609964,
+    -0.15189564460888505,
+    0.006461242251098162
+   ],
+   "uv": 7,
+   "id": "b9u"
+  },
+  {
    "type": "prop",
    "prop": "cactus",
    "pos": [
-    -19.32,
+    27.47,
     0,
-    -188.05
+    -132.98
    ],
    "rot": [
     0,
-    4.6,
+    2.6,
     0
    ],
-   "variant": 1,
-   "id": "p9u"
+   "variant": 0,
+   "id": "p9v"
   },
   {
    "type": "box",
    "pos": [
-    28.97,
-    6.86,
-    -188.67
+    -30.33,
+    4.73,
+    -150.6
    ],
    "size": [
-    17.32,
-    15.72,
-    16.83
+    19.32,
+    11.46,
+    17.29
    ],
    "mat": "rock",
    "color": "#9a6a55",
    "rot": [
-    -0.04491102461703121,
-    -0.22884377976879478,
-    -0.02383541334420443
+    0.04244738085195422,
+    -0.1877468506572768,
+    -0.0667380215227604
    ],
    "uv": 7,
-   "id": "b9v"
+   "id": "b9w"
   },
   {
    "type": "prop",
    "prop": "rock",
    "pos": [
-    17.82,
+    -16.48,
     0,
-    -191.7
+    -152.57
    ],
    "rot": [
     0,
-    3.79,
+    1.77,
     0
    ],
-   "variant": 1,
-   "scale": 1.09,
-   "color": "#9a6a55",
-   "id": "p9w"
+   "variant": 2,
+   "scale": 1.32,
+   "color": "#b87a4b",
+   "id": "p9x"
   },
   {
    "type": "box",
    "pos": [
-    -41.21,
-    5.68,
-    -200.3
+    38.31,
+    6.68,
+    -149.45
    ],
    "size": [
-    19.07,
-    13.37,
-    15.17
+    18.95,
+    15.36,
+    16.67
    ],
    "mat": "rock",
    "color": "#6e4a41",
    "rot": [
-    -0.055329449661076065,
-    0.06721272540744394,
-    -0.038466300144791604
+    0.04527444097213447,
+    -0.05338625470176339,
+    -0.044023509211838244
    ],
    "uv": 7,
-   "id": "b9x"
-  },
-  {
-   "type": "prop",
-   "prop": "cactus",
-   "pos": [
-    -23.1,
-    0,
-    -200.45
-   ],
-   "rot": [
-    0,
-    4.87,
-    0
-   ],
-   "variant": 2,
-   "id": "p9y"
+   "id": "b9y"
   },
   {
    "type": "box",
    "pos": [
-    28.53,
-    4.53,
-    -199.08
+    -33.96,
+    6.47,
+    -161.99
    ],
    "size": [
-    17.14,
-    11.07,
-    17.69
+    21.72,
+    14.94,
+    18.48
    ],
    "mat": "rock",
    "color": "#9a6a55",
    "rot": [
-    -0.016160883055999872,
-    -0.023085964377969503,
-    -0.014983121044933795
+    -0.05180346233770251,
+    0.12575205194298178,
+    0.016734201014041897
    ],
    "uv": 7,
    "id": "b9z"
@@ -6072,252 +6029,256 @@
    "type": "prop",
    "prop": "rock",
    "pos": [
-    14.98,
+    -19.17,
     0,
-    -200.93
+    -157.08
    ],
    "rot": [
     0,
-    2.14,
+    2.86,
     0
    ],
    "variant": 0,
-   "scale": 1.46,
+   "scale": 1.16,
    "color": "#9a6a55",
    "id": "pa0"
   },
   {
-   "type": "box",
-   "pos": [
-    -40.65,
-    4.67,
-    -212.5
-   ],
-   "size": [
-    19.8,
-    11.35,
-    16.72
-   ],
-   "mat": "rock",
-   "color": "#9a6a55",
-   "rot": [
-    0.03618161838501692,
-    -0.01387301238719374,
-    0.04546886168420315
-   ],
-   "uv": 7,
-   "id": "ba1"
-  },
-  {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -26.81,
-    0,
-    -209.82
-   ],
-   "rot": [
-    0,
-    3.59,
-    0
-   ],
-   "variant": 1,
-   "scale": 1.45,
-   "color": "#b87a4b",
-   "id": "pa2"
-  },
-  {
    "type": "prop",
    "prop": "cactus",
    "pos": [
-    -24.46,
+    -19.96,
     0,
-    -217.18
+    -165.28
    ],
    "rot": [
     0,
-    2.27,
+    5.01,
     0
    ],
-   "variant": 1,
-   "id": "pa3"
+   "variant": 0,
+   "id": "pa1"
   },
   {
    "type": "box",
    "pos": [
-    33.34,
-    6.83,
-    -212.64
+    38.09,
+    4.56,
+    -162.15
    ],
    "size": [
-    18.11,
-    15.66,
-    18.98
+    20.12,
+    11.12,
+    15.98
    ],
    "mat": "rock",
    "color": "#9a6a55",
    "rot": [
-    0.03837142397649586,
-    -0.07157236034981906,
-    0.043175265230238444
+    -0.0385262578446418,
+    -0.04587789857760072,
+    0.06684931378811597
    ],
    "uv": 7,
-   "id": "ba4"
+   "id": "ba2"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -32.16,
+    4.45,
+    -176.7
+   ],
+   "size": [
+    19.94,
+    10.91,
+    15.58
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.01841347681358456,
+    0.1700887024635449,
+    0.004960677921772003
+   ],
+   "uv": 7,
+   "id": "ba3"
   },
   {
    "type": "prop",
    "prop": "rock",
    "pos": [
-    20.69,
+    -20.21,
     0,
-    -216.03
+    -177.33
    ],
    "rot": [
     0,
-    1.93,
+    1.78,
     0
    ],
-   "variant": 4,
-   "scale": 0.71,
+   "variant": 1,
+   "scale": 0.87,
    "color": "#9a6a55",
-   "id": "pa5"
+   "id": "pa4"
   },
   {
    "type": "box",
    "pos": [
-    -41.63,
-    4.33,
-    -225.2
+    33.33,
+    5.49,
+    -175.43
    ],
    "size": [
-    18.03,
-    10.67,
-    15.97
+    21.7,
+    12.97,
+    15.01
    ],
    "mat": "rock",
    "color": "#6e4a41",
    "rot": [
-    -0.017040703911334276,
-    -0.03895773726981133,
-    -0.003070414811372754
+    0.03677714369259774,
+    -0.23569550830870867,
+    0.01666125860065222
    ],
    "uv": 7,
-   "id": "ba6"
+   "id": "ba5"
   },
   {
    "type": "prop",
    "prop": "rock",
    "pos": [
-    -31.31,
+    18.42,
     0,
-    -231.47
+    -174.01
    ],
    "rot": [
     0,
-    5.62,
+    1.27,
     0
    ],
-   "variant": 2,
-   "scale": 1,
+   "variant": 1,
+   "scale": 1.56,
    "color": "#9a6a55",
-   "id": "pa7"
+   "id": "pa6"
   },
   {
    "type": "box",
    "pos": [
-    34.42,
-    4.57,
-    -226.36
+    -33.61,
+    3.65,
+    -188.6
    ],
    "size": [
-    16.81,
-    11.14,
-    18.48
+    16.75,
+    9.3,
+    15.91
    ],
    "mat": "rock",
    "color": "#9a6a55",
    "rot": [
-    -0.016870852829888462,
-    -0.03324380563572049,
-    -0.008813379593193532
+    -0.04444194741547108,
+    0.06586008227895945,
+    -0.04112340115010738
    ],
    "uv": 7,
-   "id": "ba8"
+   "id": "ba7"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -22.48,
+    0,
+    -188.21
+   ],
+   "rot": [
+    0,
+    4.78,
+    0
+   ],
+   "variant": 2,
+   "scale": 1.26,
+   "color": "#b87a4b",
+   "id": "pa8"
   },
   {
    "type": "prop",
    "prop": "cactus",
    "pos": [
-    20.66,
+    -18.72,
     0,
-    -231.27
+    -192.61
    ],
    "rot": [
     0,
-    4.56,
+    3.81,
     0
    ],
-   "variant": 2,
+   "variant": 0,
    "id": "pa9"
   },
   {
    "type": "box",
    "pos": [
-    -40.54,
-    5.96,
-    -241.71
+    32.29,
+    6.75,
+    -187.78
    ],
    "size": [
-    16.41,
-    13.92,
-    18.92
+    17.68,
+    15.5,
+    18.25
    ],
    "mat": "rock",
-   "color": "#9a6a55",
+   "color": "#6e4a41",
    "rot": [
-    -0.0578839692659676,
-    0.14327384170610458,
-    0.0030079488456249276
+    -0.03450314386747777,
+    -0.15507440292276442,
+    -0.032797128967940806
    ],
    "uv": 7,
    "id": "baa"
   },
   {
-   "type": "prop",
-   "prop": "rock",
-   "pos": [
-    -28.61,
-    0,
-    -242.22
-   ],
-   "rot": [
-    0,
-    0.37,
-    0
-   ],
-   "variant": 1,
-   "scale": 1.01,
-   "color": "#9a6a55",
-   "id": "pab"
-  },
-  {
    "type": "box",
    "pos": [
-    41.38,
-    5.22,
-    -240.84
+    -38.77,
+    5.09,
+    -201.37
    ],
    "size": [
-    21.61,
-    12.44,
-    17.48
+    18.19,
+    12.18,
+    15.46
    ],
    "mat": "rock",
    "color": "#6e4a41",
    "rot": [
-    0.018166815815493467,
-    -0.05240232916548848,
-    0.04194553654640913
+    0.0007927753776311858,
+    -0.07181829877663404,
+    -0.07543590091168881
+   ],
+   "uv": 7,
+   "id": "bab"
+  },
+  {
+   "type": "box",
+   "pos": [
+    30.05,
+    5.72,
+    -201.66
+   ],
+   "size": [
+    16.23,
+    13.43,
+    18.5
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.05522086610086262,
+    0.15075674327090383,
+    -0.004439363963902002
    ],
    "uv": 7,
    "id": "bac"
@@ -6326,13 +6287,13 @@
    "type": "prop",
    "prop": "cactus",
    "pos": [
-    22.31,
+    14.53,
     0,
-    -237.08
+    -196.82
    ],
    "rot": [
     0,
-    2.56,
+    3.59,
     0
    ],
    "variant": 1,
@@ -6341,42 +6302,256 @@
   {
    "type": "box",
    "pos": [
-    -38.75,
-    5.12,
-    -252.62
+    -43.57,
+    4.01,
+    -213.8
    ],
    "size": [
-    19.11,
-    12.24,
-    16.8
+    19.27,
+    10.01,
+    15.73
    ],
    "mat": "rock",
-   "color": "#6e4a41",
+   "color": "#9a6a55",
    "rot": [
-    -0.03405472638085484,
-    -0.14625389862339944,
-    -0.048823080807924274
+    -0.017489374671131375,
+    0.19564038247335702,
+    -0.02378545567393303
    ],
    "uv": 7,
    "id": "bae"
   },
   {
-   "type": "prop",
-   "prop": "rock",
+   "type": "box",
    "pos": [
-    -26.76,
+    32.99,
+    6.37,
+    -214.57
+   ],
+   "size": [
+    16.58,
+    14.74,
+    18.08
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    0.017708587953820826,
+    -0.10128337354399264,
+    -0.028580584935843943
+   ],
+   "uv": 7,
+   "id": "baf"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    21.46,
     0,
-    -249.63
+    -214.23
    ],
    "rot": [
     0,
-    1.24,
+    2.64,
     0
    ],
-   "variant": 3,
-   "scale": 1.11,
+   "variant": 1,
+   "id": "pag"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -42.66,
+    4.35,
+    -226.86
+   ],
+   "size": [
+    21.7,
+    10.7,
+    16.43
+   ],
+   "mat": "rock",
    "color": "#9a6a55",
-   "id": "paf"
+   "rot": [
+    -0.002302811108529569,
+    -0.07638445182237774,
+    -0.06772341020405293
+   ],
+   "uv": 7,
+   "id": "bah"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -27.06,
+    0,
+    -227.83
+   ],
+   "rot": [
+    0,
+    2,
+    0
+   ],
+   "variant": 0,
+   "scale": 1.41,
+   "color": "#b87a4b",
+   "id": "pai"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -26.98,
+    0,
+    -225.4
+   ],
+   "rot": [
+    0,
+    5.22,
+    0
+   ],
+   "variant": 1,
+   "id": "paj"
+  },
+  {
+   "type": "box",
+   "pos": [
+    34.49,
+    5.06,
+    -226.32
+   ],
+   "size": [
+    18.6,
+    12.11,
+    15.91
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.051201992807909845,
+    0.13020654418505728,
+    0.053117958046495925
+   ],
+   "uv": 7,
+   "id": "bak"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    17.97,
+    0,
+    -231.28
+   ],
+   "rot": [
+    0,
+    5.88,
+    0
+   ],
+   "variant": 0,
+   "id": "pal"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -39.59,
+    5.32,
+    -240.9
+   ],
+   "size": [
+    20.72,
+    12.63,
+    17.73
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.05266845524311065,
+    -0.05056409176904708,
+    -0.024581723734736445
+   ],
+   "uv": 7,
+   "id": "bam"
+  },
+  {
+   "type": "prop",
+   "prop": "rock",
+   "pos": [
+    -24.71,
+    0,
+    -236.55
+   ],
+   "rot": [
+    0,
+    5.61,
+    0
+   ],
+   "variant": 2,
+   "scale": 0.96,
+   "color": "#b87a4b",
+   "id": "pan"
+  },
+  {
+   "type": "box",
+   "pos": [
+    38.99,
+    6.17,
+    -238.2
+   ],
+   "size": [
+    18.37,
+    14.34,
+    15.58
+   ],
+   "mat": "rock",
+   "color": "#6e4a41",
+   "rot": [
+    0.035056104781106115,
+    -0.036921135848388076,
+    -0.011396496556699276
+   ],
+   "uv": 7,
+   "id": "bao"
+  },
+  {
+   "type": "box",
+   "pos": [
+    -37.72,
+    5.08,
+    -251.6
+   ],
+   "size": [
+    19.57,
+    12.15,
+    15.86
+   ],
+   "mat": "rock",
+   "color": "#9a6a55",
+   "rot": [
+    -0.0366173106059432,
+    -0.0025341702857986093,
+    -0.02296351440250874
+   ],
+   "uv": 7,
+   "id": "bap"
+  },
+  {
+   "type": "prop",
+   "prop": "cactus",
+   "pos": [
+    -20.74,
+    0,
+    -253.43
+   ],
+   "rot": [
+    0,
+    0.21,
+    0
+   ],
+   "variant": 2,
+   "id": "paq"
   },
   {
    "type": "box",
@@ -6398,7 +6573,7 @@
     0.044345230273902414
    ],
    "uv": 7,
-   "id": "bag"
+   "id": "bar"
   },
   {
    "type": "prop",
@@ -6414,7 +6589,7 @@
     0
    ],
    "variant": 2,
-   "id": "pah"
+   "id": "pas"
   },
   {
    "type": "box",
@@ -6436,7 +6611,7 @@
     -0.026278347522020337
    ],
    "uv": 7,
-   "id": "bai"
+   "id": "bat"
   },
   {
    "type": "prop",
@@ -6452,7 +6627,7 @@
     0
    ],
    "variant": 2,
-   "id": "paj"
+   "id": "pau"
   },
   {
    "type": "box",
@@ -6474,7 +6649,7 @@
     0.0730192107334733
    ],
    "uv": 7,
-   "id": "bak"
+   "id": "bav"
   },
   {
    "type": "prop",
@@ -6492,7 +6667,7 @@
    "variant": 4,
    "scale": 0.71,
    "color": "#b87a4b",
-   "id": "pal"
+   "id": "paw"
   },
   {
    "type": "box",
@@ -6514,7 +6689,7 @@
     -0.024572695046663283
    ],
    "uv": 7,
-   "id": "bam"
+   "id": "bax"
   },
   {
    "type": "prop",
@@ -6532,7 +6707,7 @@
    "variant": 2,
    "scale": 1.59,
    "color": "#b87a4b",
-   "id": "pan"
+   "id": "pay"
   },
   {
    "type": "box",
@@ -6554,7 +6729,7 @@
     -0.04960492450743914
    ],
    "uv": 7,
-   "id": "bao"
+   "id": "baz"
   },
   {
    "type": "box",
@@ -6576,7 +6751,7 @@
     -0.04309585481882095
    ],
    "uv": 7,
-   "id": "bap"
+   "id": "bb0"
   },
   {
    "type": "prop",
@@ -6594,7 +6769,7 @@
    "variant": 1,
    "scale": 1,
    "color": "#b87a4b",
-   "id": "paq"
+   "id": "pb1"
   },
   {
    "type": "box",
@@ -6616,7 +6791,7 @@
     -0.050664266087114815
    ],
    "uv": 7,
-   "id": "bar"
+   "id": "bb2"
   },
   {
    "type": "prop",
@@ -6634,7 +6809,7 @@
    "variant": 3,
    "scale": 1.31,
    "color": "#9a6a55",
-   "id": "pas"
+   "id": "pb3"
   },
   {
    "type": "box",
@@ -6656,7 +6831,7 @@
     -0.07593877159059048
    ],
    "uv": 7,
-   "id": "bat"
+   "id": "bb4"
   },
   {
    "type": "prop",
@@ -6674,7 +6849,7 @@
    "variant": 2,
    "scale": 1.56,
    "color": "#9a6a55",
-   "id": "pau"
+   "id": "pb5"
   },
   {
    "type": "box",
@@ -6696,7 +6871,7 @@
     -0.016491369567811484
    ],
    "uv": 7,
-   "id": "bav"
+   "id": "bb6"
   },
   {
    "type": "prop",
@@ -6714,7 +6889,7 @@
    "variant": 1,
    "scale": 1.48,
    "color": "#b87a4b",
-   "id": "paw"
+   "id": "pb7"
   },
   {
    "type": "box",
@@ -6736,7 +6911,7 @@
     -0.02913865998387337
    ],
    "uv": 7,
-   "id": "bax"
+   "id": "bb8"
   },
   {
    "type": "prop",
@@ -6754,7 +6929,7 @@
    "variant": 3,
    "scale": 1.09,
    "color": "#9a6a55",
-   "id": "pay"
+   "id": "pb9"
   },
   {
    "type": "box",
@@ -6776,7 +6951,7 @@
     0.021951456479728224
    ],
    "uv": 7,
-   "id": "baz"
+   "id": "bba"
   },
   {
    "type": "box",
@@ -6798,7 +6973,7 @@
     -0.03589849501848221
    ],
    "uv": 7,
-   "id": "bb0"
+   "id": "bbb"
   },
   {
    "type": "box",
@@ -6820,7 +6995,7 @@
     -0.053525275848805905
    ],
    "uv": 7,
-   "id": "bb1"
+   "id": "bbc"
   },
   {
    "type": "prop",
@@ -6838,7 +7013,7 @@
    "variant": 0,
    "scale": 1.4,
    "color": "#b87a4b",
-   "id": "pb2"
+   "id": "pbd"
   },
   {
    "type": "box",
@@ -6860,7 +7035,7 @@
     0.0381826700270176
    ],
    "uv": 7,
-   "id": "bb3"
+   "id": "bbe"
   },
   {
    "type": "box",
@@ -6882,7 +7057,7 @@
     -0.06678167205303907
    ],
    "uv": 7,
-   "id": "bb4"
+   "id": "bbf"
   },
   {
    "type": "prop",
@@ -6900,7 +7075,7 @@
    "variant": 3,
    "scale": 1.32,
    "color": "#9a6a55",
-   "id": "pb5"
+   "id": "pbg"
   },
   {
    "type": "box",
@@ -6922,7 +7097,7 @@
     -0.06817221105098725
    ],
    "uv": 7,
-   "id": "bb6"
+   "id": "bbh"
   },
   {
    "type": "prop",
@@ -6940,7 +7115,7 @@
    "variant": 3,
    "scale": 1.06,
    "color": "#9a6a55",
-   "id": "pb7"
+   "id": "pbi"
   },
   {
    "type": "box",
@@ -6962,7 +7137,7 @@
     -0.03976001981645823
    ],
    "uv": 7,
-   "id": "bb8"
+   "id": "bbj"
   },
   {
    "type": "prop",
@@ -6980,7 +7155,7 @@
    "variant": 1,
    "scale": 1.34,
    "color": "#9a6a55",
-   "id": "pb9"
+   "id": "pbk"
   },
   {
    "type": "prop",
@@ -6996,7 +7171,7 @@
     0
    ],
    "variant": 1,
-   "id": "pba"
+   "id": "pbl"
   },
   {
    "type": "box",
@@ -7018,7 +7193,7 @@
     -0.05587517537176609
    ],
    "uv": 7,
-   "id": "bbb"
+   "id": "bbm"
   },
   {
    "type": "box",
@@ -7040,7 +7215,7 @@
     0.02068313475698233
    ],
    "uv": 7,
-   "id": "bbc"
+   "id": "bbn"
   },
   {
    "type": "prop",
@@ -7058,7 +7233,7 @@
    "variant": 0,
    "scale": 1.54,
    "color": "#b87a4b",
-   "id": "pbd"
+   "id": "pbo"
   },
   {
    "type": "box",
@@ -7080,7 +7255,7 @@
     0.05878605373203753
    ],
    "uv": 7,
-   "id": "bbe"
+   "id": "bbp"
   },
   {
    "type": "box",
@@ -7102,7 +7277,7 @@
     0.07638210874050856
    ],
    "uv": 7,
-   "id": "bbf"
+   "id": "bbq"
   },
   {
    "type": "prop",
@@ -7120,7 +7295,7 @@
    "variant": 2,
    "scale": 1.29,
    "color": "#9a6a55",
-   "id": "pbg"
+   "id": "pbr"
   },
   {
    "type": "box",
@@ -7142,7 +7317,7 @@
     0.021116076037287712
    ],
    "uv": 7,
-   "id": "bbh"
+   "id": "bbs"
   },
   {
    "type": "prop",
@@ -7160,7 +7335,7 @@
    "variant": 0,
    "scale": 1.25,
    "color": "#b87a4b",
-   "id": "pbi"
+   "id": "pbt"
   },
   {
    "type": "prop",
@@ -7176,7 +7351,7 @@
     0
    ],
    "variant": 0,
-   "id": "pbj"
+   "id": "pbu"
   },
   {
    "type": "box",
@@ -7198,7 +7373,7 @@
     -0.02979818668216467
    ],
    "uv": 7,
-   "id": "bbk"
+   "id": "bbv"
   },
   {
    "type": "box",
@@ -7220,7 +7395,7 @@
     0.0609099643677473
    ],
    "uv": 7,
-   "id": "bbl"
+   "id": "bbw"
   },
   {
    "type": "prop",
@@ -7238,7 +7413,7 @@
    "variant": 0,
    "scale": 0.79,
    "color": "#9a6a55",
-   "id": "pbm"
+   "id": "pbx"
   },
   {
    "type": "box",
@@ -7260,7 +7435,7 @@
     -0.0023553679510951026
    ],
    "uv": 7,
-   "id": "bbn"
+   "id": "bby"
   },
   {
    "type": "prop",
@@ -7278,7 +7453,7 @@
    "variant": 3,
    "scale": 1.21,
    "color": "#9a6a55",
-   "id": "pbo"
+   "id": "pbz"
   },
   {
    "type": "box",
@@ -7300,7 +7475,7 @@
     0.013612982630729673
    ],
    "uv": 7,
-   "id": "bbp"
+   "id": "bc0"
   },
   {
    "type": "prop",
@@ -7318,7 +7493,7 @@
    "variant": 3,
    "scale": 1.17,
    "color": "#b87a4b",
-   "id": "pbq"
+   "id": "pc1"
   },
   {
    "type": "prop",
@@ -7334,7 +7509,7 @@
     0
    ],
    "variant": 1,
-   "id": "pbr"
+   "id": "pc2"
   },
   {
    "type": "box",
@@ -7356,7 +7531,7 @@
     -0.004260845072567465
    ],
    "uv": 7,
-   "id": "bbs"
+   "id": "bc3"
   },
   {
    "type": "checkpoint",
@@ -7375,7 +7550,7 @@
     6,
     5
    ],
-   "id": "cbt"
+   "id": "cc4"
   },
   {
    "type": "nav",
@@ -7389,7 +7564,7 @@
     10,
     44
    ],
-   "id": "nbu"
+   "id": "nc5"
   },
   {
    "type": "prop",
@@ -7404,7 +7579,7 @@
     0.3,
     0
    ],
-   "id": "pbv"
+   "id": "pc6"
   },
   {
    "type": "prop",
@@ -7419,7 +7594,7 @@
     0.5,
     0
    ],
-   "id": "pbw"
+   "id": "pc7"
   },
   {
    "type": "prop",
@@ -7434,7 +7609,7 @@
     -0.3,
     0
    ],
-   "id": "pbx"
+   "id": "pc8"
   },
   {
    "type": "prop",
@@ -7449,7 +7624,7 @@
     0.2,
     0
    ],
-   "id": "pby"
+   "id": "pc9"
   },
   {
    "type": "prop",
@@ -7464,7 +7639,7 @@
     0.4,
     0
    ],
-   "id": "pbz"
+   "id": "pca"
   },
   {
    "type": "prop",
@@ -7480,7 +7655,7 @@
     0
    ],
    "color": "#e0a82e",
-   "id": "pc0"
+   "id": "pcb"
   },
   {
    "type": "enemy",
@@ -7496,7 +7671,7 @@
     0
    ],
    "squad": "mile1",
-   "id": "ec1"
+   "id": "ecc"
   },
   {
    "type": "enemy",
@@ -7512,7 +7687,7 @@
     0
    ],
    "squad": "mile1",
-   "id": "ec2"
+   "id": "ecd"
   },
   {
    "type": "enemy",
@@ -7528,7 +7703,7 @@
     0
    ],
    "squad": "mile1",
-   "id": "ec3"
+   "id": "ece"
   },
   {
    "type": "enemy",
@@ -7544,7 +7719,7 @@
     0
    ],
    "squad": "mile1",
-   "id": "ec4"
+   "id": "ecf"
   },
   {
    "type": "prop",
@@ -7560,7 +7735,7 @@
     0
    ],
    "variant": 2,
-   "id": "pc5"
+   "id": "pcg"
   },
   {
    "type": "prop",
@@ -7576,7 +7751,7 @@
     0
    ],
    "variant": 9,
-   "id": "pc6"
+   "id": "pch"
   },
   {
    "type": "trigger",
@@ -7606,7 +7781,7 @@
      "line": "m01_price_2"
     }
    ],
-   "id": "tc7"
+   "id": "tci"
   },
   {
    "type": "box",
@@ -7628,7 +7803,7 @@
     0
    ],
    "uv": 9,
-   "id": "bc8"
+   "id": "bcj"
   },
   {
    "type": "box",
@@ -7650,7 +7825,51 @@
     0
    ],
    "uv": 9,
-   "id": "bc9"
+   "id": "bck"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.2,
+    -196
+   ],
+   "size": [
+    12,
+    1.64,
+    26
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "rot": [
+    0.07,
+    0,
+    0
+   ],
+   "uv": 6,
+   "id": "bcl"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    -0.2,
+    -208
+   ],
+   "size": [
+    12,
+    1.64,
+    12
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "rot": [
+    -0.1,
+    0,
+    0
+   ],
+   "uv": 6,
+   "id": "bcm"
   },
   {
    "type": "nav",
@@ -7664,7 +7883,7 @@
     10,
     56
    ],
-   "id": "nca"
+   "id": "ncn"
   },
   {
    "type": "trigger",
@@ -7686,7 +7905,7 @@
      "line": "m01_roadblock"
     }
    ],
-   "id": "tcb"
+   "id": "tco"
   },
   {
    "type": "ramp",
@@ -7707,7 +7926,7 @@
    ],
    "mat": "panel",
    "color": "#7d8a99",
-   "id": "rcc"
+   "id": "rcp"
   },
   {
    "type": "prop",
@@ -7722,7 +7941,7 @@
     0.01,
     0
    ],
-   "id": "pcd"
+   "id": "pcq"
   },
   {
    "type": "prop",
@@ -7737,7 +7956,7 @@
     -0.03,
     0
    ],
-   "id": "pce"
+   "id": "pcr"
   },
   {
    "type": "prop",
@@ -7752,7 +7971,7 @@
     -0.04,
     0
    ],
-   "id": "pcf"
+   "id": "pcs"
   },
   {
    "type": "prop",
@@ -7767,7 +7986,7 @@
     0.03,
     0
    ],
-   "id": "pcg"
+   "id": "pct"
   },
   {
    "type": "prop",
@@ -7782,7 +8001,7 @@
     0.04,
     0
    ],
-   "id": "pch"
+   "id": "pcu"
   },
   {
    "type": "prop",
@@ -7797,7 +8016,7 @@
     0.05,
     0
    ],
-   "id": "pci"
+   "id": "pcv"
   },
   {
    "type": "prop",
@@ -7813,7 +8032,7 @@
     0
    ],
    "variant": 3,
-   "id": "pcj"
+   "id": "pcw"
   },
   {
    "type": "prop",
@@ -7829,7 +8048,7 @@
     0
    ],
    "variant": 1,
-   "id": "pck"
+   "id": "pcx"
   },
   {
    "type": "prop",
@@ -7844,7 +8063,7 @@
     0.1,
     0
    ],
-   "id": "pcl"
+   "id": "pcy"
   },
   {
    "type": "prop",
@@ -7859,7 +8078,7 @@
     -0.2,
     0
    ],
-   "id": "pcm"
+   "id": "pcz"
   },
   {
    "type": "prop",
@@ -7874,7 +8093,7 @@
     0.3,
     0
    ],
-   "id": "pcn"
+   "id": "pd0"
   },
   {
    "type": "prop",
@@ -7889,7 +8108,7 @@
     0.5,
     0
    ],
-   "id": "pco"
+   "id": "pd1"
   },
   {
    "type": "prop",
@@ -7904,7 +8123,7 @@
     0,
     0
    ],
-   "id": "pcp"
+   "id": "pd2"
   },
   {
    "type": "barrel",
@@ -7913,7 +8132,7 @@
     0,
     -250
    ],
-   "id": "bcq"
+   "id": "bd3"
   },
   {
    "type": "barrel",
@@ -7922,7 +8141,7 @@
     0,
     -251.4
    ],
-   "id": "bcr"
+   "id": "bd4"
   },
   {
    "type": "barrel",
@@ -7931,7 +8150,7 @@
     0,
     -256
    ],
-   "id": "bcs"
+   "id": "bd5"
   },
   {
    "type": "enemy",
@@ -7947,7 +8166,7 @@
     0
    ],
    "squad": "block",
-   "id": "ect"
+   "id": "ed6"
   },
   {
    "type": "enemy",
@@ -7963,7 +8182,7 @@
     0
    ],
    "squad": "block",
-   "id": "ecu"
+   "id": "ed7"
   },
   {
    "type": "enemy",
@@ -7979,7 +8198,7 @@
     0
    ],
    "squad": "block",
-   "id": "ecv"
+   "id": "ed8"
   },
   {
    "type": "enemy",
@@ -7995,7 +8214,7 @@
     0
    ],
    "squad": "block",
-   "id": "ecw"
+   "id": "ed9"
   },
   {
    "type": "enemy",
@@ -8011,7 +8230,7 @@
     0
    ],
    "squad": "block",
-   "id": "ecx"
+   "id": "eda"
   },
   {
    "type": "enemy",
@@ -8027,7 +8246,7 @@
     0
    ],
    "tag": "block_drones",
-   "id": "ecy"
+   "id": "edb"
   },
   {
    "type": "enemy",
@@ -8043,7 +8262,7 @@
     0
    ],
    "tag": "block_drones",
-   "id": "ecz"
+   "id": "edc"
   },
   {
    "type": "trigger",
@@ -8065,7 +8284,7 @@
      "tag": "block_drones"
     }
    ],
-   "id": "td0"
+   "id": "tdd"
   },
   {
    "type": "checkpoint",
@@ -8084,7 +8303,7 @@
     6,
     6
    ],
-   "id": "cd1"
+   "id": "cde"
   },
   {
    "type": "pickup",
@@ -8095,7 +8314,7 @@
     -270
    ],
    "amount": 30,
-   "id": "pd2"
+   "id": "pdf"
   },
   {
    "type": "pickup",
@@ -8107,7 +8326,7 @@
    ],
    "cls": "rifle",
    "amount": 60,
-   "id": "pd3"
+   "id": "pdg"
   },
   {
    "type": "box",
@@ -8129,7 +8348,7 @@
     0
    ],
    "uv": 9,
-   "id": "bd4"
+   "id": "bdh"
   },
   {
    "type": "box",
@@ -8151,7 +8370,51 @@
     0
    ],
    "uv": 9,
-   "id": "bd5"
+   "id": "bdi"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.2,
+    -312
+   ],
+   "size": [
+    12,
+    2.44,
+    30
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "rot": [
+    0.085,
+    0,
+    0
+   ],
+   "uv": 6,
+   "id": "bdj"
+  },
+  {
+   "type": "box",
+   "pos": [
+    0,
+    0.2,
+    -330
+   ],
+   "size": [
+    12,
+    2.44,
+    16
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "rot": [
+    -0.14,
+    0,
+    0
+   ],
+   "uv": 6,
+   "id": "bdk"
   },
   {
    "type": "nav",
@@ -8165,7 +8428,7 @@
     10,
     56
    ],
-   "id": "nd6"
+   "id": "ndl"
   },
   {
    "type": "prop",
@@ -8180,7 +8443,7 @@
     0.2,
     0
    ],
-   "id": "pd7"
+   "id": "pdm"
   },
   {
    "type": "prop",
@@ -8195,7 +8458,7 @@
     -0.2,
     0
    ],
-   "id": "pd8"
+   "id": "pdn"
   },
   {
    "type": "prop",
@@ -8211,7 +8474,7 @@
     0
    ],
    "color": "#5a8f4a",
-   "id": "pd9"
+   "id": "pdo"
   },
   {
    "type": "prop",
@@ -8227,7 +8490,7 @@
     0
    ],
    "color": "#2f6f9f",
-   "id": "pda"
+   "id": "pdp"
   },
   {
    "type": "prop",
@@ -8242,7 +8505,7 @@
     0,
     0
    ],
-   "id": "pdb"
+   "id": "pdq"
   },
   {
    "type": "prop",
@@ -8257,7 +8520,7 @@
     0.4,
     0
    ],
-   "id": "pdc"
+   "id": "pdr"
   },
   {
    "type": "prop",
@@ -8272,7 +8535,7 @@
     0,
     0
    ],
-   "id": "pdd"
+   "id": "pds"
   },
   {
    "type": "enemy",
@@ -8288,7 +8551,7 @@
     0
    ],
    "squad": "mile3",
-   "id": "ede"
+   "id": "edt"
   },
   {
    "type": "enemy",
@@ -8304,7 +8567,7 @@
     0
    ],
    "squad": "mile3",
-   "id": "edf"
+   "id": "edu"
   },
   {
    "type": "enemy",
@@ -8320,7 +8583,7 @@
     0
    ],
    "squad": "mile3",
-   "id": "edg"
+   "id": "edv"
   },
   {
    "type": "enemy",
@@ -8336,7 +8599,7 @@
     0
    ],
    "tag": "mile_drones",
-   "id": "edh"
+   "id": "edw"
   },
   {
    "type": "enemy",
@@ -8352,7 +8615,7 @@
     0
    ],
    "tag": "mile_drones",
-   "id": "edi"
+   "id": "edx"
   },
   {
    "type": "enemy",
@@ -8368,7 +8631,7 @@
     0
    ],
    "tag": "mile_drones",
-   "id": "edj"
+   "id": "edy"
   },
   {
    "type": "enemy",
@@ -8384,7 +8647,7 @@
     0
    ],
    "tag": "mile_drones",
-   "id": "edk"
+   "id": "edz"
   },
   {
    "type": "trigger",
@@ -8406,7 +8669,7 @@
      "tag": "mile_drones"
     }
    ],
-   "id": "tdl"
+   "id": "te0"
   },
   {
    "type": "checkpoint",
@@ -8425,7 +8688,7 @@
     6,
     6
    ],
-   "id": "cdm"
+   "id": "ce1"
   },
   {
    "type": "box",
@@ -8442,7 +8705,7 @@
    "mat": "tile",
    "color": "#d8d2c4",
    "uv": 5,
-   "id": "bdn"
+   "id": "be2"
   },
   {
    "type": "nav",
@@ -8456,7 +8719,7 @@
     10,
     92
    ],
-   "id": "ndo"
+   "id": "ne3"
   },
   {
    "type": "box",
@@ -8472,7 +8735,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "bdp"
+   "id": "be4"
   },
   {
    "type": "box",
@@ -8488,7 +8751,7 @@
    ],
    "mat": "concrete",
    "color": "#b9b3a8",
-   "id": "bdq"
+   "id": "be5"
   },
   {
    "type": "box",
@@ -8505,7 +8768,7 @@
    "mat": "panel",
    "color": "#d2cabb",
    "uv": 8,
-   "id": "bdr"
+   "id": "be6"
   },
   {
    "type": "box",
@@ -8522,7 +8785,7 @@
    "mat": "plain",
    "color": "#4d5663",
    "collide": false,
-   "id": "bds"
+   "id": "be7"
   },
   {
    "type": "box",
@@ -8539,7 +8802,7 @@
    "mat": "plain",
    "color": "#ffd21f",
    "collide": false,
-   "id": "bdt"
+   "id": "be8"
   },
   {
    "type": "box",
@@ -8555,7 +8818,7 @@
    ],
    "mat": "concrete",
    "color": "#8d8880",
-   "id": "bdu"
+   "id": "be9"
   },
   {
    "type": "box",
@@ -8574,7 +8837,7 @@
    "mat": "hazard",
    "color": "#ffffff",
    "uv": 1.6,
-   "id": "bdv"
+   "id": "bea"
   },
   {
    "type": "prop",
@@ -8591,7 +8854,7 @@
    ],
    "scale": 7,
    "variant": 0,
-   "id": "pdw"
+   "id": "peb"
   },
   {
    "type": "prop",
@@ -8607,7 +8870,7 @@
     0
    ],
    "variant": 1,
-   "id": "pdx"
+   "id": "pec"
   },
   {
    "type": "prop",
@@ -8623,7 +8886,7 @@
     0
    ],
    "variant": 4,
-   "id": "pdy"
+   "id": "ped"
   },
   {
    "type": "prop",
@@ -8639,7 +8902,7 @@
     0
    ],
    "variant": 4,
-   "id": "pdz"
+   "id": "pee"
   },
   {
    "type": "prop",
@@ -8655,7 +8918,7 @@
     0
    ],
    "variant": 7,
-   "id": "pe0"
+   "id": "pef"
   },
   {
    "type": "prop",
@@ -8670,7 +8933,7 @@
     0.1,
     0
    ],
-   "id": "pe1"
+   "id": "peg"
   },
   {
    "type": "prop",
@@ -8685,7 +8948,7 @@
     -0.1,
     0
    ],
-   "id": "pe2"
+   "id": "peh"
   },
   {
    "type": "prop",
@@ -8701,7 +8964,7 @@
     0
    ],
    "variant": 5,
-   "id": "pe3"
+   "id": "pei"
   },
   {
    "type": "prop",
@@ -8717,7 +8980,7 @@
     0
    ],
    "variant": 7,
-   "id": "pe4"
+   "id": "pej"
   },
   {
    "type": "prop",
@@ -8732,7 +8995,7 @@
     0.2,
     0
    ],
-   "id": "pe5"
+   "id": "pek"
   },
   {
    "type": "prop",
@@ -8747,7 +9010,7 @@
     0.5,
     0
    ],
-   "id": "pe6"
+   "id": "pel"
   },
   {
    "type": "prop",
@@ -8763,7 +9026,7 @@
     0
    ],
    "color": "#2e9b8f",
-   "id": "pe7"
+   "id": "pem"
   },
   {
    "type": "prop",
@@ -8779,7 +9042,7 @@
     0
    ],
    "color": "#b5442f",
-   "id": "pe8"
+   "id": "pen"
   },
   {
    "type": "prop",
@@ -8794,7 +9057,7 @@
     0,
     0
    ],
-   "id": "pe9"
+   "id": "peo"
   },
   {
    "type": "prop",
@@ -8809,7 +9072,7 @@
     0.3,
     0
    ],
-   "id": "pea"
+   "id": "pep"
   },
   {
    "type": "prop",
@@ -8824,7 +9087,7 @@
     0.4,
     0
    ],
-   "id": "peb"
+   "id": "peq"
   },
   {
    "type": "prop",
@@ -8839,7 +9102,7 @@
     0.2,
     0
    ],
-   "id": "pec"
+   "id": "per"
   },
   {
    "type": "prop",
@@ -8854,7 +9117,7 @@
     -0.2,
     0
    ],
-   "id": "ped"
+   "id": "pes"
   },
   {
    "type": "prop",
@@ -8869,7 +9132,7 @@
     0.6,
     0
    ],
-   "id": "pee"
+   "id": "pet"
   },
   {
    "type": "prop",
@@ -8884,7 +9147,7 @@
     -0.6,
     0
    ],
-   "id": "pef"
+   "id": "peu"
   },
   {
    "type": "prop",
@@ -8899,7 +9162,194 @@
     0,
     0
    ],
-   "id": "peg"
+   "id": "pev"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -34,
+    0,
+    -458
+   ],
+   "rot": [
+    0,
+    1.2,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "pew"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    35,
+    0,
+    -456
+   ],
+   "rot": [
+    0,
+    -1.1,
+    0
+   ],
+   "color": "#e0a82e",
+   "id": "pex"
+  },
+  {
+   "type": "prop",
+   "prop": "trailer",
+   "pos": [
+    -12,
+    0,
+    -486
+   ],
+   "rot": [
+    0,
+    1.35,
+    0
+   ],
+   "variant": 2,
+   "id": "pey"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    14,
+    0,
+    -462
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#5a8f4a",
+   "id": "pez"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    -22,
+    0,
+    -500
+   ],
+   "rot": [
+    0,
+    1.57,
+    0
+   ],
+   "color": "#e6e0d0",
+   "id": "pf0"
+  },
+  {
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    24,
+    0,
+    -504
+   ],
+   "rot": [
+    0,
+    1.5,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "pf1"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -38,
+    0,
+    -486
+   ],
+   "rot": [
+    0,
+    0.2,
+    0
+   ],
+   "id": "pf2"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    38,
+    0,
+    -470
+   ],
+   "rot": [
+    0,
+    0.5,
+    0
+   ],
+   "id": "pf3"
+  },
+  {
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    6,
+    0,
+    -496
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "id": "pf4"
+  },
+  {
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    -4,
+    0,
+    -452
+   ],
+   "rot": [
+    0,
+    0.8,
+    0
+   ],
+   "id": "pf5"
+  },
+  {
+   "type": "prop",
+   "prop": "dumpster",
+   "pos": [
+    -16,
+    0,
+    -470
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "id": "pf6"
+  },
+  {
+   "type": "prop",
+   "prop": "dumpster",
+   "pos": [
+    18,
+    0,
+    -476
+   ],
+   "rot": [
+    0,
+    -0.3,
+    0
+   ],
+   "color": "#2f6f9f",
+   "id": "pf7"
   },
   {
    "type": "prop",
@@ -8914,7 +9364,7 @@
     1.57,
     0
    ],
-   "id": "peh"
+   "id": "pf8"
   },
   {
    "type": "prop",
@@ -8929,7 +9379,7 @@
     -1.57,
     0
    ],
-   "id": "pei"
+   "id": "pf9"
   },
   {
    "type": "prop",
@@ -8944,7 +9394,7 @@
     1.57,
     0
    ],
-   "id": "pej"
+   "id": "pfa"
   },
   {
    "type": "prop",
@@ -8959,7 +9409,7 @@
     -1.57,
     0
    ],
-   "id": "pek"
+   "id": "pfb"
   },
   {
    "type": "barrel",
@@ -8968,7 +9418,7 @@
     0,
     -470
    ],
-   "id": "bel"
+   "id": "bfc"
   },
   {
    "type": "barrel",
@@ -8977,7 +9427,7 @@
     0,
     -482
    ],
-   "id": "bem"
+   "id": "bfd"
   },
   {
    "type": "barrel",
@@ -8986,7 +9436,7 @@
     0,
     -476
    ],
-   "id": "ben"
+   "id": "bfe"
   },
   {
    "type": "locker",
@@ -9002,7 +9452,7 @@
    ],
    "luck": 2,
    "name": "locker_arena",
-   "id": "leo"
+   "id": "lff"
   },
   {
    "type": "pickup",
@@ -9013,7 +9463,7 @@
     -450
    ],
    "cls": "rifle",
-   "id": "pep"
+   "id": "pfg"
   },
   {
    "type": "pickup",
@@ -9024,7 +9474,7 @@
     -452
    ],
    "cls": "shotgun",
-   "id": "peq"
+   "id": "pfh"
   },
   {
    "type": "pickup",
@@ -9035,7 +9485,7 @@
     -500
    ],
    "amount": 40,
-   "id": "per"
+   "id": "pfi"
   },
   {
    "type": "pickup",
@@ -9046,7 +9496,7 @@
     -498
    ],
    "amount": 40,
-   "id": "pes"
+   "id": "pfj"
   },
   {
    "type": "pickup",
@@ -9057,7 +9507,7 @@
     -446
    ],
    "cls": "pistol",
-   "id": "pet"
+   "id": "pfk"
   },
   {
    "type": "pickup",
@@ -9068,7 +9518,7 @@
     -452
    ],
    "amount": 3,
-   "id": "peu"
+   "id": "pfl"
   },
   {
    "type": "pickup",
@@ -9079,7 +9529,7 @@
     -454
    ],
    "cls": "sniper",
-   "id": "pev"
+   "id": "pfm"
   },
   {
    "type": "enemy",
@@ -9096,7 +9546,7 @@
    ],
    "tag": "boss",
    "name": "manager",
-   "id": "eew"
+   "id": "efn"
   },
   {
    "type": "enemy",
@@ -9113,7 +9563,7 @@
    ],
    "tag": "boss_adds",
    "squad": "adds",
-   "id": "eex"
+   "id": "efo"
   },
   {
    "type": "enemy",
@@ -9130,7 +9580,7 @@
    ],
    "tag": "boss_adds",
    "squad": "adds",
-   "id": "eey"
+   "id": "efp"
   },
   {
    "type": "enemy",
@@ -9147,7 +9597,7 @@
    ],
    "tag": "boss_adds",
    "squad": "adds",
-   "id": "eez"
+   "id": "efq"
   },
   {
    "type": "enemy",
@@ -9164,7 +9614,7 @@
    ],
    "tag": "boss_adds",
    "squad": "adds",
-   "id": "ef0"
+   "id": "efr"
   },
   {
    "type": "enemy",
@@ -9181,7 +9631,7 @@
    ],
    "tag": "boss_adds",
    "squad": "adds",
-   "id": "ef1"
+   "id": "efs"
   },
   {
    "type": "trigger",
@@ -9210,7 +9660,7 @@
      "name": "boss_intro"
     }
    ],
-   "id": "tf2"
+   "id": "tft"
   }
  ]
 }

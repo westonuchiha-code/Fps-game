@@ -41,6 +41,8 @@ export interface Settings {
   dither: boolean;
   difficulty: number;
   subtitles: boolean;
+  /** internal render height the auto pixel scale aims for (540 = PS2 look, 1080 = sharp) */
+  resTarget?: number;
 }
 
 const DEFAULTS: Settings = {
@@ -186,6 +188,7 @@ export class Game {
     this.audio.volumes.voice = s.voice;
     this.audio.applyVolumes();
     this.pipe.forcedScale = s.pixelScale;
+    this.pipe.targetHeight = s.resTarget ?? 540;
     this.pipe.post.uniforms.uPosterize.value = s.dither ? 40 : 0;
     this.difficulty = DIFFICULTIES[clamp(s.difficulty, 0, 2)];
     this.resize();

@@ -79,7 +79,7 @@ body { font-family: var(--ui); color: #fff; user-select: none; -webkit-user-sele
 .ammo .mines b { color: var(--smile); }
 .ammo .mines .armed { color: var(--hivis); margin-left: 8px; }
 
-.objectives { position: absolute; left: 28px; top: 24px; max-width: 360px; }
+.objectives { position: absolute; left: 28px; top: 24px; max-width: min(360px, 30vw); }
 .objectives .title { font: 400 15px var(--title); letter-spacing: 2px; color: var(--smile); }
 .objectives .obj { font: 700 18px var(--ui); margin-top: 3px; display: flex; gap: 8px; align-items: baseline; }
 .objectives .obj::before { content: '◇'; color: var(--smile); }
@@ -120,7 +120,7 @@ body { font-family: var(--ui); color: #fff; user-select: none; -webkit-user-sele
 
 .comic { position: absolute; left: 0; top: 0; font: 400 54px var(--comic); color: var(--smile); letter-spacing: 2px; -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; text-shadow: 4px 5px 0 var(--ink); white-space: nowrap; will-change: transform; }
 
-.boss { position: absolute; left: 50%; top: 34px; transform: translateX(-50%) skewX(-12deg); width: min(560px, 60vw); display: none; text-align: center; }
+.boss { position: absolute; left: 50%; top: 30px; transform: translateX(-50%) skewX(-12deg); width: min(520px, 36vw); display: none; text-align: center; }
 .boss.show { display: block; }
 .boss .bname { font: 400 20px var(--title); letter-spacing: 3px; }
 .boss .bar { height: 14px; }
@@ -200,3 +200,11 @@ body { font-family: var(--ui); color: #fff; user-select: none; -webkit-user-sele
 .tbtn { position: absolute; width: 62px; height: 62px; border-radius: 50%; border: 3px solid var(--ink); background: rgba(242, 236, 217, 0.5); color: var(--ink); font: 700 12px var(--ui); display: flex; align-items: center; justify-content: center; pointer-events: auto; text-shadow: none; }
 .tbtn.big { width: 86px; height: 86px; background: rgba(255, 90, 60, 0.6); font-size: 15px; }
 .tbtn.act { background: rgba(255, 210, 31, 0.9); }
+
+/* touch layout: keep the right thumb cluster clear */
+#hud.touch .ammo { right: auto; left: 50%; bottom: 6px; transform: translateX(-50%) scale(0.62); transform-origin: center bottom; text-align: center; }
+#hud.touch .ammo .slots { justify-content: center; }
+#hud.touch .vitals { left: 12px; bottom: auto; top: 44px; width: min(200px, 30vw); transform: skewX(-12deg) scale(0.8); transform-origin: left top; }
+#hud.touch .objectives { left: 12px; top: 6px; }
+#hud.touch .objectives .obj { font-size: 14px; }
+#hud.touch .feed { top: 22%; right: 12px; font-size: 13px; }

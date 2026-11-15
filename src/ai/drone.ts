@@ -234,6 +234,10 @@ export class Drone implements Target, Shootable, Listener {
       }
       return;
     }
+    if (G.ai.hold) {
+      this.obj.position.copy(this.pos);
+      return;
+    }
     this.senseT -= dt;
     if (this.senseT <= 0) {
       this.senseT = 0.22;

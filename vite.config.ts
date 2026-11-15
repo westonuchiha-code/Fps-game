@@ -48,7 +48,11 @@ function levelFiles(): Plugin {
           return;
         }
         let body = '';
-        req.on('data', (c) => (body += c));
+        req.on('data', (c) => {
+          body += c;
+          // a level file is a few hundred kB at most
+          if (body.length > 8_000_000) req.destroy();
+        });
         req.on('end', () => {
           try {
             const data = JSON.parse(body);

@@ -55,15 +55,16 @@ for (const [x, z, sx, sy, sz] of [[-120, 60, 70, 26, 90], [130, 0, 80, 34, 120],
 }
 
 // =============================================================== ZONE A - employee parking (z 60..130)
-for (const z of [101, 80]) {
+for (const z of [101, 90.5, 80]) {
   for (let x = -27; x <= 27; x += 6) {
     if (Math.abs(x) < 4 && z === 101) continue; // keep the lane to the gate clear near the start
-    if (rnd() < 0.24) continue;
+    if (z === 90.5 && Math.abs(x) < 10) continue; // open middle so the first fight has sight lines
+    if (rnd() < 0.2) continue;
     prop('car', x + rr(-0.3, 0.3), z + rr(-0.4, 0.4), (rnd() < 0.5 ? 0 : Math.PI) + rr(-0.06, 0.06), { color: pick(CARS) });
   }
 }
 // painted bays
-for (const z of [101, 80]) for (let x = -30; x <= 30; x += 6) box(x, 0.012, z, 0.14, 0.02, 5, 'plain', C.white, { collide: false });
+for (const z of [101, 90.5, 80]) for (let x = -30; x <= 30; x += 6) box(x, 0.012, z, 0.14, 0.02, 5, 'plain', C.white, { collide: false });
 for (const [x, z] of [[-15, 91], [15, 91], [-15, 69], [15, 69]]) prop('lamp', x, z, x < 0 ? HALF : -HALF);
 prop('billboard', -27, 66, 0, { variant: 0 });
 prop('billboard', 29, 125, Math.PI, { variant: 3 });
@@ -262,6 +263,8 @@ trigger('price', 0, -118, 90, 4, [{ do: 'say', line: 'm01_price_1' }, { do: 'wai
 // --- rolling ground
 box(0, -0.2, -196, 40, 1.6, 26, 'sand', C.sandDark, { rot: [0.07, 0, 0], uv: 9 });
 box(0, -0.2, -208, 40, 1.6, 12, 'sand', C.sandDark, { rot: [-0.1, 0, 0], uv: 9 });
+box(0, -0.2, -196, 12, 1.64, 26, 'asphalt', C.asphalt, { rot: [0.07, 0, 0], uv: 6 });
+box(0, -0.2, -208, 12, 1.64, 12, 'asphalt', C.asphalt, { rot: [-0.1, 0, 0], uv: 6 });
 // --- roadblock with a way over and a way round
 nav(0, -250, 70, 56);
 trigger('roadblock', 0, -214, 90, 4, [{ do: 'say', line: 'm01_roadblock' }]);
@@ -285,6 +288,8 @@ pickup('ammo', 2, -271, { cls: 'rifle', amount: 60 });
 // --- the crest
 box(0, 0.2, -312, 44, 2.4, 30, 'sand', C.sand, { rot: [0.085, 0, 0], uv: 9 });
 box(0, 0.2, -330, 44, 2.4, 16, 'sand', C.sand, { rot: [-0.14, 0, 0], uv: 9 });
+box(0, 0.2, -312, 12, 2.44, 30, 'asphalt', C.asphalt, { rot: [0.085, 0, 0], uv: 6 });
+box(0, 0.2, -330, 12, 2.44, 16, 'asphalt', C.asphalt, { rot: [-0.14, 0, 0], uv: 6 });
 // --- last stand before the forecourt
 nav(0, -372, 70, 56);
 for (const [x, z, id, r] of [[-10, -366, 'barrier', 0.2], [11, -370, 'barrier', -0.2], [-16, -378, 'container', HALF], [17, -382, 'container', HALF + 0.2], [0, -384, 'sandbags', 0], [-6, -376, 'pallet_load', 0.4]]) prop(id, x, z, r, { color: id === 'container' ? pick(CONT) : undefined });
@@ -314,6 +319,10 @@ for (const [x, z, id, r, extra] of [
   [-8, -470, 'crate_big', 0.2], [9, -474, 'pallet_load', 0.5], [-20, -484, 'container', 0.2, { color: CONT[2] }], [21, -488, 'container', -0.3, { color: CONT[0] }],
   [0, -462, 'kiosk', 0], [-34, -498, 'pallet_load', 0.3], [34, -500, 'crate_big', 0.4], [-10, -500, 'barrier', 0.2], [11, -503, 'barrier', -0.2],
   [-36, -446, 'sandbags', 0.6], [36, -444, 'sandbags', -0.6], [0, -488, 'sandbags', 0],
+  // big pieces that break the mech's line of sight
+  [-34, -458, 'container', 1.2, { color: CONT[1] }], [35, -456, 'container', -1.1, { color: CONT[3] }], [-12, -486, 'trailer', 1.35, { variant: 2 }], [14, -462, 'container', 1.57, { color: CONT[4] }],
+  [-22, -500, 'container', 1.57, { color: CONT[5] }], [24, -504, 'container', 1.5, { color: CONT[1] }], [-38, -486, 'pallet_load', 0.2], [38, -470, 'crate_big', 0.5],
+  [6, -496, 'crate_big', 0.3], [-4, -452, 'pallet_load', 0.8], [-16, -470, 'dumpster', 0.4], [18, -476, 'dumpster', -0.3, { color: '#2f6f9f' }],
 ]) prop(id, x, z, r, extra ?? {});
 for (const [x, z] of [[-38, -474], [38, -478], [-12, -512], [12, -512]]) prop('lamp', x, z, x < 0 ? HALF : -HALF);
 for (const [x, z] of [[-30, -470], [31, -482], [-4, -476]]) add({ type: 'barrel', pos: P(x, 0, z) });
