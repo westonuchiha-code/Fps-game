@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>EVERYTHING MUST GO — handheld test rig</title>
+<style>
+  /* A test rig, not part of the game: the game runs untouched in the frame in the middle and is
+     driven as by a controller. Sideways: a controller either side of the screen. Upright: screen
+     on top, both controllers underneath. Button names match the game's own prompts. */
+  :root { color-scheme: dark; }
+  html, body { margin: 0; height: 100%; background: #14161c; overflow: hidden; touch-action: none;
+    user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; font: 700 13px system-ui, sans-serif; color: #e9e4d2; }
+  #rig { position: fixed; inset: 0; box-sizing: border-box; display: grid; --pad: clamp(150px, 24vw, 240px);
+    --u: min(calc(var(--pad) / 3.7), 10.4vh);
+    grid-template-columns: var(--pad) 1fr var(--pad); grid-template-areas: "l screen r";
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+  #screen { grid-area: screen; width: 100%; height: 100%; border: 0; background: #000; display: block; }
+  .pad { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--u) * 0.28); min-width: 0; }
+  #L { grid-area: l; background: #1d6f8f; } #R { grid-area: r; background: #b3402c; }
+  @media (orientation: portrait) {
+    #rig { --u: min(12vw, 6.6vh); grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr; grid-template-areas: "screen screen" "l r"; }
+    #screen { height: auto; aspect-ratio: 16 / 10; }
+    .pad { justify-content: flex-start; padding-top: calc(var(--u) * 0.5); }
+  }
+  .row { display: flex; gap: calc(var(--u) * 0.25); }
+  .b { box-sizing: border-box; width: var(--u); height: var(--u); border-radius: 50%; border: 2px solid #0b0b12; background: #2a2d36;
+    display: flex; align-items: center; justify-content: center; font-size: calc(var(--u) * 0.36); touch-action: none; }
+  .b.on { background: #ffd23f; color: #0b0b12; }
+  .b.wide { width: calc(var(--u) * 1.7); border-radius: calc(var(--u) * 0.3); height: calc(var(--u) * 0.95); }
+  .b.small { width: calc(var(--u) * 1.15); height: calc(var(--u) * 0.72); border-radius: calc(var(--u) * 0.36); font-size: calc(var(--u) * 0.3); }
+  .cluster { display: grid; grid-template-columns: repeat(3, var(--u)); grid-template-rows: repeat(3, var(--u)); }
+  .cluster .up { grid-area: 1 / 2; } .cluster .left { grid-area: 2 / 1; } .cluster .right { grid-area: 2 / 3; } .cluster .down { grid-area: 3 / 2; }
+  .dpad .b { border-radius: calc(var(--u) * 0.2); }
+  .stick { width: calc(var(--u) * 2.7); height: calc(var(--u) * 2.7); border-radius: 50%; background: #0f1116; border: 2px solid #0b0b12; position: relative; touch-action: none; }
+  .stick i { position: absolute; left: 50%; top: 50%; width: 46%; height: 46%; margin: -23% 0 0 -23%; border-radius: 50%; background: #3a3e4a; border: 2px solid #0b0b12; box-sizing: border-box; }
+  .stick.click i { background: #ffd23f; }
+  #msg { position: fixed; left: 50%; top: 40%; transform: translate(-50%, -50%); background: #0b0b12; padding: 14px 18px; border: 2px solid #ffd23f; max-width: 80vw; text-align: center; }
+</style>
+</head>
+<body>
+<div id="rig">
+  <div class="pad" id="L">
+    <div class="row"><div class="b wide" data-b="6">LT</div><div class="b wide" data-b="4">LB</div></div>
+    <div class="stick" data-x="0" data-y="1" data-click="10"><i></i></div>
+    <div class="cluster dpad">
+      <div class="b up" data-b="12">▲</div><div class="b left" data-b="14">◀</div><div class="b right" data-b="15">▶</div><div class="b down" data-b="13">▼</div>
+    </div>
+    <div class="row"><div class="b small" data-b="8">BACK</div><div class="b small" data-b="10">L3</div><div class="b small" id="full">FULL</div></div>
+  </div>
+  <iframe id="screen" allow="autoplay; fullscreen; gamepad"></iframe>
+  <div class="pad" id="R">
+    <div class="row"><div class="b wide" data-b="5">RB</div><div class="b wide" data-b="7">RT</div></div>
+    <div class="cluster">
+      <div class="b up" data-b="3">Y</div><div class="b left" data-b="2">X</div><div class="b right" data-b="1">B</div><div class="b down" data-b="0">A</div>
+    </div>
+    <div class="stick" data-x="2" data-y="3" data-click="11"><i></i></div>
+    <div class="row"><div class="b small" data-b="11">R3</div><div class="b small" data-b="9">START</div></div>
+  </div>
+</div>
+<div id="msg">Loading the game…</div>
+<!--GAME-->
+<script>
+(() => {
+  const frame = document.getElementById('screen');
+  const axes = [0, 0, 0, 0];
+  const buttons = new Array(17).fill(0);
+  const held = new Array(17).fill(0); // how many fingers / sticks hold each button
+  const post = () => frame.contentWindow && frame.contentWindow.postMessage({ emgPad: { axes, buttons } }, '*');
+  const press = (i, d) => {
+    held[i] = Math.max(0, held[i] + d);
+    buttons[i] = held[i] > 0 ? 1 : 0;
+    post();
+  };
+  setInterval(post, 250); // the game page may have reloaded (restart, level editor): keep it in step
+
+  for (const el of document.querySelectorAll('.b[data-b]')) {
+    const i = +el.dataset.b;
+    const fingers = new Set();
+    el.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      el.setPointerCapture(e.pointerId);
+      fingers.add(e.pointerId);
+      el.classList.add('on');
+      press(i, 1);
+    });
+    const up = (e) => {
+      if (!fingers.delete(e.pointerId)) return;
+      if (!fingers.size) el.classList.remove('on');
+      press(i, -1);
+    };
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointercancel', up);
+  }
+
+  // Sticks. Tap-then-hold (a quick second touch) also "clicks" the stick in for as long as you hold.
+  for (const el of document.querySelectorAll('.stick')) {
+    const ix = +el.dataset.x, iy = +el.dataset.y, click = +el.dataset.click;
+    const knob = el.firstElementChild;
+    let id = null, lastUp = 0, clicking = false;
+    const set = (e) => {
+      const r = el.getBoundingClientRect();
+      const R = r.width * 0.42;
+      let x = (e.clientX - (r.left + r.width / 2)) / R;
+      let y = (e.clientY - (r.top + r.height / 2)) / R;
+      const len = Math.hypot(x, y);
+      if (len > 1) { x /= len; y /= len; }
+      axes[ix] = x; axes[iy] = y;
+      knob.style.transform = `translate(${x * R * 0.6}px, ${y * R * 0.6}px)`;
+      post();
+    };
+    el.addEventListener('pointerdown', (e) => {
+      if (id !== null) return;
+      e.preventDefault();
+      id = e.pointerId;
+      el.setPointerCapture(id);
+      if (performance.now() - lastUp < 320) { clicking = true; el.classList.add('click'); press(click, 1); }
+      set(e);
+    });
+    el.addEventListener('pointermove', (e) => { if (e.pointerId === id) set(e); });
+    const up = (e) => {
+      if (e.pointerId !== id) return;
+      id = null; lastUp = performance.now();
+      axes[ix] = axes[iy] = 0;
+      knob.style.transform = '';
+      if (clicking) { clicking = false; el.classList.remove('click'); press(click, -1); }
+      post();
+    };
+    el.addEventListener('pointerup', up);
+    el.addEventListener('pointercancel', up);
+  }
+
+  document.getElementById('full').addEventListener('click', () => {
+    const d = document;
+    if (d.fullscreenElement) d.exitFullscreen();
+    else if (d.documentElement.requestFullscreen) d.documentElement.requestFullscreen().catch(() => {});
+  });
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  // The finished game is stored in this page as text; start it in the frame.
+  // (The hosted variant has no stored copy: there the game is the page next door.)
+  const store = document.getElementById('game-doc');
+  frame.addEventListener('load', () => document.getElementById('msg').remove(), { once: true });
+  if (store) {
+    const html = store.textContent.split('<@@EMG@@').join('<');
+    store.remove();
+    frame.src = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
+  } else frame.src = './game.html';
+})();
+</script>
+</body>
+</html>

@@ -848,7 +848,7 @@ export class WatchMenu {
     };
     res.accept = () => res.adjust!(1);
     const opts: Opt[] = [
-      slider('sensitivity', 'LOOK SENSITIVITY', 'Mouse and touch look speed.', 0.2, 3, 0.1, (v) => v.toFixed(1) + '×'),
+      slider('sensitivity', 'LOOK SENSITIVITY', 'Mouse look speed.', 0.2, 3, 0.1, (v) => v.toFixed(1) + '×'),
       slider('padSensitivity', 'PAD SENSITIVITY', 'Gamepad stick look speed.', 0.2, 3, 0.1, (v) => v.toFixed(1) + '×'),
       toggle('invertY', 'INVERT Y', 'Flight-sim look.'),
       slider('fov', 'FIELD OF VIEW', 'Vertical field of view in degrees.', 60, 100, 2, (v) => Math.round(v) + '°'),
@@ -1031,7 +1031,6 @@ export class WatchMenu {
     const k = (t: string) => `<span class="key">${t}</span>`;
     let nav = '';
     if (dev === 'gamepad') nav = `${k('D-PAD')} SELECT ${k('A')} OK ${canBack ? k('B') + ' BACK' : ''}`;
-    else if (dev === 'touch') nav = 'TAP AN OPTION';
     else nav = `${k('↑')}${k('↓')} SELECT ${this.page.opts.some((o) => o.adjust) ? k('◂') + k('▸') + ' ADJUST ' : ''}${k('ENTER')} OK ${canBack ? k('ESC') + ' BACK' : ''}`;
     if (dev === 'gamepad' && this.page.opts.some((o) => o.adjust)) nav = nav.replace(' SELECT ', ' SELECT / ADJUST ');
     this.hints.innerHTML = `<span class="wm-nav">${nav}</span>${canBack ? '<button class="wm-btn" data-act="back">◂ BACK</button>' : ''}`;

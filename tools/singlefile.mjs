@@ -64,9 +64,8 @@ const boot = `
   document.getElementById(location.hash === '#editor' ? 'css-game' : 'css-editor').remove();
   const real = window.fetch ? window.fetch.bind(window) : null;
   const find = (url) => {
-    let href;
-    try { href = new URL(url, document.baseURI).href.split('#')[0].split('?')[0]; } catch { return null; }
-    for (const el of document.querySelectorAll('script[data-emg]')) if (href.endsWith('/' + el.dataset.emg)) return el;
+    const path = String(url).split('#')[0].split('?')[0];
+    for (const el of document.querySelectorAll('script[data-emg]')) if (path === el.dataset.emg || path.endsWith('/' + el.dataset.emg)) return el;
     return null;
   };
   window.fetch = (input, init) => {

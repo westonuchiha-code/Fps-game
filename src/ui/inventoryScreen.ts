@@ -423,8 +423,6 @@ export class InventoryScreen {
     hints.innerHTML =
       dev === 'gamepad'
         ? `${k('D-PAD')} MOVE ${k('A')} SELECT ${k('B')} BACK`
-        : dev === 'touch'
-          ? 'TAP AN ITEM, THEN AN ACTION'
-          : `${k('↑↓◂▸')} MOVE ${k('ENTER')} SELECT ${k('1')}–${k('4')} EQUIP TO SLOT ${k('X')} DROP ${k('TAB')} CLOSE`;
+        : `${k('↑↓◂▸')} MOVE ${k('ENTER')} SELECT ${k('1')}–${k('4')} EQUIP TO SLOT ${k('X')} DROP ${k('TAB')} CLOSE`;
   }
 }

@@ -16,6 +16,8 @@ npm run dev        # http://localhost:5173           the game
 npm run build      # static build in dist/ (host it anywhere)
 npm run single     # the whole game as ONE file: release/everything-must-go.html
                    # (download it, double-click it, play — no server needed)
+npm run handheld   # release/handheld.html: the same game inside a test rig with two on-screen
+                   # controllers, for trying it on a phone (see tools/handheld/)
 ```
 
 ## What is in the game right now
@@ -37,7 +39,7 @@ npm run single     # the whole game as ONE file: release/everything-must-go.html
 - **Allies** — Local 404 Strikers follow you, fight from cover and crew your vehicle's gun.
 - **Vehicles** (third person) — the **Teamster** 4x4 with a rear turret and the **Vesper**
   hover scooter with twin blasters.
-- **Wristwatch menu**, backpack screen, mission report, touch controls and gamepad support.
+- **Wristwatch menu**, backpack screen, mission report and gamepad support.
 
 ## Controls
 
@@ -91,7 +93,7 @@ is documented in [`src/world/leveldata.ts`](src/world/leveldata.ts).
 
 ```
 src/
-  core/        input (keyboard, mouse, gamepad, touch), math, events, shared types
+  core/        input (keyboard, mouse, gamepad), math, events, shared types
   render/      cel-shading + ink pipeline, toon materials, procedural textures, sky, effects,
                Kit (the low-poly mesh builder every model is made with)
   world/       level geometry builder, collision (BVH), level file format + loader, props
@@ -102,7 +104,7 @@ src/
   vehicles/    rigid body, Teamster, Vesper, chase camera
   story/       cutscenes
   levels/      mission scripts (what a level file cannot express)
-  ui/          HUD, item cards, watch menu, backpack, mission report, touch controls
+  ui/          HUD, item cards, watch menu, backpack, mission report
   editor/      the level editor
 tools/
   shot.mjs     headless screenshot / scripted play-test harness

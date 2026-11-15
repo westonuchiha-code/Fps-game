@@ -8,7 +8,6 @@ import type { Level } from './world/level';
 import { WatchMenu } from './ui/watchMenu';
 import { InventoryScreen } from './ui/inventoryScreen';
 import { MissionReport } from './ui/missionReport';
-import { TouchControls } from './ui/touch';
 import { markCompleted, writeSave } from './core/save';
 import { openEditor, takeBootNote } from './core/nav';
 
@@ -157,7 +156,6 @@ async function boot() {
     if (fromEditor) openEditor();
     else toMenu();
   });
-  new TouchControls(game);
 
   game.events.on('pauseRequested', pause);
   game.events.on('inventoryRequested', openBag);
@@ -209,14 +207,18 @@ async function boot() {
     overlay.querySelector('.loadbar')!.remove();
     const go = document.createElement('div');
     go.className = 'go';
-    go.textContent = 'CLICK OR TAP TO START';
+    go.textContent = 'PRESS ANY BUTTON TO START';
     overlay.appendChild(go);
-    // shown by CSS on phones held upright
-    const turn = document.createElement('p');
-    turn.className = 'turn';
-    turn.textContent = 'TURN YOUR PHONE SIDEWAYS FOR A BETTER VIEW';
-    overlay.appendChild(turn);
-    overlay.addEventListener('click', () => void begin(), { once: true });
+    // a click, a key or a controller button all start the game
+    let started = false;
+    const start = () => {
+      if (started) return;
+      started = true;
+      game.input.onAnyInput = null;
+      void begin();
+    };
+    overlay.addEventListener('click', start);
+    game.input.onAnyInput = start;
     game.ready = true;
   }
 }

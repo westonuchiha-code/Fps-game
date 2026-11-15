@@ -189,8 +189,11 @@ function accessory(rb: RigBuilder, s: Style, item: WeaponItem, muzzleZ: number, 
   }
 }
 
-function elementCoil(rb: RigBuilder, s: Style, item: WeaponItem, pos: V3, len: number) {
+function elementCoil(rb: RigBuilder, s: Style, item: WeaponItem, top: V3, len: number) {
   if (item.element === 'none' && item.brand !== 'zapp') return;
+  // `top` is the top-centre of the receiver. The coil hangs off the left flank, below the sights:
+  // on top it sat exactly in the sight line and blocked the view when aiming.
+  const pos: V3 = [top[0] - 0.027, top[1] - 0.03, top[2]];
   const col = item.element === 'none' ? s.accent : ELEMENT_COLORS[item.element];
   const g = new THREE.CylinderGeometry(0.008, 0.008, len, 6);
   g.rotateX(Math.PI / 2);

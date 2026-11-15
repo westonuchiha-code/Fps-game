@@ -143,7 +143,6 @@ body { font-family: var(--ui); color: #fff; user-select: none; -webkit-user-sele
 .letterbox.on::before, .letterbox.on::after { height: 11vh; }
 .skip { position: absolute; right: max(30px, env(safe-area-inset-right)); bottom: calc(11vh + 14px); font: 700 15px var(--ui); opacity: 0; transition: opacity 0.3s; }
 .skip.show { opacity: 0.8; pointer-events: auto; cursor: pointer; }
-.skip.tap { padding: 12px 6px 12px 18px; bottom: calc(11vh + 2px); font-size: 17px; }
 
 .titlecard { position: absolute; left: 6vw; bottom: 22vh; opacity: 0; transition: opacity 0.6s; }
 .titlecard.show { opacity: 1; }
@@ -187,20 +186,9 @@ body { font-family: var(--ui); color: #fff; user-select: none; -webkit-user-sele
 .overlay p { font: 500 19px var(--ui); opacity: 0.85; margin: 12px 0; max-width: 620px; padding: 0 20px; }
 .overlay .loadbar { width: min(380px, 70vw); height: 12px; border: 3px solid #fff; margin-top: 16px; }
 .overlay .loadbar b { display: block; height: 100%; width: 0; background: var(--smile); }
-.overlay .turn { display: none; font: 700 14px var(--ui); letter-spacing: 1px; opacity: 0.7; margin: 14px 0 0; }
-@media (orientation: portrait) and (pointer: coarse) { .overlay .turn { display: block; } }
 .overlay .go { margin-top: 22px; font: 400 28px var(--title); letter-spacing: 3px; animation: blink 1s infinite alternate; }
 @keyframes blink { from { opacity: 0.35; } to { opacity: 1; } }
 
 .fade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.6s; }
 .fade.on { opacity: 1; }
 
-/* touch layout: keep the right thumb cluster clear */
-#hud.touch .ammo { right: auto; left: 50%; bottom: 6px; transform: translateX(-50%) scale(0.62); transform-origin: center bottom; text-align: center; }
-#hud.touch .ammo .slots { justify-content: center; }
-#hud.touch .vitals { left: max(12px, env(safe-area-inset-left)); bottom: auto; top: 62px; width: min(200px, 30vw); transform: skewX(-12deg) scale(0.8); transform-origin: left top; }
-/* subtitles sit above the ammo read-out, which moves to the bottom centre on touch screens */
-#hud.touch ~ .subs { bottom: 29%; font-size: clamp(15px, 4.6vh, 21px); width: min(560px, 62vw); }
-#hud.touch .objectives { left: max(12px, env(safe-area-inset-left)); top: 6px; }
-#hud.touch .objectives .obj { font-size: 14px; }
-#hud.touch .feed { top: 22%; right: 12px; font-size: 13px; }

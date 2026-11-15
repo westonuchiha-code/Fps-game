@@ -12,7 +12,8 @@
     "shot": "node tools/shot.mjs",
     "test": "node tools/smoke.mjs",
     "check": "node tools/check.mjs",
-    "single": "node tools/singlefile.mjs"
+    "single": "node tools/singlefile.mjs",
+    "handheld": "node tools/handheld.mjs"
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",

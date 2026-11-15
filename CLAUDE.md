@@ -26,6 +26,9 @@ decisions. The short version of the brief:
 - **Audio is generated** by `tools/music`, `tools/sfx`, `tools/voice` (Python; they need
   fluidsynth + FluidR3_GM, sox, ffmpeg, pico2wave, RHVoice, espeak-ng, flite). Dialogue text
   lives in `src/data/dialogue.json`; re-run `tools/voice/gen_voice.py` after editing it.
+- **No touch-screen code in the game.** It is a controller / keyboard-and-mouse game. For trying
+  it on a phone there is a separate test rig, `tools/handheld/` (`npm run handheld`): it wraps the
+  finished game in a page with two on-screen controllers and feeds it as an ordinary gamepad.
 - The global game instance is `G` (`src/core/globals.ts`). No per-frame allocations in hot paths.
 - **One page, two apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
   address ends in `#editor` and the game otherwise. They hand over through `src/core/nav.ts`

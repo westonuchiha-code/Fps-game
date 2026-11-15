@@ -328,8 +328,7 @@ export class Player implements Target, Shootable {
 
     // ---- sprint ----
     const canSprint = !crouch && !ads && my > 0.35 && Math.abs(mx) < 0.75 && !G.weapons.blocksSprint;
-    if (inp.device === 'touch') this.sprinting = canSprint && my > 0.92;
-    else this.sprinting = canSprint && inp.isDown('sprint');
+    this.sprinting = canSprint && inp.isDown('sprint');
 
     let maxSpeed = this.sprinting ? P.sprint : crouch ? P.crouch : ads ? P.ads : P.walk;
     maxSpeed *= G.weapons.moveScale;

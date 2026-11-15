@@ -29,7 +29,7 @@ export type Action =
   | 'uiBack'
   | 'skip';
 
-export type Device = 'kbm' | 'gamepad' | 'touch';
+export type Device = 'kbm' | 'gamepad';
 
 const KEYMAP: Record<string, Action[]> = {
   Space: ['jump', 'uiAccept', 'skip'],
@@ -75,10 +75,6 @@ const PROMPTS: Record<Device, Partial<Record<Action, string>>> = {
     fire: 'RT', ads: 'LT', jump: 'A', crouch: 'B', sprint: 'L3', reload: 'X', interact: 'X', melee: 'R3',
     mine: 'LB', detonate: 'RB', inventory: 'BACK', pause: 'START', horn: 'D-PAD ↓', next: 'Y', skip: 'A', inspect: 'D-PAD ↑',
   },
-  touch: {
-    fire: 'FIRE', ads: 'AIM', jump: 'JUMP', crouch: 'CROUCH', sprint: 'PUSH STICK', reload: 'RELOAD', interact: 'USE',
-    melee: 'MELEE', mine: 'MINE', detonate: 'WATCH', inventory: 'BAG', pause: 'II', horn: 'HORN', next: 'SWAP', skip: 'TAP',
-  },
 };
 
 export class Input {
@@ -106,14 +102,9 @@ export class Input {
   private down = new Set<Action>();
   private prev = new Set<Action>();
   private tapped = new Set<Action>(); // pressed at any point since last frame (never miss a quick tap)
-  private virtual = new Set<Action>(); // touch buttons
   private lockedAt = 0;
   private mouseDX = 0;
   private mouseDY = 0;
-  private touchDX = 0;
-  private touchDY = 0;
-  private touchMoveX = 0;
-  private touchMoveY = 0;
   private mouseButtons = 0;
   private wheelAcc = 0;
   private padPrev: boolean[] = [];
@@ -122,7 +113,6 @@ export class Input {
   readonly simDown = new Set<Action>();
   readonly simMove = { x: 0, y: 0 };
   readonly simLook = { x: 0, y: 0 };
-  private lastTouch = -1e9;
   private padsAllowed = true;
   onAnyInput: (() => void) | null = null;
   onLockChange: ((locked: boolean) => void) | null = null;
@@ -144,18 +134,7 @@ export class Input {
       this.keys.clear();
       this.mouseButtons = 0;
     });
-    // A touch anywhere means a touch device. Browsers follow every tap with made-up mouse events;
-    // those must not flip us back to "keyboard and mouse" or count as a trigger pull.
-    window.addEventListener(
-      'touchstart',
-      () => {
-        this.lastTouch = performance.now();
-        this.device = 'touch';
-      },
-      { capture: true, passive: true },
-    );
     canvas.addEventListener('mousedown', (e) => {
-      if (performance.now() - this.lastTouch < 1000) return;
       this.mouseButtons |= 1 << e.button;
       this.device = 'kbm';
       if (e.button === 0) this.tapped.add('fire');
@@ -200,7 +179,6 @@ export class Input {
   }
 
   requestLock() {
-    if (this.device === 'touch') return;
     if (document.pointerLockElement === this.canvas) return;
     try {
       const p = this.canvas.requestPointerLock() as unknown as Promise<void> | undefined;
@@ -213,24 +191,6 @@ export class Input {
     if (document.pointerLockElement === this.canvas) document.exitPointerLock();
   }
 
-  // ---- touch / virtual controls ----
-  setVirtual(a: Action, isDown: boolean) {
-    this.device = 'touch';
-    if (isDown) {
-      if (!this.virtual.has(a)) this.tapped.add(a);
-      this.virtual.add(a);
-    } else this.virtual.delete(a);
-  }
-  addTouchLook(dx: number, dy: number) {
-    this.device = 'touch';
-    this.touchDX += dx;
-    this.touchDY += dy;
-  }
-  setTouchMove(x: number, y: number) {
-    this.device = 'touch';
-    this.touchMoveX = x;
-    this.touchMoveY = y;
-  }
   /** Inject a tap from UI code (e.g. clicking a HUD button). */
   tap(a: Action) {
     this.tapped.add(a);
@@ -268,7 +228,6 @@ export class Input {
     if (this.mouseButtons & 1) down.add('fire');
     if (this.mouseButtons & 4) down.add('ads');
     if (this.mouseButtons & 2) down.add('melee');
-    for (const a of this.virtual) down.add(a);
     for (const a of this.simDown) down.add(a);
 
     let mx = 0;
@@ -282,11 +241,8 @@ export class Input {
     let ly = this.mouseDY * 0.0022 * this.sensitivity * this.lookScale;
     this.mouseDX = this.mouseDY = 0;
 
-    lx += this.touchDX * 0.0045 * this.sensitivity * this.lookScale;
-    ly += this.touchDY * 0.0045 * this.sensitivity * this.lookScale;
-    this.touchDX = this.touchDY = 0;
-    mx += this.touchMoveX + this.simMove.x;
-    my += this.touchMoveY + this.simMove.y;
+    mx += this.simMove.x;
+    my += this.simMove.y;
     lx += this.simLook.x;
     ly += this.simLook.y;
     this.simLook.x = this.simLook.y = 0;
