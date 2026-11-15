@@ -107,6 +107,7 @@ export class Input {
   private prev = new Set<Action>();
   private tapped = new Set<Action>(); // pressed at any point since last frame (never miss a quick tap)
   private virtual = new Set<Action>(); // touch buttons
+  private lockedAt = 0;
   private mouseDX = 0;
   private mouseDY = 0;
   private touchDX = 0;
@@ -158,9 +159,12 @@ export class Input {
     canvas.addEventListener('contextmenu', (e) => e.preventDefault());
     window.addEventListener('mousemove', (e) => {
       if (!this.locked) return;
-      // Browsers occasionally report a huge spurious delta on lock; clamp it out.
-      const mx = clamp(e.movementX || 0, -400, 400);
-      const my = clamp(e.movementY || 0, -400, 400);
+      // Browsers report a huge spurious delta when the lock engages (the cursor being warped to the
+      // centre) and occasionally afterwards: ignore the first moments and drop implausible jumps.
+      if (performance.now() - this.lockedAt < 150) return;
+      const mx = e.movementX || 0;
+      const my = e.movementY || 0;
+      if (Math.abs(mx) > 300 || Math.abs(my) > 300) return;
       this.mouseDX += mx;
       this.mouseDY += my;
     });
@@ -173,6 +177,7 @@ export class Input {
     );
     document.addEventListener('pointerlockchange', () => {
       this.locked = document.pointerLockElement === canvas;
+      if (this.locked) this.lockedAt = performance.now();
       if (!this.locked) {
         this.mouseButtons = 0;
         this.keys.clear();
