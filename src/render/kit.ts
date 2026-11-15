@@ -27,6 +27,13 @@ export interface Ring {
   nw?: number;
   /** pull the front back either side of the centre (eye sockets) */
   sock?: number;
+  /**
+   * For a section set off to one side (`x`): its half width and shape on the side facing the body's
+   * centre line. With a square-ish `nm` two such sections sit flush against each other, like the two
+   * halves of a pair of trousers.
+   */
+  wm?: number;
+  nm?: number;
   /** centre offset */
   x?: number;
   z?: number;
@@ -40,6 +47,8 @@ export interface LoftOpts {
   from?: number;
   to?: number;
   pick?: (seg: number, side: number) => boolean;
+  /** only the ring segments from `segs[0]` up to `segs[1]` (the rest still shape the shading) */
+  segs?: [number, number];
 }
 
 /**
@@ -62,8 +71,10 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
       const a = (k / sides) * Math.PI * 2;
       const sn = Math.sin(a);
       const cs = Math.cos(a);
-      let px = Math.sign(sn) * Math.pow(Math.abs(sn), e) * r.w;
-      let pz = -Math.sign(cs) * Math.pow(Math.abs(cs), e) * (cs >= 0 ? r.f : r.b);
+      const inner = r.wm !== undefined && ((r.x ?? 0) > 0 ? sn < 0 : (r.x ?? 0) < 0 && sn > 0);
+      const ek = inner ? 2 / (r.nm ?? r.n ?? 2.5) : e;
+      let px = Math.sign(sn) * Math.pow(Math.abs(sn), ek) * (inner ? r.wm! : r.w);
+      let pz = -Math.sign(cs) * Math.pow(Math.abs(cs), ek) * (cs >= 0 ? r.f : r.b);
       if (cs > 0) {
         if (r.nose) pz -= r.nose * Math.max(0, 1 - Math.abs(px) / (r.nw ?? 0.03));
         if (r.sock && r.w > 0) pz += r.sock * Math.max(0, 1 - Math.abs(Math.abs(px) / r.w - 0.5) / 0.35);
@@ -125,7 +136,7 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
       uv.push((idx[1] - from) / (to - from), (rings[idx[0]].y - y0) / (y1 - y0 || 1));
     }
   };
-  for (let j = 0; j < R - 1; j++)
+  for (let j = Math.max(0, o.segs?.[0] ?? 0); j < Math.min(R - 1, o.segs?.[1] ?? R - 1); j++)
     for (let k = from; k < to; k++) {
       if (o.pick && !o.pick(j, k)) continue;
       tri([j, k], [j, k + 1], [j + 1, k + 1]);

@@ -408,10 +408,6 @@ export class CharModel {
     const ink = 0x15161c;
     const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, ...extra });
 
-    // hips, with the belt painted on
-    k.curBone = B.pelvis;
-    k.loft([R(0.815, 0, 0, 0), R(0.825, 0.07, 0.06, 0.07), R(0.86, 0.15, 0.092, 0.105), R(0.92, 0.172, 0.1, 0.115), R(0.98, 0.166, 0.1, 0.112), R(1.03, 0.15, 0.098, 0.1), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 5 ? leather : pants), { sides: 16 });
-
     // torso: waist, ribcage, chest, shoulders sloping up into the neck
     k.curBone = B.chest;
     const torso: Ring[] = [
@@ -489,16 +485,34 @@ export class CharModel {
       this.hand(k, x, ey - 0.23, side, glove);
     }
 
+    // belt: one band right round the waist
+    k.curBone = B.pelvis;
+    k.loft([R(1.026, 0, 0, 0), R(1.03, 0.156, 0.103, 0.102), R(1.09, 0.143, 0.101, 0.098), R(1.094, 0, 0, 0)].map((r) => ({ ...r, n: 4 })), leather, { sides: 16 });
+    k.sphere(0.03, pants, [0, 0.868, 0.002], 2, [0.9, 1.15, 2.6], true); // gusset: the crotch is solid between the legs
+
     // legs: thigh, knee, calf, boot
     for (const side of [-1, 1]) {
       const x = side * s.hipX;
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const L = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, x, n: 2.3, ...extra });
+      // Trousers: each leg is one piece from the belt to the knee. Up at the hips it is half the
+      // body, flat against its twin along the centre seam; below the crotch it rounds into a thigh.
+      const T = (y: number, c: number, wo: number, wm: number, f: number, b: number, nm: number): Ring => ({ y, x: side * c, w: wo, wm, f, b, n: 2.5, nm });
+      const trousers = [
+        T(1.1, 0.068, 0, 0, 0, 0, 8), T(1.09, 0.068, 0.069, 0.068, 0.095, 0.092, 8), T(1.03, 0.075, 0.075, 0.075, 0.097, 0.096, 8), T(0.98, 0.082, 0.084, 0.082, 0.096, 0.102, 7),
+        T(0.93, 0.086, 0.086, 0.086, 0.095, 0.11, 6), T(0.89, 0.088, 0.084, 0.088, 0.092, 0.108, 5), T(0.86, 0.09, 0.081, 0.09, 0.089, 0.098, 4.5), T(0.84, 0.09, 0.079, 0.087, 0.087, 0.092, 3.5),
+        T(0.8, 0.09, 0.078, 0.078, 0.085, 0.088, 2.5), T(0.76, 0.09, 0.076, 0.076, 0.082, 0.082, 2.5), T(0.6, 0.09, 0.064, 0.064, 0.068, 0.066, 2.5), T(0.5, 0.09, 0.056, 0.056, 0.058, 0.058, 2.5), T(0.44, 0.09, 0.05, 0.05, 0.05, 0.052, 2.5), T(0.43, 0.09, 0, 0, 0, 0, 2.5),
+      ];
+      const split = 6; // the hips (down to the fold under the seat) stay with the pelvis; the rest swings with the thigh
+      k.curBone = B.pelvis;
+      k.loft(trousers, pants, { sides: 16, segs: [0, split] });
+      k.sphere(0.07, pants, [side * 0.096, 0.89, 0.004], 2, [1, 0.4, 1.2], true); // closes the hips underneath
       k.curBone = th;
-      k.loft([L(0.95, 0, 0, 0), L(0.94, 0.05, 0.06, 0.07), L(0.9, 0.078, 0.085, 0.092), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
+      k.loft(trousers, pants, { sides: 16, segs: [split, trousers.length - 1] });
+      k.sphere(0.074, pants, [x, 0.89, 0], 2, [1, 1, 1], true); // fills the joint when the leg swings
       k.curBone = sn;
-      k.loft([L(0.5, 0, 0, 0), L(0.49, 0.05, 0.05, 0.05), L(0.46, 0.054, 0.058, 0.054, { nose: 0.008, nw: 0.04 }), L(0.36, 0.052, 0.05, 0.064), L(0.2, 0.04, 0.04, 0.044), L(0.1, 0.036, 0.036, 0.04), L(0.09, 0, 0, 0)], (seg, d) => (!agent && seg >= 1 && seg <= 2 && d < 2 ? ink : pants), { sides: 10 });
+      k.loft([L(0.5, 0, 0, 0), L(0.49, 0.05, 0.05, 0.05), L(0.46, 0.054, 0.058, 0.054, { nose: 0.008, nw: 0.04 }), L(0.36, 0.052, 0.05, 0.064), L(0.2, 0.04, 0.04, 0.044), L(0.1, 0.036, 0.036, 0.04), L(0.09, 0, 0, 0)], (seg, d) => (!agent && seg >= 1 && seg <= 2 && d < 3 ? ink : pants), { sides: 16 });
       const boot = agent ? ink : leather;
       if (!agent) k.loft([L(0.225, 0, 0, 0), L(0.22, 0.046, 0.046, 0.05), L(0.2, 0.05, 0.05, 0.054), L(0.1, 0.05, 0.052, 0.056), L(0.09, 0, 0, 0)], boot, { sides: 10 });
       if (agent) this.foot(k, x, 0.86, 0.8, 0.95, ink, boot);
