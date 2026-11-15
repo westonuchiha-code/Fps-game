@@ -10,6 +10,134 @@ const _s = new THREE.Vector3(1, 1, 1);
 const _p = new THREE.Vector3();
 const _c = new THREE.Color();
 
+/** One cross-section of a sculpted form (see `loftGeometry`). Front is -Z. */
+export interface Ring {
+  /** height of the section */
+  y: number;
+  /** half width (x) */
+  w: number;
+  /** depth towards the front */
+  f: number;
+  /** depth towards the back */
+  b: number;
+  /** section shape: 2 = ellipse, higher = squarer (default 2.5: neither a tube nor a box) */
+  n?: number;
+  /** extra forward push at the front centre (nose, chin, kneecap) and its half width */
+  nose?: number;
+  nw?: number;
+  /** pull the front back either side of the centre (eye sockets) */
+  sock?: number;
+  /** centre offset */
+  x?: number;
+  z?: number;
+}
+
+export interface LoftOpts {
+  sides?: number;
+  /** push the whole surface outwards (clothing worn over a body, decals) */
+  grow?: number;
+  /** only the faces from side `from` up to `to`; side 0 starts at the front centre and runs towards +X */
+  from?: number;
+  to?: number;
+  pick?: (seg: number, side: number) => boolean;
+}
+
+/**
+ * Skin a stack of cross-sections into a smooth-shaded mesh: the way low-poly characters are
+ * actually modelled (a jaw, a brow, a ribcage, a calf) rather than assembled from primitives.
+ * UVs run 0..1 across the chosen sides and up the rings, so a drawn decal can be wrapped on.
+ */
+export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
+  const sides = o.sides ?? 16;
+  const grow = o.grow ?? 0;
+  const from = o.from ?? 0;
+  const to = o.to ?? sides;
+  const R = rings.length;
+  const P: THREE.Vector3[][] = [];
+  for (let j = 0; j < R; j++) {
+    const r = rings[j];
+    const e = 2 / (r.n ?? 2.5);
+    const row: THREE.Vector3[] = [];
+    for (let k = 0; k < sides; k++) {
+      const a = (k / sides) * Math.PI * 2;
+      const sn = Math.sin(a);
+      const cs = Math.cos(a);
+      let px = Math.sign(sn) * Math.pow(Math.abs(sn), e) * r.w;
+      let pz = -Math.sign(cs) * Math.pow(Math.abs(cs), e) * (cs >= 0 ? r.f : r.b);
+      if (cs > 0) {
+        if (r.nose) pz -= r.nose * Math.max(0, 1 - Math.abs(px) / (r.nw ?? 0.03));
+        if (r.sock && r.w > 0) pz += r.sock * Math.max(0, 1 - Math.abs(Math.abs(px) / r.w - 0.5) / 0.35);
+      }
+      if (grow) {
+        const len = Math.hypot(px, pz) || 1;
+        px += (px / len) * grow;
+        pz += (pz / len) * grow;
+      }
+      row.push(new THREE.Vector3(px + (r.x ?? 0), r.y, pz + (r.z ?? 0)));
+    }
+    P.push(row);
+  }
+  const at = (j: number, k: number) => P[j][((k % sides) + sides) % sides];
+  const N: THREE.Vector3[][] = [];
+  const tk = new THREE.Vector3();
+  const tj = new THREE.Vector3();
+  for (let j = 0; j < R; j++) {
+    const row: THREE.Vector3[] = [];
+    const up = rings[Math.min(R - 1, j + 1)].y >= rings[Math.max(0, j - 1)].y ? 1 : -1;
+    for (let k = 0; k < sides; k++) {
+      tk.subVectors(at(j, k + 1), at(j, k - 1));
+      tj.subVectors(at(Math.min(R - 1, j + 1), k), at(Math.max(0, j - 1), k));
+      const n = new THREE.Vector3().crossVectors(tk, tj);
+      const p = at(j, k);
+      const rx = p.x - (rings[j].x ?? 0);
+      const rz = p.z - (rings[j].z ?? 0);
+      if (n.lengthSq() < 1e-14) n.set(0, (j === 0 ? -1 : 1) * up, 0);
+      else {
+        n.normalize();
+        if (n.x * rx + n.z * rz < 0) n.negate();
+      }
+      row.push(n);
+    }
+    N.push(row);
+  }
+  const pos: number[] = [];
+  const nrm: number[] = [];
+  const uv: number[] = [];
+  const y0 = Math.min(...rings.map((r) => r.y));
+  const y1 = Math.max(...rings.map((r) => r.y));
+  const fn = new THREE.Vector3();
+  const e1 = new THREE.Vector3();
+  const e2 = new THREE.Vector3();
+  const tri = (a: [number, number], b: [number, number], c: [number, number]) => {
+    const pa = at(a[0], a[1]);
+    let pb = at(b[0], b[1]);
+    let pc = at(c[0], c[1]);
+    fn.crossVectors(e1.subVectors(pb, pa), e2.subVectors(pc, pa));
+    if (fn.lengthSq() < 1e-16) return;
+    const na = N[a[0]][((a[1] % sides) + sides) % sides];
+    const nb = N[b[0]][((b[1] % sides) + sides) % sides];
+    const nc = N[c[0]][((c[1] % sides) + sides) % sides];
+    let order: [[number, number], THREE.Vector3, THREE.Vector3][] = [[a, pa, na], [b, pb, nb], [c, pc, nc]];
+    if (fn.dot(e1.copy(na).add(nb).add(nc)) < 0) order = [order[0], order[2], order[1]];
+    for (const [idx, pp, nn] of order) {
+      pos.push(pp.x, pp.y, pp.z);
+      nrm.push(nn.x, nn.y, nn.z);
+      uv.push((idx[1] - from) / (to - from), (rings[idx[0]].y - y0) / (y1 - y0 || 1));
+    }
+  };
+  for (let j = 0; j < R - 1; j++)
+    for (let k = from; k < to; k++) {
+      if (o.pick && !o.pick(j, k)) continue;
+      tri([j, k], [j, k + 1], [j + 1, k + 1]);
+      tri([j, k], [j + 1, k + 1], [j + 1, k]);
+    }
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+  g.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+  g.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
+  return g;
+}
+
 /**
  * Builds one merged, vertex-coloured, flat-shaded mesh out of simple primitives.
  * Everything procedural in the game (guns, arms, characters, vehicles, props) goes through this,
@@ -88,6 +216,29 @@ export class Kit {
     }
     this.add(g, color, pos, [0, 0, 0], true, [sx, 1, sz]);
     g.dispose();
+    return this;
+  }
+
+  /**
+   * A sculpted form from cross-sections (see `loftGeometry`). `color` may be a function of the
+   * face — (ring segment, distance from the front in sides, side) — to paint regions such as hair,
+   * a belt or a reflective band without adding geometry.
+   */
+  loft(rings: Ring[], color: number | ((seg: number, d: number, side: number) => number), o: LoftOpts & { pos?: V3; rot?: V3 } = {}) {
+    const sides = o.sides ?? 16;
+    const colourOf = (seg: number, k: number) => {
+      if (typeof color === 'number') return color;
+      const ks = ((k % sides) + sides) % sides;
+      const fr = ks < sides / 2 ? ks : ks - sides;
+      return color(seg, Math.abs(fr + 0.5), ks);
+    };
+    const seen = new Set<number>();
+    for (let j = 0; j < rings.length - 1; j++) for (let k = o.from ?? 0; k < (o.to ?? sides); k++) seen.add(colourOf(j, k));
+    for (const c of seen) {
+      const g = loftGeometry(rings, { ...o, pick: (j, k) => colourOf(j, k) === c });
+      if (g.getAttribute('position').count) this.add(g, c, o.pos ?? [0, 0, 0], o.rot ?? [0, 0, 0], true);
+      g.dispose();
+    }
     return this;
   }
 
