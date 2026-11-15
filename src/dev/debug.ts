@@ -14,7 +14,7 @@ export function installDebug(game: Game) {
      * Stand one of every character in a row in mid-air and point the camera at them: the way to
      * judge character art. `aim` 0..1 raises their weapons; `turn` spins them (radians).
      */
-    lineup(aim = 0.6, turn = 0.5, close = false, hold = true) {
+    lineup(aim = 0.6, turn = 0.5, close = false, hold = true, speed = 0, t = 0) {
       const cast: [CharKind, string, number][] = [['assoc', 'assoc', 0], ['super', 'super', 0], ['striker', 'striker', 0], ['striker', 'striker', 1], ['striker', 'striker', 2], ['striker', 'striker', 99], ['manager', 'manager', 0]];
       const y = 200;
       const floor = new THREE.Mesh(new THREE.BoxGeometry(40, 0.2, 12), new THREE.MeshBasicMaterial({ color: 0x9aa0a8 }));
@@ -31,12 +31,14 @@ export function installDebug(game: Game) {
         const m = new CharModel(kind, PALETTES[pal], variant);
         const a = new CharAnim(m);
         a.aim = aim;
+        a.speed = speed;
         a.twoHanded = kind === 'striker';
         x += kind === 'manager' ? 2.4 : 1.25;
         m.root.position.set(x, y, 0);
         m.root.rotation.y = turn;
         game.scene.add(m.root);
         for (let i = 0; i < 40; i++) a.update(1 / 30);
+        if (t > 0) for (let i = 0; i < t; i++) a.update(1 / 60);
         if (!hold) {
           // arms down, for judging the model rather than the pose
           for (const [arm, fore, sgn] of [[B.armL, B.foreL, -1], [B.armR, B.foreR, 1]]) {

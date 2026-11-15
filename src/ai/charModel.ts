@@ -559,8 +559,33 @@ export class CharModel {
       if (agent) this.foot(k, x, 0.86, 0.8, 0.95, ink, boot);
       else this.foot(k, x, 1, 1, 1, ink, boot);
     }
-    this.muzzle.position.set(0, -0.3, -0.5);
-    this.bones[B.foreR].add(this.muzzle);
+    if (agent) {
+      this.muzzle.position.set(0, -0.3, -0.5);
+      this.bones[B.foreR].add(this.muzzle);
+      return;
+    }
+    // the rifle: carried on the chest and held with both hands (CharAnim solves the arms to it).
+    // Its origin is the right hand on the pistol grip; forward is -Z.
+    const r = new Kit();
+    const steel = 0x2a2c30;
+    const wood = [0x6b4a2a, 0x5a3e24, 0x7a5432][v];
+    r.box(0.05, 0.075, 0.26, steel, [0, 0.045, -0.08]); // receiver
+    r.box(0.046, 0.02, 0.2, 0x3a3d42, [0, 0.092, -0.07]); // top rail
+    r.cyl(0.013, 0.013, 0.3, steel, [0, 0.055, -0.36], 'z', 8); // barrel
+    r.cyl(0.02, 0.02, 0.04, steel, [0, 0.055, -0.52], 'z', 8); // muzzle brake
+    r.box(0.05, 0.05, 0.2, wood, [0, 0.035, -0.29]); // handguard
+    r.box(0.03, 0.09, 0.04, steel, [0, -0.03, 0.0], [0.3, 0, 0]); // pistol grip
+    r.box(0.032, 0.1, 0.05, steel, [0, -0.03, -0.1], [-0.15, 0, 0]); // magazine
+    r.taper(0.04, 0.07, 0.2, 1, 1.3, wood, [0, 0.03, 0.13]); // stock
+    r.box(0.045, 0.09, 0.02, 0x1c1d20, [0, 0.025, 0.235]); // butt pad
+    r.box(0.012, 0.03, 0.02, steel, [0, 0.112, -0.15]); // rear sight
+    r.box(0.008, 0.03, 0.012, steel, [0, 0.085, -0.48]); // front sight
+    const rifle = new THREE.Mesh(r.geometry(), G.mat.char);
+    rifle.castShadow = true;
+    this.bones[B.chest].add(rifle);
+    this.held = rifle;
+    this.muzzle.position.set(0, 0.055, -0.56);
+    rifle.add(this.muzzle);
   }
 
   private buildMech(k: Kit, s: Spec) {
@@ -696,6 +721,40 @@ export class CharModel {
 }
 
 const _e = new THREE.Euler();
+const _S = new THREE.Vector3();
+const _T = new THREE.Vector3();
+const _D = new THREE.Vector3();
+const _P = new THREE.Vector3();
+const _E = new THREE.Vector3();
+const _U = new THREE.Vector3();
+const _DOWN = new THREE.Vector3(0, -1, 0);
+const _q = new THREE.Quaternion();
+const _qi = new THREE.Quaternion();
+/**
+ * Two-bone arm IK in the chest's frame: point the upper arm and forearm (both hanging along -Y at
+ * rest) so the hand reaches `target`, with the elbow bending toward `pole`.
+ */
+function reach(upper: THREE.Bone, fore: THREE.Bone, l1: number, l2: number, target: THREE.Vector3, pole: THREE.Vector3) {
+  _S.copy(upper.position);
+  _D.subVectors(target, _S);
+  const d = clamp(_D.length(), 0.08, l1 + l2 - 0.002);
+  _D.normalize();
+  const a = (l1 * l1 - l2 * l2 + d * d) / (2 * d);
+  const h = Math.sqrt(Math.max(0, l1 * l1 - a * a));
+  _P.copy(pole).addScaledVector(_D, -pole.dot(_D)).normalize();
+  _E.copy(_S).addScaledVector(_D, a).addScaledVector(_P, h);
+  _U.subVectors(_E, _S).normalize();
+  _q.setFromUnitVectors(_DOWN, _U);
+  upper.quaternion.copy(_q);
+  _T.copy(_S).addScaledVector(_D, d).sub(_E).normalize();
+  _qi.copy(_q).invert();
+  _T.applyQuaternion(_qi);
+  fore.quaternion.setFromUnitVectors(_DOWN, _T);
+}
+const _grip = new THREE.Vector3();
+const _fore = new THREE.Vector3();
+const _poleR = new THREE.Vector3(0.6, -1, 0.4);
+const _poleL = new THREE.Vector3(-0.9, -1, 0.1);
 
 /** Inputs the brain sets each frame; the animator turns them into bone rotations. */
 export class CharAnim {
@@ -756,7 +815,7 @@ export class CharAnim {
     this.phase += (sp / stride) * Math.PI * 2 * dt;
     const ph = this.phase;
     const moving = clamp(sp / 0.6, 0, 1);
-    const swing = lerp(0.45, 0.95, run) * moving;
+    const swing = lerp(0.45, 0.62, run) * moving;
     const back = this.moveZ < -0.3 ? -1 : 1;
 
     // ---- legs ----
@@ -767,7 +826,8 @@ export class CharAnim {
     for (const side of [-1, 1]) {
       const p = ph + (side > 0 ? Math.PI : 0);
       const fwd = Math.sin(p) * swing * back;
-      const lift = Math.max(0, Math.cos(p)) * lerp(0.5, 1.1, run) * moving;
+      // the knee folds as the foot comes through, hardest at a run
+      const lift = Math.max(0, Math.cos(p)) * lerp(0.5, 1.5, run) * moving;
       const th = b[side < 0 ? B.thighL : B.thighR];
       const sn = b[side < 0 ? B.shinL : B.shinR];
       if (this.sit > 0.5) {
@@ -785,7 +845,7 @@ export class CharAnim {
     const pel = b[B.pelvis];
     const hipY = s.hip + 0.02 - drop * (legLen / 0.9) + bob;
     pel.position.set(0, lerp(hipY, 0.32 * (legLen / 0.9), de), lerp(0, 0.25, de) + this.sit * 0.0);
-    pel.rotation.set(lerp(run * 0.12 * back, -1.35 * this.deadSide, de), 0, lerp(Math.sin(ph) * 0.04 * moving, 0.25, de));
+    pel.rotation.set(lerp(-run * 0.14 * back, -1.35 * this.deadSide, de), 0, lerp(Math.sin(ph) * 0.04 * moving, 0.25, de));
 
     // ---- torso ----
     const ch = b[B.chest];
@@ -808,6 +868,21 @@ export class CharAnim {
       aR.rotation.set(2.9 + Math.cos(this.t * 13) * 0.3, 0, 0.3);
       fL.rotation.set(0.3, 0, 0);
       fR.rotation.set(0.3, 0, 0);
+    } else if (this.m.held) {
+      // rifle: carried at low ready, shouldered when aiming; both hands solved onto it
+      const g = this.m.held;
+      const sy = s.shoulderY - s.spine;
+      const bounce = Math.sin(ph * 2) * 0.012 * moving * (1 - a);
+      g.position.set(lerp(0.06, 0.085, a), lerp(sy - 0.17, sy - 0.03, a) + bounce, lerp(-0.2, -0.27, a) + this.kick * 0.035);
+      g.rotation.set(lerp(-0.55, pitch, a) + this.kick * 0.12, lerp(0.5, 0.06, a), lerp(0.25, 0, a), 'YXZ');
+      g.updateMatrix();
+      _grip.set(0, 0, 0).applyMatrix4(g.matrix);
+      _fore.set(0, -0.005, -0.29).applyMatrix4(g.matrix);
+      const l1 = s.upperArm;
+      const l2 = 0.27;
+      reach(aR, fR, l1, l2, _grip, _poleR);
+      reach(aL, fL, l1, l2, _fore, _poleL);
+      g.visible = de < 0.4;
     } else if (this.m.kind === 'striker') {
       // two-handed rifle: relaxed low-ready -> shouldered
       aR.rotation.set(lerp(0.55, 1.15 + pitch, a) + armSwing * 0.3, 0, lerp(-0.1, -0.35, a));
