@@ -223,108 +223,110 @@ export class CharModel {
   }
 
   private buildRobot(k: Kit, s: Spec, boss: boolean) {
+    // Moulded shop-floor robots: every part is a shaped shell (a tube TV for a head, a wedge of a
+    // chest, flared forearms and shins) over dark joints, with the uniform painted on.
     const P = this.pal;
     const sh = P.shell;
     const dk = P.dark;
     const shD = shade(sh, 0.84);
-    // pelvis: waist joint, hip block, apron plate
+    const tie = 0xc0281e;
+    const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, n: 4, ...extra });
+
+    // hips, with the apron's skirt
     k.curBone = B.pelvis;
-    k.cyl(0.07, 0.07, 0.12, dk, [0, s.hip + 0.14, 0], 'y', 8, false);
-    k.taper(0.25, 0.15, 0.19, 1.28, 1.15, sh, [0, s.hip + 0.02, 0]);
-    k.box(0.11, 0.13, 0.03, P.accent, [0, s.hip + 0.0, -0.105]);
-    // chest (front is -Z): wide shoulders, narrow waist
+    k.cyl(0.062, 0.062, 0.14, dk, [0, s.hip + 0.14, 0], 'y', 10, true);
+    k.loft([R(0.8, 0, 0, 0), R(0.81, 0.07, 0.06, 0.065), R(0.87, 0.15, 0.1, 0.1), R(0.95, 0.165, 0.108, 0.105), R(1.0, 0.15, 0.1, 0.098), R(1.02, 0.09, 0.07, 0.07), R(1.025, 0, 0, 0)], (seg, d) => (seg >= 1 && seg <= 3 && d < 2 ? P.accent : sh), { sides: 16 });
+
+    // chest: narrow waist widening to the shoulders, apron on the front, battery on the back
     k.curBone = B.chest;
-    k.taper(0.27, 0.36, 0.2, 1.5, 1.2, sh, [0, 1.3, 0]);
-    k.box(0.27, 0.19, 0.02, P.accent, [0, 1.335, -0.118]); // vest panel
-    k.box(0.09, 0.045, 0.012, PAL.shell, [0.075, 1.385, -0.132]); // name badge
-    k.box(0.2, 0.028, 0.02, shD, [0, 1.2, -0.108]); // belly vents
-    k.box(0.18, 0.028, 0.02, shD, [0, 1.155, -0.103]);
-    k.box(0.28, 0.28, 0.1, dk, [0, 1.31, 0.155]); // battery pack
-    k.box(0.2, 0.035, 0.02, P.accent, [0, 1.4, 0.21]);
-    k.box(0.06, 0.12, 0.02, shD, [-0.08, 1.27, 0.21]);
-    k.box(0.06, 0.12, 0.02, shD, [0.08, 1.27, 0.21]);
-    k.cyl(0.075, 0.06, 0.05, dk, [0, 1.495, 0], 'y', 8, false); // collar
-    k.cyl(0.04, 0.04, 0.1, dk, [0, 1.52, 0], 'y', 6);
-    if (boss) {
-      k.profile([[-0.132, 1.46], [-0.132, 1.2], [-0.15, 1.16], [-0.132, 1.12]], 0.05, 0xc0281e, [0, 0, 0]); // tie
-      k.box(0.17, 0.05, 0.2, P.trim, [-0.27, 1.5, 0]); // epaulettes
-      k.box(0.17, 0.05, 0.2, P.trim, [0.27, 1.5, 0]);
-      k.box(0.03, 0.03, 0.2, dk, [-0.34, 1.5, 0]);
-      k.box(0.03, 0.03, 0.2, dk, [0.34, 1.5, 0]);
-    }
-    // head: a chunky little monitor with a bezel, a tube back and speaker ears
+    k.loft(
+      [R(1.085, 0, 0, 0), R(1.095, 0.1, 0.08, 0.075), R(1.16, 0.118, 0.092, 0.084), R(1.27, 0.16, 0.115, 0.1), R(1.38, 0.2, 0.13, 0.112), R(1.45, 0.212, 0.124, 0.114), R(1.49, 0.19, 0.1, 0.1), R(1.515, 0.1, 0.06, 0.065), R(1.52, 0, 0, 0)],
+      (seg, d) => {
+        if (seg >= 2 && seg <= 4 && d < 2) return P.accent;
+        if (seg === 1 && d < 2) return shD; // belly vent
+        return sh;
+      },
+      { sides: 16 },
+    );
+    k.box(0.07, 0.035, 0.01, boss ? P.trim : PAL.shell, [0.085, 1.4, -0.131]); // name badge
+    if (boss) k.loft([[1.5, 0, 0.1], [1.49, 0.02, 0.1], [1.462, 0.024, 0.118], [1.44, 0.014, 0.126], [1.33, 0.027, 0.126], [1.23, 0.033, 0.108], [1.17, 0, 0.094]].map(([y, w, z]) => ({ y, w, f: 0.009, b: 0.009, z: -z, n: 2.5 })), tie, { sides: 8 });
+    k.loft([R(1.17, 0, 0, 0), R(1.18, 0.11, 0.02, 0.07), R(1.21, 0.125, 0.02, 0.1), R(1.41, 0.125, 0.02, 0.095), R(1.45, 0.1, 0.02, 0.06), R(1.46, 0, 0, 0)].map((r) => ({ ...r, z: 0.1, n: 3.4 })), (seg) => (seg === 3 ? P.accent : dk));
+    k.cyl(0.055, 0.07, 0.04, dk, [0, 1.52, 0], 'y', 10, true); // collar
+    k.cyl(0.036, 0.036, 0.1, dk, [0, 1.55, 0], 'y', 8, true);
+    if (boss) for (const side of [-1, 1]) k.loft([R(1.5, 0, 0, 0), R(1.505, 0.075, 0.09, 0.09), R(1.53, 0.082, 0.096, 0.096), R(1.536, 0, 0, 0)].map((r) => ({ ...r, x: side * 0.25 })), P.trim, { sides: 12 });
+
+    // head: a tube television, laid out back-to-front (`y` runs forward, `f` is down, `b` is up)
     k.curBone = B.head;
-    k.box(0.33, 0.27, 0.22, sh, [0, 1.67, 0]);
-    k.box(0.29, 0.22, 0.02, PAL.screen, [0, 1.675, -0.112]);
-    k.box(0.34, 0.028, 0.035, shD, [0, 1.797, -0.112]);
-    k.box(0.34, 0.034, 0.035, shD, [0, 1.547, -0.112]);
-    k.box(0.024, 0.27, 0.035, shD, [-0.158, 1.67, -0.112]);
-    k.box(0.024, 0.27, 0.035, shD, [0.158, 1.67, -0.112]);
-    k.box(0.24, 0.2, 0.07, shD, [0, 1.67, 0.14]);
-    k.box(0.16, 0.025, 0.012, dk, [0, 1.72, 0.178]);
-    k.box(0.16, 0.025, 0.012, dk, [0, 1.67, 0.178]);
-    k.box(0.16, 0.025, 0.012, dk, [0, 1.62, 0.178]);
-    k.cyl(0.05, 0.05, 0.03, dk, [-0.178, 1.67, 0.01], 'x', 8, false);
-    k.cyl(0.05, 0.05, 0.03, dk, [0.178, 1.67, 0.01], 'x', 8, false);
-    k.box(0.03, 0.012, 0.012, P.accent, [0.12, 1.548, -0.132]); // power light
-    k.cyl(0.006, 0.006, 0.12, dk, [0.1, 1.86, 0.05], 'y', 4);
-    k.sphere(0.022, P.accent, [0.1, 1.93, 0.05]);
+    const hy = 1.675;
+    const H = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 4.5 });
+    k.loft(
+      [H(-0.185, 0, 0, 0), H(-0.178, 0.07, 0.06, 0.055), H(-0.13, 0.11, 0.09, 0.09), H(-0.03, 0.15, 0.118, 0.125), H(0.06, 0.166, 0.132, 0.14), H(0.108, 0.17, 0.136, 0.144), H(0.118, 0.162, 0.128, 0.136), H(0.1185, 0.146, 0.112, 0.118), H(0.122, 0.1, 0.075, 0.08), H(0.123, 0, 0, 0)],
+      (seg) => (seg >= 7 ? PAL.screen : seg >= 5 || seg <= 1 ? shD : sh),
+      { sides: 20, pos: [0, hy, 0], rot: [-Math.PI / 2, 0, 0] },
+    );
+    k.cyl(0.046, 0.046, 0.03, dk, [-0.162, hy, 0.0], 'x', 10, true); // speaker ears
+    k.cyl(0.046, 0.046, 0.03, dk, [0.162, hy, 0.0], 'x', 10, true);
+    k.sphere(0.008, P.accent, [0.115, hy - 0.113, -0.119], 1, [1, 1, 1], true); // power light
     if (boss) {
-      // peaked manager's cap
-      k.box(0.36, 0.045, 0.26, P.trim, [0, 1.825, 0]);
-      k.box(0.3, 0.07, 0.21, dk, [0, 1.88, 0.01]);
-      k.box(0.3, 0.02, 0.11, dk, [0, 1.81, -0.16]);
-      k.box(0.06, 0.04, 0.012, P.trim, [0, 1.875, -0.1]);
+      // peaked manager's cap: band, crown, visor, badge
+      k.loft([R(1.795, 0, 0, 0), R(1.797, 0.15, 0.125, 0.15), R(1.835, 0.155, 0.13, 0.155), R(1.84, 0.162, 0.138, 0.16), R(1.895, 0.186, 0.168, 0.17), R(1.912, 0.168, 0.15, 0.152), R(1.916, 0, 0, 0)].map((r) => ({ ...r, z: 0.01, n: 3 })), (seg) => (seg === 1 ? P.trim : dk), { sides: 16 });
+      k.sphere(0.125, dk, [0, 1.8, -0.14], 2, [1, 0.1, 0.75], true);
+      k.sphere(0.024, P.trim, [0, 1.868, -0.142], 1, [1, 1, 0.4], true);
+    } else {
+      k.cyl(0.006, 0.006, 0.13, dk, [0.1, 1.85, 0.05], 'y', 4);
+      k.sphere(0.022, P.accent, [0.1, 1.92, 0.05], 1, [1, 1, 1], true);
     }
-    // arms
+
+    // arms: shoulder cap, piston, then a forearm that flares toward the wrist
     for (const side of [-1, 1]) {
       const x = side * s.shoulderX;
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
+      const sy = s.shoulderY;
+      const ey = sy - s.upperArm;
+      const A = (y: number, w: number, f: number, b: number, n = 3.2): Ring => ({ y, w, f, b, x, n });
       k.curBone = up;
-      k.sphere(0.078, sh, [x, s.shoulderY + 0.01, 0]);
-      k.box(0.05, 0.03, 0.14, P.accent, [x + side * 0.045, s.shoulderY + 0.06, 0]);
-      this.limb(k, up, x, s.shoulderY - 0.04, s.shoulderY - s.upperArm, 0.038, dk);
+      k.loft([A(sy + 0.085, 0, 0, 0), A(sy + 0.078, 0.04, 0.045, 0.045), A(sy + 0.045, 0.074, 0.08, 0.078), A(sy - 0.01, 0.08, 0.086, 0.084), A(sy - 0.05, 0.07, 0.076, 0.074), A(sy - 0.06, 0, 0, 0)], (seg) => (seg === 3 ? P.accent : sh), { sides: 12 });
+      k.cyl(0.032, 0.032, s.upperArm - 0.04, dk, [x, (sy - 0.05 + ey) / 2, 0], 'y', 8, true);
       k.curBone = fo;
-      const ey = s.shoulderY - s.upperArm;
-      k.cyl(0.05, 0.05, 0.09, dk, [x, ey, 0], 'x', 8, false); // elbow
+      k.sphere(0.046, dk, [x, ey, 0], 2, [1, 1, 1], true); // elbow
       if (side > 0) {
-        // right forearm is the built-in blaster ("price gun")
-        k.box(0.125, 0.2, 0.125, sh, [x, ey - 0.13, 0]);
-        k.box(0.13, 0.03, 0.13, P.accent, [x, ey - 0.06, 0]);
-        k.cyl(0.042, 0.036, 0.16, dk, [x, ey - 0.29, 0], 'y', 8, false);
-        k.cyl(0.052, 0.052, 0.03, P.accent, [x, ey - 0.34, 0], 'y', 8, false);
-        k.box(0.03, 0.1, 0.05, P.accent, [x + 0.068, ey - 0.13, 0]);
-        k.box(0.02, 0.05, 0.03, dk, [x, ey - 0.2, -0.075]); // trigger guard / label feed
+        // right forearm is the built-in blaster (a "price gun"): casing, barrel, muzzle ring
+        k.loft(
+          [A(ey - 0.02, 0, 0, 0), A(ey - 0.03, 0.045, 0.045, 0.045), A(ey - 0.06, 0.07, 0.075, 0.07), A(ey - 0.2, 0.074, 0.08, 0.074), A(ey - 0.235, 0.06, 0.062, 0.06), A(ey - 0.25, 0.042, 0.042, 0.042, 2), A(ey - 0.33, 0.036, 0.036, 0.036, 2), A(ey - 0.335, 0.05, 0.05, 0.05, 2), A(ey - 0.36, 0.05, 0.05, 0.05, 2), A(ey - 0.365, 0, 0, 0, 2)],
+          (seg) => (seg === 1 || seg === 6 || seg === 7 ? P.accent : seg >= 4 ? dk : sh),
+          { sides: 12 },
+        );
       } else {
-        k.taper(0.07, 0.22, 0.078, 1.3, 1.25, sh, [x, ey - 0.14, 0]);
-        k.cyl(0.036, 0.036, 0.03, dk, [x, ey - 0.262, 0], 'y', 6);
-        for (const fx of [-0.03, 0, 0.03]) k.box(0.022, 0.075, 0.03, dk, [x + fx, ey - 0.31, -0.012]);
-        k.box(0.022, 0.05, 0.03, dk, [x + 0.01, ey - 0.295, 0.03]); // thumb
+        k.loft([A(ey - 0.02, 0, 0, 0), A(ey - 0.03, 0.04, 0.04, 0.04), A(ey - 0.07, 0.05, 0.052, 0.05), A(ey - 0.2, 0.062, 0.066, 0.062), A(ey - 0.245, 0.058, 0.062, 0.058), A(ey - 0.25, 0, 0, 0)], (seg) => (seg === 3 ? P.accent : sh), { sides: 12 });
+        k.loft([A(ey - 0.24, 0, 0, 0, 2.2), A(ey - 0.245, 0.024, 0.03, 0.03, 2.2), A(ey - 0.28, 0.028, 0.046, 0.042, 2.2), A(ey - 0.325, 0.026, 0.044, 0.04, 2.2), A(ey - 0.36, 0.018, 0.03, 0.026, 2.2), A(ey - 0.372, 0, 0, 0, 2.2)], dk, { sides: 10 });
+        k.sphere(0.016, dk, [x, ey - 0.295, -0.048], 2, [0.9, 1.7, 0.9], true); // thumb
       }
     }
-    // legs
+
+    // legs: thigh shell, knee, a shin that flares to the ankle, a shoe with a shell toe
     for (const side of [-1, 1]) {
       const x = side * s.hipX;
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const ky = s.hip - s.thigh;
-      this.limb(k, th, x, s.hip, ky, 0.045, dk);
+      const L = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, x, n: 3.4 });
       k.curBone = th;
-      k.taper(0.1, 0.28, 0.115, 1.28, 1.15, sh, [x, s.hip - 0.21, -0.005]);
+      k.cyl(0.036, 0.036, s.thigh, dk, [x, (s.hip + ky) / 2, 0], 'y', 8, true);
+      k.loft([L(0.86, 0, 0, 0), L(0.85, 0.05, 0.055, 0.055), L(0.8, 0.07, 0.076, 0.07), L(0.66, 0.064, 0.07, 0.062), L(0.56, 0.05, 0.054, 0.05), L(0.55, 0, 0, 0)], sh, { sides: 12 });
       k.curBone = sn;
-      k.cyl(0.058, 0.058, 0.135, dk, [x, ky, 0], 'x', 8, false);
-      k.box(0.09, 0.07, 0.03, P.accent, [x, ky - 0.005, -0.06]); // knee cap
-      k.taper(0.085, 0.31, 0.1, 1.32, 1.2, sh, [x, ky - 0.225, 0]);
-      k.cyl(0.04, 0.04, 0.06, dk, [x, 0.085, 0], 'y', 6);
-      k.box(0.125, 0.06, 0.27, dk, [x, 0.03, -0.05]);
-      k.box(0.13, 0.035, 0.11, sh, [x, 0.072, -0.125]);
+      k.sphere(0.052, dk, [x, ky, 0], 2, [1, 1, 1], true); // knee
+      k.sphere(0.04, P.accent, [x, ky, -0.04], 2, [1, 1.1, 0.5], true);
+      k.loft([L(0.42, 0, 0, 0), L(0.41, 0.04, 0.045, 0.04), L(0.36, 0.052, 0.06, 0.056), L(0.2, 0.062, 0.066, 0.07), L(0.1, 0.072, 0.074, 0.08), L(0.085, 0.066, 0.068, 0.074), L(0.08, 0, 0, 0)], (seg) => (seg === 4 ? P.accent : sh), { sides: 12 });
+      k.cyl(0.035, 0.035, 0.06, dk, [x, 0.07, 0], 'y', 8, true);
+      const F = (y: number, w: number, f: number, b: number): Ring => ({ y, w, f, b, n: 3 });
+      k.loft([F(-0.08, 0, 0, 0), F(-0.072, 0.035, 0.045, 0.025), F(-0.03, 0.055, 0.05, 0.05), F(0.05, 0.06, 0.05, 0.045), F(0.12, 0.064, 0.05, 0.032), F(0.18, 0.058, 0.046, 0.024), F(0.21, 0.03, 0.034, 0.014), F(0.218, 0, 0, 0)], (seg) => (seg >= 4 ? sh : dk), { sides: 10, pos: [x, 0.05, 0], rot: [-Math.PI / 2, 0, 0] });
     }
-    this.finishRobot(s, 0.3, 1.675, -0.124, 0.27, 0.2);
-    this.muzzle.position.set(0, -0.36, 0);
+    this.finishRobot(s, 0.3, hy + 0.003, -0.127, 0.25, 0.185);
+    this.muzzle.position.set(0, -0.375, 0);
     this.bones[B.foreR].add(this.muzzle);
-    const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.02, 6), flat(PAL.smile));
-    tip.position.set(0, -0.35, 0);
+    const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.02, 8), flat(PAL.smile));
+    tip.position.set(0, -0.368, 0);
     this.bones[B.foreR].add(tip);
     this.glow.push(tip);
     if (boss) {
