@@ -46,7 +46,7 @@ const minesBefore = inv.mines;
 d.run(2, { down: ['mine'] });
 game.step(90, 1 / 60);
 const m = game.mines.list[0];
-expect(!!m && m.stuck && inv.mines === minesBefore - 1, 'thrown charge sticks');
+expect(!!m && m.stuck && inv.mines === minesBefore - 1, `thrown charge sticks (thrown ${!!m}, stuck ${!!(m && m.stuck)}, mines ${minesBefore} -> ${inv.mines}, total ${game.mines.list.length})`);
 const e1 = ai.spawnEnemy('assoc', V(m.pos.x, 0, m.pos.z - 0.8), { hold: true });
 e1.brain.sense = () => {};
 game.step(10, 1 / 60);
