@@ -40,8 +40,6 @@ export interface LoftOpts {
   from?: number;
   to?: number;
   pick?: (seg: number, side: number) => boolean;
-  /** push points around after the sections are laid out, like thumbing clay (muscle, a seat) */
-  sculpt?: (p: THREE.Vector3, ring: number, side: number) => void;
 }
 
 /**
@@ -75,9 +73,7 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
         px += (px / len) * grow;
         pz += (pz / len) * grow;
       }
-      const v = new THREE.Vector3(px + (r.x ?? 0), r.y, pz + (r.z ?? 0));
-      if (o.sculpt && (r.w > 0 || r.f > 0 || r.b > 0)) o.sculpt(v, j, k);
-      row.push(v);
+      row.push(new THREE.Vector3(px + (r.x ?? 0), r.y, pz + (r.z ?? 0)));
     }
     P.push(row);
   }
