@@ -129,49 +129,81 @@ export class CharModel {
     const P = this.pal;
     const sh = P.shell;
     const dk = P.dark;
-    // pelvis
+    const shD = shade(sh, 0.84);
+    // pelvis: waist joint, hip block, apron plate
     k.curBone = B.pelvis;
-    k.box(0.3, 0.16, 0.2, dk, [0, s.hip + 0.02, 0]);
-    k.box(0.34, 0.07, 0.24, sh, [0, s.hip + 0.1, 0]);
-    // chest (front is -Z)
+    k.cyl(0.07, 0.07, 0.12, dk, [0, s.hip + 0.14, 0], 'y', 8, false);
+    k.taper(0.25, 0.15, 0.19, 1.28, 1.15, sh, [0, s.hip + 0.02, 0]);
+    k.box(0.11, 0.13, 0.03, P.accent, [0, s.hip + 0.0, -0.105]);
+    // chest (front is -Z): wide shoulders, narrow waist
     k.curBone = B.chest;
-    k.taper(0.36, 0.4, 0.22, 1.18, 1.1, sh, [0, 1.3, 0]);
-    k.box(0.3, 0.2, 0.02, P.accent, [0, 1.3, -0.13]); // vest panel
-    k.box(0.09, 0.05, 0.022, PAL.shell, [0.08, 1.36, -0.14]); // name badge
-    k.box(0.26, 0.26, 0.09, dk, [0, 1.3, 0.15]); // battery pack
-    k.cyl(0.055, 0.055, 0.1, dk, [0, 1.49, 0], 'y', 6);
+    k.taper(0.27, 0.36, 0.2, 1.5, 1.2, sh, [0, 1.3, 0]);
+    k.box(0.27, 0.19, 0.02, P.accent, [0, 1.335, -0.118]); // vest panel
+    k.box(0.09, 0.045, 0.012, PAL.shell, [0.075, 1.385, -0.132]); // name badge
+    k.box(0.2, 0.028, 0.02, shD, [0, 1.2, -0.108]); // belly vents
+    k.box(0.18, 0.028, 0.02, shD, [0, 1.155, -0.103]);
+    k.box(0.28, 0.28, 0.1, dk, [0, 1.31, 0.155]); // battery pack
+    k.box(0.2, 0.035, 0.02, P.accent, [0, 1.4, 0.21]);
+    k.box(0.06, 0.12, 0.02, shD, [-0.08, 1.27, 0.21]);
+    k.box(0.06, 0.12, 0.02, shD, [0.08, 1.27, 0.21]);
+    k.cyl(0.075, 0.06, 0.05, dk, [0, 1.495, 0], 'y', 8, false); // collar
+    k.cyl(0.04, 0.04, 0.1, dk, [0, 1.52, 0], 'y', 6);
     if (boss) {
-      k.profile([[-0.132, 1.44], [-0.132, 1.2], [-0.15, 1.16], [-0.132, 1.12]], 0.05, 0xc0281e, [0, 0, 0]); // tie
-      k.box(0.16, 0.06, 0.2, P.trim, [-0.29, 1.48, 0]);
-      k.box(0.16, 0.06, 0.2, P.trim, [0.29, 1.48, 0]);
+      k.profile([[-0.132, 1.46], [-0.132, 1.2], [-0.15, 1.16], [-0.132, 1.12]], 0.05, 0xc0281e, [0, 0, 0]); // tie
+      k.box(0.17, 0.05, 0.2, P.trim, [-0.27, 1.5, 0]); // epaulettes
+      k.box(0.17, 0.05, 0.2, P.trim, [0.27, 1.5, 0]);
+      k.box(0.03, 0.03, 0.2, dk, [-0.34, 1.5, 0]);
+      k.box(0.03, 0.03, 0.2, dk, [0.34, 1.5, 0]);
     }
-    // head: a little monitor
+    // head: a chunky little monitor with a bezel, a tube back and speaker ears
     k.curBone = B.head;
-    k.box(0.3, 0.25, 0.22, sh, [0, 1.65, 0]);
-    k.box(0.26, 0.2, 0.02, PAL.screen, [0, 1.65, -0.112]);
-    k.cyl(0.006, 0.006, 0.12, dk, [0.1, 1.83, 0.05], 'y', 4);
-    k.sphere(0.022, P.accent, [0.1, 1.9, 0.05]);
-    if (boss) k.box(0.34, 0.05, 0.26, P.trim, [0, 1.79, 0]);
+    k.box(0.33, 0.27, 0.22, sh, [0, 1.67, 0]);
+    k.box(0.29, 0.22, 0.02, PAL.screen, [0, 1.675, -0.112]);
+    k.box(0.34, 0.028, 0.035, shD, [0, 1.797, -0.112]);
+    k.box(0.34, 0.034, 0.035, shD, [0, 1.547, -0.112]);
+    k.box(0.024, 0.27, 0.035, shD, [-0.158, 1.67, -0.112]);
+    k.box(0.024, 0.27, 0.035, shD, [0.158, 1.67, -0.112]);
+    k.box(0.24, 0.2, 0.07, shD, [0, 1.67, 0.14]);
+    k.box(0.16, 0.025, 0.012, dk, [0, 1.72, 0.178]);
+    k.box(0.16, 0.025, 0.012, dk, [0, 1.67, 0.178]);
+    k.box(0.16, 0.025, 0.012, dk, [0, 1.62, 0.178]);
+    k.cyl(0.05, 0.05, 0.03, dk, [-0.178, 1.67, 0.01], 'x', 8, false);
+    k.cyl(0.05, 0.05, 0.03, dk, [0.178, 1.67, 0.01], 'x', 8, false);
+    k.box(0.03, 0.012, 0.012, P.accent, [0.12, 1.548, -0.132]); // power light
+    k.cyl(0.006, 0.006, 0.12, dk, [0.1, 1.86, 0.05], 'y', 4);
+    k.sphere(0.022, P.accent, [0.1, 1.93, 0.05]);
+    if (boss) {
+      // peaked manager's cap
+      k.box(0.36, 0.045, 0.26, P.trim, [0, 1.825, 0]);
+      k.box(0.3, 0.07, 0.21, dk, [0, 1.88, 0.01]);
+      k.box(0.3, 0.02, 0.11, dk, [0, 1.81, -0.16]);
+      k.box(0.06, 0.04, 0.012, P.trim, [0, 1.875, -0.1]);
+    }
     // arms
     for (const side of [-1, 1]) {
       const x = side * s.shoulderX;
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
       k.curBone = up;
-      k.box(0.12, 0.12, 0.13, sh, [x, s.shoulderY + 0.01, 0]);
-      this.limb(k, up, x, s.shoulderY - 0.04, s.shoulderY - s.upperArm, 0.04, dk);
+      k.sphere(0.078, sh, [x, s.shoulderY + 0.01, 0]);
+      k.box(0.05, 0.03, 0.14, P.accent, [x + side * 0.045, s.shoulderY + 0.06, 0]);
+      this.limb(k, up, x, s.shoulderY - 0.04, s.shoulderY - s.upperArm, 0.038, dk);
       k.curBone = fo;
       const ey = s.shoulderY - s.upperArm;
+      k.cyl(0.05, 0.05, 0.09, dk, [x, ey, 0], 'x', 8, false); // elbow
       if (side > 0) {
         // right forearm is the built-in blaster ("price gun")
-        k.box(0.12, 0.2, 0.12, sh, [x, ey - 0.12, 0]);
-        k.cyl(0.04, 0.034, 0.16, dk, [x, ey - 0.28, 0], 'y', 6);
-        k.cyl(0.05, 0.05, 0.03, P.accent, [x, ey - 0.33, 0], 'y', 6);
-        k.box(0.03, 0.1, 0.05, P.accent, [x + 0.065, ey - 0.12, 0]);
+        k.box(0.125, 0.2, 0.125, sh, [x, ey - 0.13, 0]);
+        k.box(0.13, 0.03, 0.13, P.accent, [x, ey - 0.06, 0]);
+        k.cyl(0.042, 0.036, 0.16, dk, [x, ey - 0.29, 0], 'y', 8, false);
+        k.cyl(0.052, 0.052, 0.03, P.accent, [x, ey - 0.34, 0], 'y', 8, false);
+        k.box(0.03, 0.1, 0.05, P.accent, [x + 0.068, ey - 0.13, 0]);
+        k.box(0.02, 0.05, 0.03, dk, [x, ey - 0.2, -0.075]); // trigger guard / label feed
       } else {
-        k.box(0.09, 0.24, 0.09, sh, [x, ey - 0.13, 0]);
-        k.box(0.03, 0.08, 0.07, dk, [x - 0.025, ey - 0.29, 0]);
-        k.box(0.03, 0.08, 0.07, dk, [x + 0.025, ey - 0.29, 0]);
+        k.taper(0.07, 0.22, 0.078, 1.3, 1.25, sh, [x, ey - 0.14, 0]);
+        k.cyl(0.036, 0.036, 0.03, dk, [x, ey - 0.262, 0], 'y', 6);
+        for (const fx of [-0.03, 0, 0.03]) k.box(0.022, 0.075, 0.03, dk, [x + fx, ey - 0.31, -0.012]);
+        k.box(0.022, 0.05, 0.03, dk, [x + 0.01, ey - 0.295, 0.03]); // thumb
       }
     }
     // legs
@@ -180,15 +212,18 @@ export class CharModel {
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const ky = s.hip - s.thigh;
-      this.limb(k, th, x, s.hip, ky, 0.05, dk);
+      this.limb(k, th, x, s.hip, ky, 0.045, dk);
       k.curBone = th;
-      k.box(0.12, 0.28, 0.13, sh, [x, s.hip - 0.2, -0.01]);
+      k.taper(0.1, 0.28, 0.115, 1.28, 1.15, sh, [x, s.hip - 0.21, -0.005]);
       k.curBone = sn;
-      k.box(0.11, 0.34, 0.12, sh, [x, ky - 0.2, 0]);
-      k.cyl(0.055, 0.055, 0.13, dk, [x, ky, 0], 'x', 6);
-      k.box(0.12, 0.07, 0.25, dk, [x, 0.035, -0.045]);
+      k.cyl(0.058, 0.058, 0.135, dk, [x, ky, 0], 'x', 8, false);
+      k.box(0.09, 0.07, 0.03, P.accent, [x, ky - 0.005, -0.06]); // knee cap
+      k.taper(0.085, 0.31, 0.1, 1.32, 1.2, sh, [x, ky - 0.225, 0]);
+      k.cyl(0.04, 0.04, 0.06, dk, [x, 0.085, 0], 'y', 6);
+      k.box(0.125, 0.06, 0.27, dk, [x, 0.03, -0.05]);
+      k.box(0.13, 0.035, 0.11, sh, [x, 0.072, -0.125]);
     }
-    this.finishRobot(s, 0.3, 1.65, -0.124, 0.24, 0.18);
+    this.finishRobot(s, 0.3, 1.675, -0.124, 0.27, 0.2);
     this.muzzle.position.set(0, -0.36, 0);
     this.bones[B.foreR].add(this.muzzle);
     const tip = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, 0.02, 6), flat(PAL.smile));
@@ -219,55 +254,146 @@ export class CharModel {
   private buildStriker(k: Kit, s: Spec, variant: number) {
     // variant 99 is the player character: Agent "Clearance", tuxedo under a hi-vis vest
     const agent = variant === 99;
+    const v = variant % 3;
     const skin = agent ? PAL.skin1 : variant % 2 === 0 ? PAL.skin1 : PAL.skin2;
-    const shirt = agent ? PAL.tux : [PAL.denim, 0x7a3b3b, 0x4f6b4a][variant % 3];
-    const pants = agent ? PAL.tux : [0x2c3140, 0x3a3328, 0x2e3a4a][variant % 3];
-    const hat = [0xf0c020, 0xe8e2d0, PAL.hivis][variant % 3];
+    const skinD = shade(skin, 0.8);
+    const shirt = agent ? PAL.tux : [PAL.denim, 0x7a3b3b, 0x4f6b4a][v];
+    const shirtL = shade(shirt, 1.25);
+    const pants = agent ? PAL.tux : [0x2c3140, 0x3a3328, 0x2e3a4a][v];
+    const hat = [0xf0c020, 0xe8e2d0, PAL.hivis][v];
+    const hair = agent ? 0x2a1d14 : [0x2a1d14, 0x6b4a2a, 0x1c1c22][v];
+    const leather = 0x3a2a20;
+    const glove = 0x6a4a36;
+    const ink = 0x15161c;
+    const band = 0xe8e8d8;
+    const red = 0xb5382e;
+    const canvas = 0x4a4f3a;
+
+    // hips, belt, pouches
     k.curBone = B.pelvis;
-    k.box(0.32, 0.18, 0.22, pants, [0, s.hip + 0.03, 0]);
-    k.box(0.34, 0.05, 0.24, 0x3a2a20, [0, s.hip + 0.12, 0]); // belt
-    k.curBone = B.chest;
-    k.taper(0.36, 0.42, 0.23, 1.16, 1.08, shirt, [0, 1.3, 0]);
-    // hi-vis vest with reflective bands
-    k.box(0.4, 0.34, 0.245, PAL.hivis, [0, 1.3, 0]);
-    k.box(0.41, 0.04, 0.25, 0xe8e8d8, [0, 1.24, 0]);
-    k.box(0.1, 0.36, 0.25, agent ? PAL.shirt : shirt, [0, 1.3, -0.004]); // open front
-    if (agent) k.box(0.07, 0.035, 0.03, 0x15161c, [0, 1.46, -0.125]); // bow tie
-    else k.box(0.22, 0.2, 0.1, 0x4a4f3a, [0, 1.28, 0.16]); // pack
-    k.cyl(0.05, 0.05, 0.1, skin, [0, 1.5, 0], 'y', 6);
-    k.curBone = B.head;
-    k.box(0.2, 0.23, 0.21, skin, [0, 1.65, 0]);
-    k.box(0.21, 0.07, 0.04, 0x15161c, [0, 1.68, -0.1]); // safety goggles / shades
-    if (!agent) k.box(0.21, 0.09, 0.215, 0xb5382e, [0, 1.58, -0.004]); // bandana
-    if (agent) {
-      k.box(0.22, 0.08, 0.23, 0x2a1d14, [0, 1.79, 0.01]); // slicked hair
-      k.box(0.22, 0.14, 0.06, 0x2a1d14, [0, 1.7, 0.09]);
-    } else if (variant % 3 === 2) k.box(0.22, 0.09, 0.23, hat, [0, 1.775, 0]); // beanie
-    else {
-      k.taper(0.24, 0.1, 0.25, 0.8, 0.8, hat, [0, 1.8, 0]);
-      k.box(0.26, 0.02, 0.32, hat, [0, 1.755, -0.03]);
+    k.taper(0.3, 0.2, 0.2, 1.13, 1.08, pants, [0, s.hip + 0.02, 0]);
+    k.box(0.35, 0.05, 0.235, leather, [0, s.hip + 0.125, 0]);
+    k.box(0.05, 0.042, 0.02, 0xc9a23a, [0, s.hip + 0.125, -0.12]);
+    if (!agent) {
+      k.box(0.08, 0.1, 0.06, canvas, [-0.15, s.hip + 0.055, -0.09]);
+      k.box(0.07, 0.12, 0.05, leather, [0.165, s.hip + 0.045, 0.02]);
     }
+
+    // torso: narrow waist, broad shoulders, hi-vis vest worn open
+    k.curBone = B.chest;
+    k.taper(0.32, 0.4, 0.2, 1.3, 1.12, shirt, [0, 1.31, 0]);
+    k.taper(0.345, 0.3, 0.215, 1.26, 1.1, PAL.hivis, [0, 1.33, 0]);
+    k.box(0.385, 0.035, 0.235, band, [0, 1.265, 0]);
+    k.box(0.045, 0.2, 0.245, band, [-0.125, 1.385, 0]);
+    k.box(0.045, 0.2, 0.245, band, [0.125, 1.385, 0]);
+    k.box(agent ? 0.13 : 0.1, 0.31, 0.03, agent ? PAL.shirt : shirtL, [0, 1.33, -0.107]); // open front
+    k.box(0.07, 0.05, 0.05, agent ? PAL.shirt : shirtL, [-0.055, 1.5, -0.075], [0, 0, 0.45]); // collar
+    k.box(0.07, 0.05, 0.05, agent ? PAL.shirt : shirtL, [0.055, 1.5, -0.075], [0, 0, -0.45]);
+    if (agent) {
+      k.box(0.08, 0.036, 0.03, ink, [0, 1.472, -0.122]); // bow tie
+      k.box(0.02, 0.03, 0.034, ink, [0, 1.472, -0.123]);
+      for (const y of [1.4, 1.34, 1.28]) k.box(0.014, 0.014, 0.01, ink, [0, y, -0.124]); // studs
+      k.box(0.05, 0.04, 0.012, red, [0.115, 1.42, -0.118]); // pocket square on the vest
+    } else {
+      k.box(0.045, 0.08, 0.03, ink, [0.125, 1.43, -0.128]); // radio
+      k.cyl(0.005, 0.005, 0.09, ink, [0.14, 1.51, -0.128], 'y', 4);
+      k.box(0.07, 0.06, 0.014, shade(PAL.hivis, 0.82), [-0.12, 1.27, -0.122]); // vest pocket
+      k.box(0.24, 0.25, 0.1, canvas, [0, 1.3, 0.16]); // pack
+      k.box(0.2, 0.09, 0.02, shade(canvas, 0.78), [0, 1.25, 0.215]);
+      k.cyl(0.05, 0.05, 0.27, 0x7a6a44, [0, 1.46, 0.17], 'x', 6, false); // bedroll
+    }
+    k.cyl(0.058, 0.052, 0.1, skin, [0, 1.5, 0], 'y', 6);
+    if (!agent) {
+      // the Local 404 red bandana, worn round the neck
+      k.box(0.17, 0.05, 0.17, red, [0, 1.52, 0.005]);
+      k.taper(0.02, 0.09, 0.02, 7, 1, red, [0, 1.465, -0.112]);
+    }
+
+    // head: jaw narrower than the crown, an actual face
+    k.curBone = B.head;
+    k.taper(0.19, 0.27, 0.215, 1.2, 1.08, skin, [0, 1.665, 0]);
+    k.box(0.04, 0.065, 0.045, skinD, [0, 1.652, -0.125]); // nose
+    k.box(0.025, 0.065, 0.045, skinD, [-0.122, 1.665, 0.01]); // ears
+    k.box(0.025, 0.065, 0.045, skinD, [0.122, 1.665, 0.01]);
+    k.box(0.235, 0.13, 0.08, hair, [0, 1.71, 0.085]); // hair at the back and sides
+    if (agent) {
+      k.box(0.215, 0.05, 0.03, ink, [0, 1.697, -0.116]); // shades
+      k.box(0.012, 0.02, 0.12, ink, [-0.113, 1.7, -0.05]);
+      k.box(0.012, 0.02, 0.12, ink, [0.113, 1.7, -0.05]);
+      k.box(0.07, 0.012, 0.012, 0x5a2a22, [0.008, 1.586, -0.107], [0, 0, 0.12]); // half a smirk
+      k.taper(0.235, 0.075, 0.24, 0.9, 0.94, hair, [0, 1.83, 0.008]); // slicked hair
+      k.box(0.14, 0.05, 0.06, hair, [0.03, 1.835, -0.1], [0.25, 0, 0]); // quiff
+    } else {
+      k.box(0.2, 0.028, 0.03, hair, [0, 1.726, -0.112]); // brow
+      for (const side of [-1, 1]) {
+        k.box(0.05, 0.032, 0.012, 0xf2efe6, [side * 0.052, 1.694, -0.114]);
+        k.box(0.022, 0.026, 0.014, ink, [side * 0.047, 1.692, -0.117]);
+      }
+      if (v === 1) k.box(0.208, 0.09, 0.225, hair, [0, 1.572, 0.002]); // beard
+      else k.box(0.075, 0.014, 0.012, 0x5a2a22, [0, 1.586, -0.107]); // mouth
+      if (v === 0) k.box(0.105, 0.03, 0.022, hair, [0, 1.613, -0.113]); // moustache
+      if (v === 2) {
+        // beanie
+        k.taper(0.245, 0.12, 0.245, 0.8, 0.8, hat, [0, 1.815, 0.005]);
+        k.box(0.255, 0.045, 0.255, shade(hat, 0.84), [0, 1.768, 0.005]);
+      } else {
+        // hard hat: dome, brim, ridge
+        k.sphere(0.145, hat, [0, 1.79, 0.005], 1, [1, 0.72, 1.08]);
+        k.box(0.3, 0.022, 0.37, hat, [0, 1.79, -0.02]);
+        k.box(0.045, 0.03, 0.26, shade(hat, 0.86), [0, 1.895, 0.005]);
+        if (v === 1) {
+          k.box(0.18, 0.05, 0.03, ink, [0, 1.845, -0.135]); // goggles pushed up
+          k.box(0.07, 0.034, 0.012, 0x7fd0e8, [-0.045, 1.845, -0.152]);
+          k.box(0.07, 0.034, 0.012, 0x7fd0e8, [0.045, 1.845, -0.152]);
+        }
+      }
+    }
+
+    // arms: rolled sleeves and work gloves (the agent keeps his cuffs)
     for (const side of [-1, 1]) {
-      const x = side * (s.shoulderX - 0.02);
+      const x = side * (s.shoulderX - 0.005);
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
       k.curBone = up;
-      k.box(0.11, 0.3, 0.12, shirt, [x, s.shoulderY - 0.13, 0]);
+      k.sphere(0.072, shirt, [x, s.shoulderY + 0.005, 0]);
+      k.taper(0.1, 0.27, 0.11, 1.18, 1.12, shirt, [x, s.shoulderY - 0.145, 0]);
+      if (!agent) k.box(0.115, 0.04, 0.125, shirtL, [x, s.shoulderY - 0.258, 0]);
       k.curBone = fo;
       const ey = s.shoulderY - s.upperArm;
-      k.box(0.095, 0.24, 0.1, shirt, [x, ey - 0.11, 0]);
-      k.box(0.09, 0.09, 0.1, 0x6a4a36, [x, ey - 0.28, 0]); // work glove
+      if (agent) {
+        k.taper(0.085, 0.2, 0.09, 1.2, 1.15, shirt, [x, ey - 0.1, 0]);
+        k.box(0.095, 0.03, 0.1, PAL.shirt, [x, ey - 0.21, 0]);
+        k.box(0.08, 0.09, 0.09, skin, [x, ey - 0.27, 0]);
+        k.box(0.028, 0.05, 0.036, skin, [x, ey - 0.25, -0.058]);
+      } else {
+        k.taper(0.075, 0.19, 0.08, 1.3, 1.25, skin, [x, ey - 0.1, 0]);
+        k.box(0.102, 0.035, 0.107, shade(glove, 0.78), [x, ey - 0.207, 0]);
+        k.box(0.095, 0.1, 0.105, glove, [x, ey - 0.272, 0]);
+        k.box(0.03, 0.05, 0.04, glove, [x, ey - 0.252, -0.066]);
+      }
     }
+
+    // legs: tapered, knee pads, proper boots
     for (const side of [-1, 1]) {
       const x = side * s.hipX;
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const ky = s.hip - s.thigh;
       k.curBone = th;
-      k.box(0.14, 0.46, 0.15, pants, [x, s.hip - 0.21, 0]);
+      k.taper(0.115, 0.45, 0.135, 1.28, 1.15, pants, [x, s.hip - 0.215, 0]);
       k.curBone = sn;
-      k.box(0.125, 0.36, 0.14, pants, [x, ky - 0.19, 0]);
-      k.box(0.13, 0.1, 0.27, 0x3a2a20, [x, 0.05, -0.05]); // boots
+      k.taper(0.1, 0.35, 0.115, 1.22, 1.15, pants, [x, ky - 0.185, 0]);
+      if (agent) {
+        k.box(0.11, 0.07, 0.27, ink, [x, 0.05, -0.05]); // dress shoes
+        k.box(0.115, 0.02, 0.29, 0x05060a, [x, 0.01, -0.055]);
+      } else {
+        k.box(0.125, 0.1, 0.05, ink, [x, ky - 0.045, -0.078]); // knee pad
+        k.box(0.136, 0.025, 0.14, ink, [x, ky - 0.045, 0]);
+        k.box(0.13, 0.15, 0.16, leather, [x, 0.105, 0.005]); // boot shaft
+        k.box(0.13, 0.09, 0.13, leather, [x, 0.075, -0.135]); // toe
+        k.box(0.134, 0.05, 0.05, shade(leather, 1.35), [x, 0.08, -0.182]); // toe cap
+        k.box(0.142, 0.03, 0.31, ink, [x, 0.015, -0.06]); // sole
+      }
     }
     this.muzzle.position.set(0, -0.3, -0.5);
     this.bones[B.foreR].add(this.muzzle);

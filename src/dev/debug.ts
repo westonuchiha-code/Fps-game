@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import type { Game } from '../game';
 import { rollShield, rollWeapon, type Brand, type Rarity, type WeaponClass } from '../weapons/items';
 import type { ClipName } from '../weapons/clips';
+import { CharAnim, CharModel, PALETTES, type CharKind } from '../ai/charModel';
 import { setLayer } from '../render/kit';
 import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
 
@@ -9,6 +10,39 @@ import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
 export function installDebug(game: Game) {
   const anchor = new THREE.Object3D();
   const d = {
+    /**
+     * Stand one of every character in a row in mid-air and point the camera at them: the way to
+     * judge character art. `aim` 0..1 raises their weapons; `turn` spins them (radians).
+     */
+    lineup(aim = 0.6, turn = 0.5, close = false) {
+      const cast: [CharKind, string, number][] = [['assoc', 'assoc', 0], ['super', 'super', 0], ['striker', 'striker', 0], ['striker', 'striker', 1], ['striker', 'striker', 2], ['striker', 'striker', 99], ['manager', 'manager', 0]];
+      const y = 200;
+      const floor = new THREE.Mesh(new THREE.BoxGeometry(40, 0.2, 12), new THREE.MeshBasicMaterial({ color: 0x9aa0a8 }));
+      floor.position.set(0, y - 0.1, 0);
+      game.scene.add(floor);
+      // studio light from the camera side, so the art is judged lit rather than in silhouette
+      const key = new THREE.DirectionalLight(0xffffff, 2.2);
+      key.position.set(3, y + 6, -8);
+      key.target.position.set(0, y + 1, 0);
+      game.scene.add(key, key.target);
+      let x = close ? -3.2 : -5.2;
+      for (const [kind, pal, variant] of cast) {
+        if (close && kind === 'manager') continue;
+        const m = new CharModel(kind, PALETTES[pal], variant);
+        const a = new CharAnim(m);
+        a.aim = aim;
+        a.twoHanded = kind === 'striker';
+        x += kind === 'manager' ? 2.4 : 1.25;
+        m.root.position.set(x, y, 0);
+        m.root.rotation.y = turn;
+        game.scene.add(m.root);
+        for (let i = 0; i < 40; i++) a.update(1 / 30);
+      }
+      game.hud.setVisible(false);
+      game.view.root.visible = false;
+      if (close) d.cam(1.2, y + 1.5, -6.6, 1.2, y + 1.0, 0, 36);
+      else d.cam(0.9, y + 1.9, -9.5, 0.9, y + 1.35, 0, 42);
+    },
     /** The item generator, for checks (they cannot import source modules from a production build). */
     items: { rollWeapon, rollShield },
     /** Give + equip a specific roll. */
