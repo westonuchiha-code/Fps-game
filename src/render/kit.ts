@@ -40,6 +40,8 @@ export interface LoftOpts {
   from?: number;
   to?: number;
   pick?: (seg: number, side: number) => boolean;
+  /** push points around after the sections are laid out, like thumbing clay (muscle, a seat) */
+  sculpt?: (p: THREE.Vector3, ring: number, side: number) => void;
 }
 
 /**
@@ -73,7 +75,9 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
         px += (px / len) * grow;
         pz += (pz / len) * grow;
       }
-      row.push(new THREE.Vector3(px + (r.x ?? 0), r.y, pz + (r.z ?? 0)));
+      const v = new THREE.Vector3(px + (r.x ?? 0), r.y, pz + (r.z ?? 0));
+      if (o.sculpt && (r.w > 0 || r.f > 0 || r.b > 0)) o.sculpt(v, j, k);
+      row.push(v);
     }
     P.push(row);
   }
@@ -297,7 +301,7 @@ export class Kit {
    * Extrude a 2D side profile. Points are [z, y] pairs (z = along the barrel, forward is NEGATIVE z,
    * y = up); the shape is given `width` along x, centred. Great for receivers, grips and stocks.
    */
-  profile(pts: [number, number][], width: number, color: number, pos: V3 = [0, 0, 0], bevel = 0) {
+  profile(pts: [number, number][], width: number, color: number, pos: V3 = [0, 0, 0], bevel = 0, rot: V3 = [0, 0, 0]) {
     const shape = new THREE.Shape();
     // map profile (z,y) -> shape (x= -z, y) so that after rotating the extrusion, forward ends up at -z
     pts.forEach((p, i) => (i === 0 ? shape.moveTo(-p[0], p[1]) : shape.lineTo(-p[0], p[1])));
@@ -313,7 +317,7 @@ export class Kit {
     // extrusion runs along +z in shape space; rotate so shape-x -> -z (forward) and depth -> x
     g.translate(0, 0, -(width - bevel * 2) / 2);
     g.rotateY(Math.PI / 2);
-    this.add(g, color, pos);
+    this.add(g, color, pos, rot);
     g.dispose();
     return this;
   }

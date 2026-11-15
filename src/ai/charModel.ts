@@ -410,7 +410,27 @@ export class CharModel {
 
     // hips, with the belt painted on
     k.curBone = B.pelvis;
-    k.loft([R(0.838, 0, 0, 0), R(0.845, 0.04, 0.05, 0.05), R(0.875, 0.11, 0.082, 0.078), R(0.92, 0.17, 0.092, 0.088), R(0.98, 0.166, 0.096, 0.094), R(1.03, 0.15, 0.097, 0.096), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)], (seg) => (seg === 5 ? leather : pants), { sides: 16 });
+    // The seat is sculpted into the one hip form: two cheeks either side of a cleft, fullest low
+    // down, tucking in sharply underneath where the backs of the thighs come out.
+    const hips: Ring[] = [R(0.838, 0, 0, 0), R(0.845, 0.04, 0.05, 0.05), R(0.865, 0.1, 0.078, 0.05), R(0.885, 0.135, 0.086, 0.06), R(0.905, 0.166, 0.09, 0.092), R(0.925, 0.172, 0.092, 0.092), R(0.945, 0.17, 0.094, 0.09), R(0.965, 0.168, 0.095, 0.092), R(0.985, 0.166, 0.096, 0.094), R(1.03, 0.15, 0.097, 0.096), R(1.09, 0.137, 0.095, 0.092), R(1.1, 0, 0, 0)];
+    const seat = (p: THREE.Vector3, ring: number) => {
+      if (p.z <= 0) return;
+      const y = p.y;
+      // gather the points toward the middle so the cleft is a crease, not a wide valley
+      const w = hips[ring].w;
+      p.x = Math.sign(p.x) * Math.pow(Math.abs(p.x) / w, 1 + 0.6 * clamp((1 - y) / 0.05, 0, 1)) * w;
+      const gx = Math.exp(-(((Math.abs(p.x) - 0.075) / 0.045) ** 2)); // 1 at the middle of each cheek
+      const gy = y < 0.89 ? 0 : y < 0.915 ? 0.55 : y <= 0.95 ? 1 : Math.exp(-(((y - 0.95) / 0.05) ** 2));
+      const cleft = (y < 0.93 ? clamp((y - 0.855) / 0.035, 0, 1) : Math.exp(-(((y - 0.93) / 0.035) ** 2))) * Math.exp(-((p.x / 0.018) ** 2));
+      p.z = Math.max(0.005, p.z + 0.036 * gy * gx - 0.05 * cleft);
+      // each cheek hangs lowest at its middle, so the fold under it is an arc
+      p.y -= 0.028 * gx * clamp((0.95 - y) / 0.045, 0, 1);
+    };
+    k.loft(
+      hips,
+      (seg) => (seg === 9 ? leather : pants),
+      { sides: 32, sculpt: seat },
+    );
 
     // torso: waist, ribcage, chest, shoulders sloping up into the neck
     k.curBone = B.chest;
@@ -453,12 +473,14 @@ export class CharModel {
       return skin;
     }, { sides: 16 });
     for (const side of [-1, 1]) {
-      // ears: a flat flap set into the head at the front and standing off it at the back, with a
-      // darker hollow so it reads as an ear rather than a button
-      const g = new THREE.SphereGeometry(0.03, 8, 6);
-      k.add(g, skin, [side * 0.074, y0 + 0.102, 0.03], [0, -side * 0.6, 0], true, [0.2, 1.05, 0.62]);
-      k.add(g, shade(skin, 0.78), [side * 0.0795, y0 + 0.1, 0.03], [0, -side * 0.6, 0], true, [0.12, 0.62, 0.34]);
-      g.dispose();
+      // ears: a thin plate in the outline of an ear, joined to the head along its front edge and
+      // standing off it at the back, with the hollow drawn on in a darker tone
+      const ear: [number, number][] = [[0, 0.032], [0.009, 0.037], [0.023, 0.034], [0.032, 0.022], [0.034, 0.005], [0.03, -0.011], [0.02, -0.024], [0.011, -0.033], [0.003, -0.035], [0, -0.028]];
+      const tilt = 0.62;
+      const ex = side * 0.08;
+      k.profile(ear, 0.008, skin, [ex, y0 + 0.1, 0.016], 0, [0, side * tilt, 0]);
+      const hollow = ear.map(([z, y]): [number, number] => [0.007 + z * 0.6, y * 0.6 + 0.002]);
+      k.profile(hollow, 0.002, shade(skin, 0.72), [ex + side * 0.0042 * Math.cos(tilt), y0 + 0.1, 0.016 - 0.0042 * Math.sin(tilt)], 0, [0, side * tilt, 0]);
     }
     if (!agent && v === 2) {
       // beanie with a turned-up cuff
@@ -494,7 +516,7 @@ export class CharModel {
       const sn = side < 0 ? B.shinL : B.shinR;
       const L = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, x, n: 2.3, ...extra });
       k.curBone = th;
-      k.loft([L(0.995, 0, 0, 0), L(0.985, 0.05, 0.05, 0.07), L(0.95, 0.082, 0.08, 0.106, { x: side * 0.084 }), L(0.905, 0.088, 0.088, 0.114, { x: side * 0.082 }), L(0.86, 0.084, 0.086, 0.1, { x: side * 0.085 }), L(0.825, 0.077, 0.084, 0.086), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
+      k.loft([L(0.955, 0, 0, 0), L(0.945, 0.06, 0.07, 0.06), L(0.9, 0.076, 0.088, 0.072), L(0.855, 0.078, 0.086, 0.09), L(0.76, 0.076, 0.082, 0.082), L(0.6, 0.064, 0.068, 0.066), L(0.5, 0.056, 0.058, 0.058), L(0.44, 0.05, 0.05, 0.052), L(0.43, 0, 0, 0)], pants, { sides: 10 });
       k.curBone = sn;
       k.loft([L(0.5, 0, 0, 0), L(0.49, 0.05, 0.05, 0.05), L(0.46, 0.054, 0.058, 0.054, { nose: 0.008, nw: 0.04 }), L(0.36, 0.052, 0.05, 0.064), L(0.2, 0.04, 0.04, 0.044), L(0.1, 0.036, 0.036, 0.04), L(0.09, 0, 0, 0)], (seg, d) => (!agent && seg >= 1 && seg <= 2 && d < 2 ? ink : pants), { sides: 10 });
       const boot = agent ? ink : leather;
