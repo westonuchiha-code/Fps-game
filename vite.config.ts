@@ -72,8 +72,8 @@ function levelFiles(): Plugin {
 }
 
 /**
- * Build-only: bundle each folder of small sound files into one `<folder>.pack` so a player makes
- * one request instead of a few hundred. The runtime side and the layout are in src/audio/pack.ts.
+ * Build-only: bundle each folder of small sound files into one `<folder>-pack.json` so a player
+ * makes one request instead of a few hundred. The runtime side is src/audio/pack.ts.
  */
 function soundPacks(folders: string[]): Plugin {
   let outDir = 'dist';
@@ -88,22 +88,12 @@ function soundPacks(folders: string[]): Plugin {
         const dir = path.join(outDir, 'audio', name);
         if (!fs.existsSync(dir)) continue;
         const files = fs.readdirSync(dir).filter((f) => fs.statSync(path.join(dir, f)).isFile()).sort();
-        const index: Record<string, [number, number]> = {};
-        const parts: Buffer[] = [];
-        let at = 0;
-        for (const f of files) {
-          const b = fs.readFileSync(path.join(dir, f));
-          index[f] = [at, b.length];
-          parts.push(b);
-          at += b.length;
-        }
-        const head = Buffer.from(JSON.stringify(index), 'utf8');
-        const pre = Buffer.alloc(8);
-        pre.write('EMGP', 0, 'latin1');
-        pre.writeUInt32LE(head.length, 4);
-        fs.writeFileSync(path.join(outDir, 'audio', name + '.pack'), Buffer.concat([pre, head, ...parts]));
+        const pack: Record<string, string> = {};
+        for (const f of files) pack[f] = fs.readFileSync(path.join(dir, f)).toString('base64');
+        const json = JSON.stringify(pack);
+        fs.writeFileSync(path.join(outDir, 'audio', name + '-pack.json'), json);
         fs.rmSync(dir, { recursive: true });
-        console.log(`  audio/${name}.pack  ${files.length} files, ${((at + head.length + 8) / 1e6).toFixed(2)} MB`);
+        console.log(`  audio/${name}-pack.json  ${files.length} files, ${(json.length / 1e6).toFixed(2)} MB`);
       }
     },
   };

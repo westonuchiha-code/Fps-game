@@ -123,6 +123,7 @@ export class Input {
   readonly simMove = { x: 0, y: 0 };
   readonly simLook = { x: 0, y: 0 };
   private lastTouch = -1e9;
+  private padsAllowed = true;
   onAnyInput: (() => void) | null = null;
   onLockChange: ((locked: boolean) => void) | null = null;
 
@@ -298,7 +299,15 @@ export class Input {
 
     // gamepad
     this.padLooking = false;
-    const pads = navigator.getGamepads ? navigator.getGamepads() : [];
+    let pads: readonly (Gamepad | null)[] = [];
+    if (this.padsAllowed) {
+      try {
+        pads = navigator.getGamepads ? navigator.getGamepads() : [];
+      } catch {
+        // a page that embeds the game can forbid controllers; keyboard and mouse still work
+        this.padsAllowed = false;
+      }
+    }
     for (const pad of pads) {
       if (!pad || !pad.connected || pad.mapping !== 'standard') continue;
       const dz = (v: number, d = 0.16) => (Math.abs(v) < d ? 0 : (v - Math.sign(v) * d) / (1 - d));

@@ -34,7 +34,7 @@ const voManifest = voManifestRaw as unknown as Record<string, { dur: number; who
 export const dialogue = dialogueRaw as unknown as DialogueData;
 
 const BASE = import.meta.env.BASE_URL + 'audio/';
-/** Folders a production build ships as one `<folder>.pack` file (vite.config.ts → soundPacks). */
+/** Folders a production build ships as one `<folder>-pack.json` file (vite.config.ts → soundPacks). */
 const PACKED: readonly string[] = import.meta.env.PROD ? ['sfx', 'vo'] : [];
 
 export interface PlayOpts {
@@ -188,7 +188,7 @@ export class AudioSys {
   private pack(dir: string) {
     let p = this.packs.get(dir);
     if (!p) {
-      p = SoundPack.load(BASE + dir + '.pack');
+      p = SoundPack.load(BASE + dir + '-pack.json');
       this.packs.set(dir, p);
     }
     return p;
