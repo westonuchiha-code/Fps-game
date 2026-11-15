@@ -428,6 +428,25 @@ export class CharModel {
       k.loft([R(1.16, 0, 0, 0), R(1.17, 0.1, 0.02, 0.07), R(1.2, 0.115, 0.02, 0.095), R(1.4, 0.115, 0.02, 0.09), R(1.44, 0.09, 0.02, 0.06), R(1.45, 0, 0, 0)].map((r) => ({ ...r, z: 0.1, n: 3.4 })), 0x4a4f3a);
       k.cyl(0.05, 0.05, 0.27, 0x7a6a44, [0, 1.47, 0.16], 'x', 12, true);
     }
+    // shirt details: collar points, button placket, buttons, shoulder seams
+    if (!agent) {
+      const sd = shade(shirt, 0.7);
+      const fz = (y: number) => {
+        // front surface of the vest's centre strip at height y
+        for (let i = 1; i < torso.length; i++) if (torso[i].y >= y) {
+          const a = torso[i - 1], b = torso[i];
+          const t = (y - a.y) / (b.y - a.y || 1);
+          return -(a.f + (b.f - a.f) * t) - 0.012;
+        }
+        return -0.1;
+      };
+      for (const side of [-1, 1]) k.profile([[0, 0.03], [0.004, -0.015], [0.03, 0.022]].map(([z, y]): [number, number] => [z, y]), 0.006, shade(shirt, 1.12), [side * 0.034, 1.468, fz(1.468) - 0.006], 0, [0.35, side * 0.5, 0]);
+      k.loft(torso.slice(2, 9), sd, { sides: 64, grow: 0.0135, from: -1, to: 1 }); // placket, on the shirt's own surface
+      for (const y of [1.15, 1.23, 1.31, 1.39]) k.sphere(0.0065, 0xd8d2c0, [0, y, fz(y) - 0.006], 1, [1, 1, 0.5], true);
+      for (const side of [-1, 1]) k.box(0.006, 0.006, 0.17, sd, [side * 0.17, 1.462, 0.0], [0, 0, side * -0.55]); // shoulder seam
+    } else {
+      for (const y of [1.29, 1.35, 1.41]) k.sphere(0.006, ink, [0, y, -(y < 1.35 ? 0.128 : 0.12)], 1, [1, 1, 0.5], true); // shirt studs
+    }
     // neck, and the Local 404 red bandana round it
     k.loft([R(1.46, 0.056, 0.05, 0.056), R(1.56, 0.05, 0.046, 0.054)], skin, { sides: 12 });
     if (!agent) k.loft([R(1.485, 0.06, 0.056, 0.06), R(1.5, 0.074, 0.074, 0.07), R(1.53, 0.07, 0.066, 0.068), R(1.552, 0.054, 0.048, 0.056)], 0xb5382e, { sides: 12 });
@@ -480,6 +499,9 @@ export class CharModel {
       const A = (y: number, w: number, f: number, b: number): Ring => ({ y, w: w * 1.12, f: f * 1.12, b: b * 1.12, x, n: 2.2 });
       k.curBone = up;
       k.loft([A(sy + 0.058, 0, 0, 0), A(sy + 0.05, 0.03, 0.04, 0.04), A(sy + 0.02, 0.052, 0.062, 0.06), A(sy - 0.04, 0.054, 0.06, 0.056), A(sy - 0.14, 0.048, 0.055, 0.048), A(ey + 0.03, 0.044, 0.046, 0.046), A(ey - 0.015, 0.045, 0.046, 0.047), A(ey - 0.025, 0, 0, 0)], (seg) => (seg === 5 ? cuff : shirt), { sides: 10 });
+      if (!agent) {
+        k.loft([A(ey + 0.04, 0, 0, 0), A(ey + 0.038, 0.05, 0.051, 0.051), A(ey + 0.01, 0.052, 0.053, 0.053), A(ey - 0.004, 0.051, 0.052, 0.052), A(ey - 0.01, 0.047, 0.048, 0.048), A(ey - 0.012, 0, 0, 0)], (seg) => (seg === 2 ? shade(cuff, 0.85) : cuff), { sides: 10 });
+      } else k.loft([A(ey - 0.19, 0, 0, 0), A(ey - 0.19, 0.032, 0.034, 0.034), A(ey - 0.215, 0.031, 0.033, 0.033), A(ey - 0.217, 0, 0, 0)].map((r) => ({ ...r, y: r.y })), PAL.shirt, { sides: 10 });
       k.curBone = fo;
       k.loft([A(ey + 0.03, 0, 0, 0), A(ey + 0.022, 0.04, 0.04, 0.04), A(ey - 0.03, 0.045, 0.047, 0.045), A(ey - 0.13, 0.041, 0.042, 0.04), A(ey - 0.23, 0.027, 0.029, 0.029), A(ey - 0.24, 0, 0, 0)], (seg) => (agent ? (seg === 3 ? PAL.shirt : shirt) : skin), { sides: 10 });
       this.hand(k, x, ey - 0.23, side, glove);
