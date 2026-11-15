@@ -27,6 +27,10 @@ decisions. The short version of the brief:
   fluidsynth + FluidR3_GM, sox, ffmpeg, pico2wave, RHVoice, espeak-ng, flite). Dialogue text
   lives in `src/data/dialogue.json`; re-run `tools/voice/gen_voice.py` after editing it.
 - The global game instance is `G` (`src/core/globals.ts`). No per-frame allocations in hot paths.
+- **One page, two apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
+  address ends in `#editor` and the game otherwise. They hand over through `src/core/nav.ts`
+  (`openEditor()`, `openGame(note)`), never through query strings or separate pages, so the pair
+  also works on hosts that only serve one page. Wrap every browser-storage access in try/catch.
 
 ## Verifying changes
 
@@ -42,6 +46,6 @@ In the eval, `game` is the Game; set `game.manual = true` and advance with
 (hold inputs), `botFight`, `gun`, `pose`, `rigView`, `overview`, `cam`. Look at the screenshot.
 `npm run typecheck` must pass; `npm run build` must succeed. `npm test` (real-input smoke test)
 and `npm run check` (scripted gameplay checks in `tools/checks/`) must pass; add a check when you
-add a mechanic. Checks are flaky while files are being saved (Vite reloads the page): run them
+add a mechanic. `node tools/editor-shot.mjs` covers the level editor (dev server only). Checks are flaky while files are being saved (Vite reloads the page): run them
 against a build instead with `npm run build && npx vite preview --port 4173` and
 `GAME_URL=http://localhost:4173/ npm test`.

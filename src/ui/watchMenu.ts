@@ -995,7 +995,13 @@ export class WatchMenu {
         (o.value
           ? `<span class="wm-v">${o.adjust ? '<b class="wm-arr" data-d="-1">◂</b>' : ''}<span>${esc(val)}</span>${o.adjust ? '<b class="wm-arr" data-d="1">▸</b>' : ''}</span>`
           : '');
-      b.addEventListener('pointerenter', () => this.select(i));
+      // Hover selects, but only when the mouse itself moves over the label. Browsers also report
+      // "the pointer entered" when an element appears or slides under a pointer that is not moving
+      // (new labels start life stacked in the corner, and a phone's phantom mouse sits there), and
+      // that must not steal the selection.
+      b.addEventListener('pointermove', (e) => {
+        if (e.pointerType === 'mouse' && this.page.sel !== i) this.select(i);
+      });
       b.addEventListener('click', (e) => {
         e.stopPropagation();
         const arr = (e.target as HTMLElement).closest('.wm-arr') as HTMLElement | null;

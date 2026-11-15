@@ -7,7 +7,7 @@ const log = [];
 let pass = true;
 const expect = (cond, msg) => { log.push((cond ? 'ok   ' : 'FAIL ') + msg); if (!cond) pass = false; };
 const V = (x, y, z) => pl.pos.clone().set(x, y, z);
-const items = await import('/src/weapons/items.ts');
+const items = game.debug.items;
 for (const [x, z] of [[-6, -14], [0, -16], [5, -15]]) ai.spawnEnemy('assoc', V(x, 0, z), { yaw: Math.PI, squad: 'A' });
 ai.spawnEnemy('super', V(2, 0, -18), { yaw: Math.PI, squad: 'A' });
 ai.spawnEnemy('drone', V(10, 0, -10), {});

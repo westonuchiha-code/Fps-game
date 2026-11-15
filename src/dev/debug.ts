@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import type { Game } from '../game';
-import { rollWeapon, type Brand, type Rarity, type WeaponClass } from '../weapons/items';
+import { rollShield, rollWeapon, type Brand, type Rarity, type WeaponClass } from '../weapons/items';
 import type { ClipName } from '../weapons/clips';
 import { setLayer } from '../render/kit';
 import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
@@ -9,6 +9,8 @@ import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
 export function installDebug(game: Game) {
   const anchor = new THREE.Object3D();
   const d = {
+    /** The item generator, for checks (they cannot import source modules from a production build). */
+    items: { rollWeapon, rollShield },
     /** Give + equip a specific roll. */
     gun(cls: WeaponClass, brand?: Brand, rarity: Rarity = 2, seed = 7, slot = 0) {
       const item = rollWeapon(3, { cls, brand, rarity, seed });

@@ -1,0 +1,888 @@
+{
+ "format": 1,
+ "id": "sandbox",
+ "title": "Sandbox Yard",
+ "number": "EXAMPLE",
+ "sky": "dawn",
+ "enemyLevel": 2,
+ "music": "m01",
+ "killY": -30,
+ "spawn": {
+  "pos": [
+   0,
+   0.1,
+   30
+  ],
+  "yaw": 0
+ },
+ "winOnAllDead": false,
+ "objects": [
+  {
+   "id": "floor",
+   "type": "box",
+   "pos": [
+    0,
+    -0.5,
+    0
+   ],
+   "size": [
+    80,
+    1,
+    80
+   ],
+   "mat": "asphalt",
+   "color": "#4b4852",
+   "uv": 6,
+   "name": "floor",
+   "group": "structure",
+   "locked": true
+  },
+  {
+   "id": "boxs6w95",
+   "type": "box",
+   "pos": [
+    0,
+    2.5,
+    -40
+   ],
+   "size": [
+    80,
+    5,
+    1
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs6wj7",
+   "type": "box",
+   "pos": [
+    0,
+    2.5,
+    40
+   ],
+   "size": [
+    80,
+    5,
+    1
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs6wr9",
+   "type": "box",
+   "pos": [
+    -40,
+    2.5,
+    0
+   ],
+   "size": [
+    1,
+    5,
+    80
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs6x0b",
+   "type": "box",
+   "pos": [
+    40,
+    2.5,
+    0
+   ],
+   "size": [
+    1,
+    5,
+    80
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs6x9d",
+   "type": "box",
+   "pos": [
+    -22,
+    1.5,
+    -18
+   ],
+   "size": [
+    16,
+    3,
+    12
+   ],
+   "mat": "panel",
+   "color": "#8d8880",
+   "uv": 3,
+   "name": "deck",
+   "group": "structure"
+  },
+  {
+   "id": "ramps6xij",
+   "type": "ramp",
+   "pos": [
+    -22,
+    0,
+    -8
+   ],
+   "size": [
+    5,
+    3,
+    8
+   ],
+   "mat": "concrete",
+   "color": "#b9b3a8",
+   "uv": 4,
+   "rot": [
+    0,
+    3.141592653589793,
+    0
+   ],
+   "group": "structure"
+  },
+  {
+   "id": "boxs6xql",
+   "type": "box",
+   "pos": [
+    -22,
+    3.6,
+    -23.7
+   ],
+   "size": [
+    16,
+    1.2,
+    0.4
+   ],
+   "mat": "hazard",
+   "color": "#e0a82e",
+   "uv": 2,
+   "group": "structure"
+  },
+  {
+   "id": "ps6xym",
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    10,
+    0,
+    -8
+   ],
+   "rot": [
+    0,
+    1.5708,
+    0
+   ],
+   "group": "cover",
+   "color": "#b5442f"
+  },
+  {
+   "id": "ps6ycn",
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    10,
+    2.6,
+    -8
+   ],
+   "rot": [
+    0,
+    1.5708,
+    0
+   ],
+   "group": "cover",
+   "color": "#2f6f9f"
+  },
+  {
+   "id": "ps6ymo",
+   "type": "prop",
+   "prop": "container",
+   "pos": [
+    18,
+    0,
+    6
+   ],
+   "rot": [
+    0,
+    0.3,
+    0
+   ],
+   "group": "cover",
+   "color": "#2e9b8f"
+  },
+  {
+   "id": "ps6yvp",
+   "type": "prop",
+   "prop": "container_open",
+   "pos": [
+    -10,
+    0,
+    10
+   ],
+   "group": "cover",
+   "color": "#e0a82e"
+  },
+  {
+   "id": "ps6z4q",
+   "type": "prop",
+   "prop": "crate_big",
+   "pos": [
+    2,
+    0,
+    4
+   ],
+   "rot": [
+    0,
+    0.4,
+    0
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps6zcr",
+   "type": "prop",
+   "prop": "crate",
+   "pos": [
+    3.4,
+    0,
+    5.2
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps6zls",
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    -4,
+    0,
+    16
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps6ztt",
+   "type": "prop",
+   "prop": "barrier",
+   "pos": [
+    4,
+    0,
+    16
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps702u",
+   "type": "prop",
+   "prop": "sandbags",
+   "pos": [
+    0,
+    0,
+    -14
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps70bv",
+   "type": "prop",
+   "prop": "pallet_load",
+   "pos": [
+    24,
+    0,
+    -20
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps70jw",
+   "type": "prop",
+   "prop": "boxes",
+   "pos": [
+    -30,
+    0,
+    20
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps70sx",
+   "type": "prop",
+   "prop": "forklift",
+   "pos": [
+    -28,
+    0,
+    4
+   ],
+   "rot": [
+    0,
+    1.2,
+    0
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps712y",
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    -36,
+    0,
+    36
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps71bz",
+   "type": "prop",
+   "prop": "lamp",
+   "pos": [
+    36,
+    0,
+    36
+   ],
+   "group": "cover"
+  },
+  {
+   "id": "ps71j10",
+   "type": "prop",
+   "prop": "billboard",
+   "pos": [
+    0,
+    0,
+    -38
+   ],
+   "group": "cover",
+   "text": "EVERYTHING MUST GO"
+  },
+  {
+   "id": "ps71v11",
+   "type": "prop",
+   "prop": "union_sign",
+   "pos": [
+    -6,
+    1.6,
+    39.45
+   ],
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "text": "SANDBOX YARD - LOCAL 404"
+  },
+  {
+   "id": "boxs72513",
+   "type": "box",
+   "pos": [
+    28,
+    2,
+    -30
+   ],
+   "size": [
+    0.5,
+    4,
+    8
+   ],
+   "mat": "hazard",
+   "color": "#e0a82e",
+   "uv": 2,
+   "name": "yard_gate",
+   "dynamic": true,
+   "group": "structure"
+  },
+  {
+   "id": "boxs72b15",
+   "type": "box",
+   "pos": [
+    28,
+    2.5,
+    -21
+   ],
+   "size": [
+    0.5,
+    5,
+    10
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs72g17",
+   "type": "box",
+   "pos": [
+    28,
+    2.5,
+    -37
+   ],
+   "size": [
+    0.5,
+    5,
+    6
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "boxs72l19",
+   "type": "box",
+   "pos": [
+    34.25,
+    2.5,
+    -16
+   ],
+   "size": [
+    12,
+    5,
+    0.5
+   ],
+   "mat": "corrugated",
+   "color": "#7d8a99",
+   "uv": 3,
+   "group": "structure"
+  },
+  {
+   "id": "ens72q1a",
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    8,
+    0,
+    -14
+   ],
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "squad": "A",
+   "group": "squad A",
+   "patrol": [
+    [
+     0,
+     0,
+     -18
+    ],
+    [
+     -8,
+     0,
+     -12
+    ]
+   ]
+  },
+  {
+   "id": "ens72z1b",
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    14,
+    0,
+    -2
+   ],
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "squad": "A",
+   "group": "squad A"
+  },
+  {
+   "id": "ens7361c",
+   "type": "enemy",
+   "kind": "super",
+   "pos": [
+    12,
+    0,
+    -12
+   ],
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "squad": "A",
+   "group": "squad A"
+  },
+  {
+   "id": "ens73i1d",
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    -22,
+    3,
+    -20
+   ],
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "squad": "A",
+   "group": "squad A",
+   "hold": true
+  },
+  {
+   "id": "ens73p1e",
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    32,
+    0,
+    -30
+   ],
+   "rot": [
+    0,
+    -1.5708,
+    0
+   ],
+   "squad": "B",
+   "tag": "wave2",
+   "group": "squad B"
+  },
+  {
+   "id": "ens73w1f",
+   "type": "enemy",
+   "kind": "assoc",
+   "pos": [
+    34,
+    0,
+    -26
+   ],
+   "rot": [
+    0,
+    -1.5708,
+    0
+   ],
+   "squad": "B",
+   "tag": "wave2",
+   "group": "squad B"
+  },
+  {
+   "id": "ens7431g",
+   "type": "enemy",
+   "kind": "drone",
+   "pos": [
+    30,
+    0,
+    -34
+   ],
+   "rot": [
+    0,
+    -1.5708,
+    0
+   ],
+   "squad": "B",
+   "tag": "wave2",
+   "group": "squad B"
+  },
+  {
+   "id": "ens74b1h",
+   "type": "enemy",
+   "kind": "manager",
+   "pos": [
+    36,
+    0,
+    -32
+   ],
+   "rot": [
+    0,
+    -1.5708,
+    0
+   ],
+   "squad": "B",
+   "tag": "wave2",
+   "group": "squad B",
+   "level": 3
+  },
+  {
+   "id": "lks74k1i",
+   "type": "locker",
+   "pos": [
+    -22,
+    3,
+    -23
+   ],
+   "luck": 2,
+   "rot": [
+    0,
+    3.14159,
+    0
+   ],
+   "name": "deck_locker"
+  },
+  {
+   "id": "pks74r1j",
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    -3,
+    0,
+    20
+   ]
+  },
+  {
+   "id": "pks74v1k",
+   "type": "pickup",
+   "kind": "health",
+   "pos": [
+    3,
+    0,
+    20
+   ]
+  },
+  {
+   "id": "pks74z1l",
+   "type": "pickup",
+   "kind": "ammo",
+   "pos": [
+    16,
+    0,
+    10
+   ],
+   "cls": "shotgun",
+   "amount": 24
+  },
+  {
+   "id": "pks7551m",
+   "type": "pickup",
+   "kind": "mine",
+   "pos": [
+    -12,
+    0,
+    10
+   ]
+  },
+  {
+   "id": "pks7591n",
+   "type": "pickup",
+   "kind": "cash",
+   "pos": [
+    -20,
+    3,
+    -14
+   ]
+  },
+  {
+   "id": "wps75d1o",
+   "type": "weapon",
+   "pos": [
+    0,
+    0,
+    22
+   ],
+   "cls": "rifle",
+   "rarity": 1
+  },
+  {
+   "id": "brs75k1p",
+   "type": "barrel",
+   "pos": [
+    8,
+    0,
+    -4
+   ]
+  },
+  {
+   "id": "brs75o1q",
+   "type": "barrel",
+   "pos": [
+    9,
+    0,
+    -3
+   ]
+  },
+  {
+   "id": "brs75r1r",
+   "type": "barrel",
+   "pos": [
+    30,
+    0,
+    -28
+   ]
+  },
+  {
+   "id": "vhs75u1s",
+   "type": "vehicle",
+   "kind": "teamster",
+   "pos": [
+    -28,
+    0,
+    30
+   ],
+   "rot": [
+    0,
+    1.5708,
+    0
+   ]
+  },
+  {
+   "id": "cps75z1t",
+   "type": "checkpoint",
+   "pos": [
+    0,
+    1.5,
+    6
+   ],
+   "size": [
+    6,
+    3,
+    6
+   ],
+   "name": "mid_checkpoint"
+  },
+  {
+   "id": "trs7641u",
+   "type": "trigger",
+   "pos": [
+    -22,
+    5,
+    -18
+   ],
+   "size": [
+    14,
+    4,
+    10
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "toast",
+     "text": "THE DECK — GOOD VIEW"
+    },
+    {
+     "do": "checkpoint"
+    }
+   ],
+   "name": "deck_trigger"
+  },
+  {
+   "id": "trs76e1v",
+   "type": "trigger",
+   "pos": [
+    22,
+    2,
+    -28
+   ],
+   "size": [
+    8,
+    4,
+    16
+   ],
+   "once": true,
+   "actions": [
+    {
+     "do": "spawn",
+     "tag": "wave2"
+    },
+    {
+     "do": "say",
+     "line": "m01_arena_1"
+    },
+    {
+     "do": "objective",
+     "id": "wave2",
+     "text": "Scrap the Regional Manager"
+    },
+    {
+     "do": "unmark",
+     "target": "backyard"
+    }
+   ],
+   "name": "backyard_trigger",
+   "disabled": true
+  },
+  {
+   "id": "mks76n1w",
+   "type": "marker",
+   "pos": [
+    32,
+    0,
+    -30
+   ],
+   "name": "backyard"
+  }
+ ],
+ "onStart": [
+  {
+   "do": "say",
+   "line": "m01_yard"
+  },
+  {
+   "do": "objective",
+   "id": "squadA",
+   "text": "Clear the yard"
+  },
+  {
+   "do": "marker",
+   "target": "deck_locker",
+   "label": "LOOT"
+  }
+ ],
+ "watchers": [
+  {
+   "allDead": "__base",
+   "actions": [
+    {
+     "do": "complete",
+     "id": "squadA"
+    },
+    {
+     "do": "remove",
+     "target": "yard_gate",
+     "boom": true
+    },
+    {
+     "do": "say",
+     "line": "m01_gate_blown"
+    },
+    {
+     "do": "enable",
+     "target": "backyard_trigger"
+    },
+    {
+     "do": "marker",
+     "target": "backyard",
+     "label": "BACK YARD"
+    },
+    {
+     "do": "toast",
+     "text": "THE GATE IS DOWN"
+    }
+   ]
+  },
+  {
+   "allDead": "wave2",
+   "actions": [
+    {
+     "do": "complete",
+     "id": "wave2"
+    },
+    {
+     "do": "say",
+     "line": "m01_manager_dead"
+    },
+    {
+     "do": "wait",
+     "seconds": 3
+    },
+    {
+     "do": "end"
+    }
+   ]
+  }
+ ]
+}

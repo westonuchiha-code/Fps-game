@@ -129,6 +129,7 @@ export class Game {
     this.ui = document.getElementById('ui') as HTMLElement;
     this.loadSettings();
     this.pipe = new RenderPipeline(this.canvas);
+    this.pipe.compact = true;
     this.input = new Input(this.canvas);
     this.camera.rotation.order = 'YXZ';
     this.scene.add(this.camera);

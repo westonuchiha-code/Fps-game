@@ -1,1 +1,12 @@
-[]
+[
+  {
+    "id": "m01",
+    "title": "Receiving",
+    "number": "MISSION 01"
+  },
+  {
+    "id": "sandbox",
+    "title": "Sandbox Yard",
+    "number": "EXAMPLE"
+  }
+]

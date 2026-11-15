@@ -26,8 +26,8 @@ const BUTTONS: BtnDef[] = [
   { act: 'melee', label: 'MELEE', x: 2.9, y: 2.55 },
   { act: 'mine', label: 'MINE', x: 4.25, y: 0.25, cls: 'mine' },
   { act: 'detonate', label: 'WATCH', x: 4.25, y: 1.4, cls: 'watch' },
-  { act: 'inventory', label: 'BAG', x: 1.0, y: 0.15, size: 0.78, top: true },
-  { act: 'pause', label: 'II', x: 0.12, y: 0.15, size: 0.78, top: true, cls: 'pause' },
+  { act: 'inventory', label: 'BAG', x: 1.2, y: 0.15, size: 0.94, top: true },
+  { act: 'pause', label: 'II', x: 0.12, y: 0.15, size: 0.94, top: true, cls: 'pause' },
 ];
 
 type Track = { kind: 'stick'; ox: number; oy: number } | { kind: 'look'; x: number; y: number } | { kind: 'btn'; def: BtnDef; el: HTMLElement; x: number; y: number };
@@ -101,7 +101,8 @@ export class TouchControls {
   }
 
   private update() {
-    const want = (this.forced ?? this.touchSeen) && this.g.state === 'playing';
+    // not during cutscenes: the buttons do nothing there and would cover the SKIP prompt
+    const want = (this.forced ?? this.touchSeen) && this.g.state === 'playing' && !this.g.player.frozen;
     if (want !== this.visible) {
       this.visible = want;
       this.root.classList.toggle('on', want);

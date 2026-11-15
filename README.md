@@ -11,8 +11,8 @@ It runs in any modern desktop browser. Nothing to install except Node.
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173        the game
-                   # http://localhost:5173/editor.html   the level editor
+npm run dev        # http://localhost:5173           the game
+                   # http://localhost:5173/#editor   the level editor
 npm run build      # static build in dist/ (host it anywhere)
 ```
 
@@ -59,20 +59,30 @@ npm run build      # static build in dist/ (host it anywhere)
 
 ## The level editor
 
-Open **`/editor.html`** (or pick *Level Editor* in the watch menu). Levels are plain JSON files in
-[`public/levels/`](public/levels); the format is documented in
-[`src/world/leveldata.ts`](src/world/leveldata.ts).
+Open **`/#editor`** (or pick *Level Editor* in the watch menu). It is a desktop tool: it wants a
+mouse and a keyboard. Levels are plain JSON files in [`public/levels/`](public/levels); the format
+is documented in [`src/world/leveldata.ts`](src/world/leveldata.ts).
 
-- Place shapes, 33 props, enemies, allies, pickups, lockers, explosive barrels, vehicles,
-  triggers, checkpoints and nav areas; move / rotate / scale with gizmos and grid snapping.
-- Build simple logic without code: a trigger (or a destroyed object, or "all enemies with tag X
-  are dead") runs a list of actions — spawn a wave, play a voice line, add or complete an
-  objective, open a gate, set a checkpoint, change the music, end the mission.
-- **▶ Play** drops you straight into the level. With `npm run dev` running, **Save** writes into
-  `public/levels/` so the level becomes part of the game; on a static host it saves to the browser
-  and you can export / import the file.
-- `m01.json` is the real first mission — open it and change it. (`tools/levels/gen_m01.mjs`
-  produced the first draft; re-running it overwrites the file.)
+- **Place** shapes, 33 props, enemies, allies, pickups, lockers, explosive barrels, vehicles,
+  triggers, checkpoints and nav areas from the palette on the left: click an item, then click in
+  the world (Shift keeps placing, R turns it). Move / rotate / scale with the handles (keys 1 / 2 /
+  3), with grid and angle snapping. Undo is Ctrl+Z.
+- **Look around**: right-drag to look, WASD to fly, wheel to zoom, F to frame the selection, T for
+  the map view. Press H for the full cheat-sheet.
+- **Logic without code**: a trigger (or a destroyed object, or "every enemy with tag X is dead")
+  runs a list of actions — spawn a wave, play a voice line, add or complete an objective, open a
+  gate, set a checkpoint, change the music, end the mission. The actions editor offers pick-lists
+  of the tags, names, voice lines and music that actually exist.
+- **▶ PLAY** (F5) drops you straight into the level; **FROM HERE** (Shift+F5) starts you where the
+  camera is looking. F4 in the game brings you back to the editor with the level as you left it.
+- **Saving**: with `npm run dev` running, Save writes into `public/levels/` so the level becomes
+  part of the game. On a static host it saves in the browser, and Export / Import move the file.
+  Everything is autosaved as you work.
+- The **Problems** chip in the status bar lists things that would break a level (no player start,
+  a trigger that spawns a tag nobody has, …); click a problem to select the object.
+- `sandbox.json` is a small example level with two waves, a gate and a boss — open it to see how
+  the logic is wired. `m01.json` is the real first mission — open it and change it.
+  (`tools/levels/gen_m01.mjs` produced the first draft; re-running it overwrites the file.)
 - Play any level directly with `/?level=<id>`; `/?level=test` is a developer sandbox yard.
 
 ## How it is put together
@@ -94,6 +104,9 @@ src/
   editor/      the level editor
 tools/
   shot.mjs     headless screenshot / scripted play-test harness
+  smoke.mjs    real-input smoke test (npm test)
+  check.mjs    scripted gameplay checks, one per file in checks/ (npm run check)
+  editor-shot.mjs   level-editor test suite + screenshots
   levels/      level generators
   music/ sfx/ voice/   the pipelines that produced everything under public/audio
 ```
@@ -112,10 +125,14 @@ npm test             # real-input smoke test: boots like a player, clicks throug
                      # skips the intro, moves, shoots, reloads, pauses, opens the backpack
 npm run check        # scripted gameplay checks (tools/checks/*.js): combat, loot, charges,
                      # respawn, and Mission 01's gate / boss / ending logic
+node tools/editor-shot.mjs   # the level editor: places every object with real clicks, edits,
+                     # undoes, saves, reloads, play-tests and comes back (needs the dev server)
 npm run typecheck
 ```
 
-Both fail on any console error. To poke at something by hand, `tools/shot.mjs` drives the real
+All of them fail on any console error. The first two also run against a production build, which
+is steadier while files are being edited: `npm run build && npx vite preview --port 4173`, then
+`GAME_URL=http://localhost:4173/ npm test`. To poke at something by hand, `tools/shot.mjs` drives the real
 game in headless Chromium and saves a screenshot:
 
 ```bash

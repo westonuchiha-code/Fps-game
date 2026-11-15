@@ -155,6 +155,8 @@ export class Hud {
     this.letter = el('div', 'letterbox');
     this.letter.style.cssText = 'position:absolute;inset:0;';
     this.skipEl = el('div', 'skip outline');
+    // tappable, so touch players can skip too (the cutscene polls the 'skip' action)
+    this.skipEl.addEventListener('click', () => G.input.tap('skip'));
     this.titleEl = el('div', 'titlecard', '<div class="m"></div><div class="t"></div>');
     this.typedEl = el('div', 'typed');
     this.fadeEl = el('div', 'fade');
@@ -270,6 +272,7 @@ export class Hud {
   letterbox(on: boolean, skippable = false) {
     this.letter.classList.toggle('on', on);
     this.skipEl.classList.toggle('show', on && skippable);
+    this.skipEl.classList.toggle('tap', G.input.device === 'touch');
     if (on && skippable) this.skipEl.innerHTML = `<span class="key">${G.input.prompt('skip')}</span> SKIP`;
   }
 

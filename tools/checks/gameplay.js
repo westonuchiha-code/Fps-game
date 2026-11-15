@@ -8,7 +8,7 @@ let pass = true;
 const expect = (cond, msg) => { log.push((cond ? 'ok   ' : 'FAIL ') + msg); if (!cond) pass = false; };
 const V = (x, y, z) => pl.pos.clone().set(x, y, z);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-const items = await import('/src/weapons/items.ts');
+const items = game.debug.items;
 
 inv.slots = [inv.slots[0], null, null, null];
 inv.active = 0;

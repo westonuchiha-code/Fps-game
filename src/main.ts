@@ -10,6 +10,7 @@ import { InventoryScreen } from './ui/inventoryScreen';
 import { MissionReport } from './ui/missionReport';
 import { TouchControls } from './ui/touch';
 import { markCompleted, writeSave } from './core/save';
+import { openEditor, takeBootNote } from './core/nav';
 
 /**
  * Boot + top-level flow:
@@ -24,13 +25,14 @@ import { markCompleted, writeSave } from './core/save';
  */
 
 const params = new URLSearchParams(location.search);
+const note = takeBootNote();
 const game = new Game();
 (window as any).__game = game;
 installVehicles(game);
 
 /** watch-menu mission id -> level file id */
 const LEVEL_FOR: Record<string, string> = { receiving: 'm01' };
-const fromEditor = params.get('from') === 'editor';
+const fromEditor = params.get('from') === 'editor' || note?.from === 'editor';
 let currentLevelId = 'm01';
 let currentMission = 'receiving';
 
@@ -143,18 +145,16 @@ async function boot() {
     onResume: resume,
     onRestart: () => void startLevel(currentLevelId),
     onQuitToMenu: () => {
-      if (fromEditor) location.href = './editor.html';
+      if (fromEditor) openEditor();
       else toMenu();
     },
     onOpenBackpack: openBag,
-    onOpenEditor: () => {
-      location.href = './editor.html';
-    },
+    onOpenEditor: openEditor,
   });
   const bag = new InventoryScreen(game, resume);
   const report = new MissionReport(game, () => {
     report.hide();
-    if (fromEditor) location.href = './editor.html';
+    if (fromEditor) openEditor();
     else toMenu();
   });
   new TouchControls(game);
@@ -184,15 +184,15 @@ async function boot() {
     back.className = 'interactive outline';
     back.style.cssText = 'position:absolute;right:14px;top:10px;font:700 15px var(--ui);cursor:pointer;opacity:.85;z-index:5';
     back.innerHTML = '<span class="key">F4</span> BACK TO EDITOR';
-    back.onclick = () => (location.href = './editor.html');
+    back.onclick = openEditor;
     ui.appendChild(back);
     window.addEventListener('keydown', (e) => {
-      if (e.code === 'F4') location.href = './editor.html';
+      if (e.code === 'F4') openEditor();
     });
   }
 
   // ---------------------------------------------------------------- first screen
-  const direct = params.get('level');
+  const direct = params.get('level') ?? note?.level ?? null;
   const begin = async () => {
     overlay.remove();
     game.audio.resume();
@@ -211,6 +211,11 @@ async function boot() {
     go.className = 'go';
     go.textContent = 'CLICK OR TAP TO START';
     overlay.appendChild(go);
+    // shown by CSS on phones held upright
+    const turn = document.createElement('p');
+    turn.className = 'turn';
+    turn.textContent = 'TURN YOUR PHONE SIDEWAYS FOR A BETTER VIEW';
+    overlay.appendChild(turn);
     overlay.addEventListener('click', () => void begin(), { once: true });
     game.ready = true;
   }

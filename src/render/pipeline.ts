@@ -161,6 +161,13 @@ export class RenderPipeline {
   /** 0 = auto integer scale towards targetHeight, otherwise forced divisor (1 = native). */
   forcedScale = 0;
   pixelScale = 1;
+  /**
+   * Give the canvas only as many pixels as we actually render and let the page stretch it
+   * (`image-rendering: pixelated`), instead of blowing the picture up ourselves. Same image, far
+   * fewer pixels through the final pass. The game turns this on; the editor draws crisp overlays
+   * on the same canvas and leaves it off.
+   */
+  compact = false;
   width = 1;
   height = 1;
 
@@ -254,16 +261,19 @@ export class RenderPipeline {
 
   /** Call when the canvas CSS size changes. */
   resize(cssW: number, cssH: number) {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Device pixels we are prepared to fill. The automatic scale looks at up to 3x, so a phone's
+    // very dense screen lands near the target line count instead of far above it.
+    const dpr = Math.min(window.devicePixelRatio || 1, this.compact && this.forcedScale === 0 ? 3 : 2);
     const bw = Math.max(2, Math.floor(cssW * dpr));
     const bh = Math.max(2, Math.floor(cssH * dpr));
-    this.renderer.setPixelRatio(1);
-    this.renderer.setSize(bw, bh, false);
-    this.canvas.style.width = cssW + 'px';
-    this.canvas.style.height = cssH + 'px';
     this.pixelScale = this.forcedScale > 0 ? this.forcedScale : Math.max(1, Math.round(bh / this.targetHeight));
     this.width = Math.max(2, Math.floor(bw / this.pixelScale));
     this.height = Math.max(2, Math.floor(bh / this.pixelScale));
+    this.renderer.setPixelRatio(1);
+    if (this.compact) this.renderer.setSize(this.width, this.height, false);
+    else this.renderer.setSize(bw, bh, false);
+    this.canvas.style.width = cssW + 'px';
+    this.canvas.style.height = cssH + 'px';
     this.colorRT.setSize(this.width, this.height);
     this.normalRT.setSize(this.width, this.height);
     (this.post.uniforms.uSize.value as THREE.Vector2).set(this.width, this.height);

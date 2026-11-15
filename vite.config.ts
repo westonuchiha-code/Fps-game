@@ -71,10 +71,48 @@ function levelFiles(): Plugin {
   };
 }
 
+/**
+ * Build-only: bundle each folder of small sound files into one `<folder>.pack` so a player makes
+ * one request instead of a few hundred. The runtime side and the layout are in src/audio/pack.ts.
+ */
+function soundPacks(folders: string[]): Plugin {
+  let outDir = 'dist';
+  return {
+    name: 'emg-sound-packs',
+    apply: 'build',
+    configResolved(cfg) {
+      outDir = path.resolve(cfg.root, cfg.build.outDir);
+    },
+    closeBundle() {
+      for (const name of folders) {
+        const dir = path.join(outDir, 'audio', name);
+        if (!fs.existsSync(dir)) continue;
+        const files = fs.readdirSync(dir).filter((f) => fs.statSync(path.join(dir, f)).isFile()).sort();
+        const index: Record<string, [number, number]> = {};
+        const parts: Buffer[] = [];
+        let at = 0;
+        for (const f of files) {
+          const b = fs.readFileSync(path.join(dir, f));
+          index[f] = [at, b.length];
+          parts.push(b);
+          at += b.length;
+        }
+        const head = Buffer.from(JSON.stringify(index), 'utf8');
+        const pre = Buffer.alloc(8);
+        pre.write('EMGP', 0, 'latin1');
+        pre.writeUInt32LE(head.length, 4);
+        fs.writeFileSync(path.join(outDir, 'audio', name + '.pack'), Buffer.concat([pre, head, ...parts]));
+        fs.rmSync(dir, { recursive: true });
+        console.log(`  audio/${name}.pack  ${files.length} files, ${((at + head.length + 8) / 1e6).toFixed(2)} MB`);
+      }
+    },
+  };
+}
+
 // Relative base so the build runs from any sub-path (GitHub Pages, file hosts, previews).
 export default defineConfig({
   base: './',
-  plugins: [levelFiles()],
+  plugins: [levelFiles(), soundPacks(['sfx', 'vo'])],
   server: { host: true, port: 5173 },
   preview: { host: true, port: 4173 },
   build: {

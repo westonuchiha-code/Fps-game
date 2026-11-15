@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import sfxManifestRaw from '../data/sfx-manifest.json';
 import musicManifestRaw from '../data/music-manifest.json';
+import { SoundPack } from './pack';
 import voManifestRaw from '../data/vo-manifest.json';
 import dialogueRaw from '../data/dialogue.json';
 import { clamp, rand } from '../core/math';
@@ -33,6 +34,8 @@ const voManifest = voManifestRaw as unknown as Record<string, { dur: number; who
 export const dialogue = dialogueRaw as unknown as DialogueData;
 
 const BASE = import.meta.env.BASE_URL + 'audio/';
+/** Folders a production build ships as one `<folder>.pack` file (vite.config.ts → soundPacks). */
+const PACKED: readonly string[] = import.meta.env.PROD ? ['sfx', 'vo'] : [];
 
 export interface PlayOpts {
   pos?: THREE.Vector3;
@@ -77,6 +80,7 @@ export class AudioSys {
   private reverb!: ConvolverNode;
   private reverbGain!: GainNode;
   private buffers = new Map<string, AudioBuffer>();
+  private packs = new Map<string, Promise<SoundPack | null>>();
   private loading = new Map<string, Promise<AudioBuffer | null>>();
   private lastVariant = new Map<string, number>();
   private warned = new Set<string>();
@@ -181,6 +185,28 @@ export class AudioSys {
     this.muffle.frequency.setTargetAtTime(freq, this.ctx.currentTime, time);
   }
 
+  private pack(dir: string) {
+    let p = this.packs.get(dir);
+    if (!p) {
+      p = SoundPack.load(BASE + dir + '.pack');
+      this.packs.set(dir, p);
+    }
+    return p;
+  }
+
+  /** The bytes of one sound file: out of its folder's pack if there is one, else fetched on its own. */
+  private async bytes(url: string): Promise<ArrayBuffer> {
+    const cut = url.indexOf('/');
+    const dir = url.slice(0, cut);
+    if (PACKED.includes(dir)) {
+      const hit = (await this.pack(dir))?.get(url.slice(cut + 1));
+      if (hit) return hit;
+    }
+    const res = await fetch(BASE + url);
+    if (!res.ok) throw new Error(res.status + '');
+    return res.arrayBuffer();
+  }
+
   private async fetchBuffer(url: string): Promise<AudioBuffer | null> {
     const cached = this.buffers.get(url);
     if (cached) return cached;
@@ -188,9 +214,7 @@ export class AudioSys {
     if (!p) {
       p = (async () => {
         try {
-          const res = await fetch(BASE + url);
-          if (!res.ok) throw new Error(res.status + '');
-          const arr = await res.arrayBuffer();
+          const arr = await this.bytes(url);
           const buf = await this.ctx.decodeAudioData(arr);
           this.buffers.set(url, buf);
           return buf;
@@ -209,6 +233,8 @@ export class AudioSys {
 
   /** Preload every sound effect. Resolves when done; `onProgress` gets 0..1. */
   async loadAllSfx(onProgress?: (f: number) => void) {
+    // start fetching the voice pack alongside: it is not needed until the first line is spoken
+    for (const dir of PACKED) void this.pack(dir);
     const files: string[] = [];
     for (const k in sfxManifest) for (const f of sfxManifest[k].files) files.push('sfx/' + f);
     let done = 0;

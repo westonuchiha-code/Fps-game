@@ -122,6 +122,7 @@ export class Input {
   readonly simDown = new Set<Action>();
   readonly simMove = { x: 0, y: 0 };
   readonly simLook = { x: 0, y: 0 };
+  private lastTouch = -1e9;
   onAnyInput: (() => void) | null = null;
   onLockChange: ((locked: boolean) => void) | null = null;
 
@@ -142,7 +143,18 @@ export class Input {
       this.keys.clear();
       this.mouseButtons = 0;
     });
+    // A touch anywhere means a touch device. Browsers follow every tap with made-up mouse events;
+    // those must not flip us back to "keyboard and mouse" or count as a trigger pull.
+    window.addEventListener(
+      'touchstart',
+      () => {
+        this.lastTouch = performance.now();
+        this.device = 'touch';
+      },
+      { capture: true, passive: true },
+    );
     canvas.addEventListener('mousedown', (e) => {
+      if (performance.now() - this.lastTouch < 1000) return;
       this.mouseButtons |= 1 << e.button;
       this.device = 'kbm';
       if (e.button === 0) this.tapped.add('fire');
