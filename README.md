@@ -14,6 +14,8 @@ npm install
 npm run dev        # http://localhost:5173           the game
                    # http://localhost:5173/#editor   the level editor
 npm run build      # static build in dist/ (host it anywhere)
+npm run single     # the whole game as ONE file: release/everything-must-go.html
+                   # (download it, double-click it, play — no server needed)
 ```
 
 ## What is in the game right now

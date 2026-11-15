@@ -6,3 +6,5 @@ dist/
 shots/
 __pycache__/
 *.pyc
+release/
+.single-build/
