@@ -490,6 +490,25 @@ export class CharModel {
     k.loft([R(1.026, 0, 0, 0), R(1.03, 0.156, 0.103, 0.102), R(1.09, 0.143, 0.101, 0.098), R(1.094, 0, 0, 0)].map((r) => ({ ...r, n: 4 })), leather, { sides: 16 });
     k.sphere(0.03, pants, [0, 0.868, 0.002], 2, [0.9, 1.15, 2.6], true); // gusset: the crotch is solid between the legs
 
+    // buckle and belt loops
+    const metal = 0x9a9488;
+    if (!agent) k.box(0.05, 0.04, 0.012, metal, [0, 1.06, -0.106]);
+    for (const a of [-2.2, -1.25, -0.55, 0.55, 1.25, 2.2, Math.PI]) {
+      // on the belt's own (squarish) outline, standing just proud of it
+      const sn = Math.sin(a);
+      const cs = Math.cos(a);
+      const px = Math.sign(sn) * Math.sqrt(Math.abs(sn)) * 0.162;
+      const pz = -Math.sign(cs) * Math.sqrt(Math.abs(cs)) * 0.107;
+      k.box(0.016, 0.072, 0.01, pants, [px, 1.06, pz], [0, -a, 0]);
+    }
+    // pocket seams: slanted openings at the front, patch pockets on the seat
+    const seamC = shade(pants, 0.6);
+    for (const sd of [-1, 1]) {
+      k.box(0.008, 0.085, 0.022, seamC, [sd * 0.122, 0.985, -0.078], [0.12, sd * 0.75, sd * 0.42]);
+      k.box(0.066, 0.08, 0.02, shade(pants, 1.1), [sd * 0.074, 0.955, 0.104], [-0.1, sd * 0.3, 0]);
+      k.box(0.068, 0.008, 0.024, seamC, [sd * 0.074, 0.994, 0.106], [-0.1, sd * 0.3, 0]);
+    }
+
     // legs: thigh, knee, calf, boot
     for (const side of [-1, 1]) {
       const x = side * s.hipX;
@@ -498,7 +517,7 @@ export class CharModel {
       const L = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, x, n: 2.3, ...extra });
       // Trousers: each leg is one piece from the belt to the knee. Up at the hips it is half the
       // body, flat against its twin along the centre seam; below the crotch it rounds into a thigh.
-      const T = (y: number, c: number, wo: number, wm: number, f: number, b: number, nm: number): Ring => ({ y, x: side * c, w: wo, wm, f, b, n: 2.5, nm });
+      const T = (y: number, c: number, wo: number, wm: number, f: number, b: number, nm: number): Ring => ({ y, x: side * c, w: wo, wm, f, b, n: 2.5, nm, nmf: y >= 0.885 ? 40 : y >= 0.855 ? 14 : nm });
       const trousers = [
         T(1.1, 0.068, 0, 0, 0, 0, 8), T(1.09, 0.068, 0.069, 0.068, 0.095, 0.092, 8), T(1.03, 0.075, 0.075, 0.075, 0.097, 0.096, 8), T(0.98, 0.082, 0.084, 0.082, 0.096, 0.102, 7),
         T(0.93, 0.086, 0.086, 0.086, 0.095, 0.11, 6), T(0.89, 0.088, 0.084, 0.088, 0.092, 0.108, 5), T(0.86, 0.09, 0.081, 0.09, 0.089, 0.098, 4.5), T(0.84, 0.09, 0.079, 0.087, 0.087, 0.092, 3.5),

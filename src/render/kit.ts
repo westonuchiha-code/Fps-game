@@ -34,6 +34,8 @@ export interface Ring {
    */
   wm?: number;
   nm?: number;
+  /** the same shape setting for the front half only (a flat trouser front over a shaped seat) */
+  nmf?: number;
   /** centre offset */
   x?: number;
   z?: number;
@@ -72,7 +74,7 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
       const sn = Math.sin(a);
       const cs = Math.cos(a);
       const inner = r.wm !== undefined && ((r.x ?? 0) > 0 ? sn < 0 : (r.x ?? 0) < 0 && sn > 0);
-      const ek = inner ? 2 / (r.nm ?? r.n ?? 2.5) : e;
+      const ek = inner ? 2 / ((cs >= 0 ? r.nmf : undefined) ?? r.nm ?? r.n ?? 2.5) : e;
       let px = Math.sign(sn) * Math.pow(Math.abs(sn), ek) * (inner ? r.wm! : r.w);
       let pz = -Math.sign(cs) * Math.pow(Math.abs(cs), ek) * (cs >= 0 ? r.f : r.b);
       if (cs > 0) {
