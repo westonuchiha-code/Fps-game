@@ -40,14 +40,14 @@ export class Kit {
   }
 
   /** Append a geometry (flat or smooth as provided). `shade`: per-vertex darkening function of local position. */
-  add(geo: THREE.BufferGeometry, color: number, pos: V3 = [0, 0, 0], rot: V3 = [0, 0, 0], smooth = false) {
+  add(geo: THREE.BufferGeometry, color: number, pos: V3 = [0, 0, 0], rot: V3 = [0, 0, 0], smooth = false, scale: V3 = [1, 1, 1]) {
     let g = geo.index ? geo.toNonIndexed() : geo;
     if (!smooth) {
       g = g === geo ? geo.clone() : g;
       g.deleteAttribute('normal');
       g.computeVertexNormals();
     } else if (!g.getAttribute('normal')) g.computeVertexNormals();
-    _m.compose(_p.set(pos[0], pos[1], pos[2]), _q.setFromEuler(_e.set(rot[0], rot[1], rot[2], 'XYZ')), _s.set(1, 1, 1));
+    _m.compose(_p.set(pos[0], pos[1], pos[2]), _q.setFromEuler(_e.set(rot[0], rot[1], rot[2], 'XYZ')), _s.set(scale[0], scale[1], scale[2]));
     const m = this.cur.clone().multiply(_m);
     const nm = new THREE.Matrix3().getNormalMatrix(m);
     const p = g.getAttribute('position');
@@ -66,6 +66,36 @@ export class Kit {
       this.bone.push(this.curBone);
     }
     if (g !== geo) g.dispose();
+    return this;
+  }
+
+  /**
+   * Smooth solid of revolution about Y, for rounded bodies and limbs. `pts` are [radius, y] pairs
+   * running up (or down) the shape; `sx` / `sz` squash it; `gap` (radians) leaves it open at the
+   * front (-Z), e.g. for an unbuttoned vest.
+   */
+  lathe(pts: [number, number][], color: number, pos: V3 = [0, 0, 0], sx = 1, sz = 1, sides = 14, gap = 0) {
+    const make = (p: [number, number][]) => new THREE.LatheGeometry(p.map(([r, y]) => new THREE.Vector2(r, y)), sides, Math.PI + gap / 2, Math.PI * 2 - gap);
+    let g = make(pts);
+    // face outwards whichever way the points run
+    const P = g.getAttribute('position');
+    const N = g.getAttribute('normal');
+    let out = 0;
+    for (let i = 0; i < P.count; i++) out += P.getX(i) * N.getX(i) + P.getZ(i) * N.getZ(i);
+    if (out < 0) {
+      g.dispose();
+      g = make(pts.slice().reverse());
+    }
+    this.add(g, color, pos, [0, 0, 0], true, [sx, 1, sz]);
+    g.dispose();
+    return this;
+  }
+
+  /** Smooth dome (the top `frac` of a sphere), for hair, hats and helmets. */
+  dome(r: number, color: number, pos: V3 = [0, 0, 0], scale: V3 = [1, 1, 1], frac = 0.5, rot: V3 = [0, 0, 0]) {
+    const g = new THREE.SphereGeometry(r, 16, 8, 0, Math.PI * 2, 0, Math.PI * frac);
+    this.add(g, color, pos, rot, true, scale);
+    g.dispose();
     return this;
   }
 

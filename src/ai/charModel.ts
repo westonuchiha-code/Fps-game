@@ -43,6 +43,95 @@ function faceTexture() {
   return faceTex;
 }
 
+const faceCache = new Map<string, THREE.CanvasTexture>();
+/**
+ * A human face as ink on a transparent canvas: brows, eyes, mouth, and optionally shades, a
+ * moustache or a beard. It is wrapped onto the front of the head, so nothing is modelled.
+ */
+function humanFace(style: 'plain' | 'moustache' | 'beard' | 'agent', hair: number) {
+  const key = style + hair;
+  let tex = faceCache.get(key);
+  if (tex) return tex;
+  const c = document.createElement('canvas');
+  c.width = c.height = 256;
+  const g = c.getContext('2d')!;
+  const ink = '#15161c';
+  const hairCss = '#' + hair.toString(16).padStart(6, '0');
+  g.lineCap = 'round';
+  g.lineJoin = 'round';
+  if (style === 'beard') {
+    // beard first, so the mouth is drawn over it
+    g.fillStyle = hairCss;
+    g.beginPath();
+    g.moveTo(34, 150);
+    g.quadraticCurveTo(40, 250, 128, 256);
+    g.quadraticCurveTo(216, 250, 222, 150);
+    g.quadraticCurveTo(180, 172, 128, 166);
+    g.quadraticCurveTo(76, 172, 34, 150);
+    g.fill();
+  }
+  if (style === 'agent') {
+    // wraparound shades
+    g.fillStyle = ink;
+    g.beginPath();
+    g.roundRect(32, 102, 192, 48, 18);
+    g.fill();
+    g.strokeStyle = '#4a5568';
+    g.lineWidth = 5;
+    g.beginPath();
+    g.moveTo(58, 114);
+    g.lineTo(96, 114);
+    g.stroke();
+  } else {
+    for (const sx of [-1, 1]) {
+      const ex = 128 + sx * 48;
+      g.fillStyle = '#f4f1e8';
+      g.strokeStyle = ink;
+      g.lineWidth = 7;
+      g.beginPath();
+      g.ellipse(ex, 128, 23, 17, 0, 0, Math.PI * 2);
+      g.fill();
+      g.stroke();
+      g.fillStyle = ink;
+      g.beginPath();
+      g.arc(ex - sx * 3, 129, 10, 0, Math.PI * 2);
+      g.fill();
+      // heavy brow, tilted a touch: determined rather than blank
+      g.strokeStyle = hairCss;
+      g.lineWidth = 13;
+      g.beginPath();
+      g.moveTo(ex - sx * 27, 98);
+      g.lineTo(ex + sx * 25, 91);
+      g.stroke();
+    }
+  }
+  g.strokeStyle = style === 'beard' ? '#e9b9a0' : '#6a2d24';
+  g.lineWidth = 8;
+  g.beginPath();
+  if (style === 'agent') {
+    g.moveTo(98, 200);
+    g.quadraticCurveTo(132, 206, 162, 190); // half a smirk
+  } else {
+    g.moveTo(100, 202);
+    g.quadraticCurveTo(128, 208, 156, 202);
+  }
+  g.stroke();
+  if (style === 'moustache') {
+    g.fillStyle = hairCss;
+    g.beginPath();
+    g.moveTo(128, 168);
+    g.quadraticCurveTo(170, 160, 186, 192);
+    g.quadraticCurveTo(156, 184, 128, 186);
+    g.quadraticCurveTo(100, 184, 70, 192);
+    g.quadraticCurveTo(86, 160, 128, 168);
+    g.fill();
+  }
+  tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  faceCache.set(key, tex);
+  return tex;
+}
+
 export interface Palette {
   shell: number;
   dark: number;
@@ -240,6 +329,16 @@ export class CharModel {
     }
   }
 
+  /** Wrap a drawn face onto the front of an egg-shaped head (centre height `hy`, radius `hr`, squash `hs`). */
+  private addFace(tex: THREE.Texture, hr: number, hy: number, hs: [number, number, number]) {
+    // the front of the head is -Z, which is phi = 3π/2 on a three.js sphere
+    const g = new THREE.SphereGeometry(hr * 1.03, 22, 18, Math.PI * 1.5 - 0.9, 1.8, 0.86, 1.36);
+    const face = new THREE.Mesh(g, flat(0xffffff, { map: tex, transparent: true }));
+    face.scale.set(hs[0], hs[1], hs[2]);
+    face.position.set(0, hy - this.spec.neck, 0);
+    this.bones[B.head].add(face);
+  }
+
   private finishRobot(_s: Spec, _w: number, faceY: number, faceZ: number, fw: number, fh: number) {
     const fg = new THREE.PlaneGeometry(fw, fh);
     fg.rotateY(Math.PI);
@@ -252,147 +351,111 @@ export class CharModel {
   }
 
   private buildStriker(k: Kit, s: Spec, variant: number) {
+    // Rounded bodies (solids of revolution, ellipsoids) and a face that is DRAWN, not modelled.
     // variant 99 is the player character: Agent "Clearance", tuxedo under a hi-vis vest
     const agent = variant === 99;
     const v = variant % 3;
     const skin = agent ? PAL.skin1 : variant % 2 === 0 ? PAL.skin1 : PAL.skin2;
-    const skinD = shade(skin, 0.8);
     const shirt = agent ? PAL.tux : [PAL.denim, 0x7a3b3b, 0x4f6b4a][v];
-    const shirtL = shade(shirt, 1.25);
     const pants = agent ? PAL.tux : [0x2c3140, 0x3a3328, 0x2e3a4a][v];
     const hat = [0xf0c020, 0xe8e2d0, PAL.hivis][v];
     const hair = agent ? 0x2a1d14 : [0x2a1d14, 0x6b4a2a, 0x1c1c22][v];
     const leather = 0x3a2a20;
     const glove = 0x6a4a36;
-    const ink = 0x15161c;
     const band = 0xe8e8d8;
     const red = 0xb5382e;
     const canvas = 0x4a4f3a;
+    const D = 0.64; // bodies are this deep relative to their width
 
-    // hips, belt, pouches
+    // hips and belt
     k.curBone = B.pelvis;
-    k.taper(0.3, 0.2, 0.2, 1.13, 1.08, pants, [0, s.hip + 0.02, 0]);
-    k.box(0.35, 0.05, 0.235, leather, [0, s.hip + 0.125, 0]);
-    k.box(0.05, 0.042, 0.02, 0xc9a23a, [0, s.hip + 0.125, -0.12]);
+    k.lathe([[0, 0.83], [0.12, 0.85], [0.165, 0.93], [0.162, 1.04], [0.15, 1.1], [0, 1.1]], pants, [0, 0, 0], 1, D + 0.06);
+    k.lathe([[0.166, 1.0], [0.17, 1.02], [0.17, 1.055], [0.164, 1.07]], leather, [0, 0, 0], 1, D + 0.06);
     if (!agent) {
-      k.box(0.08, 0.1, 0.06, canvas, [-0.15, s.hip + 0.055, -0.09]);
-      k.box(0.07, 0.12, 0.05, leather, [0.165, s.hip + 0.045, 0.02]);
+      k.sphere(0.05, canvas, [-0.15, 0.96, -0.06], 2, [0.8, 1.1, 0.7], true);
+      k.sphere(0.045, leather, [0.16, 0.95, 0.02], 2, [0.7, 1.3, 0.8], true);
     }
 
-    // torso: narrow waist, broad shoulders, hi-vis vest worn open
+    // torso: narrow waist, broad rounded shoulders
     k.curBone = B.chest;
-    k.taper(0.32, 0.4, 0.2, 1.3, 1.12, shirt, [0, 1.31, 0]);
-    k.taper(0.345, 0.3, 0.215, 1.26, 1.1, PAL.hivis, [0, 1.33, 0]);
-    k.box(0.385, 0.035, 0.235, band, [0, 1.265, 0]);
-    k.box(0.045, 0.2, 0.245, band, [-0.125, 1.385, 0]);
-    k.box(0.045, 0.2, 0.245, band, [0.125, 1.385, 0]);
-    k.box(agent ? 0.13 : 0.1, 0.31, 0.03, agent ? PAL.shirt : shirtL, [0, 1.33, -0.107]); // open front
-    k.box(0.07, 0.05, 0.05, agent ? PAL.shirt : shirtL, [-0.055, 1.5, -0.075], [0, 0, 0.45]); // collar
-    k.box(0.07, 0.05, 0.05, agent ? PAL.shirt : shirtL, [0.055, 1.5, -0.075], [0, 0, -0.45]);
+    k.lathe([[0, 1.06], [0.145, 1.08], [0.158, 1.2], [0.19, 1.36], [0.2, 1.44], [0.15, 1.5], [0.06, 1.525], [0, 1.525]], shirt, [0, 0, 0], 1, D);
+    // hi-vis vest, worn open, with its reflective bands
+    const vest: [number, number][] = [[0.166, 1.16], [0.17, 1.2], [0.2, 1.36], [0.21, 1.445], [0.165, 1.5]];
+    k.lathe(vest, PAL.hivis, [0, 0, 0], 1, D + 0.02, 16, agent ? 0.95 : 0.6);
+    k.lathe([[0.176, 1.235], [0.181, 1.25], [0.184, 1.27], [0.184, 1.285]], band, [0, 0, 0], 1, D + 0.02, 16, agent ? 0.95 : 0.6);
     if (agent) {
-      k.box(0.08, 0.036, 0.03, ink, [0, 1.472, -0.122]); // bow tie
-      k.box(0.02, 0.03, 0.034, ink, [0, 1.472, -0.123]);
-      for (const y of [1.4, 1.34, 1.28]) k.box(0.014, 0.014, 0.01, ink, [0, y, -0.124]); // studs
-      k.box(0.05, 0.04, 0.012, red, [0.115, 1.42, -0.118]); // pocket square on the vest
+      // dress shirt showing between the lapels, and a bow tie
+      k.lathe([[0.162, 1.2], [0.193, 1.36], [0.203, 1.44], [0.153, 1.5]], PAL.shirt, [0, 0, 0], 1, D, 16, Math.PI * 2 - 0.5);
+      k.sphere(0.03, 0x15161c, [-0.03, 1.49, -0.118], 2, [1.2, 0.8, 0.5], true);
+      k.sphere(0.03, 0x15161c, [0.03, 1.49, -0.118], 2, [1.2, 0.8, 0.5], true);
     } else {
-      k.box(0.045, 0.08, 0.03, ink, [0.125, 1.43, -0.128]); // radio
-      k.cyl(0.005, 0.005, 0.09, ink, [0.14, 1.51, -0.128], 'y', 4);
-      k.box(0.07, 0.06, 0.014, shade(PAL.hivis, 0.82), [-0.12, 1.27, -0.122]); // vest pocket
-      k.box(0.24, 0.25, 0.1, canvas, [0, 1.3, 0.16]); // pack
-      k.box(0.2, 0.09, 0.02, shade(canvas, 0.78), [0, 1.25, 0.215]);
-      k.cyl(0.05, 0.05, 0.27, 0x7a6a44, [0, 1.46, 0.17], 'x', 6, false); // bedroll
+      k.sphere(0.13, canvas, [0, 1.3, 0.15], 2, [1, 1.05, 0.55], true); // pack
+      k.cyl(0.05, 0.05, 0.27, 0x7a6a44, [0, 1.46, 0.16], 'x', 12, true); // bedroll
     }
-    k.cyl(0.058, 0.052, 0.1, skin, [0, 1.5, 0], 'y', 6);
+    k.cyl(0.056, 0.05, 0.1, skin, [0, 1.52, 0], 'y', 12, true);
     if (!agent) {
       // the Local 404 red bandana, worn round the neck
-      k.box(0.17, 0.05, 0.17, red, [0, 1.52, 0.005]);
-      k.taper(0.02, 0.09, 0.02, 7, 1, red, [0, 1.465, -0.112]);
+      k.lathe([[0.066, 1.485], [0.086, 1.5], [0.088, 1.525], [0.07, 1.55]], red);
+      k.cyl(0.004, 0.06, 0.11, red, [0, 1.455, -0.085], 'y', 10, true, [0.25, 0, 0]);
     }
 
-    // head: jaw narrower than the crown, an actual face
+    // head: an egg, slightly bigger than life
     k.curBone = B.head;
-    k.taper(0.19, 0.27, 0.215, 1.2, 1.08, skin, [0, 1.665, 0]);
-    k.box(0.04, 0.065, 0.045, skinD, [0, 1.652, -0.125]); // nose
-    k.box(0.025, 0.065, 0.045, skinD, [-0.122, 1.665, 0.01]); // ears
-    k.box(0.025, 0.065, 0.045, skinD, [0.122, 1.665, 0.01]);
-    k.box(0.235, 0.13, 0.08, hair, [0, 1.71, 0.085]); // hair at the back and sides
+    const hy = 1.68;
+    const hs: [number, number, number] = [0.92, 1.1, 1];
+    const hr = 0.138;
+    k.sphere(hr, skin, [0, hy, 0], 3, hs, true);
+    k.sphere(0.028, skin, [0, hy - 0.02, -hr + 0.004], 2, [0.85, 1.25, 1.1], true); // nose
+    k.sphere(0.03, skin, [-hr * 0.9, hy - 0.005, 0.01], 2, [0.45, 1, 0.8], true); // ears
+    k.sphere(0.03, skin, [hr * 0.9, hy - 0.005, 0.01], 2, [0.45, 1, 0.8], true);
     if (agent) {
-      k.box(0.215, 0.05, 0.03, ink, [0, 1.697, -0.116]); // shades
-      k.box(0.012, 0.02, 0.12, ink, [-0.113, 1.7, -0.05]);
-      k.box(0.012, 0.02, 0.12, ink, [0.113, 1.7, -0.05]);
-      k.box(0.07, 0.012, 0.012, 0x5a2a22, [0.008, 1.586, -0.107], [0, 0, 0.12]); // half a smirk
-      k.taper(0.235, 0.075, 0.24, 0.9, 0.94, hair, [0, 1.83, 0.008]); // slicked hair
-      k.box(0.14, 0.05, 0.06, hair, [0.03, 1.835, -0.1], [0.25, 0, 0]); // quiff
+      k.dome(hr + 0.008, hair, [0, hy + 0.012, 0.012], [0.94, 1.12, 1.03], 0.5, [0.38, 0, 0]); // slicked back
+    } else if (v === 2) {
+      k.dome(hr + 0.014, hat, [0, hy + 0.05, 0.006], [0.95, 1.15, 1.03], 0.5, [0.2, 0, 0]); // beanie
+      k.lathe([[hr + 0.008, hy + 0.05], [hr + 0.02, hy + 0.066], [hr + 0.014, hy + 0.09]], shade(hat, 0.82), [0, 0, 0.012], 0.95, 1.03);
     } else {
-      k.box(0.2, 0.028, 0.03, hair, [0, 1.726, -0.112]); // brow
-      for (const side of [-1, 1]) {
-        k.box(0.05, 0.032, 0.012, 0xf2efe6, [side * 0.052, 1.694, -0.114]);
-        k.box(0.022, 0.026, 0.014, ink, [side * 0.047, 1.692, -0.117]);
-      }
-      if (v === 1) k.box(0.208, 0.09, 0.225, hair, [0, 1.572, 0.002]); // beard
-      else k.box(0.075, 0.014, 0.012, 0x5a2a22, [0, 1.586, -0.107]); // mouth
-      if (v === 0) k.box(0.105, 0.03, 0.022, hair, [0, 1.613, -0.113]); // moustache
-      if (v === 2) {
-        // beanie
-        k.taper(0.245, 0.12, 0.245, 0.8, 0.8, hat, [0, 1.815, 0.005]);
-        k.box(0.255, 0.045, 0.255, shade(hat, 0.84), [0, 1.768, 0.005]);
-      } else {
-        // hard hat: dome, brim, ridge
-        k.sphere(0.145, hat, [0, 1.79, 0.005], 1, [1, 0.72, 1.08]);
-        k.box(0.3, 0.022, 0.37, hat, [0, 1.79, -0.02]);
-        k.box(0.045, 0.03, 0.26, shade(hat, 0.86), [0, 1.895, 0.005]);
-        if (v === 1) {
-          k.box(0.18, 0.05, 0.03, ink, [0, 1.845, -0.135]); // goggles pushed up
-          k.box(0.07, 0.034, 0.012, 0x7fd0e8, [-0.045, 1.845, -0.152]);
-          k.box(0.07, 0.034, 0.012, 0x7fd0e8, [0.045, 1.845, -0.152]);
-        }
-      }
+      k.dome(hr + 0.006, hair, [0, hy + 0.005, 0.02], [0.95, 1.08, 1.02], 0.6, [0.75, 0, 0]); // hair under the hat
+      k.dome(hr + 0.024, hat, [0, hy + 0.08, 0.004], [0.98, 0.9, 1.08], 0.5); // hard hat
+      k.lathe([[0, hy + 0.076], [hr + 0.055, hy + 0.076], [hr + 0.057, hy + 0.086], [hr + 0.02, hy + 0.094]], hat, [0, 0, -0.02], 0.95, 1.12, 18);
     }
+    this.addFace(humanFace(agent ? 'agent' : v === 0 ? 'moustache' : v === 1 ? 'beard' : 'plain', hair), hr, hy, hs);
 
-    // arms: rolled sleeves and work gloves (the agent keeps his cuffs)
+    // arms: rolled sleeves, bare forearms, mitten gloves
     for (const side of [-1, 1]) {
-      const x = side * (s.shoulderX - 0.005);
+      const x = side * (s.shoulderX - 0.012);
       const up = side < 0 ? B.armL : B.armR;
       const fo = side < 0 ? B.foreL : B.foreR;
+      const sy = s.shoulderY;
+      const ey = sy - s.upperArm;
       k.curBone = up;
-      k.sphere(0.072, shirt, [x, s.shoulderY + 0.005, 0]);
-      k.taper(0.1, 0.27, 0.11, 1.18, 1.12, shirt, [x, s.shoulderY - 0.145, 0]);
-      if (!agent) k.box(0.115, 0.04, 0.125, shirtL, [x, s.shoulderY - 0.258, 0]);
+      k.lathe([[0, sy + 0.075], [0.05, sy + 0.06], [0.072, sy + 0.01], [0.064, sy - 0.12], [0.056, ey + 0.01], [0.058, ey - 0.012], [0, ey - 0.02]], shirt, [x, 0, 0]);
       k.curBone = fo;
-      const ey = s.shoulderY - s.upperArm;
       if (agent) {
-        k.taper(0.085, 0.2, 0.09, 1.2, 1.15, shirt, [x, ey - 0.1, 0]);
-        k.box(0.095, 0.03, 0.1, PAL.shirt, [x, ey - 0.21, 0]);
-        k.box(0.08, 0.09, 0.09, skin, [x, ey - 0.27, 0]);
-        k.box(0.028, 0.05, 0.036, skin, [x, ey - 0.25, -0.058]);
+        k.lathe([[0, ey + 0.03], [0.05, ey + 0.015], [0.05, ey - 0.1], [0.042, ey - 0.215], [0, ey - 0.22]], shirt, [x, 0, 0]);
+        k.lathe([[0.044, ey - 0.2], [0.046, ey - 0.215], [0.044, ey - 0.235]], PAL.shirt, [x, 0, 0]);
+        k.sphere(0.046, skin, [x, ey - 0.275, -0.004], 2, [0.85, 1.2, 1], true);
       } else {
-        k.taper(0.075, 0.19, 0.08, 1.3, 1.25, skin, [x, ey - 0.1, 0]);
-        k.box(0.102, 0.035, 0.107, shade(glove, 0.78), [x, ey - 0.207, 0]);
-        k.box(0.095, 0.1, 0.105, glove, [x, ey - 0.272, 0]);
-        k.box(0.03, 0.05, 0.04, glove, [x, ey - 0.252, -0.066]);
+        k.lathe([[0, ey + 0.03], [0.048, ey + 0.015], [0.05, ey - 0.08], [0.038, ey - 0.215], [0, ey - 0.22]], skin, [x, 0, 0]);
+        k.lathe([[0.042, ey - 0.19], [0.05, ey - 0.2], [0.05, ey - 0.225]], shade(glove, 0.78), [x, 0, 0]);
+        k.sphere(0.052, glove, [x, ey - 0.275, -0.004], 2, [0.9, 1.2, 1.05], true);
       }
     }
 
-    // legs: tapered, knee pads, proper boots
+    // legs and boots
     for (const side of [-1, 1]) {
       const x = side * s.hipX;
       const th = side < 0 ? B.thighL : B.thighR;
       const sn = side < 0 ? B.shinL : B.shinR;
       const ky = s.hip - s.thigh;
       k.curBone = th;
-      k.taper(0.115, 0.45, 0.135, 1.28, 1.15, pants, [x, s.hip - 0.215, 0]);
+      k.lathe([[0, s.hip + 0.04], [0.07, s.hip + 0.02], [0.084, s.hip - 0.1], [0.072, ky + 0.08], [0.064, ky], [0, ky - 0.03]], pants, [x, 0, 0]);
       k.curBone = sn;
-      k.taper(0.1, 0.35, 0.115, 1.22, 1.15, pants, [x, ky - 0.185, 0]);
-      if (agent) {
-        k.box(0.11, 0.07, 0.27, ink, [x, 0.05, -0.05]); // dress shoes
-        k.box(0.115, 0.02, 0.29, 0x05060a, [x, 0.01, -0.055]);
-      } else {
-        k.box(0.125, 0.1, 0.05, ink, [x, ky - 0.045, -0.078]); // knee pad
-        k.box(0.136, 0.025, 0.14, ink, [x, ky - 0.045, 0]);
-        k.box(0.13, 0.15, 0.16, leather, [x, 0.105, 0.005]); // boot shaft
-        k.box(0.13, 0.09, 0.13, leather, [x, 0.075, -0.135]); // toe
-        k.box(0.134, 0.05, 0.05, shade(leather, 1.35), [x, 0.08, -0.182]); // toe cap
-        k.box(0.142, 0.03, 0.31, ink, [x, 0.015, -0.06]); // sole
+      k.lathe([[0, ky + 0.04], [0.062, ky + 0.02], [0.066, ky - 0.1], [0.052, 0.17], [0.05, 0.1], [0, 0.09]], pants, [x, 0, 0]);
+      if (agent) k.sphere(0.06, 0x101116, [x, 0.045, -0.055], 2, [0.9, 0.78, 2.2], true);
+      else {
+        k.sphere(0.058, 0x15161c, [x, ky - 0.02, -0.045], 2, [1, 1.15, 0.6], true); // knee pad
+        k.lathe([[0, 0.06], [0.066, 0.06], [0.064, 0.2], [0.056, 0.22], [0, 0.22]], leather, [x, 0, 0.005]);
+        k.sphere(0.07, leather, [x, 0.065, -0.07], 2, [0.98, 0.95, 1.85], true);
       }
     }
     this.muzzle.position.set(0, -0.3, -0.5);
