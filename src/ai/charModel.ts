@@ -501,8 +501,9 @@ export class CharModel {
       k.loft([A(sy + 0.058, 0, 0, 0), A(sy + 0.05, 0.03, 0.04, 0.04), A(sy + 0.02, 0.052, 0.062, 0.06), A(sy - 0.04, 0.054, 0.06, 0.056), A(sy - 0.14, 0.048, 0.055, 0.048), A(ey + 0.03, 0.044, 0.046, 0.046), A(ey - 0.015, 0.045, 0.046, 0.047), A(ey - 0.025, 0, 0, 0)], (seg) => (seg === 5 ? cuff : shirt), { sides: 10 });
       if (!agent) {
         k.loft([A(ey + 0.04, 0, 0, 0), A(ey + 0.038, 0.05, 0.051, 0.051), A(ey + 0.01, 0.052, 0.053, 0.053), A(ey - 0.004, 0.051, 0.052, 0.052), A(ey - 0.01, 0.047, 0.048, 0.048), A(ey - 0.012, 0, 0, 0)], (seg) => (seg === 2 ? shade(cuff, 0.85) : cuff), { sides: 10 });
-      } else k.loft([A(ey - 0.19, 0, 0, 0), A(ey - 0.19, 0.032, 0.034, 0.034), A(ey - 0.215, 0.031, 0.033, 0.033), A(ey - 0.217, 0, 0, 0)].map((r) => ({ ...r, y: r.y })), PAL.shirt, { sides: 10 });
+      }
       k.curBone = fo;
+      if (agent) k.loft([A(ey - 0.19, 0, 0, 0), A(ey - 0.19, 0.032, 0.034, 0.034), A(ey - 0.215, 0.031, 0.033, 0.033), A(ey - 0.217, 0, 0, 0)], PAL.shirt, { sides: 10 }); // dress cuffs
       k.loft([A(ey + 0.03, 0, 0, 0), A(ey + 0.022, 0.04, 0.04, 0.04), A(ey - 0.03, 0.045, 0.047, 0.045), A(ey - 0.13, 0.041, 0.042, 0.04), A(ey - 0.23, 0.027, 0.029, 0.029), A(ey - 0.24, 0, 0, 0)], (seg) => (agent ? (seg === 3 ? PAL.shirt : shirt) : skin), { sides: 10 });
       this.hand(k, x, ey - 0.23, side, glove);
     }
@@ -755,6 +756,10 @@ const _grip = new THREE.Vector3();
 const _fore = new THREE.Vector3();
 const _poleR = new THREE.Vector3(0.6, -1, 0.4);
 const _poleL = new THREE.Vector3(-0.9, -1, 0.1);
+const _poleBrace = new THREE.Vector3(-0.4, -1, 0.6);
+const _qa = new THREE.Quaternion();
+const _qf = new THREE.Quaternion();
+const _wrist = new THREE.Vector3();
 
 /** Inputs the brain sets each frame; the animator turns them into bone rotations. */
 export class CharAnim {
@@ -823,6 +828,7 @@ export class CharAnim {
     const drop = this.cCrouch * 0.36 + this.sit * 0.42;
     const bend = Math.acos(clamp((legLen - drop * (legLen / 0.9)) / legLen, 0.3, 1));
     const bob = Math.abs(Math.sin(ph)) * 0.05 * moving * (legLen / 0.9);
+    const hinge = (this.m.kind === 'manager' ? 0 : 0.42) * this.cCrouch * (1 - this.sit);
     for (const side of [-1, 1]) {
       const p = ph + (side > 0 ? Math.PI : 0);
       const fwd = Math.sin(p) * swing * back;
@@ -834,8 +840,10 @@ export class CharAnim {
         th.rotation.set(1.45, 0, side * 0.12);
         sn.rotation.set(-1.4, 0, 0);
       } else {
-        th.rotation.set(fwd + bend + lift * 0.35, 0, side * 0.03 + this.moveX * 0.12 * moving);
-        sn.rotation.set(-(bend * 2 + lift), 0, 0);
+        // standing to shoot: left foot forward, right foot back, knees soft
+        const stance = this.m.kind === 'manager' ? 0 : this.cAim * (1 - moving);
+        th.rotation.set(fwd + bend + hinge + lift * 0.35 + stance * (side < 0 ? 0.2 : -0.14), 0, side * (0.03 + stance * 0.05) + this.moveX * 0.12 * moving);
+        sn.rotation.set(-(bend * 2 + lift + stance * 0.12), 0, 0);
       }
     }
 
@@ -845,12 +853,12 @@ export class CharAnim {
     const pel = b[B.pelvis];
     const hipY = s.hip + 0.02 - drop * (legLen / 0.9) + bob;
     pel.position.set(0, lerp(hipY, 0.32 * (legLen / 0.9), de), lerp(0, 0.25, de) + this.sit * 0.0);
-    pel.rotation.set(lerp(-run * 0.14 * back, -1.35 * this.deadSide, de), 0, lerp(Math.sin(ph) * 0.04 * moving, 0.25, de));
+    pel.rotation.set(lerp(-run * 0.14 * back - hinge, -1.35 * this.deadSide, de), 0, lerp(Math.sin(ph) * 0.04 * moving, 0.25, de));
 
     // ---- torso ----
     const ch = b[B.chest];
     const breathe = Math.sin(this.t * 1.7) * 0.012;
-    _e.set(breathe + this.cPitch * 0.45 * this.cAim - this.flinch * 0.35 + this.cCrouch * 0.25 + this.stomp * 0.4 - de * 0.3, this.cTwist + this.flinchSide * this.flinch * 0.4, Math.sin(ph) * -0.05 * moving, 'YXZ');
+    _e.set(breathe + this.cPitch * 0.45 * this.cAim - this.flinch * 0.35 + hinge * 0.6 + this.stomp * 0.4 - de * 0.3, this.cTwist + this.flinchSide * this.flinch * 0.4, Math.sin(ph) * -0.05 * moving, 'YXZ');
     ch.rotation.copy(_e);
     b[B.head].rotation.set(clamp(this.headPitch, -0.6, 0.6) - this.flinch * 0.3 + de * 0.5, clamp(this.headYaw, -1.1, 1.1), de * 0.4 * this.deadSide, 'YXZ');
 
@@ -874,7 +882,7 @@ export class CharAnim {
       const sy = s.shoulderY - s.spine;
       const bounce = Math.sin(ph * 2) * 0.012 * moving * (1 - a);
       g.position.set(lerp(0.06, 0.085, a), lerp(sy - 0.17, sy - 0.03, a) + bounce, lerp(-0.2, -0.27, a) + this.kick * 0.035);
-      g.rotation.set(lerp(-0.55, pitch, a) + this.kick * 0.12, lerp(0.5, 0.06, a), lerp(0.25, 0, a), 'YXZ');
+      g.rotation.set(lerp(-0.55, pitch + hinge * 0.4, a) + this.kick * 0.12, lerp(0.5, 0.06, a), lerp(0.25, 0, a), 'YXZ');
       g.updateMatrix();
       _grip.set(0, 0, 0).applyMatrix4(g.matrix);
       _fore.set(0, -0.005, -0.29).applyMatrix4(g.matrix);
@@ -890,12 +898,25 @@ export class CharAnim {
       aL.rotation.set(lerp(0.75, 1.35 + pitch, a) - armSwing * 0.3, 0, lerp(0.35, 0.62, a));
       fL.rotation.set(lerp(0.75, 0.25, a), 0, lerp(0.7, 0.3, a));
     } else {
-      // blaster arm points at the target; off-hand balances
+      // blaster arm points at the target; at a run the arms pump with bent elbows; when firing the
+      // free hand comes over to brace the gun arm
       const sw = this.swing > 0 ? Math.sin(this.swing * Math.PI) : 0;
-      aR.rotation.set(lerp(0.12 - armSwing, 1.48 + pitch - this.kick * 0.25, a) + this.stomp * 0.5, 0, lerp(0.08, 0.02, a));
-      fR.rotation.set(lerp(0.25, 0.08, a) + this.kick * 0.2, 0, 0);
-      aL.rotation.set(lerp(0.1 + armSwing, 0.35, a) + sw * 2.4 + this.stomp * 2.2, 0, lerp(-0.1, -0.22, a) - sw * 0.3);
-      fL.rotation.set(lerp(0.3, 0.9, a) + sw * 0.4, 0, 0);
+      const pump = run * moving * (this.m.kind === 'manager' ? 0.4 : 1);
+      aR.rotation.set(lerp(0.12 - armSwing * (1 + pump * 0.4), 1.48 + pitch + hinge * 0.4 - this.kick * 0.25, a) + this.stomp * 0.5, 0, lerp(0.08, 0.02, a));
+      fR.rotation.set(lerp(0.25 + pump * 1.1, 0.08, a) + this.kick * 0.2, 0, 0);
+      aL.rotation.set(lerp(0.1 + armSwing * (1 + pump * 0.4), 0.35, a) + sw * 2.4 + this.stomp * 2.2, 0, lerp(-0.1, -0.22, a) - sw * 0.3);
+      fL.rotation.set(lerp(0.3 + pump * 1.1, 0.9, a) + sw * 0.4, 0, 0);
+      if (a > 0.01 && sw === 0 && this.stomp === 0 && this.m.kind !== 'manager') {
+        _qa.copy(aL.quaternion);
+        _qf.copy(fL.quaternion);
+        // a point on the gun forearm, a little way down from the elbow
+        _wrist.set(0, -0.13, 0).applyQuaternion(fR.quaternion).add(fR.position).applyQuaternion(aR.quaternion).add(aR.position);
+        reach(aL, fL, s.upperArm, 0.3, _wrist, _poleBrace);
+        const k = a * a * (3 - 2 * a);
+        // (slerp from the old pose toward the solved one, which is already in the bones)
+        aL.quaternion.copy(_qa.slerp(aL.quaternion, k));
+        fL.quaternion.copy(_qf.slerp(fL.quaternion, k));
+      }
     }
     if (de > 0) {
       aL.rotation.x = lerp(aL.rotation.x, -0.6, de);

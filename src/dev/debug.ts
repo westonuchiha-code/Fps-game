@@ -26,10 +26,13 @@ export function installDebug(game: Game) {
       key.target.position.set(0, y + 1, 0);
       game.scene.add(key, key.target);
       let x = close ? -3.2 : -5.2;
+      const anims: CharAnim[] = [];
+      (d as unknown as { anims: CharAnim[] }).anims = anims;
       for (const [kind, pal, variant] of cast) {
         if (close && kind === 'manager') continue;
         const m = new CharModel(kind, PALETTES[pal], variant);
         const a = new CharAnim(m);
+        anims.push(a);
         a.aim = aim;
         a.speed = speed;
         a.twoHanded = kind === 'striker';
