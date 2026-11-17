@@ -13,7 +13,8 @@
     "test": "node tools/smoke.mjs",
     "check": "node tools/check.mjs",
     "single": "node tools/singlefile.mjs",
-    "handheld": "node tools/handheld.mjs"
+    "handheld": "node tools/handheld.mjs",
+    "anim-sheet": "node tools/anim-sheet.mjs"
   },
   "dependencies": {
     "@fontsource/anton": "^5.3.0",

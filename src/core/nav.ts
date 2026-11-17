@@ -45,3 +45,8 @@ export function openGame(note: BootNote | null = null) {
 }
 
 export const wantsEditor = () => location.hash === '#editor';
+/** The pose / animation editor (src/animtool). */
+export const wantsAnim = () => location.hash === '#anim';
+export function openAnim() {
+  go('#anim', null);
+}

@@ -38,7 +38,7 @@
    "locked": true
   },
   {
-   "id": "boxs6w95",
+   "id": "boxwf6c5",
    "type": "box",
    "pos": [
     0,
@@ -56,7 +56,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs6wj7",
+   "id": "boxwf6i7",
    "type": "box",
    "pos": [
     0,
@@ -74,7 +74,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs6wr9",
+   "id": "boxwf6n9",
    "type": "box",
    "pos": [
     -40,
@@ -92,7 +92,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs6x0b",
+   "id": "boxwf6sb",
    "type": "box",
    "pos": [
     40,
@@ -110,7 +110,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs6x9d",
+   "id": "boxwf6yd",
    "type": "box",
    "pos": [
     -22,
@@ -129,7 +129,7 @@
    "group": "structure"
   },
   {
-   "id": "ramps6xij",
+   "id": "rampwf78j",
    "type": "ramp",
    "pos": [
     -22,
@@ -152,7 +152,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs6xql",
+   "id": "boxwf7gl",
    "type": "box",
    "pos": [
     -22,
@@ -170,7 +170,7 @@
    "group": "structure"
   },
   {
-   "id": "ps6xym",
+   "id": "pwf7pm",
    "type": "prop",
    "prop": "container",
    "pos": [
@@ -187,7 +187,7 @@
    "color": "#b5442f"
   },
   {
-   "id": "ps6ycn",
+   "id": "pwf83n",
    "type": "prop",
    "prop": "container",
    "pos": [
@@ -204,7 +204,7 @@
    "color": "#2f6f9f"
   },
   {
-   "id": "ps6ymo",
+   "id": "pwf8eo",
    "type": "prop",
    "prop": "container",
    "pos": [
@@ -221,7 +221,7 @@
    "color": "#2e9b8f"
   },
   {
-   "id": "ps6yvp",
+   "id": "pwf8np",
    "type": "prop",
    "prop": "container_open",
    "pos": [
@@ -233,7 +233,7 @@
    "color": "#e0a82e"
   },
   {
-   "id": "ps6z4q",
+   "id": "pwf8wq",
    "type": "prop",
    "prop": "crate_big",
    "pos": [
@@ -249,7 +249,7 @@
    "group": "cover"
   },
   {
-   "id": "ps6zcr",
+   "id": "pwf96r",
    "type": "prop",
    "prop": "crate",
    "pos": [
@@ -260,7 +260,7 @@
    "group": "cover"
   },
   {
-   "id": "ps6zls",
+   "id": "pwf9fs",
    "type": "prop",
    "prop": "barrier",
    "pos": [
@@ -271,7 +271,7 @@
    "group": "cover"
   },
   {
-   "id": "ps6ztt",
+   "id": "pwf9qt",
    "type": "prop",
    "prop": "barrier",
    "pos": [
@@ -282,7 +282,7 @@
    "group": "cover"
   },
   {
-   "id": "ps702u",
+   "id": "pwfa0u",
    "type": "prop",
    "prop": "sandbags",
    "pos": [
@@ -293,7 +293,7 @@
    "group": "cover"
   },
   {
-   "id": "ps70bv",
+   "id": "pwfabv",
    "type": "prop",
    "prop": "pallet_load",
    "pos": [
@@ -304,7 +304,7 @@
    "group": "cover"
   },
   {
-   "id": "ps70jw",
+   "id": "pwfamw",
    "type": "prop",
    "prop": "boxes",
    "pos": [
@@ -315,7 +315,7 @@
    "group": "cover"
   },
   {
-   "id": "ps70sx",
+   "id": "pwfaxx",
    "type": "prop",
    "prop": "forklift",
    "pos": [
@@ -331,7 +331,7 @@
    "group": "cover"
   },
   {
-   "id": "ps712y",
+   "id": "pwfb7y",
    "type": "prop",
    "prop": "lamp",
    "pos": [
@@ -342,7 +342,7 @@
    "group": "cover"
   },
   {
-   "id": "ps71bz",
+   "id": "pwfbfz",
    "type": "prop",
    "prop": "lamp",
    "pos": [
@@ -353,7 +353,7 @@
    "group": "cover"
   },
   {
-   "id": "ps71j10",
+   "id": "pwfbo10",
    "type": "prop",
    "prop": "billboard",
    "pos": [
@@ -365,7 +365,7 @@
    "text": "EVERYTHING MUST GO"
   },
   {
-   "id": "ps71v11",
+   "id": "pwfc111",
    "type": "prop",
    "prop": "union_sign",
    "pos": [
@@ -381,7 +381,7 @@
    "text": "SANDBOX YARD - LOCAL 404"
   },
   {
-   "id": "boxs72513",
+   "id": "boxwfcb13",
    "type": "box",
    "pos": [
     28,
@@ -401,7 +401,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs72b15",
+   "id": "boxwfcg15",
    "type": "box",
    "pos": [
     28,
@@ -419,7 +419,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs72g17",
+   "id": "boxwfcm17",
    "type": "box",
    "pos": [
     28,
@@ -437,7 +437,7 @@
    "group": "structure"
   },
   {
-   "id": "boxs72l19",
+   "id": "boxwfcq19",
    "type": "box",
    "pos": [
     34.25,
@@ -455,7 +455,7 @@
    "group": "structure"
   },
   {
-   "id": "ens72q1a",
+   "id": "enwfcv1a",
    "type": "enemy",
    "kind": "assoc",
    "pos": [
@@ -484,7 +484,7 @@
    ]
   },
   {
-   "id": "ens72z1b",
+   "id": "enwfd41b",
    "type": "enemy",
    "kind": "assoc",
    "pos": [
@@ -501,7 +501,7 @@
    "group": "squad A"
   },
   {
-   "id": "ens7361c",
+   "id": "enwfdb1c",
    "type": "enemy",
    "kind": "super",
    "pos": [
@@ -518,7 +518,7 @@
    "group": "squad A"
   },
   {
-   "id": "ens73i1d",
+   "id": "enwfdp1d",
    "type": "enemy",
    "kind": "assoc",
    "pos": [
@@ -536,7 +536,7 @@
    "hold": true
   },
   {
-   "id": "ens73p1e",
+   "id": "enwfdx1e",
    "type": "enemy",
    "kind": "assoc",
    "pos": [
@@ -554,7 +554,7 @@
    "group": "squad B"
   },
   {
-   "id": "ens73w1f",
+   "id": "enwfe51f",
    "type": "enemy",
    "kind": "assoc",
    "pos": [
@@ -572,7 +572,7 @@
    "group": "squad B"
   },
   {
-   "id": "ens7431g",
+   "id": "enwfec1g",
    "type": "enemy",
    "kind": "drone",
    "pos": [
@@ -590,7 +590,7 @@
    "group": "squad B"
   },
   {
-   "id": "ens74b1h",
+   "id": "enwfel1h",
    "type": "enemy",
    "kind": "manager",
    "pos": [
@@ -609,7 +609,7 @@
    "level": 3
   },
   {
-   "id": "lks74k1i",
+   "id": "lkwfew1i",
    "type": "locker",
    "pos": [
     -22,
@@ -625,7 +625,7 @@
    "name": "deck_locker"
   },
   {
-   "id": "pks74r1j",
+   "id": "pkwff31j",
    "type": "pickup",
    "kind": "ammo",
    "pos": [
@@ -635,7 +635,7 @@
    ]
   },
   {
-   "id": "pks74v1k",
+   "id": "pkwff81k",
    "type": "pickup",
    "kind": "health",
    "pos": [
@@ -645,7 +645,7 @@
    ]
   },
   {
-   "id": "pks74z1l",
+   "id": "pkwffc1l",
    "type": "pickup",
    "kind": "ammo",
    "pos": [
@@ -657,7 +657,7 @@
    "amount": 24
   },
   {
-   "id": "pks7551m",
+   "id": "pkwffi1m",
    "type": "pickup",
    "kind": "mine",
    "pos": [
@@ -667,7 +667,7 @@
    ]
   },
   {
-   "id": "pks7591n",
+   "id": "pkwffn1n",
    "type": "pickup",
    "kind": "cash",
    "pos": [
@@ -677,7 +677,7 @@
    ]
   },
   {
-   "id": "wps75d1o",
+   "id": "wpwffr1o",
    "type": "weapon",
    "pos": [
     0,
@@ -688,7 +688,7 @@
    "rarity": 1
   },
   {
-   "id": "brs75k1p",
+   "id": "brwffz1p",
    "type": "barrel",
    "pos": [
     8,
@@ -697,7 +697,7 @@
    ]
   },
   {
-   "id": "brs75o1q",
+   "id": "brwfg31q",
    "type": "barrel",
    "pos": [
     9,
@@ -706,7 +706,7 @@
    ]
   },
   {
-   "id": "brs75r1r",
+   "id": "brwfg61r",
    "type": "barrel",
    "pos": [
     30,
@@ -715,7 +715,7 @@
    ]
   },
   {
-   "id": "vhs75u1s",
+   "id": "vhwfg91s",
    "type": "vehicle",
    "kind": "teamster",
    "pos": [
@@ -730,7 +730,7 @@
    ]
   },
   {
-   "id": "cps75z1t",
+   "id": "cpwfge1t",
    "type": "checkpoint",
    "pos": [
     0,
@@ -745,7 +745,7 @@
    "name": "mid_checkpoint"
   },
   {
-   "id": "trs7641u",
+   "id": "trwfgk1u",
    "type": "trigger",
    "pos": [
     -22,
@@ -770,7 +770,7 @@
    "name": "deck_trigger"
   },
   {
-   "id": "trs76e1v",
+   "id": "trwfgw1v",
    "type": "trigger",
    "pos": [
     22,
@@ -806,7 +806,7 @@
    "disabled": true
   },
   {
-   "id": "mks76n1w",
+   "id": "mkwfh71w",
    "type": "marker",
    "pos": [
     32,

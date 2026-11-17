@@ -194,6 +194,8 @@ export class Npc implements Target, Shootable, Listener {
   wantFire = false;
   aimPoint3 = new THREE.Vector3();
   private burstLeft = 0;
+  /** bursts left before the next magazine change (workers play the 'reload' clip) */
+  private magBursts = 2 + Math.floor(Math.random() * 3);
   private shotT = 0;
   private pauseT = rand(0.2, 1);
   focus = 0;
@@ -584,6 +586,11 @@ export class Npc implements Target, Shootable, Listener {
     if (this.burstLeft <= 0) {
       this.pauseT = rand(def.pause[0], def.pause[1]);
       G.ai.releaseToken(this);
+      if (--this.magBursts <= 0) {
+        this.magBursts = 2 + Math.floor(Math.random() * 3);
+        // change magazines (an authored clip, if this character has one)
+        if (this.anim.play('reload')) this.pauseT = Math.max(this.pauseT, this.anim.clip!.length * 0.9);
+      }
     }
     // muzzle + aim with error
     this.model.root.updateMatrixWorld(true);

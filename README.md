@@ -13,6 +13,7 @@ It runs in any modern desktop browser. Nothing to install except Node.
 npm install
 npm run dev        # http://localhost:5173           the game
                    # http://localhost:5173/#editor   the level editor
+                   # http://localhost:5173/#anim     the animation editor
 npm run build      # static build in dist/ (host it anywhere)
 npm run single     # the whole game as ONE file: release/everything-must-go.html
                    # (download it, double-click it, play — no server needed)
@@ -152,3 +153,23 @@ view the first-person rig from outside and take bird's-eye shots of a level.
 This is an early build: one mission, placeholder voices, and a lot of tuning still to do.
 Planned next, roughly in order: missions 2–3, vending kiosks, more legendaries, enemy vehicles,
 the finale in the MonoMart Tower against Max Price's robotic CEO chassis.
+
+## Animation editor
+
+Open **`/#anim`**. It shows one character driven by the game's own animation code. The sliders on
+the left set its base motion (aim, run speed, crouch, aim up/down); a clip is layered on top.
+
+- Pick a **clip** (or type a name and press *New*). Set its length, whether it loops and which
+  characters it plays on.
+- **Click a joint** (or the rifle) and drag the gizmo rings, or type angles on the right. Every
+  change writes a key at the playhead; keys show as diamonds on the timeline (drag them to retime).
+- *Left hand: grip → magazine* moves a worker's off hand from the handguard to the magazine.
+- **Space** plays, **K** adds a key, **, .** jump between keys, **Ctrl+Z** undoes, **Ctrl+S** saves,
+  **R** switches the rifle gizmo between move and turn. *Mirror* swaps left and right; *Copy / Paste
+  pose* carries a pose to another time or clip; *Fades* previews the blend the game uses.
+- **Save** writes `public/anims/clips.json` (dev server); on a static host it downloads the file.
+
+The game plays clips by name (`npc.anim.play('reload')`): workers change magazines every few bursts.
+
+`node tools/anim-sheet.mjs --clips reload --cast 2,3 --times 0,0.25,0.5,0.75,1 --yaws 35,-60` renders a
+contact sheet into `shots/anim-sheet.png` (dev server running).

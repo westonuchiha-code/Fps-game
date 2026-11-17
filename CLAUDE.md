@@ -12,6 +12,11 @@ decisions. The short version of the brief:
 - Villains: MonoMart, a hyper-capitalist megacorp of smiling robots; finale vs a robotic CEO.
 - Scope cap: no bigger than Halo CE. Focus on cool level layouts and fun gunplay.
 - The owner wants tools: keep the level editor working and levels data-driven.
+- **Character animation is data plus code.** CharAnim (`src/ai/charModel.ts`) makes the base motion
+  (walk, run, aim, crouch, hands solved onto the rifle); authored clips (`public/anims/clips.json`,
+  format in `src/anim/clips.ts`) layer keyed offsets on top. Make and edit clips in the animation
+  editor (`/#anim`, `window.__anim` for scripting) rather than typing poses into code, and judge them
+  with `node tools/anim-sheet.mjs` (a contact sheet of characters x clips x moments).
 - The owner likes progress screenshots during long work sessions.
 
 ## Conventions
@@ -30,8 +35,8 @@ decisions. The short version of the brief:
   it on a phone there is a separate test rig, `tools/handheld/` (`npm run handheld`): it wraps the
   finished game in a page with two on-screen controllers and feeds it as an ordinary gamepad.
 - The global game instance is `G` (`src/core/globals.ts`). No per-frame allocations in hot paths.
-- **One page, two apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
-  address ends in `#editor` and the game otherwise. They hand over through `src/core/nav.ts`
+- **One page, three apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
+  address ends in `#editor`, the animation editor at `#anim`, and the game otherwise. They hand over through `src/core/nav.ts`
   (`openEditor()`, `openGame(note)`), never through query strings or separate pages, so the pair
   also works on hosts that only serve one page. Wrap every browser-storage access in try/catch.
 

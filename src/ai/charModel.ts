@@ -5,6 +5,7 @@ import { Kit, loftGeometry, type Ring } from '../render/kit';
 import { flat, PAL, shade } from '../render/toon';
 import { drawSmile } from '../render/textures';
 import { LAYER_FX } from '../render/pipeline';
+import { CLIPS, ClipPose, clipWeight, sampleClip, type Clip } from '../anim/clips';
 
 export type CharKind = 'assoc' | 'super' | 'striker' | 'manager';
 export type Mood = 'happy' | 'angry' | 'hurt' | 'dead';
@@ -760,6 +761,10 @@ const _poleBrace = new THREE.Vector3(-0.4, -1, 0.6);
 const _qa = new THREE.Quaternion();
 const _qf = new THREE.Quaternion();
 const _wrist = new THREE.Vector3();
+const _mag = new THREE.Vector3();
+const _qid = new THREE.Quaternion();
+const _qc = new THREE.Quaternion();
+const _rq = new THREE.Quaternion();
 
 /** Inputs the brain sets each frame; the animator turns them into bone rotations. */
 export class CharAnim {
@@ -800,7 +805,38 @@ export class CharAnim {
   private t = Math.random() * 10;
   twoHanded = false;
 
+  // ---- clips (src/anim/clips.ts) ----
+  /** the clip playing, its time and playback speed (0 = held at clipT, for the pose editor) */
+  clip: Clip | null = null;
+  clipName = '';
+  clipT = 0;
+  clipSpeed = 1;
+  /** blend weight override (the pose editor shows a clip at full strength) */
+  clipWeightOverride = -1;
+  readonly pose = new ClipPose();
+  /** each bone's rotation before the clip was layered on (the pose editor edits offsets from it) */
+  readonly base = Array.from({ length: 12 }, () => new THREE.Quaternion());
+  readonly rifleBase = new THREE.Matrix4();
+
   constructor(private m: CharModel) {}
+
+  /** Play a clip by name. Returns false if there is no such clip, or it is not for this character. */
+  play(name: string, speed = 1) {
+    const c = CLIPS[name];
+    if (!c || (c.for?.length && !c.for.includes(this.m.kind))) return false;
+    this.clip = c;
+    this.clipName = name;
+    this.clipT = 0;
+    this.clipSpeed = speed;
+    return true;
+  }
+  stop() {
+    this.clip = null;
+    this.clipName = '';
+  }
+  get playing() {
+    return !!this.clip;
+  }
 
   update(dt: number) {
     const b = this.m.bones;
@@ -813,6 +849,19 @@ export class CharAnim {
     this.cSpeed = damp(this.cSpeed, this.speed, 8, dt);
     this.kick = damp(this.kick, 0, 14, dt);
     this.flinch = damp(this.flinch, 0, 7, dt);
+
+    // advance and sample the clip
+    let cw = 0;
+    const clip = this.clip;
+    if (clip) {
+      this.clipT += dt * this.clipSpeed;
+      if (clip.loop) this.clipT %= clip.length;
+      else if (this.clipT >= clip.length && this.clipSpeed > 0) this.stop();
+      if (this.clip) {
+        sampleClip(clip, this.clipT, this.pose);
+        cw = this.clipWeightOverride >= 0 ? this.clipWeightOverride : clipWeight(clip, this.clipT);
+      }
+    }
 
     const sp = this.cSpeed;
     const run = clamp(sp / 4.5, 0, 1);
@@ -884,8 +933,21 @@ export class CharAnim {
       g.position.set(lerp(0.06, 0.085, a), lerp(sy - 0.17, sy - 0.03, a) + bounce, lerp(-0.2, -0.27, a) + this.kick * 0.035);
       g.rotation.set(lerp(-0.55, pitch + hinge * 0.4, a) + this.kick * 0.12, lerp(0.5, 0.06, a), lerp(0.25, 0, a), 'YXZ');
       g.updateMatrix();
+      this.rifleBase.copy(g.matrix);
+      if (cw > 0 && this.pose.hasRifle) {
+        // the clip moves the rifle (in the chest frame); the hands follow it
+        g.position.addScaledVector(this.pose.rifleP, cw);
+        _rq.setFromEuler(this.pose.rifleR);
+        _qc.copy(_qid).slerp(_rq, cw);
+        g.quaternion.premultiply(_qc);
+        g.updateMatrix();
+      }
       _grip.set(0, 0, 0).applyMatrix4(g.matrix);
       _fore.set(0, -0.005, -0.29).applyMatrix4(g.matrix);
+      if (cw > 0 && this.pose.mag > 0) {
+        _mag.set(0.0, -0.085, -0.1).applyMatrix4(g.matrix);
+        _fore.lerp(_mag, this.pose.mag * cw);
+      }
       const l1 = s.upperArm;
       const l2 = 0.27;
       reach(aR, fR, l1, l2, _grip, _poleR);
@@ -916,6 +978,14 @@ export class CharAnim {
         // (slerp from the old pose toward the solved one, which is already in the bones)
         aL.quaternion.copy(_qa.slerp(aL.quaternion, k));
         fL.quaternion.copy(_qf.slerp(fL.quaternion, k));
+      }
+    }
+    // layer the clip's bone offsets over the procedural pose
+    for (let i = 0; i < 12; i++) {
+      this.base[i].copy(b[i].quaternion);
+      if (cw > 0 && this.pose.has[i]) {
+        _qc.copy(_qid).slerp(this.pose.q[i], cw);
+        b[i].quaternion.multiply(_qc);
       }
     }
     if (de > 0) {

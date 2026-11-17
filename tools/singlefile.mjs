@@ -32,7 +32,7 @@ if (scripts.length !== 1) throw new Error('expected one script chunk, got ' + sc
 const js = fs.readFileSync(path.join(tmp, 'assets', scripts[0]), 'utf8').replace(/<\/script/gi, '<\\/script').replace(/<!--/g, '<\\!--');
 
 // styles: one sheet per app, fonts embedded (only the Latin files; the others are never requested)
-const css = { game: '', editor: '' };
+const css = { game: '', editor: '', anim: '' };
 for (const f of fs.readdirSync(path.join(dist, 'assets')).filter((n) => n.endsWith('.css'))) {
   let text = fs.readFileSync(path.join(dist, 'assets', f), 'utf8');
   text = text.replace(/url\(([^)]+)\)/g, (all, raw) => {
@@ -43,9 +43,10 @@ for (const f of fs.readdirSync(path.join(dist, 'assets')).filter((n) => n.endsWi
   });
   if (text.includes('#hud')) css.game += text;
   else if (text.includes('.insp-')) css.editor += text;
+  else if (text.includes('.at-timeline')) css.anim += text;
   else throw new Error('cannot tell which app owns ' + f);
 }
-if (!css.game || !css.editor) throw new Error('missing a stylesheet');
+if (!css.game || !css.editor || !css.anim) throw new Error('missing a stylesheet');
 
 // data the game normally fetches
 const blocks = [];
@@ -55,13 +56,15 @@ const embed = (rel, type, enc) => {
   blocks.push(`<script type="${enc === 'base64' ? 'text/plain' : 'application/json'}" data-emg="${rel}" data-type="${type}" data-enc="${enc}">${body}</script>`);
 };
 for (const f of fs.readdirSync(path.join(dist, 'levels'))) embed('levels/' + f, 'application/json', 'text');
+if (fs.existsSync(path.join(dist, 'anims'))) for (const f of fs.readdirSync(path.join(dist, 'anims'))) embed('anims/' + f, 'application/json', 'text');
 for (const f of fs.readdirSync(path.join(dist, 'audio')).filter((n) => n.endsWith('-pack.json'))) embed('audio/' + f, 'application/json', 'text');
 for (const f of fs.readdirSync(path.join(dist, 'audio', 'music'))) embed('audio/music/' + f, 'audio/ogg', 'base64');
 
 const boot = `
 (() => {
   // only the running app's styles: the game's and the editor's sheets both style <body>
-  document.getElementById(location.hash === '#editor' ? 'css-game' : 'css-editor').remove();
+  const app = location.hash === '#editor' ? 'editor' : location.hash === '#anim' ? 'anim' : 'game';
+  for (const k of ['game', 'editor', 'anim']) if (k !== app) document.getElementById('css-' + k).remove();
   const real = window.fetch ? window.fetch.bind(window) : null;
   const find = (url) => {
     const path = String(url).split('#')[0].split('?')[0];
@@ -93,6 +96,7 @@ const html = `<!doctype html>
 <style>html,body{background:#07070b;height:100%;margin:0}</style>
 <style id="css-game">${css.game}</style>
 <style id="css-editor">${css.editor}</style>
+<style id="css-anim">${css.anim}</style>
 <script>${boot}</script>
 </head>
 <body>
