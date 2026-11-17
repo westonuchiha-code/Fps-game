@@ -58,7 +58,12 @@ try {
   });
   const z0 = await page.evaluate(() => window.__game.player.pos.z);
   await step('walk forward', async () => {
-    await key('KeyW', 2600);
+    // hold W until the player has covered some ground: software rendering can run at ~1 fps, so a
+    // fixed hold time says more about the machine than about the game
+    await page.keyboard.down('KeyW');
+    await page.waitForFunction((z) => Math.abs(window.__game.player.pos.z - z) > 0.6, z0, { timeout: 20000, polling: 100 }).catch(() => {});
+    await page.keyboard.up('KeyW');
+    await page.waitForTimeout(120);
   });
   const z1 = await page.evaluate(() => window.__game.player.pos.z);
   // software rendering in CI runs at a few frames per second, so only require *some* movement
@@ -68,7 +73,8 @@ try {
     await page.mouse.down();
     await page.waitForTimeout(120);
     await page.mouse.up();
-    await page.waitForTimeout(400);
+    // a quick click is latched by the game; wait for the frame that handles it
+    await page.waitForFunction((a) => window.__game.inv.current.ammo < a, a0, { timeout: 10000, polling: 100 }).catch(() => {});
     const a1 = await page.evaluate(() => window.__game.inv.current.ammo);
     if (!(a1 < a0)) throw new Error(`no shot fired (ammo ${a0} -> ${a1})`);
   });
