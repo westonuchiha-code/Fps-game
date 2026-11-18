@@ -43,6 +43,18 @@ function levelFiles(): Plugin {
           body += c;
           if (body.length > 4_000_000) req.destroy();
         });
+      // ...and the texture editor its surface recipes
+      server.middlewares.use('/__tex/save', (req, res) => {
+        if (req.method !== 'POST') {
+          res.statusCode = 405;
+          res.end('POST only');
+          return;
+        }
+        let body = '';
+        req.on('data', (c) => {
+          body += c;
+          if (body.length > 4_000_000) req.destroy();
+        });
         req.on('end', () => {
           try {
             const data = JSON.parse(body);

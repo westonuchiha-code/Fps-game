@@ -273,6 +273,7 @@ export class CharModel {
     const shD = shade(sh, 0.84);
     const tie = 0xc0281e;
     const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, n: 4, ...extra });
+    k.surfMap = new Map<number, string>([[sh, 'robot_shell'], [shD, 'robot_shell'], [P.accent, 'robot_paint'], [P.trim, 'robot_paint'], [dk, 'robot_joint'], [tie, 'cotton']]);
 
     // hips, with the apron's skirt
     k.curBone = B.pelvis;
@@ -408,6 +409,13 @@ export class CharModel {
     const band = 0xe8e8d8;
     const ink = 0x15161c;
     const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, ...extra });
+    k.surfMap = new Map<number, string>([
+      [pants, agent ? 'suit' : 'denim'], [shade(pants, 1.08), 'denim'],
+      [shirt, agent ? 'suit' : 'shirt'], [shade(shirt, 0.7), 'shirt'], [shade(shirt, 1.12), 'shirt'], [cuff, agent ? 'cotton' : 'shirt'], [shade(cuff, 0.85), 'shirt'],
+      [PAL.hivis, 'hivis'], [band, 'reflective'], [leather, 'leather'], [glove, agent ? 'skin' : 'leather'], [0x4a4f3a, 'canvas'], [0x7a6a44, 'canvas'],
+      [skin, 'skin'], [hair, 'hair'], [hat, v === 2 ? 'knit' : 'hardhat'], [shade(hat, 0.8), 'knit'], [0xb5382e, 'cotton'], [PAL.shirt, 'cotton'],
+      [ink, agent ? 'leather' : 'rubber'],
+    ]);
 
     // torso: waist, ribcage, chest, shoulders sloping up into the neck
     k.curBone = B.chest;
@@ -571,6 +579,7 @@ export class CharModel {
     const r = new Kit();
     const steel = 0x2a2c30;
     const wood = [0x6b4a2a, 0x5a3e24, 0x7a5432][v];
+    r.surfMap = new Map<number, string>([[steel, 'gun_metal'], [0x3a3d42, 'gun_metal'], [wood, 'wood_stock'], [0x1c1d20, 'rubber']]);
     r.box(0.05, 0.075, 0.26, steel, [0, 0.045, -0.08]); // receiver
     r.box(0.046, 0.02, 0.2, 0x3a3d42, [0, 0.092, -0.07]); // top rail
     r.cyl(0.013, 0.013, 0.3, steel, [0, 0.055, -0.36], 'z', 8); // barrel
@@ -597,6 +606,7 @@ export class CharModel {
     const sh = P.shell;
     const dk = P.dark;
     const R = (y: number, w: number, f: number, b: number, extra: Partial<Ring> = {}): Ring => ({ y, w, f, b, n: 4, ...extra });
+    k.surfMap = new Map<number, string>([[sh, 'mech_paint'], [shade(sh, 0.84), 'mech_paint'], [shade(sh, 0.85), 'mech_paint'], [P.accent, 'robot_paint'], [P.trim, 'robot_paint'], [dk, 'robot_joint'], [PAL.smile, 'mech_paint'], [0xc0281e, 'rubber']]);
     k.curBone = B.pelvis;
     k.cyl(0.3, 0.3, 0.32, dk, [0, s.hip + 0.25, 0], 'y', 12, true);
     k.loft([R(1.2, 0, 0, 0), R(1.22, 0.3, 0.25, 0.25), R(1.32, 0.52, 0.36, 0.36), R(1.5, 0.56, 0.38, 0.38), R(1.6, 0.5, 0.34, 0.34), R(1.64, 0.3, 0.22, 0.22), R(1.65, 0, 0, 0)], (seg, d) => (seg >= 1 && seg <= 2 && d < 2 ? sh : dk), { sides: 16 });

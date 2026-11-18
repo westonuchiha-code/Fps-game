@@ -50,3 +50,8 @@ export const wantsAnim = () => location.hash === '#anim';
 export function openAnim() {
   go('#anim', null);
 }
+/** The texture / surface editor (src/textool). */
+export const wantsTex = () => location.hash === '#tex';
+export function openTex() {
+  go('#tex', null);
+}

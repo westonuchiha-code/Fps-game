@@ -111,7 +111,7 @@ class RigBuilder {
     return m;
   }
   finish() {
-    const mat = toon({ vertexColors: true, ramp: RAMP_METAL, rim: 0.35 });
+    const mat = toon({ vertexColors: true, ramp: RAMP_METAL, rim: 0.35, surfaces: true });
     for (const [name, k] of this.kits) {
       if (k.empty) continue;
       const mesh = new THREE.Mesh(k.geometry(), mat);

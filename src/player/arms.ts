@@ -51,7 +51,7 @@ export class Hand {
 
   constructor(readonly side: 1 | -1) {
     const s = side; // +1 right hand (thumb at -X), -1 left hand (thumb at +X)
-    const mat = toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.25 });
+    const mat = toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.25, surfaces: true });
     const part = (g: THREE.Group, build: (k: Kit) => void) => {
       const k = new Kit();
       build(k);

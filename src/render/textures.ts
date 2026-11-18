@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { Rng } from '../core/math';
+import { BUILTINS, ENV_TEX, SURFACES, repaint } from './surfaces';
 
 /**
  * Procedural "hand-inked" textures. They are near-white so vertex colours tint them:
@@ -14,6 +15,7 @@ function make(size: number, seed: number, draw: Draw, opts: { repeat?: boolean; 
   const g = c.getContext('2d')!;
   draw(g, size, new Rng(seed));
   const t = new THREE.CanvasTexture(c);
+  t.userData.paint = (gg: CanvasRenderingContext2D, ss: number) => draw(gg, ss, new Rng(seed));
   t.colorSpace = opts.srgb === false ? THREE.NoColorSpace : THREE.SRGBColorSpace;
   if (opts.repeat !== false) t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.magFilter = THREE.LinearFilter;
@@ -354,6 +356,13 @@ export function textures(): TexSet {
       speckle(g, s, r, 40, 0.06, 0.2);
     }),
   };
+  // every hand-written texture is also a layer recipes can start from, and is repainted from its
+  // recipe when public/textures/surfaces.json has one
+  for (const [name, t] of Object.entries(cached)) {
+    BUILTINS[name] = t.userData.paint;
+    ENV_TEX[name] = t as THREE.CanvasTexture;
+    if (SURFACES[name]) repaint(name);
+  }
   return cached;
 }
 

@@ -1,0 +1,619 @@
+{
+ "version": 1,
+ "surfaces": {
+  "denim": {
+   "use": "model",
+   "perMetre": 3,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 5,
+     "width": 1.6,
+     "angle": 45,
+     "alpha": 0.22,
+     "wobble": 0.3,
+     "seed": 3
+    },
+    {
+     "type": "noise",
+     "color": "#ffffff",
+     "scale": 4,
+     "amount": 0.22,
+     "octaves": 3,
+     "seed": 5
+    },
+    {
+     "type": "blotch",
+     "color": "#ffffff",
+     "count": 5,
+     "size": [
+      30,
+      70
+     ],
+     "alpha": 0.14,
+     "stretch": 0.35,
+     "seed": 7
+    },
+    {
+     "type": "speckle",
+     "color": "#0b0b12",
+     "count": 90,
+     "size": [
+      0.6,
+      1.6
+     ],
+     "alpha": [
+      0.08,
+      0.22
+     ],
+     "seed": 9
+    }
+   ],
+   "note": "Twill weave, faded patches."
+  },
+  "shirt": {
+   "use": "model",
+   "perMetre": 3.5,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 42,
+     "width": 7,
+     "angle": 90,
+     "alpha": 0.16,
+     "seed": 2
+    },
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 42,
+     "width": 7,
+     "angle": 0,
+     "alpha": 0.16,
+     "seed": 2
+    },
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 42,
+     "width": 1.5,
+     "angle": 90,
+     "alpha": 0.25,
+     "seed": 4
+    },
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 42,
+     "width": 1.5,
+     "angle": 0,
+     "alpha": 0.25,
+     "seed": 4
+    },
+    {
+     "type": "weave",
+     "color": "#0b0b12",
+     "spacing": 4,
+     "width": 1,
+     "alpha": 0.1,
+     "seed": 6
+    }
+   ],
+   "note": "Flannel work shirt (plaid)."
+  },
+  "cotton": {
+   "use": "model",
+   "perMetre": 8,
+   "layers": [
+    {
+     "type": "weave",
+     "color": "#0b0b12",
+     "spacing": 3,
+     "width": 1,
+     "alpha": 0.08
+    }
+   ]
+  },
+  "suit": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 10,
+     "width": 1.2,
+     "angle": 90,
+     "alpha": 0.16
+    },
+    {
+     "type": "weave",
+     "color": "#0b0b12",
+     "spacing": 3,
+     "width": 1,
+     "alpha": 0.08
+    }
+   ],
+   "note": "Pinstripe."
+  },
+  "hivis": {
+   "use": "model",
+   "perMetre": 5,
+   "layers": [
+    {
+     "type": "dots",
+     "color": "#0b0b12",
+     "spacing": 8,
+     "radius": 2.1,
+     "alpha": 0.24,
+     "offsetRows": true
+    },
+    {
+     "type": "blotch",
+     "color": "#3a2a18",
+     "count": 6,
+     "size": [
+      20,
+      50
+     ],
+     "alpha": 0.12,
+     "stretch": 0.5,
+     "seed": 3
+    }
+   ],
+   "note": "Mesh safety vest, grubby."
+  },
+  "reflective": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 6,
+     "width": 1,
+     "angle": 0,
+     "alpha": 0.12
+    },
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 260,
+     "size": [
+      0.6,
+      1.4
+     ],
+     "alpha": [
+      0.4,
+      0.9
+     ]
+    }
+   ]
+  },
+  "leather": {
+   "use": "model",
+   "perMetre": 4,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 8,
+     "amount": 0.26,
+     "octaves": 3,
+     "seed": 2
+    },
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 22,
+     "width": 1.2,
+     "angle": 0,
+     "alpha": 0.25,
+     "wobble": 3,
+     "jitter": 0.8,
+     "seed": 5
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 30,
+     "length": [
+      8,
+      26
+     ],
+     "width": 1.5,
+     "alpha": 0.3,
+     "seed": 7
+    }
+   ],
+   "note": "Worn work boots and belts, creased."
+  },
+  "canvas": {
+   "use": "model",
+   "perMetre": 4,
+   "layers": [
+    {
+     "type": "weave",
+     "color": "#0b0b12",
+     "spacing": 6,
+     "width": 2,
+     "alpha": 0.18
+    },
+    {
+     "type": "blotch",
+     "color": "#2a2018",
+     "count": 7,
+     "size": [
+      20,
+      56
+     ],
+     "alpha": 0.14,
+     "seed": 4
+    },
+    {
+     "type": "stitches",
+     "color": "#0b0b12",
+     "spacing": 256,
+     "dash": 6,
+     "width": 1.6,
+     "angle": 0,
+     "alpha": 0.5,
+     "offset": 16
+    }
+   ]
+  },
+  "skin": {
+   "use": "model",
+   "perMetre": 3,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#7a3a2a",
+     "scale": 5,
+     "amount": 0.08,
+     "octaves": 2
+    }
+   ]
+  },
+  "hair": {
+   "use": "model",
+   "perMetre": 8,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 4,
+     "width": 1.5,
+     "angle": 80,
+     "alpha": 0.32,
+     "wobble": 1.5,
+     "jitter": 0.6
+    },
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 9,
+     "width": 1.2,
+     "angle": 84,
+     "alpha": 0.16,
+     "wobble": 1.8,
+     "jitter": 0.8,
+     "seed": 3
+    }
+   ]
+  },
+  "hardhat": {
+   "use": "model",
+   "perMetre": 3,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 4,
+     "amount": 0.08
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 40,
+     "length": [
+      6,
+      22
+     ],
+     "width": 1.5,
+     "alpha": 0.45,
+     "seed": 3
+    },
+    {
+     "type": "speckle",
+     "color": "#3a2a18",
+     "count": 80,
+     "size": [
+      0.8,
+      2.6
+     ],
+     "alpha": [
+      0.12,
+      0.35
+     ],
+     "seed": 5
+    }
+   ],
+   "note": "Scuffed plastic."
+  },
+  "knit": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 8,
+     "width": 3,
+     "angle": 90,
+     "alpha": 0.24
+    },
+    {
+     "type": "weave",
+     "color": "#0b0b12",
+     "spacing": 4,
+     "width": 1,
+     "alpha": 0.12
+    }
+   ],
+   "note": "Rib knit."
+  },
+  "rubber": {
+   "use": "model",
+   "perMetre": 5,
+   "layers": [
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 140,
+     "size": [
+      0.6,
+      1.4
+     ],
+     "alpha": [
+      0.08,
+      0.2
+     ]
+    },
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 6,
+     "amount": 0.1
+    }
+   ]
+  },
+  "robot_shell": {
+   "use": "model",
+   "perMetre": 2,
+   "layers": [
+    {
+     "type": "grid",
+     "color": "#0b0b12",
+     "cols": 1,
+     "rows": 1,
+     "width": 3,
+     "alpha": 0.5,
+     "bevel": 2.5
+    },
+    {
+     "type": "dots",
+     "color": "#0b0b12",
+     "spacing": 64,
+     "radius": 3.5,
+     "alpha": 0.45
+    },
+    {
+     "type": "scratches",
+     "color": "#0b0b12",
+     "count": 24,
+     "length": [
+      8,
+      30
+     ],
+     "width": 1.2,
+     "alpha": 0.16,
+     "seed": 3
+    },
+    {
+     "type": "blotch",
+     "color": "#5a4a38",
+     "count": 6,
+     "size": [
+      20,
+      60
+     ],
+     "alpha": 0.1,
+     "seed": 5
+    }
+   ],
+   "note": "Moulded plastic: panel seams, screws, scuffs."
+  },
+  "robot_paint": {
+   "use": "model",
+   "perMetre": 3,
+   "layers": [
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 40,
+     "size": [
+      1,
+      3.2
+     ],
+     "alpha": [
+      0.35,
+      0.7
+     ],
+     "seed": 2
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 20,
+     "length": [
+      6,
+      18
+     ],
+     "width": 2,
+     "alpha": 0.35,
+     "seed": 4
+    },
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 4,
+     "amount": 0.04
+    }
+   ],
+   "note": "Chipped paint."
+  },
+  "robot_joint": {
+   "use": "model",
+   "perMetre": 8,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 10,
+     "width": 3,
+     "angle": 0,
+     "alpha": 0.14
+    },
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 80,
+     "size": [
+      0.6,
+      1.4
+     ],
+     "alpha": [
+      0.06,
+      0.16
+     ]
+    }
+   ],
+   "note": "Ribbed rubber over the joints."
+  },
+  "mech_paint": {
+   "use": "model",
+   "perMetre": 1,
+   "layers": [
+    {
+     "type": "grid",
+     "color": "#0b0b12",
+     "cols": 2,
+     "rows": 2,
+     "width": 3,
+     "alpha": 0.45,
+     "bevel": 2.5
+    },
+    {
+     "type": "dots",
+     "color": "#0b0b12",
+     "spacing": 64,
+     "radius": 4,
+     "alpha": 0.45
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 50,
+     "length": [
+      8,
+      36
+     ],
+     "width": 2.5,
+     "alpha": 0.4,
+     "seed": 3
+    },
+    {
+     "type": "blotch",
+     "color": "#7a3a1a",
+     "count": 10,
+     "size": [
+      10,
+      40
+     ],
+     "alpha": 0.16,
+     "seed": 5
+    },
+    {
+     "type": "gradient",
+     "color": "#2a2018",
+     "from": 0.55,
+     "to": 1,
+     "alphaFrom": 0,
+     "alphaTo": 0.22
+    }
+   ],
+   "note": "Forklift paint: plates, chips, rust."
+  },
+  "gun_metal": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 3,
+     "width": 1,
+     "angle": 0,
+     "alpha": 0.08
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 36,
+     "length": [
+      6,
+      24
+     ],
+     "width": 1.4,
+     "alpha": 0.4,
+     "angle": 0,
+     "spread": 25,
+     "seed": 3
+    },
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 5,
+     "amount": 0.1
+    }
+   ],
+   "note": "Brushed steel, scratched."
+  },
+  "wood_stock": {
+   "use": "model",
+   "perMetre": 5,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#0b0b12",
+     "spacing": 7,
+     "width": 1.4,
+     "angle": 0,
+     "alpha": 0.3,
+     "wobble": 2.2,
+     "jitter": 0.7
+    },
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 3,
+     "amount": 0.1
+    }
+   ],
+   "note": "Wood grain."
+  }
+ }
+}

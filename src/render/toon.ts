@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { atlas, SLOT_SCALE, SURF_GLSL_FRAG, SURF_GLSL_FRAG_HEAD, SURF_GLSL_VERT, SURF_GLSL_VERT_HEAD } from './surfaces';
 
 /** Brand + world palette. Everything visual pulls from here so the look stays coherent. */
 export const PAL = {
@@ -80,6 +81,8 @@ export interface ToonOpts {
   alphaTest?: number;
   /** hard rim light strength (0 = off) */
   rim?: number;
+  /** sample the model surface atlas per vertex (Kit-built models; see surfaces.ts) */
+  surfaces?: boolean;
   name?: string;
 }
 
@@ -100,6 +103,7 @@ export function toon(o: ToonOpts = {}): THREE.MeshToonMaterial {
     o.opacity ?? 1,
     o.alphaTest ?? 0,
     o.rim ?? 0,
+    o.surfaces ? 1 : 0,
   ].join('|');
   let m = cache.get(key);
   if (m) return m;
@@ -118,20 +122,33 @@ export function toon(o: ToonOpts = {}): THREE.MeshToonMaterial {
   });
   if (o.name) m.name = o.name;
   const rim = o.rim ?? 0;
-  if (rim > 0) {
-    // Hard-edged rim light: a classic cel-shading accent that separates characters and guns from the background.
+  const surf = !!o.surfaces;
+  if (rim > 0 || surf) {
     m.onBeforeCompile = (shader) => {
-      shader.uniforms.uRim = { value: rim };
-      shader.fragmentShader = shader.fragmentShader
-        .replace('#include <common>', '#include <common>\nuniform float uRim;')
-        .replace(
-          '#include <opaque_fragment>',
-          `float rimF = 1.0 - saturate(dot(normalize(vViewPosition), normal));
+      if (surf) {
+        shader.uniforms.uAtlas = { value: atlas() };
+        shader.uniforms.uSurfScale = { value: SLOT_SCALE };
+        shader.vertexShader = shader.vertexShader
+          .replace('#include <common>', '#include <common>\n' + SURF_GLSL_VERT_HEAD)
+          .replace('#include <begin_vertex>', '#include <begin_vertex>\n' + SURF_GLSL_VERT);
+        shader.fragmentShader = shader.fragmentShader
+          .replace('#include <common>', '#include <common>\n' + SURF_GLSL_FRAG_HEAD)
+          .replace('#include <color_fragment>', '#include <color_fragment>\n' + SURF_GLSL_FRAG);
+      }
+      if (rim > 0) {
+        // Hard-edged rim light: a classic cel-shading accent that separates characters and guns from the background.
+        shader.uniforms.uRim = { value: rim };
+        shader.fragmentShader = shader.fragmentShader
+          .replace('#include <common>', '#include <common>\nuniform float uRim;')
+          .replace(
+            '#include <opaque_fragment>',
+            `float rimF = 1.0 - saturate(dot(normalize(vViewPosition), normal));
            outgoingLight += diffuseColor.rgb * step(0.72, rimF) * uRim;
            #include <opaque_fragment>`,
-        );
+          );
+      }
     };
-    m.customProgramCacheKey = () => 'rim' + rim;
+    m.customProgramCacheKey = () => 'rim' + rim + (surf ? 'surf' : '');
   }
   cache.set(key, m);
   return m;

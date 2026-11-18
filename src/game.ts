@@ -135,8 +135,8 @@ export class Game {
     this.scene.add(this.camera);
     textures();
     this.mat = {
-      prop: toon({ vertexColors: true, ramp: RAMP_CHAR, name: 'prop' }),
-      char: toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.3, name: 'char' }),
+      prop: toon({ vertexColors: true, ramp: RAMP_CHAR, name: 'prop', surfaces: true }),
+      char: toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.3, name: 'char', surfaces: true }),
     };
     this.sky = new Sky(this.scene, SKY_DAWN, 2048);
     this.fx = new Fx(this.scene);

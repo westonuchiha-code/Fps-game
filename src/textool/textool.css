@@ -1,0 +1,257 @@
+@import '@fontsource/anton/400.css';
+@import '@fontsource/rajdhani/600.css';
+
+:root {
+  --bg0: #121319;
+  --bg1: #191a22;
+  --bg2: #22242e;
+  --bg3: #2c2f3b;
+  --line: #3a3d4b;
+  --text: #e9e6dc;
+  --dim: #a3a3ad;
+  --smile: #ffd21f;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body.textool {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg0);
+  color: var(--text);
+  font: 13px system-ui, 'Segoe UI', Roboto, sans-serif;
+}
+body.textool #view {
+  position: fixed;
+  z-index: 0;
+  display: block;
+}
+#tex-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 230px minmax(0, 0.9fr) minmax(0, 1.1fr) 330px;
+  grid-template-rows: 40px minmax(0, 1fr);
+  grid-template-areas: 'top top top top' 'left mid view right';
+}
+.tx-top {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  background: var(--bg1);
+  border-bottom: 1px solid var(--line);
+}
+.tx-title {
+  font: 22px Anton, Impact, sans-serif;
+  color: var(--smile);
+  letter-spacing: 0.04em;
+}
+.tx-help {
+  flex: 1;
+  color: var(--dim);
+  font-size: 12px;
+  padding-left: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tx-panel {
+  background: var(--bg1);
+  overflow-y: auto;
+  padding: 4px 10px 14px;
+}
+.tx-left {
+  grid-area: left;
+  border-right: 1px solid var(--line);
+}
+.tx-right {
+  grid-area: right;
+  border-left: 1px solid var(--line);
+}
+.tx-mid {
+  grid-area: mid;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  min-width: 0;
+  background: var(--bg0);
+  border-right: 1px solid var(--line);
+}
+.tx-tilebox {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tx-tile {
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 1;
+  image-rendering: auto;
+  border: 1px solid var(--line);
+}
+.tx-view {
+  grid-area: view;
+  min-width: 0;
+  min-height: 0;
+  touch-action: none;
+}
+.tx-opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tx-inline input[type="color"] {
+  width: 56px;
+}
+.tx-inline {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--dim);
+}
+h3 {
+  margin: 12px 0 6px;
+  font: 600 14px Rajdhani, 'Segoe UI', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.tx-right > div > h3:first-child {
+  color: var(--smile);
+  text-transform: none;
+  font-size: 18px;
+}
+.tx-seg,
+.tx-btns {
+  display: flex;
+  gap: 4px;
+  margin: 6px 0;
+  flex-wrap: wrap;
+}
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 8px;
+}
+.tx-list button {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  text-align: left;
+}
+.tx-list small {
+  color: var(--dim);
+  font-size: 11px;
+}
+.tx-list button.on small {
+  color: #0b0b12;
+}
+.tx-row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto auto;
+  align-items: center;
+  gap: 6px;
+  margin: 3px 0;
+}
+.tx-row > span:first-child {
+  color: var(--dim);
+}
+.tx-pair {
+  display: flex;
+  gap: 4px;
+}
+.tx-n {
+  width: 64px !important;
+}
+.tx-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-bottom: 6px;
+}
+.tx-layer {
+  display: flex;
+  gap: 2px;
+}
+.tx-layer.off .tx-lname {
+  opacity: 0.45;
+}
+.tx-lname {
+  flex: 1;
+  text-align: left;
+}
+.tx-layer.on .tx-lname {
+  background: var(--smile);
+  color: #0b0b12;
+}
+.tx-ic {
+  padding: 2px 6px;
+}
+.tx-form {
+  padding: 6px 8px;
+  margin: 0 0 6px;
+  background: var(--bg2);
+  border-left: 3px solid var(--smile);
+}
+.tx-dim {
+  color: var(--dim);
+}
+.tx-status {
+  color: var(--dim);
+  min-height: 2.4em;
+}
+button,
+select,
+input,
+textarea {
+  font: inherit;
+  color: var(--text);
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+button {
+  cursor: pointer;
+}
+button:hover {
+  background: var(--bg3);
+}
+button.on {
+  background: var(--smile);
+  color: #0b0b12;
+  border-color: var(--smile);
+}
+input,
+select,
+textarea {
+  width: 100%;
+}
+input[type='range'] {
+  accent-color: var(--smile);
+}
+input[type='checkbox'] {
+  width: auto;
+}
+input[type='color'] {
+  padding: 0;
+  height: 26px;
+}
+textarea {
+  min-height: 44px;
+  resize: vertical;
+}
+.fatal {
+  padding: 30px;
+}

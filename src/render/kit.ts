@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { surfaceSlot } from './surfaces';
 import { toon, RAMP_CHAR, type ToonOpts } from './toon';
 
 type V3 = [number, number, number];
@@ -163,6 +164,11 @@ export class Kit {
   private uv: number[] = [];
   /** optional per-vertex bone index for rigid skinning */
   private bone: number[] = [];
+  private sid: number[] = [];
+  /** surface texture for the parts added from now on (see src/render/surfaces.ts); null = none */
+  surf: string | null = null;
+  /** surface by colour, used when `surf` is not set (lets one loft paint denim and leather) */
+  surfMap: Map<number, string> | null = null;
   curBone = 0;
   private stack: THREE.Matrix4[] = [];
   private cur = new THREE.Matrix4();
@@ -195,6 +201,7 @@ export class Kit {
     const n = g.getAttribute('normal');
     const u = g.getAttribute('uv');
     _c.setHex(color);
+    const sidNow = surfaceSlot(this.surf ?? this.surfMap?.get(color) ?? null);
     const v = new THREE.Vector3();
     for (let i = 0; i < p.count; i++) {
       v.set(p.getX(i), p.getY(i), p.getZ(i)).applyMatrix4(m);
@@ -205,6 +212,7 @@ export class Kit {
       if (u) this.uv.push(u.getX(i), u.getY(i));
       else this.uv.push(0, 0);
       this.bone.push(this.curBone);
+      this.sid.push(sidNow);
     }
     if (g !== geo) g.dispose();
     return this;
@@ -356,6 +364,7 @@ export class Kit {
     g.setAttribute('normal', new THREE.Float32BufferAttribute(this.nrm, 3));
     g.setAttribute('color', new THREE.Float32BufferAttribute(this.col, 3));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(this.uv, 2));
+    g.setAttribute('surf', new THREE.Float32BufferAttribute(this.sid, 1));
     g.computeBoundingSphere();
     g.computeBoundingBox();
     return g;
@@ -377,7 +386,7 @@ export class Kit {
   }
 
   mesh(opts: ToonOpts = {}) {
-    const m = new THREE.Mesh(this.geometry(), toon({ vertexColors: true, ramp: RAMP_CHAR, ...opts }));
+    const m = new THREE.Mesh(this.geometry(), toon({ vertexColors: true, ramp: RAMP_CHAR, surfaces: true, ...opts }));
     m.castShadow = true;
     m.receiveShadow = true;
     return m;
@@ -385,11 +394,12 @@ export class Kit {
 
   /** Split the geometry per bone (used to turn a character into flying parts when it is destroyed). */
   splitByBone(): Map<number, THREE.BufferGeometry> {
-    const out = new Map<number, { pos: number[]; nrm: number[]; col: number[] }>();
+    const out = new Map<number, { pos: number[]; nrm: number[]; col: number[]; sid: number[] }>();
     for (let i = 0; i < this.bone.length; i++) {
       const b = this.bone[i];
       let o = out.get(b);
-      if (!o) out.set(b, (o = { pos: [], nrm: [], col: [] }));
+      if (!o) out.set(b, (o = { pos: [], nrm: [], col: [], sid: [] }));
+      o.sid.push(this.sid[i]);
       o.pos.push(this.pos[i * 3], this.pos[i * 3 + 1], this.pos[i * 3 + 2]);
       o.nrm.push(this.nrm[i * 3], this.nrm[i * 3 + 1], this.nrm[i * 3 + 2]);
       o.col.push(this.col[i * 3], this.col[i * 3 + 1], this.col[i * 3 + 2]);
@@ -400,6 +410,7 @@ export class Kit {
       g.setAttribute('position', new THREE.Float32BufferAttribute(o.pos, 3));
       g.setAttribute('normal', new THREE.Float32BufferAttribute(o.nrm, 3));
       g.setAttribute('color', new THREE.Float32BufferAttribute(o.col, 3));
+      g.setAttribute('surf', new THREE.Float32BufferAttribute(o.sid, 1));
       res.set(b, g);
     }
     return res;

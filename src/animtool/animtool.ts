@@ -9,6 +9,7 @@ import { RenderPipeline, LAYER_FX } from '../render/pipeline';
 import { Sky, SKIES } from '../render/sky';
 import { toon, RAMP_CHAR } from '../render/toon';
 import { textures } from '../render/textures';
+import { loadSurfaces } from '../render/surfaces';
 
 /**
  * The animation editor (#anim). Shows one character driven by the game's own CharAnim, with
@@ -87,6 +88,7 @@ export class AnimTool {
   private tl!: HTMLCanvasElement;
 
   static async create(root: HTMLElement, canvas: HTMLCanvasElement) {
+    await loadSurfaces();
     let file: ClipFile = { version: 1, clips: {} };
     try {
       const r = await fetch('anims/clips.json', { cache: 'no-store' });
@@ -121,7 +123,7 @@ export class AnimTool {
   ) {
     if (!G) {
       textures();
-      setGame({ mat: { char: toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.3, name: 'char' }), prop: toon({ vertexColors: true, ramp: RAMP_CHAR, name: 'prop' }) } } as never);
+      setGame({ mat: { char: toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.3, name: 'char', surfaces: true }), prop: toon({ vertexColors: true, ramp: RAMP_CHAR, name: 'prop', surfaces: true }) } } as never);
     }
     this.pipe = new RenderPipeline(canvas);
     this.pipe.forcedScale = 1;
