@@ -267,13 +267,51 @@
   "skin": {
    "use": "model",
    "perMetre": 3,
+   "note": "Skin: warm mottling, pores, a little sun.",
    "layers": [
     {
      "type": "noise",
-     "color": "#7a3a2a",
+     "color": "#b04030",
      "scale": 5,
-     "amount": 0.08,
-     "octaves": 2
+     "amount": 0.12,
+     "octaves": 3,
+     "seed": 3
+    },
+    {
+     "type": "noise",
+     "color": "#3a1a10",
+     "scale": 12,
+     "amount": 0.06,
+     "octaves": 2,
+     "seed": 5
+    },
+    {
+     "type": "speckle",
+     "color": "#5a2418",
+     "count": 260,
+     "size": [
+      0.4,
+      0.9
+     ],
+     "alpha": [
+      0.05,
+      0.14
+     ],
+     "seed": 7
+    },
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 60,
+     "size": [
+      0.6,
+      1.6
+     ],
+     "alpha": [
+      0.04,
+      0.1
+     ],
+     "seed": 9
     }
    ]
   },

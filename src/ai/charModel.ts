@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { G } from '../core/globals';
-import { clamp, damp, lerp, DEG } from '../core/math';
+import { clamp, damp, lerp, DEG, Rng } from '../core/math';
 import { Kit, loftGeometry, type Ring } from '../render/kit';
 import { flat, PAL, shade } from '../render/toon';
 import { drawSmile } from '../render/textures';
@@ -55,79 +55,209 @@ function humanFace(style: 'plain' | 'moustache' | 'beard' | 'agent', hair: numbe
   const key = style + hair;
   let tex = faceCache.get(key);
   if (tex) return tex;
+  // Painted in 256-unit coordinates on a 512 canvas. The canvas is skinned over the front of the head
+  // from the lips (bottom) to the forehead (top); x = 128 is the centre line. Shading is drawn in
+  // translucent browns so it works on every skin tone.
   const c = document.createElement('canvas');
-  c.width = c.height = 256;
+  c.width = c.height = 512;
   const g = c.getContext('2d')!;
+  g.scale(2, 2);
   const ink = '#15161c';
-  const hairCss = '#' + hair.toString(16).padStart(6, '0');
+  const hairC = new THREE.Color(hair);
+  const hairA = (a: number) => `rgba(${Math.round(hairC.r * 255)},${Math.round(hairC.g * 255)},${Math.round(hairC.b * 255)},${a})`;
+  const shadow = (a: number) => `rgba(70,28,18,${a})`;
+  const rnd = new Rng(style.length * 97 + hair);
   g.lineCap = 'round';
   g.lineJoin = 'round';
-  const EY = 96; // eye line
-  if (style === 'agent') {
-    // wraparound shades
-    g.fillStyle = ink;
+  const blob = (x: number, y: number, rx: number, ry: number, col: string, a0: number) => {
+    const gr = g.createRadialGradient(x, y, 0, x, y, Math.max(rx, ry));
+    gr.addColorStop(0, col.replace('A', String(a0)));
+    gr.addColorStop(1, col.replace('A', '0'));
+    g.save();
+    g.translate(x, y);
+    g.scale(rx / Math.max(rx, ry), ry / Math.max(rx, ry));
+    g.translate(-x, -y);
+    g.fillStyle = gr;
     g.beginPath();
-    g.roundRect(40, EY - 20, 78, 36, 12);
-    g.roundRect(138, EY - 20, 78, 36, 12);
+    g.arc(x, y, Math.max(rx, ry), 0, Math.PI * 2);
     g.fill();
-    g.fillRect(112, EY - 12, 32, 9);
-    g.strokeStyle = '#59657a';
-    g.lineWidth = 4;
+    g.restore();
+  };
+  const EY = 96; // eye line
+  const NY = 182; // under the nose
+  const MY = 214; // mouth line
+
+  // ---- skin shading: sockets, temples, cheeks, nose, mouth, chin
+  for (const sx of [-1, 1]) {
+    const ex = 128 + sx * 42;
+    blob(ex, EY + 2, 34, 22, 'rgba(70,28,18,A)', 0.32); // socket
+    blob(ex + sx * 8, EY - 22, 30, 10, 'rgba(70,28,18,A)', 0.16); // under the brow ridge
+    blob(128 + sx * 72, 168, 30, 24, 'rgba(200,60,50,A)', 0.14); // cheek warmth
+    blob(128 + sx * 86, 150, 18, 40, 'rgba(70,28,18,A)', 0.14); // cheekbone shadow
+  }
+  blob(128, 140, 9, 44, 'rgba(255,240,220,A)', 0.22); // nose bridge highlight
+  blob(128, NY - 4, 26, 10, 'rgba(70,28,18,A)', 0.32); // under the nose
+  for (const sx of [-1, 1]) {
+    g.fillStyle = shadow(0.55);
     g.beginPath();
-    g.moveTo(56, EY - 10);
-    g.lineTo(82, EY - 10);
-    g.moveTo(154, EY - 10);
-    g.lineTo(180, EY - 10);
+    g.ellipse(128 + sx * 11, NY - 6, 5, 3, sx * 0.4, 0, Math.PI * 2);
+    g.fill();
+    // nostril wing crease
+    g.strokeStyle = shadow(0.3);
+    g.lineWidth = 2.5;
+    g.beginPath();
+    g.arc(128 + sx * 16, NY - 12, 10, sx > 0 ? -0.4 : Math.PI - 1.2, sx > 0 ? 1.2 : Math.PI + 0.4);
     g.stroke();
+    // smile line from the nose to the mouth corner
+    g.strokeStyle = shadow(style === 'moustache' ? 0.32 : 0.18);
+    g.lineWidth = 2.5;
+    g.beginPath();
+    g.moveTo(128 + sx * 26, NY - 10);
+    g.quadraticCurveTo(128 + sx * 40, NY + 18, 128 + sx * 34, MY + 12);
+    g.stroke();
+  }
+  blob(128, MY - 16, 8, 10, 'rgba(70,28,18,A)', 0.18); // philtrum
+  blob(128, MY + 26, 34, 12, 'rgba(70,28,18,A)', 0.2); // under the lower lip
+  if (style === 'moustache') {
+    // a few years on him: forehead lines and crow's feet
+    g.strokeStyle = shadow(0.22);
+    g.lineWidth = 1.8;
+    for (const y of [36, 46]) {
+      g.beginPath();
+      g.moveTo(84, y + 2);
+      g.quadraticCurveTo(128, y - 4, 172, y + 2);
+      g.stroke();
+    }
+    for (const sx of [-1, 1])
+      for (let i = -1; i <= 1; i++) {
+        g.beginPath();
+        g.moveTo(128 + sx * 66, EY + i * 6);
+        g.lineTo(128 + sx * 76, EY + i * 9);
+        g.stroke();
+      }
+  }
+  if (style === 'plain') {
+    // stubble on the upper lip and chin
+    for (let i = 0; i < 520; i++) {
+      const x = rnd.range(70, 186);
+      const y = rnd.range(NY - 2, 256);
+      const d = Math.hypot((x - 128) / 60, (y - (MY + 6)) / 44);
+      if (d > 1.15 || (Math.abs(y - MY) < 5 && Math.abs(x - 128) < 26)) continue;
+      g.fillStyle = hairA(rnd.range(0.12, 0.3));
+      g.fillRect(x, y, 1.3, 1.3);
+    }
+  }
+
+  // ---- eyes
+  if (style === 'agent') {
+    // wraparound shades with a sky reflection
+    for (const sx of [-1, 1]) {
+      const ex = 128 + sx * 40;
+      const gr = g.createLinearGradient(0, EY - 20, 0, EY + 18);
+      gr.addColorStop(0, '#3a4a66');
+      gr.addColorStop(0.45, '#151a26');
+      gr.addColorStop(1, '#0b0b12');
+      g.fillStyle = gr;
+      g.beginPath();
+      g.roundRect(ex - 38, EY - 20, 76, 36, 12);
+      g.fill();
+      g.strokeStyle = 'rgba(200,220,255,0.55)';
+      g.lineWidth = 3;
+      g.beginPath();
+      g.moveTo(ex - 24, EY - 11);
+      g.lineTo(ex + 4, EY - 11);
+      g.stroke();
+    }
+    g.fillStyle = ink;
+    g.fillRect(112, EY - 13, 32, 8);
   } else {
+    const iris = { plain: '#4a6a8a', moustache: '#5a4228', beard: '#3a2a1c' }[style];
     for (const sx of [-1, 1]) {
       const ex = 128 + sx * 42;
-      // almond eye: white, dark iris, heavy upper lid
-      g.fillStyle = '#f1ece0';
+      g.save();
       g.beginPath();
-      g.ellipse(ex, EY, 19, 9.5, 0, 0, Math.PI * 2);
+      g.moveTo(ex - 20, EY + 1);
+      g.quadraticCurveTo(ex, EY - 15, ex + 20, EY + 1);
+      g.quadraticCurveTo(ex, EY + 11, ex - 20, EY + 1);
+      g.fillStyle = '#eee6d8';
       g.fill();
-      g.fillStyle = '#2b1c14';
+      g.clip();
+      // iris, pupil, glint; the upper lid shades the top of the eye
+      g.fillStyle = iris;
       g.beginPath();
       g.arc(ex + sx * 1, EY - 1, 8.5, 0, Math.PI * 2);
       g.fill();
-      g.fillStyle = '#f1ece0';
-      g.fillRect(ex + sx * 1 - 4, EY - 6, 3, 3);
+      g.fillStyle = '#0b0b12';
+      g.beginPath();
+      g.arc(ex + sx * 1, EY - 1, 3.8, 0, Math.PI * 2);
+      g.fill();
+      g.fillStyle = 'rgba(70,28,18,0.35)';
+      g.fillRect(ex - 22, EY - 16, 44, 7);
+      g.restore();
+      g.fillStyle = '#ffffff';
+      g.fillRect(ex + sx * 1 - 4.5, EY - 6, 3, 3);
+      // lash line and lid crease
       g.strokeStyle = ink;
-      g.lineWidth = 5;
+      g.lineWidth = 4;
       g.beginPath();
-      g.moveTo(ex - 21, EY + 1);
-      g.quadraticCurveTo(ex, EY - 17, ex + 21, EY + 1);
+      g.moveTo(ex - 21, EY + 2);
+      g.quadraticCurveTo(ex, EY - 16, ex + 21, EY + 1);
       g.stroke();
-      g.strokeStyle = 'rgba(40,20,14,0.35)';
-      g.lineWidth = 3;
+      g.strokeStyle = shadow(0.4);
+      g.lineWidth = 2;
       g.beginPath();
-      g.moveTo(ex - 15, EY + 11);
-      g.quadraticCurveTo(ex, EY + 15, ex + 15, EY + 10);
+      g.moveTo(ex - 17, EY - 9);
+      g.quadraticCurveTo(ex, EY - 22, ex + 18, EY - 8);
       g.stroke();
-      // brow, set low and angled in: determined
-      g.strokeStyle = hairCss;
-      g.lineWidth = 10;
+      g.strokeStyle = shadow(0.35);
+      g.lineWidth = 2;
       g.beginPath();
-      g.moveTo(ex + sx * 25, EY - 30);
-      g.quadraticCurveTo(ex, EY - 36, ex - sx * 24, EY - 25);
+      g.moveTo(ex - 15, EY + 10);
+      g.quadraticCurveTo(ex, EY + 14, ex + 16, EY + 8);
       g.stroke();
     }
   }
-  // mouth
-  g.strokeStyle = style === 'beard' ? '#d9a48a' : '#5e2a22';
-  g.lineWidth = 6;
-  g.beginPath();
-  if (style === 'agent') {
-    g.moveTo(104, 214);
-    g.quadraticCurveTo(134, 219, 158, 206); // half a smirk
-  } else {
-    g.moveTo(104, 214);
-    g.quadraticCurveTo(128, 219, 152, 214);
+  // ---- brows: drawn hair by hair
+  for (const sx of [-1, 1]) {
+    const ex = 128 + sx * 42;
+    for (let i = 0; i < 46; i++) {
+      const t = rnd.next();
+      const x = ex - sx * 24 + sx * t * 50;
+      const y = EY - 26 - Math.sin(t * Math.PI) * 6 - (1 - t) * 1 + rnd.range(-3, 3);
+      g.strokeStyle = hairA(rnd.range(0.55, 0.95));
+      g.lineWidth = rnd.range(1.6, 2.6);
+      g.beginPath();
+      g.moveTo(x, y + 3);
+      g.lineTo(x + sx * rnd.range(5, 9), y - rnd.range(1, 4));
+      g.stroke();
+    }
   }
+
+  // ---- mouth: upper lip darker, lower lip fuller and lit
+  const lipX = style === 'agent' ? 6 : 0;
+  g.fillStyle = 'rgba(140,50,45,0.55)';
+  g.beginPath();
+  g.moveTo(104, MY);
+  g.quadraticCurveTo(116, MY - 9, 128, MY - 5);
+  g.quadraticCurveTo(140, MY - 9, 152 + lipX, MY - 2 - lipX);
+  g.quadraticCurveTo(128, MY + 2, 104, MY);
+  g.fill();
+  g.fillStyle = 'rgba(170,70,60,0.42)';
+  g.beginPath();
+  g.moveTo(106, MY + 1);
+  g.quadraticCurveTo(128, MY + 15, 150 + lipX, MY - lipX);
+  g.quadraticCurveTo(128, MY + 4, 106, MY + 1);
+  g.fill();
+  blob(128, MY + 7, 10, 3, 'rgba(255,230,220,A)', 0.35);
+  g.strokeStyle = style === 'beard' ? '#e0b09a' : '#4a1e18';
+  g.lineWidth = 3.5;
+  g.beginPath();
+  g.moveTo(104, MY);
+  if (style === 'agent') g.quadraticCurveTo(134, MY + 4, 158, MY - 8); // half a smirk
+  else g.quadraticCurveTo(128, MY + 4, 152, MY);
   g.stroke();
   if (style === 'moustache') {
-    g.fillStyle = hairCss;
+    g.fillStyle = hairA(1);
     g.beginPath();
     g.moveTo(128, 186);
     g.quadraticCurveTo(164, 180, 180, 210);
@@ -135,9 +265,19 @@ function humanFace(style: 'plain' | 'moustache' | 'beard' | 'agent', hair: numbe
     g.quadraticCurveTo(104, 200, 76, 210);
     g.quadraticCurveTo(92, 180, 128, 186);
     g.fill();
+    g.strokeStyle = 'rgba(255,255,255,0.18)';
+    g.lineWidth = 1.2;
+    for (let i = 0; i < 30; i++) {
+      const x = rnd.range(84, 172);
+      g.beginPath();
+      g.moveTo(x, 190 + Math.abs(x - 128) * 0.12);
+      g.lineTo(x + (x - 128) * 0.12, 200 + Math.abs(x - 128) * 0.2);
+      g.stroke();
+    }
   }
   tex = new THREE.CanvasTexture(c);
   tex.colorSpace = THREE.SRGBColorSpace;
+  tex.anisotropy = 4;
   faceCache.set(key, tex);
   return tex;
 }
