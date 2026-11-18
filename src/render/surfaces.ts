@@ -76,6 +76,20 @@ export const LAYER_DEFAULTS: Record<Layer['type'], Layer> = {
 
 export const SURFACES: Record<string, Surface> = {};
 
+/**
+ * Surface by colour for any Kit model that does not say otherwise (vehicles, props, pickups): the
+ * shared palette colours each get a sensible material.
+ */
+export const COLOR_SURF = new Map<number, string>([
+  // vehicles: the Teamster's paint, dark metal and cage; tyres; seats
+  [0xb4462b, 'vehicle_paint'], [0xd0612c, 'vehicle_paint'], [0x2c2d33, 'gun_metal'], [0x3a3f47, 'gun_metal'], [0x34343c, 'gun_metal'], [0x3b3f46, 'gun_metal'],
+  [0x1d1d22, 'tire'], [0x26262c, 'tire'], [0x2b2b30, 'canvas'], [0x2a2b31, 'rubber'],
+  // palette: steel, container colours, MonoMart cream and yellow, wood
+  [0x7d8a99, 'painted_metal'], [0x4d5663, 'painted_metal'], [0xe0a82e, 'painted_metal'], [0xb5442f, 'painted_metal'], [0x2f6f9f, 'painted_metal'],
+  [0x2e9b8f, 'painted_metal'], [0x5a8f4a, 'painted_metal'], [0xe6e0d0, 'painted_metal'],
+  [0xf2ecd9, 'scooter_paint'], [0xc9c2ae, 'scooter_paint'], [0xffd21f, 'scooter_paint'], [0xb07a45, 'wood_stock'],
+]);
+
 /** Built-in drawings from textures.ts: name -> painter (registered there). */
 export const BUILTINS: Record<string, (g: CanvasRenderingContext2D, s: number) => void> = {};
 

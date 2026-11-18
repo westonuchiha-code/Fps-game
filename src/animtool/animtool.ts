@@ -10,6 +10,7 @@ import { Sky, SKIES } from '../render/sky';
 import { toon, RAMP_CHAR } from '../render/toon';
 import { textures } from '../render/textures';
 import { loadSurfaces } from '../render/surfaces';
+import { loadDecals } from '../render/decals';
 
 /**
  * The animation editor (#anim). Shows one character driven by the game's own CharAnim, with
@@ -88,7 +89,7 @@ export class AnimTool {
   private tl!: HTMLCanvasElement;
 
   static async create(root: HTMLElement, canvas: HTMLCanvasElement) {
-    await loadSurfaces();
+    await Promise.all([loadSurfaces(), loadDecals()]);
     let file: ClipFile = { version: 1, clips: {} };
     try {
       const r = await fetch('anims/clips.json', { cache: 'no-store' });

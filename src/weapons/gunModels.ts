@@ -50,6 +50,17 @@ function styleFor(item: WeaponItem): Style {
   }
 }
 
+/** Each brand's materials: Valu is cheap store plastic, Krona dark polymer, Picket wood and rust, Zapp lab plastic. */
+function gunSurfaces(s: Style) {
+  const b = s.brand;
+  return new Map<number, string>([
+    [s.body, b === 'picket' ? 'gun_rust' : b === 'krona' ? 'gun_polymer' : 'gun_plastic'],
+    [s.furn, b === 'picket' ? 'wood_stock' : b === 'krona' ? 'gun_polymer' : 'gun_plastic'],
+    [s.dark, b === 'picket' ? 'gun_rust' : 'gun_metal'],
+    [s.metal, 'gun_metal'],
+  ]);
+}
+
 const _x = new THREE.Vector3();
 const _y = new THREE.Vector3();
 const _z = new THREE.Vector3();
@@ -70,6 +81,8 @@ class RigBuilder {
   nodes: Record<string, THREE.Object3D> = {};
   sockets: Record<string, THREE.Object3D> = {};
   private kits = new Map<string, Kit>();
+  /** surface per style colour (see surfaces.ts), applied to every kit of this gun */
+  surfMap: Map<number, string> | null = null;
   glow: THREE.Mesh[] = [];
 
   constructor() {
@@ -89,7 +102,10 @@ class RigBuilder {
   /** Kit whose geometry is attached to `node` (coordinates relative to that node). */
   kit(node = 'gun') {
     let k = this.kits.get(node);
-    if (!k) this.kits.set(node, (k = new Kit()));
+    if (!k) {
+      this.kits.set(node, (k = new Kit()));
+      k.surfMap = this.surfMap;
+    }
     return k;
   }
   socket(name: string, pos: V3, parent = 'gun', fingers?: V3, dorsal?: V3) {
@@ -206,6 +222,7 @@ function elementCoil(rb: RigBuilder, s: Style, item: WeaponItem, top: V3, len: n
 
 function buildPistol(item: WeaponItem, s: Style): GunRig {
   const rb = new RigBuilder();
+  rb.surfMap = gunSurfaces(s);
   const k = rb.kit();
   const barrelLen = [0, 0.03, -0.022, 0.008][item.parts.barrel];
   const mz = -0.165 - barrelLen; // muzzle z
@@ -321,6 +338,7 @@ function stock(rb: RigBuilder, s: Style, kind: number, z0: number, y: number, dr
 
 function buildRifle(item: WeaponItem, s: Style): GunRig {
   const rb = new RigBuilder();
+  rb.surfMap = gunSurfaces(s);
   const k = rb.kit();
   const bl = [0.14, 0.24, 0.07, 0.15][item.parts.barrel];
   const heavy = item.parts.barrel === 3;
@@ -415,6 +433,7 @@ function buildRifle(item: WeaponItem, s: Style): GunRig {
 
 function buildShotgun(item: WeaponItem, s: Style): GunRig {
   const rb = new RigBuilder();
+  rb.surfMap = gunSurfaces(s);
   const k = rb.kit();
   const bl = [0.44, 0.56, 0.32, 0.46][item.parts.barrel];
   const heavy = item.parts.barrel === 3;
@@ -484,6 +503,7 @@ function buildShotgun(item: WeaponItem, s: Style): GunRig {
 
 function buildSniper(item: WeaponItem, s: Style): GunRig {
   const rb = new RigBuilder();
+  rb.surfMap = gunSurfaces(s);
   const k = rb.kit();
   const bl = [0.56, 0.68, 0.44, 0.58][item.parts.barrel];
   const heavy = item.parts.barrel === 3;

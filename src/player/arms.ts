@@ -54,6 +54,7 @@ export class Hand {
     const mat = toon({ vertexColors: true, ramp: RAMP_CHAR, rim: 0.25, surfaces: true });
     const part = (g: THREE.Group, build: (k: Kit) => void) => {
       const k = new Kit();
+      k.surfMap = new Map([[COL.sleeve, 'suit'], [COL.cuff, 'cotton'], [COL.glove, 'leather'], [COL.gloveDark, 'leather']]);
       build(k);
       g.add(new THREE.Mesh(k.geometry(), mat));
     };

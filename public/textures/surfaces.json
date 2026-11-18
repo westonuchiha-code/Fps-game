@@ -614,6 +614,439 @@
     }
    ],
    "note": "Wood grain."
+  },
+  "vehicle_paint": {
+   "use": "model",
+   "perMetre": 1.5,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 4,
+     "amount": 0.08
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 40,
+     "length": [
+      8,
+      40
+     ],
+     "width": 2,
+     "alpha": 0.35,
+     "seed": 2
+    },
+    {
+     "type": "blotch",
+     "color": "#5a2a14",
+     "count": 10,
+     "size": [
+      10,
+      40
+     ],
+     "alpha": 0.2,
+     "seed": 4,
+     "stretch": 0.5
+    },
+    {
+     "type": "speckle",
+     "color": "#5a2a14",
+     "count": 120,
+     "size": [
+      0.8,
+      2.5
+     ],
+     "alpha": [
+      0.15,
+      0.4
+     ],
+     "seed": 6
+    },
+    {
+     "type": "gradient",
+     "color": "#3a2a18",
+     "from": 0.6,
+     "to": 1,
+     "alphaFrom": 0,
+     "alphaTo": 0.25
+    }
+   ],
+   "note": "Sun-faded paint with rust spots and road grime."
+  },
+  "painted_metal": {
+   "use": "model",
+   "perMetre": 1.5,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 5,
+     "amount": 0.07
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 30,
+     "length": [
+      6,
+      30
+     ],
+     "width": 1.5,
+     "alpha": 0.3,
+     "seed": 3
+    },
+    {
+     "type": "speckle",
+     "color": "#6a3a1a",
+     "count": 60,
+     "size": [
+      0.8,
+      2
+     ],
+     "alpha": [
+      0.15,
+      0.35
+     ],
+     "seed": 5
+    }
+   ],
+   "note": "Painted steel: chips and a little rust."
+  },
+  "tire": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "lines",
+     "color": "#ffffff",
+     "spacing": 12,
+     "width": 3,
+     "angle": 0,
+     "alpha": 0.12
+    },
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 120,
+     "size": [
+      0.6,
+      1.5
+     ],
+     "alpha": [
+      0.06,
+      0.18
+     ]
+    },
+    {
+     "type": "blotch",
+     "color": "#5a4a38",
+     "count": 6,
+     "size": [
+      14,
+      40
+     ],
+     "alpha": 0.15
+    }
+   ],
+   "note": "Rubber with mud."
+  },
+  "scooter_paint": {
+   "use": "model",
+   "perMetre": 2.5,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 3,
+     "amount": 0.05
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 16,
+     "length": [
+      6,
+      24
+     ],
+     "width": 1.5,
+     "alpha": 0.4,
+     "seed": 8
+    },
+    {
+     "type": "speckle",
+     "color": "#5a4a38",
+     "count": 40,
+     "size": [
+      0.8,
+      2
+     ],
+     "alpha": [
+      0.1,
+      0.25
+     ]
+    }
+   ],
+   "note": "Glossy cream enamel, lightly scuffed."
+  },
+  "gun_plastic": {
+   "use": "model",
+   "perMetre": 8,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#0b0b12",
+     "scale": 6,
+     "amount": 0.06
+    },
+    {
+     "type": "dots",
+     "color": "#0b0b12",
+     "spacing": 5,
+     "radius": 0.8,
+     "alpha": 0.08,
+     "offsetRows": true
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 16,
+     "length": [
+      4,
+      14
+     ],
+     "width": 1,
+     "alpha": 0.25
+    }
+   ],
+   "note": "Cheap moulded plastic (Valu, Zapp)."
+  },
+  "gun_polymer": {
+   "use": "model",
+   "perMetre": 8,
+   "layers": [
+    {
+     "type": "speckle",
+     "color": "#ffffff",
+     "count": 260,
+     "size": [
+      0.4,
+      1
+     ],
+     "alpha": [
+      0.05,
+      0.14
+     ]
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 20,
+     "length": [
+      4,
+      16
+     ],
+     "width": 1,
+     "alpha": 0.25,
+     "seed": 3
+    }
+   ],
+   "note": "Stippled polymer (Krona)."
+  },
+  "gun_rust": {
+   "use": "model",
+   "perMetre": 6,
+   "layers": [
+    {
+     "type": "noise",
+     "color": "#5a2a14",
+     "scale": 5,
+     "amount": 0.2,
+     "seed": 3
+    },
+    {
+     "type": "blotch",
+     "color": "#6a3014",
+     "count": 26,
+     "size": [
+      3,
+      11
+     ],
+     "alpha": 0.2,
+     "seed": 5,
+     "stretch": 0.3
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 24,
+     "length": [
+      4,
+      18
+     ],
+     "width": 1.2,
+     "alpha": 0.3
+    }
+   ],
+   "note": "Weathered steel with rust (Picket)."
+  },
+  "concrete": {
+   "use": "env",
+   "layers": [
+    {
+     "type": "builtin",
+     "name": "concrete"
+    },
+    {
+     "type": "blotch",
+     "color": "#5a5048",
+     "count": 7,
+     "size": [
+      20,
+      60
+     ],
+     "alpha": 0.1,
+     "stretch": 0.35,
+     "seed": 11
+    },
+    {
+     "type": "lines",
+     "color": "#4a4038",
+     "spacing": 37,
+     "width": 2,
+     "angle": 90,
+     "alpha": 0.08,
+     "wobble": 2.5,
+     "jitter": 0.9,
+     "seed": 4
+    }
+   ],
+   "note": "Hand-made concrete plus water stains and run-off streaks."
+  },
+  "asphalt": {
+   "use": "env",
+   "layers": [
+    {
+     "type": "builtin",
+     "name": "asphalt"
+    },
+    {
+     "type": "blotch",
+     "color": "#14120f",
+     "count": 2,
+     "size": [
+      8,
+      20
+     ],
+     "alpha": 0.13,
+     "stretch": 0.3,
+     "seed": 5
+    },
+    {
+     "type": "cracks",
+     "color": "#0b0b12",
+     "count": 3,
+     "segments": 6,
+     "length": [
+      10,
+      26
+     ],
+     "width": 1.2,
+     "alpha": 0.35,
+     "seed": 8
+    }
+   ],
+   "note": "Hand-made asphalt plus oil stains and cracks."
+  },
+  "corrugated": {
+   "use": "env",
+   "layers": [
+    {
+     "type": "builtin",
+     "name": "corrugated"
+    },
+    {
+     "type": "lines",
+     "color": "#7a3a1a",
+     "spacing": 23,
+     "width": 2.5,
+     "angle": 90,
+     "alpha": 0.16,
+     "wobble": 1.5,
+     "jitter": 1,
+     "seed": 6
+    },
+    {
+     "type": "speckle",
+     "color": "#6a3014",
+     "count": 90,
+     "size": [
+      0.8,
+      2.4
+     ],
+     "alpha": [
+      0.12,
+      0.3
+     ],
+     "seed": 9
+    }
+   ],
+   "note": "Hand-made corrugated metal plus rust streaks."
+  },
+  "panel": {
+   "use": "env",
+   "layers": [
+    {
+     "type": "builtin",
+     "name": "panel"
+    },
+    {
+     "type": "blotch",
+     "color": "#4a4038",
+     "count": 5,
+     "size": [
+      18,
+      50
+     ],
+     "alpha": 0.08,
+     "seed": 3
+    },
+    {
+     "type": "scratches",
+     "color": "#0b0b12",
+     "count": 14,
+     "length": [
+      6,
+      24
+     ],
+     "width": 1,
+     "alpha": 0.12,
+     "seed": 7
+    }
+   ],
+   "note": "Hand-made panels plus grime and scuffs."
+  },
+  "wood": {
+   "use": "env",
+   "layers": [
+    {
+     "type": "builtin",
+     "name": "wood"
+    },
+    {
+     "type": "scratches",
+     "color": "#ffffff",
+     "count": 20,
+     "length": [
+      6,
+      20
+     ],
+     "width": 1.2,
+     "alpha": 0.18,
+     "seed": 4
+    }
+   ],
+   "note": "Hand-made crate wood plus scuffs."
   }
  }
 }

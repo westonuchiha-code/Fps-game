@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { surfaceSlot } from './surfaces';
+import { COLOR_SURF, surfaceSlot } from './surfaces';
 import { toon, RAMP_CHAR, type ToonOpts } from './toon';
 
 type V3 = [number, number, number];
@@ -201,7 +201,7 @@ export class Kit {
     const n = g.getAttribute('normal');
     const u = g.getAttribute('uv');
     _c.setHex(color);
-    const sidNow = surfaceSlot(this.surf ?? this.surfMap?.get(color) ?? null);
+    const sidNow = surfaceSlot(this.surf ?? this.surfMap?.get(color) ?? COLOR_SURF.get(color) ?? null);
     const v = new THREE.Vector3();
     for (let i = 0; i < p.count; i++) {
       v.set(p.getX(i), p.getY(i), p.getZ(i)).applyMatrix4(m);

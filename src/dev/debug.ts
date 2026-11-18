@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import type { Game } from '../game';
 import { rollShield, rollWeapon, type Brand, type Rarity, type WeaponClass } from '../weapons/items';
 import type { ClipName } from '../weapons/clips';
+import { SURFACES, surfaceSlot } from '../render/surfaces';
+import { PLACEMENTS } from '../render/decals';
 import { B, CharAnim, CharModel, PALETTES, type CharKind } from '../ai/charModel';
 import { setLayer } from '../render/kit';
 import { LAYER_VIEW, LAYER_WORLD } from '../render/pipeline';
@@ -57,6 +59,8 @@ export function installDebug(game: Game) {
     },
     /** The item generator, for checks (they cannot import source modules from a production build). */
     items: { rollWeapon, rollShield },
+    /** texture and decal registries, for checks */
+    art: { SURFACES, PLACEMENTS, surfaceSlot },
     /** Give + equip a specific roll. */
     gun(cls: WeaponClass, brand?: Brand, rarity: Rarity = 2, seed = 7, slot = 0) {
       const item = rollWeapon(3, { cls, brand, rarity, seed });

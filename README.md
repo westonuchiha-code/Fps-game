@@ -14,6 +14,7 @@ npm install
 npm run dev        # http://localhost:5173           the game
                    # http://localhost:5173/#editor   the level editor
                    # http://localhost:5173/#anim     the animation editor
+                   # http://localhost:5173/#tex      the texture editor
 npm run build      # static build in dist/ (host it anywhere)
 npm run single     # the whole game as ONE file: release/everything-must-go.html
                    # (download it, double-click it, play — no server needed)
@@ -173,3 +174,23 @@ The game plays clips by name (`npc.anim.play('reload')`): workers change magazin
 
 `node tools/anim-sheet.mjs --clips reload --cast 2,3 --times 0,0.25,0.5,0.75,1 --yaws 35,-60` renders a
 contact sheet into `shots/anim-sheet.png` (dev server running).
+
+## Texture editor
+
+Open **`/#tex`**. Every texture in the game is a *surface*: a stack of procedural layers (noise,
+speckle, blotches, lines, weave, grids, stripes, scratches, cracks, stitches, dots, gradients, and
+the original hand-made textures as a starting layer).
+
+- **Surfaces tab.** Pick a surface on the left (*Models* = characters, guns, vehicles; *World* =
+  level geometry). Add layers, reorder them, hide them, and tune each one; the tile in the middle
+  and the model in the 3D view update as you go. *Tint* previews it under a different paint colour;
+  *Show on* picks the model. *Repeats per metre* sets how big the pattern is on models.
+- **Decals tab.** Stamps are drawn from shapes and text (in the game's fonts). Choose a character
+  under *Show on*, press *Place*, and click the model to stick the stamp on; then resize, turn or
+  swap it. Decals follow the bone they sit on.
+- **Save** (or Ctrl+S) writes `public/textures/surfaces.json` / `decals.json` on the dev server;
+  elsewhere it downloads the file. Ctrl+Z undoes; unsaved work is kept in the browser until you save
+  or revert.
+
+Which surface a model part uses comes from its colour (`kit.surfMap`, or the palette defaults in
+`COLOR_SURF` in `src/render/surfaces.ts`), so a new model is textured the moment it uses the palette.

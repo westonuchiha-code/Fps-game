@@ -24,6 +24,12 @@ decisions. The short version of the brief:
 - **All art is procedural.** Build models with `Kit` (`src/render/kit.ts`) and colours from `PAL`
   (`src/render/toon.ts`); level geometry goes through `GeoBuilder`. Ink outlines come from the
   post-process, so flat-shaded boxes with good silhouettes are the style.
+- **Textures are recipes.** Every texture is a stack of procedural layers in
+  `public/textures/surfaces.json` (format in `src/render/surfaces.ts`); decals (logos, badges,
+  stencils, dirt) and where they sit on each model are in `public/textures/decals.json`
+  (`src/render/decals.ts`). Kit models pick a surface per part through `kit.surfMap` (by colour),
+  `kit.surf`, or the palette defaults in `COLOR_SURF`. Edit both in the texture editor (`/#tex`,
+  `window.__tex` for scripting), not by hand-drawing in code.
 - **Everything original.** Music must not quote existing themes; names and logos are invented.
 - **Levels are data** (`public/levels/*.json`, format in `src/world/leveldata.ts`). Put layout,
   spawns, triggers and simple logic in the file; use a script in `src/levels/` only for what the
@@ -35,8 +41,9 @@ decisions. The short version of the brief:
   it on a phone there is a separate test rig, `tools/handheld/` (`npm run handheld`): it wraps the
   finished game in a page with two on-screen controllers and feeds it as an ordinary gamepad.
 - The global game instance is `G` (`src/core/globals.ts`). No per-frame allocations in hot paths.
-- **One page, three apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
-  address ends in `#editor`, the animation editor at `#anim`, and the game otherwise. They hand over through `src/core/nav.ts`
+- **One page, four apps.** `index.html` loads `src/shell.ts`, which starts the level editor when the
+  address ends in `#editor`, the animation editor at `#anim`, the texture editor at `#tex`, and the
+  game otherwise. They hand over through `src/core/nav.ts`
   (`openEditor()`, `openGame(note)`), never through query strings or separate pages, so the pair
   also works on hosts that only serve one page. Wrap every browser-storage access in try/catch.
 
