@@ -83,6 +83,8 @@ function getWheelGeo() {
   if (wheelGeo) return wheelGeo;
   const k = new Kit();
   const r = T.wheelRadius;
+  k.bevel = 0.35;
+  k.bevelMax = 0.03;
   const w = 0.4;
   k.cyl(r * 0.94, r * 0.94, w, 0x1d1d22, [0, 0, 0], 'x', 12, false);
   // chunky tread blocks
@@ -379,6 +381,8 @@ export class Teamster extends Vehicle {
 
   private buildModel() {
     const k = new Kit();
+    k.bevel = 0.3;
+    k.bevelMax = 0.06;
     const body = 0xb4462b; // rust red
     const body2 = 0xd0612c; // sun-faded orange
     const dark = 0x2c2d33;

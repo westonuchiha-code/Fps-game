@@ -105,6 +105,9 @@ class RigBuilder {
     if (!k) {
       this.kits.set(node, (k = new Kit()));
       k.surfMap = this.surfMap;
+      // moulded and machined parts: soft edges, still crisp silhouettes
+      k.bevel = 0.3;
+      k.bevelMax = 0.012;
     }
     return k;
   }

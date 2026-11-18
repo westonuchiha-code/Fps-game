@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js';
 import { COLOR_SURF, surfaceSlot } from './surfaces';
 import { toon, RAMP_CHAR, type ToonOpts } from './toon';
 
@@ -167,6 +168,12 @@ export class Kit {
   private sid: number[] = [];
   /** surface texture for the parts added from now on (see src/render/surfaces.ts); null = none */
   surf: string | null = null;
+  /**
+   * Rounded edges for boxes and tapers added from now on: the corner radius as a fraction of the
+   * box's smallest side (0 = sharp, 0.5 = fully round), capped at `bevelMax` metres.
+   */
+  bevel = 0;
+  bevelMax = 0.06;
   /** surface by colour, used when `surf` is not set (lets one loft paint denim and leather) */
   surfMap: Map<number, string> | null = null;
   curBone = 0;
@@ -271,9 +278,15 @@ export class Kit {
     return this;
   }
 
+  /** A box, with rounded edges when `bevel` is set. */
+  private boxGeo(w: number, h: number, d: number) {
+    const r = Math.min(this.bevel * Math.min(w, h, d), this.bevelMax);
+    if (r < 0.0015) return { g: new THREE.BoxGeometry(w, h, d), smooth: false };
+    return { g: new RoundedBoxGeometry(w, h, d, 2, r) as THREE.BufferGeometry, smooth: true };
+  }
   box(w: number, h: number, d: number, color: number, pos: V3 = [0, 0, 0], rot: V3 = [0, 0, 0]) {
-    const g = new THREE.BoxGeometry(w, h, d);
-    this.add(g, color, pos, rot);
+    const { g, smooth } = this.boxGeo(w, h, d);
+    this.add(g, color, pos, rot, smooth);
     g.dispose();
     return this;
   }
@@ -283,15 +296,16 @@ export class Kit {
    * `tx`,`tz` scale the +Y face in x and z.
    */
   taper(w: number, h: number, d: number, tx: number, tz: number, color: number, pos: V3 = [0, 0, 0], rot: V3 = [0, 0, 0]) {
-    const g = new THREE.BoxGeometry(w, h, d);
+    const { g, smooth } = this.boxGeo(w, h, d);
     const p = g.getAttribute('position');
     for (let i = 0; i < p.count; i++) {
-      if (p.getY(i) > 0) {
-        p.setX(i, p.getX(i) * tx);
-        p.setZ(i, p.getZ(i) * tz);
-      }
+      // scale smoothly from the bottom face to the top face
+      const f = Math.min(1, Math.max(0, p.getY(i) / h + 0.5));
+      p.setX(i, p.getX(i) * (1 + (tx - 1) * f));
+      p.setZ(i, p.getZ(i) * (1 + (tz - 1) * f));
     }
-    this.add(g, color, pos, rot);
+    if (smooth) g.computeVertexNormals();
+    this.add(g, color, pos, rot, smooth);
     g.dispose();
     return this;
   }
