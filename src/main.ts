@@ -12,6 +12,7 @@ import { markCompleted, writeSave } from './core/save';
 import { openEditor, takeBootNote } from './core/nav';
 import { loadClips } from './anim/clips';
 import { loadSurfaces } from './render/surfaces';
+import { loadDecals } from './render/decals';
 
 /**
  * Boot + top-level flow:
@@ -65,7 +66,7 @@ async function makeLevel(id: string): Promise<Level> {
 }
 
 async function boot() {
-  await Promise.all([loadClips(), loadSurfaces()]);
+  await Promise.all([loadClips(), loadSurfaces(), loadDecals()]);
   const ui = game.ui;
   const overlay = document.createElement('div');
   overlay.className = 'overlay';

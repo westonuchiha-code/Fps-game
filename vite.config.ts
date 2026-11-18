@@ -31,45 +31,37 @@ function levelFiles(): Plugin {
     name: 'emg-level-files',
     apply: 'serve',
     configureServer(server) {
-      // the animation editor saves its clips the same way
-      server.middlewares.use('/__anim/save', (req, res) => {
-        if (req.method !== 'POST') {
-          res.statusCode = 405;
-          res.end('POST only');
-          return;
-        }
-        let body = '';
-        req.on('data', (c) => {
-          body += c;
-          if (body.length > 4_000_000) req.destroy();
-        });
-      // ...and the texture editor its surface recipes
-      server.middlewares.use('/__tex/save', (req, res) => {
-        if (req.method !== 'POST') {
-          res.statusCode = 405;
-          res.end('POST only');
-          return;
-        }
-        let body = '';
-        req.on('data', (c) => {
-          body += c;
-          if (body.length > 4_000_000) req.destroy();
-        });
-        req.on('end', () => {
-          try {
-            const data = JSON.parse(body);
-            if (data.version !== 1 || typeof data.clips !== 'object') throw new Error('not a clip file');
-            const out = path.resolve(__dirname, 'public/anims');
-            fs.mkdirSync(out, { recursive: true });
-            fs.writeFileSync(path.join(out, 'clips.json'), JSON.stringify(data, null, 1) + '\n');
-            res.setHeader('Content-Type', 'application/json');
-            res.end('{"ok":true}');
-          } catch (e) {
-            res.statusCode = 400;
-            res.end(String(e));
+      // the animation and texture editors save their data files the same way
+      const saveJson = (route: string, dir: string, file: string, ok: (d: any) => boolean) =>
+        server.middlewares.use(route, (req, res) => {
+          if (req.method !== 'POST') {
+            res.statusCode = 405;
+            res.end('POST only');
+            return;
           }
+          let body = '';
+          req.on('data', (c) => {
+            body += c;
+            if (body.length > 8_000_000) req.destroy();
+          });
+          req.on('end', () => {
+            try {
+              const data = JSON.parse(body);
+              if (data.version !== 1 || !ok(data)) throw new Error('not a ' + file);
+              const out = path.resolve(__dirname, dir);
+              fs.mkdirSync(out, { recursive: true });
+              fs.writeFileSync(path.join(out, file), JSON.stringify(data, null, 1) + '\n');
+              res.setHeader('Content-Type', 'application/json');
+              res.end('{"ok":true}');
+            } catch (e) {
+              res.statusCode = 400;
+              res.end(String(e));
+            }
+          });
         });
-      });
+      saveJson('/__anim/save', 'public/anims', 'clips.json', (d) => typeof d.clips === 'object');
+      saveJson('/__tex/save', 'public/textures', 'surfaces.json', (d) => typeof d.surfaces === 'object');
+      saveJson('/__decals/save', 'public/textures', 'decals.json', (d) => typeof d.stamps === 'object' && typeof d.models === 'object');
       server.middlewares.use('/__editor/list', (_req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify(reindex()));

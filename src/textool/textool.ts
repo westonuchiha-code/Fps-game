@@ -8,6 +8,7 @@ import { Sky, SKIES } from '../render/sky';
 import { toon, RAMP_CHAR, RAMP_WORLD } from '../render/toon';
 import { textures } from '../render/textures';
 import { Kit } from '../render/kit';
+import { DecalTab } from './decaltab';
 import { BUILTINS, ENV_TEX, LAYER_DEFAULTS, SURFACES, loadSurfaces, paintSurface, repaint, setSurfaces, surfaceSlot, type Layer, type Surface, type SurfaceFile } from '../render/surfaces';
 
 /**
@@ -31,6 +32,7 @@ interface Subject {
 }
 const char = (kind: CharKind, pal: string, variant: number) => () => {
   const m = new CharModel(kind, PALETTES[pal], variant);
+  m.root.userData.model = m;
   const a = new CharAnim(m);
   a.aim = 0.3;
   for (let i = 0; i < 30; i++) a.update(1 / 30);
@@ -93,12 +95,12 @@ const SUBJECTS: Subject[] = [
 
 export class TexTool {
   private pipe: RenderPipeline;
-  private scene = new THREE.Scene();
-  private camera = new THREE.PerspectiveCamera(35, 1, 0.05, 400);
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(35, 1, 0.05, 400);
   private sky: Sky;
-  private orbit: OrbitControls;
-  private subject: THREE.Object3D | null = null;
-  private subjectIdx = 0;
+  orbit: OrbitControls;
+  subject: THREE.Object3D | null = null;
+  subjectIdx = 0;
   private floor: THREE.Mesh;
 
   name = '';
@@ -110,9 +112,11 @@ export class TexTool {
   private dirty = false;
   private status = '';
   private fileJson = '{}';
-  private ui!: Record<string, HTMLElement>;
-  private tile!: HTMLCanvasElement;
+  ui!: Record<string, HTMLElement>;
+  tile!: HTMLCanvasElement;
   private pending = new Set<string>();
+  readonly decals = new DecalTab(this);
+  mode: 'surf' | 'decal' = 'surf';
 
   static async create(root: HTMLElement, canvas: HTMLCanvasElement) {
     let file: SurfaceFile = { version: 1, surfaces: {} };
@@ -135,6 +139,8 @@ export class TexTool {
     } catch {
       /* no storage */
     }
+    await Promise.all(['Anton', 'Bangers', 'Special Elite', 'Share Tech Mono', 'Rajdhani'].map((f) => document.fonts?.load(`32px '${f}'`).catch(() => null)));
+    await tool.decals.load();
     tool.name = tool.names()[0] ?? '';
     tool.refreshAll();
     tool.setSubject(tool.subjectIdx);
@@ -155,6 +161,14 @@ export class TexTool {
     this.floor.receiveShadow = true;
     this.scene.add(this.floor);
     this.buildUi();
+    for (const side of ['left', 'right'] as const) {
+      const pane = h('div', 'tx-pane');
+      const host = this.ui[side];
+      while (host.firstChild) pane.append(host.firstChild);
+      host.append(pane, side === 'left' ? this.decals.left : this.decals.right);
+      this.ui[side + 'Surf'] = pane;
+    }
+    this.decals.left.hidden = this.decals.right.hidden = true;
     this.orbit = new OrbitControls(this.camera, this.ui.view);
     this.orbit.enableDamping = true;
     this.camera.position.set(1.6, 1.6, -3);
@@ -253,6 +267,21 @@ export class TexTool {
     else if (this.kind(name) === 'env') this.setSubject(SUBJECTS.length - 1);
   }
 
+  private modeSeg!: HTMLElement;
+  setMode(m: 'surf' | 'decal') {
+    this.mode = m;
+    for (const [i, b] of [...this.modeSeg.children].entries()) b.classList.toggle('on', (i === 0) === (m === 'surf'));
+    this.ui.leftSurf.hidden = this.ui.rightSurf.hidden = m !== 'surf';
+    this.decals.left.hidden = this.decals.right.hidden = m !== 'decal';
+    if (m === 'decal') {
+      if (this.subjectIdx >= SUBJECTS.length - 2) this.setSubject(0);
+      this.decals.refresh();
+    } else {
+      this.decals.placing = false;
+      this.refreshAll();
+    }
+  }
+
   setSubject(i: number) {
     this.subjectIdx = i;
     if (this.subject) this.scene.remove(this.subject);
@@ -264,6 +293,7 @@ export class TexTool {
     const d = this.camera.position.clone().sub(this.orbit.target).normalize().multiplyScalar(s.height * 2 + 0.8);
     this.camera.position.copy(this.orbit.target).add(d);
     if (this.ui) (this.ui.subject as HTMLSelectElement).value = String(i);
+    if (this.mode === 'decal' && this.decals) this.decals.refresh();
   }
 
   // ------------------------------------------------------------------ frame
@@ -271,7 +301,7 @@ export class TexTool {
   private frame() {
     for (const n of this.pending) repaint(n);
     if (this.pending.size) {
-      this.drawTile();
+      if (this.mode === 'surf') this.drawTile();
       // the flat-colour previews rebuild with the new tint / surface
       if (this.subjectIdx >= SUBJECTS.length - 2 && this.pendingRebuild) this.setSubject(this.subjectIdx);
       this.pendingRebuild = false;
@@ -332,6 +362,14 @@ export class TexTool {
       b.onclick = fn;
       top.append(b);
     };
+    const seg = h('div', 'tx-seg tx-mode');
+    for (const m of ['surf', 'decal'] as const) {
+      const b = h('button', m === this.mode ? 'on' : '', m === 'surf' ? 'Surfaces' : 'Decals');
+      b.onclick = () => this.setMode(m);
+      seg.append(b);
+    }
+    top.insertBefore(seg, top.children[1]);
+    this.modeSeg = seg;
     nav('Animation', openAnim);
     nav('Level editor', openEditor);
     nav('Play the game', () => openGame());
@@ -346,6 +384,9 @@ export class TexTool {
     mid.append(tileBox);
     r.append(top, left, mid, view, right);
     this.ui = { top, left, mid, view, right };
+    view.addEventListener('pointerdown', (e) => {
+      if (this.mode === 'decal' && e.button === 0) this.decals.click(e, view.getBoundingClientRect());
+    });
 
     // left: surface list
     left.append(h('h3', '', 'Surfaces'));
@@ -460,7 +501,10 @@ export class TexTool {
       const ctrl = e.ctrlKey || e.metaKey;
       if (ctrl && e.code === 'KeyS') {
         e.preventDefault();
-        void this.save();
+        void (this.mode === 'decal' ? this.decals.save() : this.save());
+      } else if (tag !== 'INPUT' && tag !== 'TEXTAREA' && this.mode === 'decal' && ctrl && e.code === 'KeyZ') {
+        e.preventDefault();
+        this.decals.undoStep();
       } else if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
       else if (ctrl && e.code === 'KeyZ') {
         e.preventDefault();
@@ -754,6 +798,15 @@ export class TexTool {
       },
       target: (x: number, y: number, z: number) => t.orbit.target.set(x, y, z),
       save: () => t.save(),
+      mode: (m: 'surf' | 'decal') => t.setMode(m),
+      stamp: (n: string) => {
+        t.decals.stamp = n;
+        t.decals.refresh();
+      },
+      /** place the current stamp where the view ray at (ndcX, ndcY) hits the model */
+      place: (x: number, y: number, size = 0.12, rot = 0) => t.decals.placeAt(x, y, size, rot),
+      decalData: () => JSON.parse(JSON.stringify({ stamps: t.decals['data']().stamps, models: t.decals['data']().models })),
+      saveDecals: () => t.decals.save(),
       state: () => ({ name: t.name, layer: t.layer, dirty: t.dirty, subject: SUBJECTS[t.subjectIdx].label }),
       /** a sheet of surface tiles (name labels), as a PNG data URL */
       tiles: (names?: string[], size = 160, cols = 6) => {

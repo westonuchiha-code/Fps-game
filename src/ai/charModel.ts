@@ -6,6 +6,7 @@ import { flat, PAL, shade } from '../render/toon';
 import { drawSmile } from '../render/textures';
 import { LAYER_FX } from '../render/pipeline';
 import { CLIPS, ClipPose, clipWeight, sampleClip, type Clip } from '../anim/clips';
+import { attachDecals } from '../render/decals';
 
 export type CharKind = 'assoc' | 'super' | 'striker' | 'manager';
 export type Mood = 'happy' | 'angry' | 'hurt' | 'dead';
@@ -162,6 +163,8 @@ export class CharModel {
   /** optional hand-held prop (ally rifles) */
   held: THREE.Object3D | null = null;
   height: number;
+  /** which decal set this model wears (public/textures/decals.json) */
+  decalKey = '';
   /** glowing bits (blaster tip, vents) */
   glow: THREE.Mesh[] = [];
 
@@ -212,6 +215,8 @@ export class CharModel {
     this.bones[0].updateMatrixWorld(true);
     this.mesh.bind(new THREE.Skeleton(this.bones));
     this.root.add(this.mesh);
+    this.decalKey = kind === 'striker' ? (variant === 99 ? 'agent' : 'striker') : kind;
+    attachDecals(this.decalKey, this.root, this.bones);
     this.root.scale.setScalar(s.scale);
     this.height = (kind === 'manager' ? 3.3 : 1.82) * s.scale;
   }
@@ -413,7 +418,7 @@ export class CharModel {
       [pants, agent ? 'suit' : 'denim'], [shade(pants, 1.08), 'denim'],
       [shirt, agent ? 'suit' : 'shirt'], [shade(shirt, 0.7), 'shirt'], [shade(shirt, 1.12), 'shirt'], [cuff, agent ? 'cotton' : 'shirt'], [shade(cuff, 0.85), 'shirt'],
       [PAL.hivis, 'hivis'], [band, 'reflective'], [leather, 'leather'], [glove, agent ? 'skin' : 'leather'], [0x4a4f3a, 'canvas'], [0x7a6a44, 'canvas'],
-      [skin, 'skin'], [hair, 'hair'], [hat, v === 2 ? 'knit' : 'hardhat'], [shade(hat, 0.8), 'knit'], [0xb5382e, 'cotton'], [PAL.shirt, 'cotton'],
+      [skin, 'skin'], [hair, 'hair'], [0xb5382e, 'cotton'], [PAL.shirt, 'cotton'],
       [ink, agent ? 'leather' : 'rubber'],
     ]);
 
@@ -488,11 +493,14 @@ export class CharModel {
     }
     if (!agent && v === 2) {
       // beanie with a turned-up cuff
+      k.surf = 'knit';
       k.loft([R(0.138, 0.084, 0.1, 0.106), R(0.143, 0.098, 0.115, 0.121), R(0.183, 0.1, 0.117, 0.123), R(0.19, 0.094, 0.109, 0.116), R(0.24, 0.086, 0.098, 0.106), R(0.275, 0.064, 0.07, 0.08), R(0.297, 0.03, 0.033, 0.036), R(0.303, 0, 0, 0)].map((r) => ({ ...r, y: r.y + y0, n: 2.4 })), (seg) => (seg <= 2 ? shade(hat, 0.8) : hat), { sides: 16 });
     } else if (!agent) {
       // hard hat: brim, then the dome
+      k.surf = 'hardhat';
       k.loft([R(0.15, 0.086, 0.1, 0.106), R(0.152, 0.116, 0.152, 0.122), R(0.162, 0.116, 0.15, 0.122), R(0.166, 0.093, 0.108, 0.113), R(0.215, 0.088, 0.1, 0.106), R(0.255, 0.068, 0.076, 0.084), R(0.278, 0.032, 0.036, 0.04), R(0.285, 0, 0, 0)].map((r) => ({ ...r, y: r.y + y0, n: 2.3 })), hat, { sides: 16 });
     }
+    k.surf = null;
     // the drawn part of the face (eyes, brows, mouth) is a decal skinned over the same sections
     const decal = new THREE.Mesh(loftGeometry(head.slice(2, 9), { sides: 16, grow: 0.0025, from: -3, to: 3 }), flat(0xffffff, { map: humanFace(agent ? 'agent' : bearded ? 'beard' : v === 0 ? 'moustache' : 'plain', hair), transparent: true }));
     decal.position.set(0, -s.neck, 0);
@@ -594,6 +602,7 @@ export class CharModel {
     const rifle = new THREE.Mesh(r.geometry(), G.mat.char);
     rifle.castShadow = true;
     this.bones[B.chest].add(rifle);
+    attachDecals('rifle', rifle);
     this.held = rifle;
     this.muzzle.position.set(0, 0.055, -0.56);
     rifle.add(this.muzzle);
