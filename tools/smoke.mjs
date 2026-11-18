@@ -70,11 +70,12 @@ try {
   if (!(Math.abs(z1 - z0) > 0.6)) throw new Error(`player did not move (z ${z0} -> ${z1})`);
   await step('fire the starter pistol', async () => {
     const a0 = await page.evaluate(() => window.__game.inv.current.ammo);
+    // the pistol comes up first (its draw animation can take many frames under software rendering)
+    await page.waitForFunction(() => { const g = window.__game; return (g.weapons?.state ?? g.view?.state) !== 'draw'; }, null, { timeout: 30000, polling: 100 }).catch(() => {});
+    // hold the trigger until a shot goes off: at a frame a second the pistol may still be coming up
     await page.mouse.down();
-    await page.waitForTimeout(120);
+    await page.waitForFunction((a) => window.__game.inv.current.ammo < a, a0, { timeout: 10000, polling: 50 }).catch(() => {});
     await page.mouse.up();
-    // a quick click is latched by the game; wait for the frame that handles it
-    await page.waitForFunction((a) => window.__game.inv.current.ammo < a, a0, { timeout: 10000, polling: 100 }).catch(() => {});
     const a1 = await page.evaluate(() => window.__game.inv.current.ammo);
     if (!(a1 < a0)) throw new Error(`no shot fired (ammo ${a0} -> ${a1})`);
   });
