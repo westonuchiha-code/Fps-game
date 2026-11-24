@@ -494,17 +494,21 @@ export async function loadSurfaces(url = 'textures/surfaces.json') {
 /** GLSL for the toon shader: triplanar sample of the model atlas (see toon.ts). */
 export const SURF_GLSL_VERT_HEAD = `
 attribute float surf;
+attribute float edge;
+varying float vEdge;
 varying float vSurf;
 varying vec3 vSurfP;
 varying vec3 vSurfN;
 `;
 export const SURF_GLSL_VERT = `
 vSurf = surf;
+vEdge = edge;
 vSurfP = position;
 vSurfN = normal;
 `;
 export const SURF_GLSL_FRAG_HEAD = `
 uniform sampler2D uAtlas;
+varying float vEdge;
 uniform float uSurfScale[${MAX}];
 varying float vSurf;
 varying vec3 vSurfP;
@@ -531,5 +535,17 @@ export const SURF_GLSL_FRAG = `
     vec2 uv = an.x > an.y && an.x > an.z ? p.zy : (an.y > an.z ? p.xz : p.xy);
     diffuseColor.rgb *= surfTap(uv, tile);
   }
+}
+`;
+
+/**
+ * Cel bands on rounded edges: an edge strip facing up catches the light as a crisp bright stripe,
+ * one facing down drops into a dark one, the way painted edge-wear reads in a comic.
+ */
+export const EDGE_GLSL_FRAG = `
+if (vEdge > 0.5) {
+  vec3 upV = normalize((viewMatrix * vec4(0.0, 1.0, 0.0, 0.0)).xyz);
+  float u = dot(normal, upV);
+  outgoingLight *= u > 0.25 ? 1.32 : (u < -0.35 ? 0.62 : 1.0);
 }
 `;

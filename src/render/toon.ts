@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { atlas, SLOT_SCALE, SURF_GLSL_FRAG, SURF_GLSL_FRAG_HEAD, SURF_GLSL_VERT, SURF_GLSL_VERT_HEAD } from './surfaces';
+import { EDGE_GLSL_FRAG, atlas, SLOT_SCALE, SURF_GLSL_FRAG, SURF_GLSL_FRAG_HEAD, SURF_GLSL_VERT, SURF_GLSL_VERT_HEAD } from './surfaces';
 
 /** Brand + world palette. Everything visual pulls from here so the look stays coherent. */
 export const PAL = {
@@ -133,7 +133,8 @@ export function toon(o: ToonOpts = {}): THREE.MeshToonMaterial {
           .replace('#include <begin_vertex>', '#include <begin_vertex>\n' + SURF_GLSL_VERT);
         shader.fragmentShader = shader.fragmentShader
           .replace('#include <common>', '#include <common>\n' + SURF_GLSL_FRAG_HEAD)
-          .replace('#include <color_fragment>', '#include <color_fragment>\n' + SURF_GLSL_FRAG);
+          .replace('#include <color_fragment>', '#include <color_fragment>\n' + SURF_GLSL_FRAG)
+          .replace('#include <opaque_fragment>', EDGE_GLSL_FRAG + '#include <opaque_fragment>');
       }
       if (rim > 0) {
         // Hard-edged rim light: a classic cel-shading accent that separates characters and guns from the background.

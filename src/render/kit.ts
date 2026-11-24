@@ -158,6 +158,9 @@ export function loftGeometry(rings: Ring[], o: LoftOpts = {}) {
  * Everything procedural in the game (guns, arms, characters, vehicles, props) goes through this,
  * which keeps each moving part to a single draw call and gives the whole game one consistent look.
  */
+/** Every Kit model gets softly rounded box edges unless it says otherwise (`kit.bevel = 0`). */
+export const KIT_DEFAULTS = { bevel: 0.25 };
+
 export class Kit {
   private pos: number[] = [];
   private nrm: number[] = [];
@@ -166,14 +169,16 @@ export class Kit {
   /** optional per-vertex bone index for rigid skinning */
   private bone: number[] = [];
   private sid: number[] = [];
+  /** 1 on rounded edges (the toon shader paints them as a lit / shadowed band) */
+  private edge: number[] = [];
   /** surface texture for the parts added from now on (see src/render/surfaces.ts); null = none */
   surf: string | null = null;
   /**
    * Rounded edges for boxes and tapers added from now on: the corner radius as a fraction of the
    * box's smallest side (0 = sharp, 0.5 = fully round), capped at `bevelMax` metres.
    */
-  bevel = 0;
-  bevelMax = 0.06;
+  bevel = KIT_DEFAULTS.bevel;
+  bevelMax = 0.04;
   /** surface by colour, used when `surf` is not set (lets one loft paint denim and leather) */
   surfMap: Map<number, string> | null = null;
   curBone = 0;
@@ -208,6 +213,7 @@ export class Kit {
     const n = g.getAttribute('normal');
     const u = g.getAttribute('uv');
     _c.setHex(color);
+    const eg = g.getAttribute('edge');
     const sidNow = surfaceSlot(this.surf ?? this.surfMap?.get(color) ?? COLOR_SURF.get(color) ?? null);
     const v = new THREE.Vector3();
     for (let i = 0; i < p.count; i++) {
@@ -216,6 +222,7 @@ export class Kit {
       v.set(n.getX(i), n.getY(i), n.getZ(i)).applyMatrix3(nm).normalize();
       this.nrm.push(v.x, v.y, v.z);
       this.col.push(_c.r, _c.g, _c.b);
+      this.edge.push(eg ? eg.getX(i) : 0);
       if (u) this.uv.push(u.getX(i), u.getY(i));
       else this.uv.push(0, 0);
       this.bone.push(this.curBone);
@@ -282,7 +289,14 @@ export class Kit {
   private boxGeo(w: number, h: number, d: number) {
     const r = Math.min(this.bevel * Math.min(w, h, d), this.bevelMax);
     if (r < 0.0015) return { g: new THREE.BoxGeometry(w, h, d), smooth: false };
-    return { g: new RoundedBoxGeometry(w, h, d, 2, r) as THREE.BufferGeometry, smooth: true };
+    // a single chamfer for small edges, a two-step round for big ones
+    const g = new RoundedBoxGeometry(w, h, d, r > 0.025 ? 2 : 1, r) as THREE.BufferGeometry;
+    // mark the rounded strips: their normals are not along an axis
+    const n = g.getAttribute('normal');
+    const e = new Float32Array(n.count);
+    for (let i = 0; i < n.count; i++) e[i] = Math.max(Math.abs(n.getX(i)), Math.abs(n.getY(i)), Math.abs(n.getZ(i))) < 0.985 ? 1 : 0;
+    g.setAttribute('edge', new THREE.BufferAttribute(e, 1));
+    return { g, smooth: true };
   }
   box(w: number, h: number, d: number, color: number, pos: V3 = [0, 0, 0], rot: V3 = [0, 0, 0]) {
     const { g, smooth } = this.boxGeo(w, h, d);
@@ -379,6 +393,7 @@ export class Kit {
     g.setAttribute('color', new THREE.Float32BufferAttribute(this.col, 3));
     g.setAttribute('uv', new THREE.Float32BufferAttribute(this.uv, 2));
     g.setAttribute('surf', new THREE.Float32BufferAttribute(this.sid, 1));
+    g.setAttribute('edge', new THREE.Float32BufferAttribute(this.edge, 1));
     g.computeBoundingSphere();
     g.computeBoundingBox();
     return g;
